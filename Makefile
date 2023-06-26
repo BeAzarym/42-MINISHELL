@@ -1,15 +1,10 @@
-NAME = minishell
+NAME = Minishell
 
 SRC = 	minishell.c \
 		lexing/lexer.c \
 		lexing/arg_split.c \
 		lexing/token.c \
 		lexing/token_utils.c \
-		lexing/env.c \
-		lexing/env_utils.c \
-		lexing/parser.c \
-		lexing/parser_utils.c \
-		lexing/redirect_handler.c \
 		utils.c \
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC))		

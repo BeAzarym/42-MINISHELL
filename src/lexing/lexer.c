@@ -6,12 +6,17 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:14:14 by cchabeau          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/08/07 11:32:57 by cchabeau         ###   ########.fr       */
+=======
+/*   Updated: 2023/06/21 15:29:10 by cchabeau         ###   ########.fr       */
+>>>>>>> lexing part one
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+<<<<<<< HEAD
 t_tkn_lst	*lexing(char *str)
 {
 	char **array;
@@ -40,3 +45,5 @@ t_tkn_lst	*lexing(char *str)
 	clear_tkn_lst(stack->head);
 	return (lst);
 }
+=======
+>>>>>>> lexing part one

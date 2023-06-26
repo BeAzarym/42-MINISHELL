@@ -6,12 +6,17 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:54:44 by cchabeau          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/07/10 11:06:52 by cchabeau         ###   ########.fr       */
+=======
+/*   Updated: 2023/06/26 14:27:15 by cchabeau         ###   ########.fr       */
+>>>>>>> lexing part one
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+<<<<<<< HEAD
 int	locate_token(char *value, char *token)
 {
 	int	i;
@@ -65,3 +70,28 @@ t_tkn_lst	*token_split(t_tkn_lst *stack, t_tkn_lst *new)
 	clear_lst(stack->head);
 	return (new);
 }
+=======
+t_token *create_token(char *word, char type, t_token *lst)
+{
+	if (!word)
+		return (NULL);
+
+	t_token *tmp;
+
+	tmp = malloc(sizeof(t_token));
+	if (!tmp)
+		return (NULL);
+	tmp->next = NULL;
+	tmp->value = ft_strdup(word);
+	if (!tmp->value)
+		return (NULL);
+	tmp->type = type;
+	add_back(lst, tmp);
+	return (lst);
+}
+
+// void tokenize(char **arr)
+// {
+	
+// }
+>>>>>>> lexing part one

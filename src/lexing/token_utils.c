@@ -6,12 +6,17 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:14:31 by cchabeau          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/08/07 16:20:21 by cchabeau         ###   ########.fr       */
+=======
+/*   Updated: 2023/06/26 14:29:47 by cchabeau         ###   ########.fr       */
+>>>>>>> lexing part one
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+<<<<<<< HEAD
 t_token *init_token(char *value)
 {
 	t_token *new;
@@ -84,6 +89,35 @@ t_tkn_lst *add_lst_tkn(char *value, t_tkn_lst *stack)
 	return (stack);
 }
 
+=======
+void add_back(t_token *src, t_token *new)
+{
+	t_token *last; 
+	
+	if (!new)
+		return ;
+	if (!src)
+	{
+		src = new;
+		src->next = NULL;
+	}
+	else
+	{
+		last = get_lstlast(src);
+		last->next = new;
+	}
+}
+
+t_token	*get_lstlast(t_token *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+>>>>>>> lexing part one
 void	clear_lst(t_token *lst)
 {
 	if (!lst)
@@ -94,4 +128,8 @@ void	clear_lst(t_token *lst)
 		lst = lst->next;
 	}
 	free(lst);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> lexing part one

@@ -6,13 +6,21 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:33:53 by cchabeau          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/07/10 10:54:25 by cchabeau         ###   ########.fr       */
+=======
+/*   Updated: 2023/06/26 10:56:19 by cchabeau         ###   ########.fr       */
+>>>>>>> lexing part one
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+<<<<<<< HEAD
 int	escape_quotes(char *str, int n)
+=======
+static int	escape_quotes(char *str, int n)
+>>>>>>> lexing part one
 {
 	int	i;
 
@@ -36,7 +44,11 @@ int	escape_quotes(char *str, int n)
 	return (n);
 }
 
+<<<<<<< HEAD
 int	is_sep(char c, char *sep)
+=======
+static int	is_sep(char c, char *sep)
+>>>>>>> lexing part one
 {
 	if (!sep)
 		return (-1);
@@ -73,7 +85,11 @@ static size_t	ft_count_word(char *s, char *sep)
 	return (count);
 }
 
+<<<<<<< HEAD
 int	jump_to_next_sep(char *s, char *sep, int i)
+=======
+static int	jump_to_next_sep(char *s, char *sep, int i)
+>>>>>>> lexing part one
 {
 	while (s[i] && !is_sep(s[i], sep))
 		{
@@ -106,9 +122,17 @@ char	**arg_split(char *s, char *sep)
 			break ;
 		start = i;
 		i = jump_to_next_sep(s, sep, i);
+<<<<<<< HEAD
 		strs[j] = ft_substr(s, start, (i - start));
 		if (!strs[j])
 			return (ft_array_clear(strs));
+=======
+		// printf("start : %d | i : %d\n", start, i);
+		strs[j] = ft_substr(s, start, (i - start));
+		if (!strs[j])
+			return (ft_array_clear(strs));
+		// printf("strs: %s\n", strs[j]);
+>>>>>>> lexing part one
 		j++;
 	}
 	strs[j] = NULL;
