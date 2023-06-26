@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 18:17:23 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/06/24 19:22:34 by cchabeau         ###   ########.fr       */
+/*   Created: 2023/06/21 15:54:44 by cchabeau          #+#    #+#             */
+/*   Updated: 2023/06/26 14:27:15 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/minishell.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+t_token *create_token(char *word, char type, t_token *lst)
 {
-	t_list	*last;
+	if (!word)
+		return (NULL);
 
-	if (!lst)
-		return ;
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	else
-	{
-		last = ft_lstlast(*lst);
-		last->next = new;
-	}
+	t_token *tmp;
+
+	tmp = malloc(sizeof(t_token));
+	if (!tmp)
+		return (NULL);
+	tmp->next = NULL;
+	tmp->value = ft_strdup(word);
+	if (!tmp->value)
+		return (NULL);
+	tmp->type = type;
+	add_back(lst, tmp);
+	return (lst);
 }
+
+// void tokenize(char **arr)
+// {
+	
+// }
