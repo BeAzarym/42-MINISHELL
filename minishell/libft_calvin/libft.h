@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:10:00 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/05/25 17:28:26 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:22:17 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,13 @@ int					ft_printf(const char *format, ...);
 char				*get_next_line(int fd);
 void				ft_array_print(char **array);
 char				**ft_array_dup(char **array);
-void				ft_array_clear(char **array);
+void				*ft_array_clear(char **array);
 char				**ft_array_join(char **s1, char **s2);
 char				**ft_array_join_s1(char **s1, char **s2);
 char				**ft_array_join_s2(char **s1, char **s2);
 char				**ft_array_join_all(char **s1, char **s2);
 char				**ft_strjoin_arr(char *s1, char **arr, int size);
 int					ft_arraylen(char **arr);
+char				*ft_strndup(char *s, int n);
 
 #endif

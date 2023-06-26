@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 13:40:02 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/06/21 13:59:53 by cchabeau         ###   ########.fr       */
+/*   Created: 2023/06/21 15:54:44 by cchabeau          #+#    #+#             */
+/*   Updated: 2023/06/26 14:27:15 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/minishell.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+t_token *create_token(char *word, char type, t_token *lst)
 {
-	size_t	i;
-	char	*str;
+	if (!word)
+		return (NULL);
 
-	if (!s)
+	t_token *tmp;
+
+	tmp = malloc(sizeof(t_token));
+	if (!tmp)
 		return (NULL);
-	if (ft_strlen(s) < start)
-		len = 0;
-	else if (ft_strlen(s + start) <= len)
-		len = ft_strlen(s + start);
-	str = malloc(sizeof(char) * (len + 1));
-	if (!str)
+	tmp->next = NULL;
+	tmp->value = ft_strdup(word);
+	if (!tmp->value)
 		return (NULL);
-	i = 0;
-	while (i < len && s[i])
-	{
-		str[i] = s[start + i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	tmp->type = type;
+	add_back(lst, tmp);
+	return (lst);
 }
+
+// void tokenize(char **arr)
+// {
+	
+// }

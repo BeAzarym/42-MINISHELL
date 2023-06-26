@@ -55,10 +55,11 @@ SRCS	=	ft_atoi.c \
 					ft_lstmap.c \
 					ft_lstnew.c \
 					ft_lstsize.c \
+					ft_strndup.c \
 
 OBJS	=	$(SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 CC	=	gcc
 
