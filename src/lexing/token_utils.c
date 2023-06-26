@@ -1,31 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 18:17:23 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/06/24 19:22:34 by cchabeau         ###   ########.fr       */
+/*   Created: 2023/06/26 10:14:31 by cchabeau          #+#    #+#             */
+/*   Updated: 2023/06/26 14:29:47 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/minishell.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void add_back(t_token *src, t_token *new)
 {
-	t_list	*last;
-
-	if (!lst)
+	t_token *last; 
+	
+	if (!new)
 		return ;
-	if (!*lst)
+	if (!src)
 	{
-		*lst = new;
-		return ;
+		src = new;
+		src->next = NULL;
 	}
 	else
 	{
-		last = ft_lstlast(*lst);
+		last = get_lstlast(src);
 		last->next = new;
 	}
+}
+
+t_token	*get_lstlast(t_token *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+void	clear_lst(t_token *lst)
+{
+	if (!lst)
+		return;
+	while (lst)
+	{
+		free(lst->value);
+		lst = lst->next;
+	}
+	free(lst);
 }
