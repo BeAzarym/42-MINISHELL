@@ -3,24 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   arg_split.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:33:53 by cchabeau          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/07/10 10:54:25 by cchabeau         ###   ########.fr       */
-=======
-/*   Updated: 2023/06/26 10:56:19 by cchabeau         ###   ########.fr       */
->>>>>>> lexing part one
+/*   Updated: 2023/08/16 16:21:58 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-<<<<<<< HEAD
-int	escape_quotes(char *str, int n)
-=======
 static int	escape_quotes(char *str, int n)
->>>>>>> lexing part one
 {
 	int	i;
 
@@ -85,11 +77,7 @@ static size_t	ft_count_word(char *s, char *sep)
 	return (count);
 }
 
-<<<<<<< HEAD
-int	jump_to_next_sep(char *s, char *sep, int i)
-=======
 static int	jump_to_next_sep(char *s, char *sep, int i)
->>>>>>> lexing part one
 {
 	while (s[i] && !is_sep(s[i], sep))
 		{
