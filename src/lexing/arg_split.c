@@ -6,13 +6,13 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:33:53 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/06/26 10:56:19 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/06/30 16:15:47 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int	escape_quotes(char *str, int n)
+int	escape_quotes(char *str, int n)
 {
 	int	i;
 
@@ -73,7 +73,7 @@ static size_t	ft_count_word(char *s, char *sep)
 	return (count);
 }
 
-static int	jump_to_next_sep(char *s, char *sep, int i)
+int	jump_to_next_sep(char *s, char *sep, int i)
 {
 	while (s[i] && !is_sep(s[i], sep))
 		{
