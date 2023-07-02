@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:14:31 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/06/30 16:21:47 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/07/01 14:33:06 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_token *init_token(char *value)
 	if (!new)
 		return (NULL);
 	new->type = define_type(value);
+	if (!new->type)
+		return (NULL);
 	new->value = ft_strdup(value);
 	if (!new->value)
 		return (NULL);
