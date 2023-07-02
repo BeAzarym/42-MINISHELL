@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/16 16:21:51 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:23:25 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)envp;
 	t_tkn_stack *stack = NULL;
+	t_tkn_stack *lst = NULL;
 	while (1)
 	{
 		char *res = readline("[Minishell] > ");
 		char **tab = arg_split(res, " \n\t\r\f\t\b");
-		ft_array_print(tab);
+		// ft_array_print(tab);
 		stack = init_stack();
 		if (!stack)
 			return (7);
@@ -58,11 +59,15 @@ int	main(int argc, char **argv, char **envp)
 			stack = add_stack(tab[i], stack);
 			if (!stack)
 				return (42);
+			int x = locate_token(tab[i], "|<>");
+			if (x != -1)
+				printf("TOKEN |> '%c' INDEX |> %d TOKEN LENGTH |> %ld\n", tab[i][x], x, ft_strlen(tab[i]));
 			i++;
 		}
 		print_chained(stack->head);
+		lst = token_split(stack, lst);
+		print_chained(lst->head);
 		ft_array_clear(tab);
-		clear_lst(stack->head);
 	}
 	return (0);
 }

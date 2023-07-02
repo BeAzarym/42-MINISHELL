@@ -6,7 +6,11 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:33:53 by cchabeau          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/08/16 16:21:58 by angassin         ###   ########.fr       */
+=======
+/*   Updated: 2023/06/30 16:34:45 by cchabeau         ###   ########.fr       */
+>>>>>>> end token
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +41,14 @@ static int	escape_quotes(char *str, int n)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int	is_sep(char c, char *sep)
 =======
 static int	is_sep(char c, char *sep)
 >>>>>>> lexing part one
+=======
+int	is_sep(char c, char *sep)
+>>>>>>> end token
 {
 	if (!sep)
 		return (-1);

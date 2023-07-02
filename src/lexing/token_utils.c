@@ -8,6 +8,7 @@
 /*   Created: 2023/06/26 10:14:31 by cchabeau          #+#    #+#             */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2023/08/07 16:20:21 by cchabeau         ###   ########.fr       */
 =======
 /*   Updated: 2023/06/26 14:29:47 by cchabeau         ###   ########.fr       */
@@ -15,6 +16,9 @@
 =======
 /*   Updated: 2023/06/30 16:21:47 by cchabeau         ###   ########.fr       */
 >>>>>>> base token before spliting
+=======
+/*   Updated: 2023/07/01 14:33:06 by cchabeau         ###   ########.fr       */
+>>>>>>> end token
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +36,7 @@ t_token *init_token(char *value)
 	new->type = define_type(value);
 	if (!new->type)
 		return (NULL);
+<<<<<<< HEAD
 	new->value = ft_strdup(value);
 	if (!new->value)
 		return (NULL);
@@ -106,6 +111,8 @@ t_token *init_token(char *value)
 	if (!new)
 		return (NULL);
 	new->type = define_type(value);
+=======
+>>>>>>> end token
 	new->value = ft_strdup(value);
 	if (!new->value)
 		return (NULL);
