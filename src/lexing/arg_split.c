@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:33:53 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/06/30 16:15:47 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/06/30 16:34:45 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	escape_quotes(char *str, int n)
 	return (n);
 }
 
-static int	is_sep(char c, char *sep)
+int	is_sep(char c, char *sep)
 {
 	if (!sep)
 		return (-1);
