@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/14 11:10:33 by angassin          #+#    #+#             */
-/*   Updated: 2023/07/15 12:45:10 by angassin         ###   ########.fr       */
+/*   Created: 2022/04/30 12:27:47 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 15:00:42 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../includes/libft.h"
 
-int	main(void)
+// Returns the length of the list aka the number of nodes in the list.
+int	ft_lstsize(t_list *lst)
 {
-	int		status;
-	char	*cmd_line;
+	int	len;
 
-	while (true)
+	if (!lst)
+		return (0);
+	len = 0;
+	while (lst)
 	{
-		status = 0;
-		cmd_line = readline("[Minishell] > ");
-		if (ft_strlen(cmd_line) > 0)
-			add_history(cmd_line);
-		printf("%s\n", cmd_line);
-		if (ft_strncmp(cmd_line, "cd", 2) == OK)
-			status = cd(cmd_line);
+		lst = lst->next;
+		len++;
 	}
-	return (status);
+	return (len);
 }

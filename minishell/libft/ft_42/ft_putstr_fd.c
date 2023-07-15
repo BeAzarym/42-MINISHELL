@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/14 11:10:33 by angassin          #+#    #+#             */
-/*   Updated: 2023/07/15 12:45:10 by angassin         ###   ########.fr       */
+/*   Created: 2022/04/29 19:46:11 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 14:59:27 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../includes/libft.h"
 
-int	main(void)
+/*
+	Output the string s to the filedescriptor fd.
+	Return the number of characters printed.
+*/
+
+ssize_t	ft_putstr_fd(char *s, int fd)
 {
-	int		status;
-	char	*cmd_line;
+	ssize_t	len;
 
-	while (true)
-	{
-		status = 0;
-		cmd_line = readline("[Minishell] > ");
-		if (ft_strlen(cmd_line) > 0)
-			add_history(cmd_line);
-		printf("%s\n", cmd_line);
-		if (ft_strncmp(cmd_line, "cd", 2) == OK)
-			status = cd(cmd_line);
-	}
-	return (status);
+	if (!s)
+		return (0);
+	len = write(fd, s, ft_strlen(s));
+	return (len);
 }

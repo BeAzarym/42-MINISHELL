@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/14 11:10:33 by angassin          #+#    #+#             */
-/*   Updated: 2023/07/15 12:45:10 by angassin         ###   ########.fr       */
+/*   Created: 2022/04/09 12:39:31 by angassin          #+#    #+#             */
+/*   Updated: 2022/05/02 17:55:48 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-
-int	main(void)
+int	ft_isprint(int c)
 {
-	int		status;
-	char	*cmd_line;
-
-	while (true)
+	if (c >= 32 && c <= 126)
 	{
-		status = 0;
-		cmd_line = readline("[Minishell] > ");
-		if (ft_strlen(cmd_line) > 0)
-			add_history(cmd_line);
-		printf("%s\n", cmd_line);
-		if (ft_strncmp(cmd_line, "cd", 2) == OK)
-			status = cd(cmd_line);
+		return (1);
 	}
-	return (status);
+	return (0);
 }

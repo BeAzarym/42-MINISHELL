@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/14 11:10:33 by angassin          #+#    #+#             */
-/*   Updated: 2023/07/15 12:45:10 by angassin         ###   ########.fr       */
+/*   Created: 2022/04/11 11:45:09 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 14:57:42 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../includes/libft.h"
 
-int	main(void)
+/*
+	The memset() function writes len bytes of value c (converted to an
+    unsigned char) to the string b.
+*/
+void	*ft_memset(void *b, int c, size_t len)
 {
-	int		status;
-	char	*cmd_line;
+	unsigned char	*dest;
+	unsigned int	i;
 
-	while (true)
+	dest = (unsigned char *)b;
+	i = 0;
+	while (i < len)
 	{
-		status = 0;
-		cmd_line = readline("[Minishell] > ");
-		if (ft_strlen(cmd_line) > 0)
-			add_history(cmd_line);
-		printf("%s\n", cmd_line);
-		if (ft_strncmp(cmd_line, "cd", 2) == OK)
-			status = cd(cmd_line);
+		dest[i] = c;
+		i++;
 	}
-	return (status);
+	return ((void *)dest);
 }

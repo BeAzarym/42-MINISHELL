@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_put_unbr_base_fd.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/14 11:10:33 by angassin          #+#    #+#             */
-/*   Updated: 2023/07/15 12:45:10 by angassin         ###   ########.fr       */
+/*   Created: 2022/07/07 16:43:48 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 14:59:03 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../includes/libft.h"
 
-int	main(void)
+// Recursive function to display an unsigned number in the given base
+void	ft_put_unbr_base_fd(unsigned long n, char *base, int fd)
 {
-	int		status;
-	char	*cmd_line;
+	unsigned int	base_len;
 
-	while (true)
+	if (!base)
+		return ;
+	base_len = ft_strlen(base);
+	if (n >= base_len)
 	{
-		status = 0;
-		cmd_line = readline("[Minishell] > ");
-		if (ft_strlen(cmd_line) > 0)
-			add_history(cmd_line);
-		printf("%s\n", cmd_line);
-		if (ft_strncmp(cmd_line, "cd", 2) == OK)
-			status = cd(cmd_line);
+		ft_put_unbr_base_fd(n / base_len, base, fd);
+		ft_put_unbr_base_fd(n % base_len, base, fd);
 	}
-	return (status);
+	if (n >= 0 && n < base_len)
+		ft_putchar_fd(base[n], fd);
 }

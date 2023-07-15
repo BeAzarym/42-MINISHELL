@@ -6,7 +6,7 @@
 #    By: angassin <angassin@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/06/24 07:59:54 by angassin         ###   ########.fr        #
+#    Updated: 2023/07/15 12:48:24 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,18 +52,18 @@ endif
 
 #--------------------------------SOURCES----------------------------------------
 
-SRC			= $(MINISHELL_SRC) $(UTILS_SRC)
+SRC			= $(MINISHELL_SRC) #$(UTILS_SRC)
 SRC_BONUS	= $(BONUS_SRC) $(UTILS_SRC)
 
 LIBFT_A 	= libft.a
 LIBFT_DIR 	= libft/
 LIBFT		= $(addprefix libft/, $(LIBFT_A))
 
-MINISHELL		= main.c
+MINISHELL		= main.c builtin.c
 MINISHELL_SRC	= $(addprefix src/, $(MINISHELL))
 
-UTILS		= utils.c
-UTILS_SRC	= $(addprefix utils/, $(UTILS))
+#UTILS		= utils.c
+#UTILS_SRC	= $(addprefix utils/, $(UTILS))
 
 #BONUS		= main_bonus.c
 #BONUS_SRC	= $(addprefix src/, $(BONUS))
@@ -83,7 +83,7 @@ $(NAME): $(OBJ)
 	@echo $(CURSIVE)$(GRAY) "     - Making libft..." $(NONE)
 	@make -C $(LIBFT_DIR)
 	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -lreadline -o $(NAME)
 	@echo $(GREEN)"- Compiled -"$(NONE)
 
 # bonus : $(BONUS_OBJ)

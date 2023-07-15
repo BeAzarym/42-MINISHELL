@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/14 11:10:33 by angassin          #+#    #+#             */
-/*   Updated: 2023/07/15 12:45:10 by angassin         ###   ########.fr       */
+/*   Created: 2022/04/29 17:13:19 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 14:59:34 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../includes/libft.h"
 
-int	main(void)
+/*
+	Applies the function ’f’ on each character of the string passed as argument
+	, passing its index as first argument. Each character is passed by
+	address to ’f’ to be modified if necessary
+*/
+
+void	ft_striteri(char const *s, void (*f)(unsigned int, char*))
 {
-	int		status;
-	char	*cmd_line;
+	unsigned int	i;
 
-	while (true)
+	if (!s || !f)
+		return ;
+	i = 0;
+	while (s[i])
 	{
-		status = 0;
-		cmd_line = readline("[Minishell] > ");
-		if (ft_strlen(cmd_line) > 0)
-			add_history(cmd_line);
-		printf("%s\n", cmd_line);
-		if (ft_strncmp(cmd_line, "cd", 2) == OK)
-			status = cd(cmd_line);
+		f(i, (char *)&s[i]);
+		i++;
 	}
-	return (status);
 }

@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/14 11:10:33 by angassin          #+#    #+#             */
-/*   Updated: 2023/07/15 12:45:10 by angassin         ###   ########.fr       */
+/*   Created: 2022/04/29 21:27:03 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 14:59:23 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../includes/libft.h"
 
-int	main(void)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int		status;
-	char	*cmd_line;
+	unsigned int	nb;
 
-	while (true)
+	if (n < 0)
 	{
-		status = 0;
-		cmd_line = readline("[Minishell] > ");
-		if (ft_strlen(cmd_line) > 0)
-			add_history(cmd_line);
-		printf("%s\n", cmd_line);
-		if (ft_strncmp(cmd_line, "cd", 2) == OK)
-			status = cd(cmd_line);
+		ft_putchar_fd('-', fd);
+		nb = -(unsigned int)n;
 	}
-	return (status);
+	else
+	{
+		nb = (unsigned int)n;
+	}
+	if (nb >= 10)
+	{
+		ft_putnbr_fd((nb / 10), fd);
+	}
+	ft_putchar_fd((nb % 10 + '0'), fd);
 }

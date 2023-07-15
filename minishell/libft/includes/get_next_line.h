@@ -1,46 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/07/15 12:48:57 by angassin         ###   ########.fr       */
+/*   Created: 2023/01/17 15:28:38 by angassin          #+#    #+#             */
+/*   Updated: 2023/04/17 18:18:38 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+
 /*									[Includes]								*/
 
-# include <sys/errno.h>
-// waitpid
-# include <sys/wait.h>
-// open
-# include <fcntl.h>
-// readline
+// BUFSIZ, strerror, perror
 # include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-// chdir
-# include <unistd.h>
-
-# include <stdbool.h>
-// libft and other includes
-# include "../libft/includes/libft.h"
-# include "execute.h"
-
-
+# include "libft.h"
 /*									[Macros]								*/
-# define OK 0
 
-/*									[Src]									*/
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE BUFSIZ
+# endif
 
-// builtin.c
-int	cd(char *cmd);
+/*									[Functions]								*/
 
+//get_next_line.c
+char	*get_next_line(int fd);
 
-/*									[Utils]									*/
+//get_next_line_utils.c
+char	*ft_strchr(const char *s, int c);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_substr(char	const *s, unsigned int start, size_t len);
+char	*ft_strdup(const char *s1);
+size_t	ft_strlen(const char *s);
 
 #endif

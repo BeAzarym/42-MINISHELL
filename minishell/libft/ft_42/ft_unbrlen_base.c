@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_unbrlen_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/14 11:10:33 by angassin          #+#    #+#             */
-/*   Updated: 2023/07/15 12:45:10 by angassin         ###   ########.fr       */
+/*   Created: 2022/07/07 17:10:19 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 14:59:59 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../includes/libft.h"
 
-int	main(void)
+// start at 1 to include zero or the equivalent in any base or the first digit
+size_t	ft_unbrlen_base(unsigned long n, unsigned int base)
 {
-	int		status;
-	char	*cmd_line;
+	size_t			nb_len;
 
-	while (true)
+	if (!base)
+		return (0);
+	nb_len = 1;
+	while (n / base)
 	{
-		status = 0;
-		cmd_line = readline("[Minishell] > ");
-		if (ft_strlen(cmd_line) > 0)
-			add_history(cmd_line);
-		printf("%s\n", cmd_line);
-		if (ft_strncmp(cmd_line, "cd", 2) == OK)
-			status = cd(cmd_line);
+		n = n / base;
+		nb_len++;
 	}
-	return (status);
+	return (nb_len);
 }
