@@ -7,10 +7,14 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2023/08/16 16:19:36 by angassin         ###   ########.fr       */
 =======
 /*   Updated: 2023/07/10 18:24:42 by cchabeau         ###   ########.fr       */
 >>>>>>> env update
+=======
+/*   Updated: 2023/08/07 11:25:14 by cchabeau         ###   ########.fr       */
+>>>>>>> cleaning main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +98,9 @@ void	clear_env_lst(t_env *lst)
 	}
 	free(lst);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cleaning main
 }
 
 void	clear_tkn_lst(t_token *lst)
@@ -106,9 +113,13 @@ void	clear_tkn_lst(t_token *lst)
 		lst = lst->next;
 	}
 	free(lst);
+<<<<<<< HEAD
 }
 
 
 =======
 }
 >>>>>>> env update
+=======
+}
+>>>>>>> cleaning main
