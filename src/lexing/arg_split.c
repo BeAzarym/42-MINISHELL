@@ -7,10 +7,14 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:33:53 by cchabeau          #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2023/08/16 16:21:58 by angassin         ###   ########.fr       */
 =======
 /*   Updated: 2023/06/30 16:34:45 by cchabeau         ###   ########.fr       */
 >>>>>>> end token
+=======
+/*   Updated: 2023/07/10 10:54:25 by cchabeau         ###   ########.fr       */
+>>>>>>> env update
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +123,7 @@ char	**arg_split(char *s, char *sep)
 		start = i;
 		i = jump_to_next_sep(s, sep, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		strs[j] = ft_substr(s, start, (i - start));
 		if (!strs[j])
 			return (ft_array_clear(strs));
@@ -129,6 +134,11 @@ char	**arg_split(char *s, char *sep)
 			return (ft_array_clear(strs));
 		// printf("strs: %s\n", strs[j]);
 >>>>>>> lexing part one
+=======
+		strs[j] = ft_substr(s, start, (i - start));
+		if (!strs[j])
+			return (ft_array_clear(strs));
+>>>>>>> env update
 		j++;
 	}
 	strs[j] = NULL;
