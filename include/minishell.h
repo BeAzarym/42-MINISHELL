@@ -70,5 +70,7 @@ t_env_lst			*init_envp(char **envp);
 char				**envp_split(char *str);
 void				print_env(t_env_lst *lst);
 void				clear_env_lst(t_env *lst);
+void clear_tkn_lst(t_token *lst);
+t_tkn_lst *lexing(char *str);
 
 #endif
