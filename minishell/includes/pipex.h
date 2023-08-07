@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/07 16:15:50 by angassin         ###   ########.fr       */
+/*   Created: 2023/04/12 12:29:35 by angassin          #+#    #+#             */
+/*   Updated: 2023/08/07 15:46:07 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef PIPEX_H
+# define PIPEX_H
 /*									[Includes]								*/
 
 # include <sys/errno.h>
@@ -19,39 +19,27 @@
 # include <sys/wait.h>
 // open
 # include <fcntl.h>
-// readline
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-// chdir
-# include <unistd.h>
-
-# include <stdbool.h>
 // libft and other includes
 # include "../libft/includes/libft.h"
-# include "execute.h"
-# include "pipex.h"
-
-/*									[Typedefs]								*/
-
-typedef struct s_cmd
-{
-	int		type_in;
-	int		type_out;
-
-	char	*infile;
-	char	*outfile;
-	char	**cmd;
-}				t_cmd;
 
 /*									[Macros]								*/
+
 # define OK 0
+# define CHILD 0
 
 /*									[Src]									*/
 
-// builtin.c
-int	cd(char *cmd);
+// pipex.c
+void		create_process(char *argv, char **envp);
+void		execute(char *argv, char **envp);
+int			lastcmd_process(int argc, char *argv, char **envp, int arg_counter);
 
 /*									[Utils]									*/
+
+void		error_exit(char *error_msg);
+int			infile_open(char *file);
+int			outfile_truncate_open(char *file);
+int			outfile_append_open(char *file);
+void		duplicate(int fd_src, int fd_dest, char *error);
 
 #endif
