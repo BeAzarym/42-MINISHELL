@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:33:53 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/06/30 16:34:45 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/07/10 10:54:25 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,9 @@ char	**arg_split(char *s, char *sep)
 			break ;
 		start = i;
 		i = jump_to_next_sep(s, sep, i);
-		// printf("start : %d | i : %d\n", start, i);
 		strs[j] = ft_substr(s, start, (i - start));
 		if (!strs[j])
 			return (ft_array_clear(strs));
-		// printf("strs: %s\n", strs[j]);
 		j++;
 	}
 	strs[j] = NULL;
