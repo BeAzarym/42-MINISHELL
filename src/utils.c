@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/07/10 18:24:42 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/07 11:25:14 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,18 @@ void	clear_env_lst(t_env *lst)
 	while (lst)
 	{
 		free(lst->key);
+		free(lst->value);
+		lst = lst->next;
+	}
+	free(lst);
+}
+
+void	clear_tkn_lst(t_token *lst)
+{
+	if (!lst)
+		return ;
+	while (lst)
+	{
 		free(lst->value);
 		lst = lst->next;
 	}
