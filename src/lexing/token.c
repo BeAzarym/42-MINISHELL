@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:54:44 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/07/02 19:29:26 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/07/10 11:06:52 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,35 +30,35 @@ int	locate_token(char *value, char *token)
 	return (-1);
 }
 
-t_tkn_stack	*token_split(t_tkn_stack *stack, t_tkn_stack *new)
+t_tkn_lst	*token_split(t_tkn_lst *stack, t_tkn_lst *new)
 {
-	int		j;
-	int len;
+	int	j;
+	int	len;
 
-	new = init_stack();
+	new = init_tkn_lst();
 	while (stack->head)
 	{
 		len = ft_strlen(stack->head->value);
 		j = locate_token(stack->head->value, "|<>");
 		if (j == -1)
-			new = add_stack(stack->head->value, new);
+			new = add_lst_tkn(stack->head->value, new);
 		else if (j == 0 && len == 1)
-			new = add_stack(ft_substr(stack->head->value, j, 1), new);
+			new = add_lst_tkn(ft_substr(stack->head->value, j, 1), new);
 		else if (j == (len - 1))
 		{
-			new = add_stack(ft_substr(stack->head->value, 0, j), new);
-			new = add_stack(ft_substr(stack->head->value, j, 1), new);
+			new = add_lst_tkn(ft_substr(stack->head->value, 0, j), new);
+			new = add_lst_tkn(ft_substr(stack->head->value, j, 1), new);
 		}
 		else if (j > 0 && j < len)
 		{
-			new = add_stack(ft_substr(stack->head->value, 0, j), new);
-			new = add_stack(ft_substr(stack->head->value, j, 1), new);
-			new = add_stack(ft_substr(stack->head->value, (j + 1), len), new);
+			new = add_lst_tkn(ft_substr(stack->head->value, 0, j), new);
+			new = add_lst_tkn(ft_substr(stack->head->value, j, 1), new);
+			new = add_lst_tkn(ft_substr(stack->head->value, (j + 1), len), new);
 		}
 		else if (j == 0 && len > 0)
 		{
-			new = add_stack(ft_substr(stack->head->value, j, 1), new);
-			new = add_stack(ft_substr(stack->head->value, 1, len), new);
+			new = add_lst_tkn(ft_substr(stack->head->value, j, 1), new);
+			new = add_lst_tkn(ft_substr(stack->head->value, 1, len), new);
 		}
 		stack->head = stack->head->next;
 	}
