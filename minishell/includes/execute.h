@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 09:55:40 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/07 16:15:46 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:20:40 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@
 # include <fcntl.h>
 // // libft and other includes
 // # include "../libft/includes/libft.h"
+# include "minishell.h"
+
+typedef struct s_cmd
+{
+	int				type_in;
+	int				type_out;
+	char			*infile;
+	char			*outfile;
+	char			**cmd;
+	struct s_cmd	*next;
+}				t_cmd;
 
 /*									[Macros]								*/
 # define CHILD 0
@@ -39,18 +50,20 @@ enum	e_redirect
 /*									[Src]									*/
 
 // execution.c
-void	execution(t_cmd *cmd, char **envp);
+int		execution(t_cmd *cmd, char **envp);
 
 // pipex.c
 // void		create_process(char *argv, char **envp);
-// void		execute(char *argv, char **envp);
-// int		lastcmd_process(int argc, char *argv, char **envp, int arg_counter);
+void	execute(t_cmd *argv, char **envp);
+int		lastcmd_process(t_cmd *cmd, char **envp, int arg_counter);
 
-// /*									[Utils]								*/
+/*									[Utils]								*/
 
-// void		error_exit(char *error_msg);
-// int			infile_open(char *file);
-// int			outfile_open(char *file);
-// void		duplicate(int fd_src, int fd_dest, char *error);
+// utils.c
+void	error_exit(char *error_msg);
+int		infile_open(char *file);
+int		outfile_append_open(char *file);
+int		outfile_truncate_open(char *file);
+void	duplicate(int fd_src, int fd_dest, char *error);
 
 #endif

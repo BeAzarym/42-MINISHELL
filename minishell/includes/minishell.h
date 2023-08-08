@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/07 16:15:50 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:13:54 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,10 @@
 // libft and other includes
 # include "../libft/includes/libft.h"
 # include "execute.h"
-# include "pipex.h"
 
 /*									[Typedefs]								*/
 
-typedef struct s_cmd
-{
-	int		type_in;
-	int		type_out;
 
-	char	*infile;
-	char	*outfile;
-	char	**cmd;
-}				t_cmd;
 
 /*									[Macros]								*/
 # define OK 0

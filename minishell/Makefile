@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: angassin <angassin@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/08/07 11:52:41 by angassin         ###   ########.fr        #
+#    Updated: 2023/08/08 16:19:10 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ LIBFT_A 	= libft.a
 LIBFT_DIR 	= libft/
 LIBFT		= $(addprefix libft/, $(LIBFT_A))
 
-MINISHELL		= main.c builtin.c
+MINISHELL		= main.c builtin.c execution.c pipex.c
 MINISHELL_SRC	= $(addprefix src/, $(MINISHELL))
 
 #UTILS		= utils.c
