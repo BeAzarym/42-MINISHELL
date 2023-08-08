@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 18:17:56 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/08 16:23:00 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:15:14 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter)
 	pid = fork();
 	if (pid == -1)
 		error_exit("could not create process");
-	if (pid == CHILD)
+	// if (pid == CHILD)
 		execute(cmd, envp);
 	waitpid(pid, &status, 0);
 	arg_counter++;
@@ -79,24 +79,24 @@ void	execute(t_cmd *argv, char **envp)
 {
 	char	**paths;
 	char	*cmd_path;
-	char	**cmd;
+	// char	**cmd;
 
 	// if (!argv || !argv[0])
 	// 	error_exit("parse error near """);
-	cmd = ft_split(argv->cmd, ' ');
-	if (cmd == NULL)
-		error_exit("parsing of the command failed");
+	// cmd = ft_split(argv->cmd, ' ');
+	// if (cmd == NULL)
+	// 	error_exit("parsing of the command failed");
 	paths = commands_paths_array(envp);
-	cmd_path = command_access(cmd[0], paths);
+	cmd_path = command_access(argv->cmd[0], paths);
 	if (cmd_path == NULL)
 	{
-		ft_free_array(cmd);
+		// ft_free_array(cmd);
 		ft_free_array(paths);
 		exit(127);
 	}
-	execve(cmd_path, cmd, envp);
+	execve(cmd_path, argv->cmd, envp);
 	perror("could not execute the command");
-	ft_free_array(cmd);
+	// ft_free_array(cmd);
 	free(cmd_path);
 	exit(127);
 }

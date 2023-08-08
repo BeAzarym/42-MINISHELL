@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: angassin <angassin@student.s19.be>         +#+  +:+       +#+         #
+#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/08/08 16:19:10 by angassin         ###   ########.fr        #
+#    Updated: 2023/08/08 17:53:17 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ endif
 
 #--------------------------------SOURCES----------------------------------------
 
-SRC			= $(MINISHELL_SRC) #$(UTILS_SRC)
+SRC			= $(MINISHELL_SRC) $(UTILS_SRC)
 SRC_BONUS	= $(BONUS_SRC) $(UTILS_SRC)
 
 LIBFT_A 	= libft.a
@@ -62,8 +62,8 @@ LIBFT		= $(addprefix libft/, $(LIBFT_A))
 MINISHELL		= main.c builtin.c execution.c pipex.c
 MINISHELL_SRC	= $(addprefix src/, $(MINISHELL))
 
-#UTILS		= utils.c
-#UTILS_SRC	= $(addprefix utils/, $(UTILS))
+UTILS		= utils.c
+UTILS_SRC	= $(addprefix utils/, $(UTILS))
 
 #BONUS		= main_bonus.c
 #BONUS_SRC	= $(addprefix src/, $(BONUS))

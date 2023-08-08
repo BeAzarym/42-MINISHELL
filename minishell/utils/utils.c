@@ -6,11 +6,11 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:19:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/07 15:44:06 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/08 17:36:27 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/minishell.h"
 
 /*
 	Displays "error_msg" followed by a ’\n’ on the standard error

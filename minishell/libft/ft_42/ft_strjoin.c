@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 12:47:06 by angassin          #+#    #+#             */
-/*   Updated: 2023/05/01 17:11:58 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:18:07 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 }
 
 /*
-	Same as strjoin but concatenaiting the number of strings sent in argument
+	Same as strjoin but concatenating the number of strings sent in argument
 */
 char	*variadic_strjoin(int argc, ...)
 {
