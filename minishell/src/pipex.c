@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 18:17:56 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/08 18:15:14 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/08 19:25:48 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter)
 	pid = fork();
 	if (pid == -1)
 		error_exit("could not create process");
-	// if (pid == CHILD)
+	if (pid == CHILD)
 		execute(cmd, envp);
 	waitpid(pid, &status, 0);
 	arg_counter++;

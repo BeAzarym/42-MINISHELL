@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/08 18:27:52 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/08 19:28:41 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ int	execution(t_cmd *cmd, char **envp)
 		fdout = STDOUT_FILENO;
 	// while (i < argc - 2)
 	// 	create_process(argv[i++], envp);
-	// duplicate(fdout, STDOUT_FILENO, "duplication of the outfile failed");
+	duplicate(fdout, STDOUT_FILENO, "duplication of the outfile failed");
 	return (lastcmd_process(cmd, envp, 2));
 }
