@@ -6,15 +6,58 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 18:17:56 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/09 13:56:44 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:09:49 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static char	**commands_paths_array(char **envp);
-static char	*command_access(char *cmd, char **paths);
+static void	read_stdin(const char *limiter, int fd);
 
+/* Creates a child process to prompt the user */
+void	heredoc(const char *limiter)
+{
+	int			fd[2];
+	int			pid;
+
+	if (pipe(fd) == -1)
+		error_exit("could not create pipe");
+	pid = fork();
+	if (pid == -1)
+		error_exit("could not create process");
+	if (pid == CHILD)
+	{
+		close(fd[0]);
+		read_stdin(limiter, fd[1]);
+		close(fd[1]);
+	}
+	close(fd[1]);
+	duplicate(fd[0], STDIN_FILENO, "could not read from the pipe");
+	close(fd[0]);
+	waitpid(pid, NULL, 0);
+}
+
+static void	read_stdin(const char *limiter, int fd)
+{
+	char	*line;
+
+	while (1)
+	{
+		ft_putstr_fd("> ", STDOUT_FILENO);
+		line = get_next_line(STDIN_FILENO);
+		if (line == NULL)
+			exit(127);
+		if (ft_strncmp(limiter, line, ft_strlen(limiter)) == OK
+			&& ft_strlen(limiter) == (ft_strlen(line) - 1))
+		{
+			free(line);
+			exit(EXIT_SUCCESS);
+		}
+		ft_putstr_fd(line, fd);
+		free(line);
+	}
+	free(line);
+}
 /*
 	Creates a child process : send to the pipe the output of the execution
 	of the command passed in argument.
@@ -71,88 +114,3 @@ int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter)
 	return (exit_status);
 }
 
-/*
-	Executes the command sent in argument, execve returns only in case
-	of failure as the execve() function overlays the current process image
-	with a new process image.
-*/
-void	execute(t_cmd *argv, char **envp)
-{
-	char	**paths;
-	char	*cmd_path;
-	// char	**cmd;
-
-	// if (!argv || !argv[0])
-	// 	error_exit("parse error near """);
-	// cmd = ft_split(argv->cmd, ' ');
-	// if (cmd == NULL)
-	// 	error_exit("parsing of the command failed");
-	paths = commands_paths_array(envp);
-	cmd_path = command_access(argv->cmd[0], paths);
-	if (cmd_path == NULL)
-	{
-		// ft_free_array(cmd);
-		ft_free_array(paths);
-		exit(127);
-	}
-	execve(cmd_path, argv->cmd, envp);
-	perror("could not execute the command");
-	// ft_free_array(cmd);
-	free(cmd_path);
-	exit(127);
-}
-
-/*
-	Returns an array of the different paths to the executables
-	or NULL if the PATH environment variable is not found.
-*/
-static char	**commands_paths_array(char **envp)
-{
-	int		i;
-	char	**paths;
-	char	*path_str;
-
-	path_str = NULL;
-	if (envp == NULL)
-		return (0);
-	i = 0;
-	while (envp[i])
-	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == OK)
-		{
-			path_str = &envp[i][5];
-			break ;
-		}
-		++i;
-	}
-	if (path_str == NULL)
-		return (NULL);
-	paths = ft_split(path_str, ':');
-	return (paths);
-}
-
-/*
-	Returns the path to the command given in argument if exists.
-	Otherwise displays error and return NULL.
-*/
-static char	*command_access(char *cmd, char **paths)
-{
-	int		i;
-	char	*cmd_address;
-	char	*error;
-
-	if (access(cmd, X_OK) == OK)
-		return (cmd);
-	i = -1;
-	while (paths[++i])
-	{
-		cmd_address = variadic_strjoin(3, paths[i], "/", cmd);
-		if (access(cmd_address, X_OK) == OK)
-			return (cmd_address);
-		free(cmd_address);
-	}
-	error = variadic_strjoin(3, "pipex: ", cmd, ": command not found\n");
-	ft_putstr_fd(error, STDERR_FILENO);
-	free(error);
-	return (NULL);
-}
