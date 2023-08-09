@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/09 16:16:24 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/09 17:00:47 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 static char	**commands_paths_array(char **envp);
 static char	*command_access(char *cmd, char **paths);
 
+/* 
+	Redirects the input and output file descriptors if necessary and execute
+	the commands in processes
+*/
 int	execution(t_cmd *cmd, char **envp)
 {
 	int	fdin;
@@ -42,6 +46,7 @@ int	execution(t_cmd *cmd, char **envp)
 		duplicate(fdout, STDOUT_FILENO, "duplication of the outfile failed");
 	return (lastcmd_process(cmd, envp, 2));
 }
+
 /*
 	Executes the command sent in argument, execve returns only in case
 	of failure as the execve() function overlays the current process image
