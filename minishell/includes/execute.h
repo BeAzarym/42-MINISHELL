@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 09:55:40 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/08 16:20:40 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/09 13:33:54 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ enum	e_redirect
 int		execution(t_cmd *cmd, char **envp);
 
 // pipex.c
-// void		create_process(char *argv, char **envp);
+void	create_process(t_cmd *cmd, char **envp);
 void	execute(t_cmd *argv, char **envp);
 int		lastcmd_process(t_cmd *cmd, char **envp, int arg_counter);
 

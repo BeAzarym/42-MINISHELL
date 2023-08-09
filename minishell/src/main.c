@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 11:10:33 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/08 19:24:32 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/09 13:59:53 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char **argv, char	**envp)
 	cmd.infile = NULL;
 	cmd.outfile = NULL;
 	cmd.cmd = &argv[1];
+	cmd.next = NULL;
 
 	status = execution(&cmd, envp);
 	// char	*cmd_line;

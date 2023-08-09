@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/08 19:28:41 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:01:17 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,12 @@ int	execution(t_cmd *cmd, char **envp)
 		fdout = outfile_append_open(cmd->outfile);
 	else
 		fdout = STDOUT_FILENO;
-	// while (i < argc - 2)
-	// 	create_process(argv[i++], envp);
-	duplicate(fdout, STDOUT_FILENO, "duplication of the outfile failed");
+	while (cmd->next != NULL && cmd->next->next != NULL)
+	{
+		create_process(cmd, envp);
+		cmd = cmd->next;
+	}
+	if (fdout != STDOUT_FILENO)
+		duplicate(fdout, STDOUT_FILENO, "duplication of the outfile failed");
 	return (lastcmd_process(cmd, envp, 2));
 }

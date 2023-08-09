@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 18:17:56 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/08 19:25:48 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/09 13:56:44 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,27 @@ static char	*command_access(char *cmd, char **paths);
 	Parent process : reads the output of the child from the pipe.
 	The child process has it's own copy of the parent's file's decriptors.
 */
-// void	create_process(char *argv, char **envp)
-// {
-// 	int	fd[2];
-// 	int	pid;
+void	create_process(t_cmd  *cmd, char **envp)
+{
+	int	fd[2];
+	int	pid;
 
-// 	if (pipe(fd) == -1)
-// 		error_exit("could not create pipe");
-// 	pid = fork();
-// 	if (pid == -1)
-// 		error_exit("could not create process");
-// 	if (pid == CHILD)
-// 	{
-// 		close(fd[0]);
-// 		duplicate(fd[1], STDOUT_FILENO, "could not write to the pipe");
-// 		close(fd[1]);
-// 		execute(argv, envp);
-// 	}
-// 	close(fd[1]);
-// 	duplicate(fd[0], STDIN_FILENO, "could not read from the pipe");
-// 	close(fd[0]);
-// }
+	if (pipe(fd) == -1)
+		error_exit("could not create pipe");
+	pid = fork();
+	if (pid == -1)
+		error_exit("could not create process");
+	if (pid == CHILD)
+	{
+		close(fd[0]);
+		duplicate(fd[1], STDOUT_FILENO, "could not write to the pipe");
+		close(fd[1]);
+		execute(cmd, envp);
+	}
+	close(fd[1]);
+	duplicate(fd[0], STDIN_FILENO, "could not read from the pipe");
+	close(fd[0]);
+}
 
 /*
 	Executes the last command in a child process and wait for all
@@ -61,6 +61,7 @@ int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter)
 		execute(cmd, envp);
 	waitpid(pid, &status, 0);
 	arg_counter++;
+	(void)arg_counter;
 	exit_status = WEXITSTATUS(status);
 	// while (arg_counter <= argc - 2)
 	// {

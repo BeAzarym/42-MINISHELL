@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:19:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/08 19:30:05 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/09 13:35:58 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	outfile_append_open(char *file)
 
 void	duplicate(int fd_src, int fd_dest, char *error)
 {
-	if (fd_src == fd_dest)
-		return ;
+	// if (fd_src == fd_dest)
+	// 	return ;
 	if (dup2(fd_src, fd_dest) == -1)
 	{
 		close(fd_src);
