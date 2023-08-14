@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 11:10:33 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/08 19:24:32 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:43:17 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main(int argc, char **argv, char	**envp)
+int	main(int argc, char **argv, char **envp)
 {
 	int		status;
 	t_cmd	cmd;
@@ -20,9 +20,10 @@ int	main(int argc, char **argv, char	**envp)
 	(void)argc;
 	cmd.type_in = STDIN_OUT;
 	cmd.type_out = STDIN_OUT;
-	cmd.infile = NULL;
-	cmd.outfile = NULL;
+	cmd.infile = "infile.txt";
+	cmd.outfile = "out";
 	cmd.cmd = &argv[1];
+	cmd.next= NULL;
 
 	status = execution(&cmd, envp);
 	// char	*cmd_line;
