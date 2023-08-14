@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/15 01:05:52 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/15 01:24:59 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd_node	*cmd;
 	char	*cmd_line;
 	int		status;
-	// 	t_cmd	cmd;
+	t_cmd	command;
 
-// 	(void)argc;
-// 	cmd.type_in = STDIN_OUT;
-// 	cmd.type_out = STDIN_OUT;
-// 	cmd.infile = "infile.txt";
-// 	cmd.outfile = "out";
-// 	cmd.cmd = &argv[1];
-// 	cmd.next= NULL;
+	(void)argc;
+	// cmd.type_in = STDIN_OUT;
+	// cmd.type_out = STDIN_OUT;
+	// cmd.infile = "infile.txt";
+	// cmd.outfile = "out";
+	// cmd.cmd = &argv[1];
+	// cmd.next= NULL;
 
-// 	status = execution(&cmd, envp);	
+	status = execution(&command, envp);	
 	(void)argv;
 	(void)argc;
 	(void)envp;
@@ -48,10 +48,8 @@ int	main(int argc, char **argv, char **envp)
 		print_token(lst->head);
 		// cmd = parsing(lst);
 		// print_cmd(cmd);
-
-	// 	// 	printf("%s\n", cmd_line);
-	// 	// 	if (ft_strncmp(cmd_line, "cd", 2) == OK)
-	// 	// 		status = cd(cmd_line);
+		if (ft_strncmp(cmd_line, "cd", 2) == OK)
+			status = cd(cmd_line + 3);
 	}
 	clear_env_lst(env_lst->head);
 	return (status);
