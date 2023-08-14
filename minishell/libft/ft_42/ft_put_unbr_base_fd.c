@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_put_unbr_base_fd.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 16:43:48 by angassin          #+#    #+#             */
-/*   Updated: 2023/02/25 14:59:03 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:24:43 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	ft_put_unbr_base_fd(unsigned long n, char *base, int fd)
 		ft_put_unbr_base_fd(n / base_len, base, fd);
 		ft_put_unbr_base_fd(n % base_len, base, fd);
 	}
-	if (n >= 0 && n < base_len)
+	if (n < base_len)
 		ft_putchar_fd(base[n], fd);
 }

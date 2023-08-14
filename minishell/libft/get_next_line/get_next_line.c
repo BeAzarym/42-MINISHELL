@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:41:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/02/25 15:07:21 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:25:11 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ const char	*keep_leftover(char *left_over);
 */
 char	*get_next_line(int fd)
 {
-	static char	*already_read[OPEN_MAX];
+	static char	*already_read[FOPEN_MAX];
 	char		*line;
 
-	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0 || BUFFER_SIZE >= INT_MAX)
+	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0 || BUFFER_SIZE >= INT_MAX)
 		return (NULL);
 	already_read[fd] = (char *)read_and_append(already_read[fd], fd, 1);
 	if (!already_read[fd])

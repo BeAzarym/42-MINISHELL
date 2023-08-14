@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:57:11 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/14 13:52:51 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:23:47 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_env_lst *init_env_lst()
+t_env_lst	*init_env_lst(void)
 {
-	t_env_lst *lst;
+	t_env_lst	*lst;
+
 	lst = malloc(sizeof(t_env_lst));
 	if (!lst)
 		return (NULL);
@@ -24,11 +25,9 @@ t_env_lst *init_env_lst()
 	return (lst);
 }
 
-
-
-t_env_lst *add_lst_env(char *key, char *value, t_env_lst *lst)
+t_env_lst	*add_lst_env(char *key, char *value, t_env_lst *lst)
 {
-	t_env *new;
+	t_env	*new;
 
 	new = malloc(sizeof(t_env));
 	if (!new)
@@ -52,30 +51,29 @@ t_env_lst *add_lst_env(char *key, char *value, t_env_lst *lst)
 	return (lst);
 }
 
-char **envp_split(char *str)
+char	**envp_split(char *str)
 {
-	int i;
-	int j;
-	char **array;
-	int len;
+	int		i;
+	int		j;
+	char	**array;
+	int		len;
+
 	array = malloc(sizeof(char *) * 3);
 	if (!array)
 		return (NULL);
 	i = 0;
 	len = ft_strlen(str);
-		j = 0;
+	j = 0;
 	while (ft_isalnum(str[i]) || str[i] == '_')
 		i++;
-		array[j] = ft_substr(str, 0, i);
-		if (!array[j])
-			return (NULL);
-		j++;
-		array[j] = ft_substr(str, i + 1, len);
-		if (!array[j])
-			return (NULL);
-		j++;
-	
+	array[j] = ft_substr(str, 0, i);
+	if (!array[j])
+		return (NULL);
+	j++;
+	array[j] = ft_substr(str, i + 1, len);
+	if (!array[j])
+		return (NULL);
+	j++;
 	array[j] = NULL;
 	return (array);
 }
-
