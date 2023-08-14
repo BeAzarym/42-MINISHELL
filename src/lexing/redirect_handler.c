@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   redirect_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/10 10:54:49 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/09 15:31:38 by cchabeau         ###   ########.fr       */
+/*   Created: 2023/08/13 16:55:06 by cchabeau          #+#    #+#             */
+/*   Updated: 2023/08/13 17:25:11 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_env_lst	*init_envp(char **envp)
+void	have_redirect_arg(t_tkn_lst *lst, t_cmd *cmd)
 {
-	int i;
-	t_env_lst *lst;
-	char **tmp;
-
-	lst = init_env_lst();
-	if (!lst)
-		return (NULL);
-	i = 0;
-	
-	while (envp[i])
+	while (lst->head)
 	{
-		tmp = envp_split(envp[i]);
-		lst = add_lst_env(tmp[0], tmp[1], lst);
-		// printf("[KEY] >> %s	[VALUE] >> %s\n", tmp[0], tmp[1]);
-		ft_array_clear(tmp);
-		i++;
+		if (lst->head->next || (lst->head->type == 'I' || lst->head->type == 'O'))
+		{
+			if (lst->head->next->type == 'I' && lst->head->next->next)
+			{
+				
+			}
+			if (lst->head->next->type == 'O' && lst->head->next->next)
+			{
+				
+			}
+		}
+		lst->head = lst->head->next;
 	}
-	return (lst);
 }
