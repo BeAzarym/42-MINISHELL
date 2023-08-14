@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:45:51 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/09 16:05:04 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:49:50 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../includes/minishell.h"
 
 t_cmd	*init_cmd_struct(void)
 {

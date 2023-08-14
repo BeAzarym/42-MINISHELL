@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/09 16:04:15 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:51:59 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../includes/minishell.h"
 
 void	print_token(t_token *lst)
 {

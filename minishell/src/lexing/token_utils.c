@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:14:31 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/07 16:20:21 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:49:41 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../includes/minishell.h"
 
 t_token *init_token(char *value)
 {

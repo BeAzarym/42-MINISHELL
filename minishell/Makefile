@@ -1,6 +1,65 @@
-NAME = minishell
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
+#    Updated: 2023/08/14 13:30:46 by angassin         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRC = 	minishell.c \
+#-------------------------------COLORS------------------------------------------
+
+NONE='\033[0m'
+GREEN='\033[32m'
+GRAY='\033[2;37m'
+CURSIVE='\033[3m'
+BLUE='\033[1;94m'
+RED='\033[1;91m'
+
+#-------------------------------VARIABLES---------------------------------------
+
+NAME		= minishell
+
+CC			= gcc
+
+CFLAGS		= -Wall -Wextra -Werror
+
+DEBUG		= 0
+
+# THREAD_SANI	= 0
+
+SANI		= 0
+
+# ifeq ($(THREAD_SANI), 1)
+# 	CFLAGS += -fsanitize=thread
+# 	DEBUG = 1
+# endif
+
+ifeq ($(SANI), 1)
+	CFLAGS += 	-fsanitize=address -fsanitize=undefined \
+				-fno-sanitize-recover=all	-fsanitize=float-divide-by-zero \
+				-fsanitize=float-cast-overflow -fno-sanitize=null \
+				-fno-sanitize=alignment
+	DEBUG = 1
+endif
+
+ifeq ($(DEBUG), 1)
+	CFLAGS += -g3
+endif
+
+#--------------------------------SOURCES----------------------------------------
+
+SRC			= $(MINISHELL_SRC) $(UTILS_SRC)
+SRC_BONUS	= $(BONUS_SRC) $(UTILS_SRC)
+
+LIBFT_A 	= libft.a
+LIBFT_DIR 	= libft/
+LIBFT		= $(addprefix libft/, $(LIBFT_A))
+
+MINISHELL		= main.c builtin.c execution.c pipex.c \
 		lexing/lexer.c \
 		lexing/arg_split.c \
 		lexing/token.c \
@@ -10,40 +69,55 @@ SRC = 	minishell.c \
 		lexing/parser.c \
 		lexing/parser_utils.c \
 		lexing/redirect_handler.c \
-		utils.c \
+		utils.c minishell.c
+MINISHELL_SRC	= $(addprefix src/, $(MINISHELL))
 
-SRCS = $(addprefix $(SRC_DIR)/, $(SRC))		
+UTILS		= utils.c
+UTILS_SRC	= $(addprefix utils/, $(UTILS))
 
-OBJS = $(SRCS:.c=.o)
+#BONUS		= main_bonus.c
+#BONUS_SRC	= $(addprefix src/, $(BONUS))
 
-LIBFT = make -C ./libft
+OBJ			= $(SRC:.c=.o)
+#BONUS_OBJ	= $(SRC_BONUS:.c=.o)
 
-SRC_DIR = src
-INC_DIR = include
+#---------------------------------RULES-----------------------------------------
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+%o: %c
+	@echo $(GRAY)"Compiling...";
+	@$(CC) $(CFLAGS) -Iincludes -c $< -o  $(<:.c=.o)
 
-CC = gcc
+all: $(NAME)
 
-RM = @rm -rf
+$(NAME): $(OBJ)
+	@echo $(CURSIVE)$(GRAY) "     - Making libft..." $(NONE)
+	@make -C $(LIBFT_DIR)
+	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -lreadline -o $(NAME)
+	@echo $(GREEN)"- Compiled -"$(NONE)
 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+# bonus : $(BONUS_OBJ)
+# 	@echo $(CURSIVE)$(GRAY) "     - Making libft..." $(NONE)
+# 	@make -C $(LIBFT_DIR)
+# 	@$(CC) $(CFLAGS) $(BONUS_OBJ) $(LIBFT) -o $(NAME)
+# 	@echo $(GREEN)"- Bonus compiled -"$(NONE)
 
-all:	$(NAME)
-
-$(NAME) : $(OBJS)
-	$(LIBFT)
-	$(CC) $(CFLAGS) -Ilibft/libft -I $(INC_DIR) -o $(NAME) $(OBJS) -Llibft -lft -lreadline
+# exe: all
+# 	@make -C ./ clean
+# 	@echo "     - Executing $(NAME)... \n"
+# 	@./$(NAME) infile "ls -l" "wc -l" outfile
+# 	@echo "\n     - Done -"
 
 clean:
-	$(RM) $(OBJS)
-	make -C ./libft clean
+	@echo $(CURSIVE)$(GRAY) "     - Removing object files..." $(NONE)
+	@rm -rf $(OBJ) $(BONUS_OBJ)
+	@make -C $(LIBFT_DIR) clean
 
 fclean: clean
-	$(RM) $(NAME)
-	make -C ./libft fclean
+	@echo $(CURSIVE)$(GRAY) "     - Removing $(NAME)..." $(NONE)
+	@rm -rf $(NAME)
+	@make -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
-.PHONY: all re clean fclean
+.PHONY: all debug exe clean fclean re bonus

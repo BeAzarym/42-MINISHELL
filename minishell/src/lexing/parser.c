@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:41:30 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/12 10:11:30 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:49:51 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../includes/minishell.h"
 
 // t_cmd_node	*parsing(t_tkn_lst *lst)
 // {

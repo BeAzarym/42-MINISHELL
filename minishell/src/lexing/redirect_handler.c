@@ -6,11 +6,11 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:55:06 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/14 13:03:28 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:49:36 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../includes/minishell.h"
 
 // void	have_redirect_arg(t_tkn_lst *lst, t_cmd *cmd)
 // {

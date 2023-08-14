@@ -6,11 +6,11 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:57:11 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/14 13:03:34 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:52:51 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../includes/minishell.h"
 
 t_env_lst *init_env_lst()
 {
