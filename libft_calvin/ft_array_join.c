@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_array_join.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 20:39:37 by cchabeau          #+#    #+#             */
 /*   Updated: 2023/08/15 14:18:43 by angassin         ###   ########.fr       */
+=======
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 20:39:37 by cchabeau          #+#    #+#             */
+/*   Updated: 2023/08/09 15:37:09 by cchabeau         ###   ########.fr       */
+>>>>>>> merge ok, commented main.c and buggy code minishell.c
 /*                                                                            */
 /* ************************************************************************** */
 

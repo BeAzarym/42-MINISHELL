@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:36:57 by cchabeau          #+#    #+#             */
 /*   Updated: 2023/08/15 14:19:14 by angassin         ###   ########.fr       */
+=======
+/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/17 13:36:57 by cchabeau          #+#    #+#             */
+/*   Updated: 2022/12/09 13:13:33 by cchabeau         ###   ########.fr       */
+>>>>>>> merge ok, commented main.c and buggy code minishell.c
 /*                                                                            */
 /* ************************************************************************** */
 

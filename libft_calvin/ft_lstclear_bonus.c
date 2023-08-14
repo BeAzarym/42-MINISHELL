@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 18:19:57 by cchabeau          #+#    #+#             */
 /*   Updated: 2023/08/15 14:21:15 by angassin         ###   ########.fr       */
+=======
+/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/25 18:19:57 by cchabeau          #+#    #+#             */
+/*   Updated: 2022/11/04 13:04:33 by cchabeau         ###   ########.fr       */
+>>>>>>> merge ok, commented main.c and buggy code minishell.c
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arraydup.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 13:59:37 by cchabeau          #+#    #+#             */
 /*   Updated: 2023/08/15 14:18:59 by angassin         ###   ########.fr       */
+=======
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/01 13:59:37 by cchabeau          #+#    #+#             */
+/*   Updated: 2023/05/01 22:27:13 by cchabeau         ###   ########.fr       */
+>>>>>>> merge ok, commented main.c and buggy code minishell.c
 /*                                                                            */
 /* ************************************************************************** */
 

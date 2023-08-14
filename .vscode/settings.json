@@ -4,6 +4,10 @@
 		"libft.h": "c",
 		"__tuple": "c",
 		"array": "c"
+<<<<<<< HEAD
 	},
 	"files.autoSave": "onFocusChange"
+=======
+	}
+>>>>>>> merge ok, commented main.c and buggy code minishell.c
 }

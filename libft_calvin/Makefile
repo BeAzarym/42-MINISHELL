@@ -56,6 +56,7 @@ SRCS	=	ft_atoi.c \
 					ft_lstnew.c \
 					ft_lstsize.c \
 					ft_strndup.c \
+<<<<<<< HEAD
 <<<<<<< HEAD:libft_calvin/Makefile
 <<<<<<< HEAD:libft_calvin/Makefile
 					array_add_back.c \
@@ -64,6 +65,9 @@ SRCS	=	ft_atoi.c \
 =======
 					array_add_back.c \
 >>>>>>> phoenix:minishell/libft_calvin/Makefile
+=======
+					array_add_back.c \
+>>>>>>> merge ok, commented main.c and buggy code minishell.c
 
 OBJS	=	$(SRCS:.c=.o)
 
