@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:10:00 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/06/24 19:22:17 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/08 15:54:05 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ char				**ft_array_join_all(char **s1, char **s2);
 char				**ft_strjoin_arr(char *s1, char **arr, int size);
 int					ft_arraylen(char **arr);
 char				*ft_strndup(char *s, int n);
+char				**array_add_back(char **arr, char *str);
 
 #endif

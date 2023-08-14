@@ -56,6 +56,7 @@ SRCS	=	ft_atoi.c \
 					ft_lstnew.c \
 					ft_lstsize.c \
 					ft_strndup.c \
+					array_add_back.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

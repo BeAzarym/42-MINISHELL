@@ -41,11 +41,21 @@ typedef struct s_env
 	struct s_env	*next;
 }					t_env;
 
+typedef struct s_cmd_node
+{
+	struct s_cmd	*head;
+	struct s_cmd	*tail;
+	int				size;
+}					t_cmd_node;
+
 typedef struct s_cmd
 {
-	char			*cmd;
-	char			**arg;
-	int				redirect;
+	int				type_in;
+	int				type_out;
+	char			*infile;
+	char			*outfile;
+	char			**cmd;
+	struct s_cmd	*next;
 }					t_cmd;
 
 char				**arg_split(char *s, char *sep);
@@ -70,7 +80,12 @@ t_env_lst			*init_envp(char **envp);
 char				**envp_split(char *str);
 void				print_env(t_env_lst *lst);
 void				clear_env_lst(t_env *lst);
-void clear_tkn_lst(t_token *lst);
-t_tkn_lst *lexing(char *str);
+void				clear_tkn_lst(t_token *lst);
+t_tkn_lst			*lexing(char *str);
+t_cmd				*init_cmd_struct(void);
+t_cmd_node			*init_cmd_node(void);
+t_cmd_node			*add_cmd_node(t_cmd_node *node, t_cmd *cmd);
+void				print_cmd(t_cmd_node *node);
+t_cmd_node			*parsing(t_tkn_lst *lst);
 
 #endif
