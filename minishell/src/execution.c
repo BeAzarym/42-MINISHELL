@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/09 17:00:47 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:25:46 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ static char	*command_access(char *cmd, char **paths)
 			return (cmd_address);
 		free(cmd_address);
 	}
-	error = variadic_strjoin(3, "pipex: ", cmd, ": command not found\n");
+	error = variadic_strjoin(3, "minishell: ", cmd, ": command not found\n");
 	ft_putstr_fd(error, STDERR_FILENO);
 	free(error);
 	return (NULL);
