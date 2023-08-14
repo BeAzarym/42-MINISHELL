@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/15 14:01:52 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/15 14:13:57 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_tkn_lst	*lst;
-	t_env_lst	*env_lst;
+	// t_env_lst	*env_lst;
 	t_cmd_node	*cmd;
 	char	*cmd_line;
 	int		status;
@@ -34,7 +34,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)envp;
 	lst = NULL;
-	env_lst = init_envp(envp);
+	// env_lst = init_envp(envp);
 	cmd = init_cmd_node();
 	if (!cmd)
 		return (1);
