@@ -62,7 +62,7 @@ LIBFT		= $(addprefix libft/, $(LIBFT_A))
 MINISHELL		= main.c builtin.c execution.c pipex.c
 MINISHELL_SRC	= $(addprefix src/, $(MINISHELL))
 
-UTILS		= utils.c
+UTILS		= exe_utils.c
 UTILS_SRC	= $(addprefix utils/, $(UTILS))
 
 #BONUS		= main_bonus.c
