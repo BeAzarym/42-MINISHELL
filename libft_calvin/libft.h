@@ -6,7 +6,11 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:10:00 by cchabeau          #+#    #+#             */
+<<<<<<< HEAD:libft_calvin/libft.h
 /*   Updated: 2023/08/15 13:56:49 by angassin         ###   ########.fr       */
+=======
+/*   Updated: 2023/08/08 15:54:05 by cchabeau         ###   ########.fr       */
+>>>>>>> phoenix:minishell/libft_calvin/libft.h
 /*                                                                            */
 /* ************************************************************************** */
 

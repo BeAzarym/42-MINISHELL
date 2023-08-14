@@ -57,9 +57,13 @@ SRCS	=	ft_atoi.c \
 					ft_lstsize.c \
 					ft_strndup.c \
 <<<<<<< HEAD:libft_calvin/Makefile
+<<<<<<< HEAD:libft_calvin/Makefile
 					array_add_back.c \
 =======
 >>>>>>> lexing part one:minishell/libft_calvin/Makefile
+=======
+					array_add_back.c \
+>>>>>>> phoenix:minishell/libft_calvin/Makefile
 
 OBJS	=	$(SRCS:.c=.o)
 
