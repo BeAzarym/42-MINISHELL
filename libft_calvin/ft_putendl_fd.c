@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/10 10:54:49 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/09 15:31:38 by cchabeau         ###   ########.fr       */
+/*   Created: 2022/10/24 23:38:37 by cchabeau          #+#    #+#             */
+/*   Updated: 2022/10/29 16:01:55 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "libft.h"
 
-t_env_lst	*init_envp(char **envp)
+void	ft_putendl_fd(char *s, int fd)
 {
-	int i;
-	t_env_lst *lst;
-	char **tmp;
-
-	lst = init_env_lst();
-	if (!lst)
-		return (NULL);
-	i = 0;
-	
-	while (envp[i])
-	{
-		tmp = envp_split(envp[i]);
-		lst = add_lst_env(tmp[0], tmp[1], lst);
-		// printf("[KEY] >> %s	[VALUE] >> %s\n", tmp[0], tmp[1]);
-		ft_array_clear(tmp);
-		i++;
-	}
-	return (lst);
+	if (!s || fd < 0)
+		return ;
+	write(fd, s, ft_strlen(s));
+	write(fd, "\n", 1);
 }

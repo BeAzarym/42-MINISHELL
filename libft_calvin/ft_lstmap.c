@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/19 23:14:14 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/07 11:32:57 by cchabeau         ###   ########.fr       */
+/*   Created: 2022/10/25 18:24:10 by cchabeau          #+#    #+#             */
+/*   Updated: 2022/11/04 16:14:00 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "libft.h"
 
-t_tkn_lst	*lexing(char *str)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char **array;
-	t_tkn_lst *stack;
-	t_tkn_lst	*lst;
-	int i;
+	t_list	*new;
+	t_list	*new_lst;
 
-	stack = NULL;
-	lst = NULL;
-	array = arg_split(str, " \n\t\r\f\t\b");
-	stack = init_tkn_lst();
-	if (!stack)
+	if (!del || !lst || !f)
 		return (NULL);
-	i = 0;
-	while (array[i])
+	new_lst = NULL;
+	while (lst)
 	{
-		stack = add_lst_tkn(array[i], stack);
-		if (!stack)
+		new = ft_lstnew(f(lst->content));
+		if (!new)
+		{
+			ft_lstclear(&new_lst, del);
 			return (NULL);
-		i++;
+		}
+		ft_lstadd_back(&new_lst, new);
+		lst = lst->next;
 	}
-	lst = token_split(stack, lst);
-	if (!lst)
-		return (NULL);
-	ft_array_clear(array);
-	clear_tkn_lst(stack->head);
-	return (lst);
+	return (new_lst);
 }

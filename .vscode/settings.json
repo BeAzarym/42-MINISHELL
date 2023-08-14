@@ -1,5 +1,8 @@
 {
 	"files.associations": {
-		"minishell.h": "c"
+		"minishell.h": "c",
+		"libft.h": "c",
+		"__tuple": "c",
+		"array": "c"
 	}
 }

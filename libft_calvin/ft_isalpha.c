@@ -1,39 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/10 11:29:20 by cchabeau         ###   ########.fr       */
+/*   Created: 2022/10/04 11:38:49 by cchabeau          #+#    #+#             */
+/*   Updated: 2023/02/21 13:45:15 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char **argv, char **envp)
+int	ft_isalpha(int c)
 {
-	t_tkn_lst	*lst;
-	t_env_lst	*env_lst;
-	t_cmd_node	*cmd;
-	char		*res;
-
-	(void)argv;
-	(void)argc;
-	lst = NULL;
-	env_lst = init_envp(envp);
-	cmd = init_cmd_node();
-	if (!cmd)
+	if (ft_islower(c) || ft_isupper(c))
 		return (1);
-	while (1)
-	{
-		res = readline("[Minishell] > ");
-		lst = lexing(res);
-		print_token(lst->head);
-		// cmd = parsing(lst);
-		// print_cmd(cmd);
-	}
-	clear_env_lst(env_lst->head);
 	return (0);
 }
