@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 09:55:40 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/14 13:50:50 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/15 01:11:05 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@
 # include <sys/wait.h>
 // open
 # include <fcntl.h>
-// // libft and other includes
-// # include "../libft/includes/libft.h"
+// other includes
 # include "minishell.h"
 
 typedef struct s_cmd
@@ -60,7 +59,7 @@ int		lastcmd_process(t_cmd *cmd, char **envp, int arg_counter);
 
 /*									[Utils]								*/
 
-// utils.c
+// exe_utils.c
 void	error_exit(char *error_msg);
 int		infile_open(char *file);
 int		outfile_append_open(char *file);

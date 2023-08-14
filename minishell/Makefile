@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+         #
+#    By: angassin <angassin@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/08/14 14:29:42 by cchabeau         ###   ########.fr        #
+#    Updated: 2023/08/15 01:12:02 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ LIBFT_A 	= libft.a
 LIBFT_DIR 	= libft/
 LIBFT		= $(addprefix libft/, $(LIBFT_A))
 
-MINISHELL		= main.c builtin.c execution.c pipex.c \
+MINISHELL		= builtin.c execution.c pipex.c \
 		lexing/lexer.c \
 		lexing/arg_split.c \
 		lexing/token.c \
@@ -72,7 +72,7 @@ MINISHELL		= main.c builtin.c execution.c pipex.c \
 		utils.c minishell.c
 MINISHELL_SRC	= $(addprefix src/, $(MINISHELL))
 
-UTILS		= utils.c
+UTILS		= exe_utils.c
 UTILS_SRC	= $(addprefix utils/, $(UTILS))
 
 #BONUS		= main_bonus.c
