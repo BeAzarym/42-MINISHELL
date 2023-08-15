@@ -6,11 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/08/15 02:34:36 by angassin         ###   ########.fr       */
-=======
-/*   Updated: 2023/08/15 01:05:52 by angassin         ###   ########.fr       */
->>>>>>> a5e91ce (removed main.c, corrected add_list_env, renamed exe_utils.c)
+/*   Updated: 2023/08/15 02:38:33 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
