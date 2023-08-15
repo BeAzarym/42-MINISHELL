@@ -1,6 +1,6 @@
 
 
-#include "minishell/include/minishell.h"
+#include "minishell/includes/minishell.h"
 
 void	handle_sigtstp(int sig);
 void	handle_sigcont(int sig);
