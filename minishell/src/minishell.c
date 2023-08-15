@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/15 01:24:59 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/15 16:05:35 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd_node	*cmd;
 	char	*cmd_line;
 	int		status;
-	t_cmd	command;
+	// t_cmd	command;
 
-	(void)argc;
-	// cmd.type_in = STDIN_OUT;
-	// cmd.type_out = STDIN_OUT;
-	// cmd.infile = "infile.txt";
-	// cmd.outfile = "out";
-	// cmd.cmd = &argv[1];
-	// cmd.next= NULL;
+	// (void)argc;
+	// command.type_in = STDIN_OUT;
+	// command.type_out = STDIN_OUT;
+	// command.infile = "infile.txt";
+	// command.outfile = "out";
+	// command.cmd = &argv[1];
+	// command.next= NULL;
 
-	status = execution(&command, envp);	
+	// status = execution(&command, envp);	
 	(void)argv;
 	(void)argc;
 	(void)envp;
@@ -48,8 +48,8 @@ int	main(int argc, char **argv, char **envp)
 		print_token(lst->head);
 		// cmd = parsing(lst);
 		// print_cmd(cmd);
-		if (ft_strncmp(cmd_line, "cd", 2) == OK)
-			status = cd(cmd_line + 3);
+		// if (ft_strncmp(cmd_line, "cd", 2) == OK)
+		// 	status = cd(cmd_line + 3);
 	}
 	clear_env_lst(env_lst->head);
 	return (status);
