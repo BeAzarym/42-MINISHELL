@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/16 17:24:54 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/16 18:58:10 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_tkn_lst	*lst;
-	t_env_lst	*env_lst;
+	// t_tkn_lst	*lst;
+	// t_env_lst	*env_lst;
 	t_cmd_dllst	*cmd_table;
 	// char	*cmd_line;
 	int		status;
@@ -30,11 +30,11 @@ int	main(int argc, char **argv, char **envp)
 	cmd.next= NULL;
 
 	status = execution(&cmd, envp);	
-	(void)argv;
-	(void)argc;
-	(void)envp;
-	lst = NULL;
-	env_lst = init_envp(envp);
+	// (void)argv;
+	// (void)argc;
+	// (void)envp;
+	// lst = NULL;
+	// env_lst = init_envp(envp);
 	cmd_table = init_cmd_dllst();
 	if (!cmd_table)
 		return (1);
