@@ -13,7 +13,11 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 18:17:23 by cchabeau          #+#    #+#             */
 /*   Updated: 2023/06/24 19:22:34 by cchabeau         ###   ########.fr       */
+<<<<<<< HEAD
 >>>>>>> merge ok, commented main.c and buggy code minishell.c
+=======
+>>>>>>> 11d7b2b8f4e9c4c32f69e3c557b139a744cea52e
+>>>>>>> aa0ee6d47bc72e27cf4d9e385551ba86e312b03b
 /*                                                                            */
 /* ************************************************************************** */
 

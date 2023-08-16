@@ -3,7 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+=======
+<<<<<<< HEAD
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/04 12:25:33 by cchabeau          #+#    #+#             */
+/*   Updated: 2023/08/15 14:19:56 by angassin         ###   ########.fr       */
+=======
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+>>>>>>> aa0ee6d47bc72e27cf4d9e385551ba86e312b03b
 /*                                                +#+#+#+#+#+   +#+           */
 <<<<<<< HEAD
 /*   Created: 2022/10/04 12:25:33 by cchabeau          #+#    #+#             */
@@ -12,6 +22,7 @@
 <<<<<<<< HEAD:libft_calvin/ft_isalnum.c
 /*   Created: 2022/10/04 12:25:33 by cchabeau          #+#    #+#             */
 /*   Updated: 2022/10/20 11:39:26 by cchabeau         ###   ########.fr       */
+<<<<<<< HEAD
 ========
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
 <<<<<<< HEAD
@@ -21,6 +32,9 @@
 >>>>>>> phoenix
 >>>>>>>> merge ok, commented main.c and buggy code minishell.c:src/minishell.c
 >>>>>>> merge ok, commented main.c and buggy code minishell.c
+=======
+>>>>>>> 11d7b2b8f4e9c4c32f69e3c557b139a744cea52e
+>>>>>>> aa0ee6d47bc72e27cf4d9e385551ba86e312b03b
 /*                                                                            */
 /* ************************************************************************** */
 
