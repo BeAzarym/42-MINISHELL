@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/14 13:51:59 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:07:13 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void	print_env(t_env_lst *lst)
 	}
 }
 
-void	print_cmd(t_cmd_node *node)
+void	print_cmd(t_cmd_dllst *dllst)
 {
-	t_cmd_node *cpy;
+	t_cmd_dllst *cpy;
 	
-	if (!node)
+	if (!dllst)
 		return ;
-	cpy = node;
+	cpy = dllst;
 	printf("[CMD TABLE]\n");
 	while(cpy->head)
 	{
