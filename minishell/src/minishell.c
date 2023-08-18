@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/16 18:58:10 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/17 20:02:40 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,30 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd	cmd;
 
 	(void)argc;
+	cmd_table = init_cmd_dllst();
 	cmd.type_in = STDIN_OUT;
 	cmd.type_out = STDIN_OUT;
 	cmd.infile = "infile.txt";
 	cmd.outfile = "out";
 	cmd.cmd = &argv[1];
 	cmd.next= NULL;
-
-	status = execution(&cmd, envp);	
+	
+	
 	// (void)argv;
 	// (void)argc;
 	// (void)envp;
 	// lst = NULL;
 	// env_lst = init_envp(envp);
-	cmd_table = init_cmd_dllst();
+	
 	if (!cmd_table)
 		return (1);
+	cmd_table->head = &cmd;
+	cmd_table->tail = &cmd;
+	cmd_table = add_cmd_dllst(cmd_table, &cmd);
+	cmd.cmd = array_add_back(cmd.cmd, cmd_table->head->value);
+	cmd_table->head = cmd_table->head->next;
+	
+	status = execution(&cmd, envp);	
 	// while (true)
 	// {
 	// 	status = 0;

@@ -9,7 +9,7 @@
 			"request": "launch",
 			"name": "Debug",
 			"program": "${workspaceFolder}/minishell/minishell",
-			"args": ["ls"],
+			"args": ["ls", "|", "wc"],
 			"cwd": "${workspaceFolder}"
 		}
 	]
