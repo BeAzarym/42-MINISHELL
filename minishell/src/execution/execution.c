@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/16 16:54:55 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:02:36 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	execution(t_cmd *cmd, char **envp)
 		fdout = outfile_append_open(cmd->outfile);
 	else
 		fdout = STDOUT_FILENO;
-	while (cmd->next != NULL && cmd->next->next != NULL)
+	while (cmd->next != NULL)
 	{
 		create_process(cmd, envp);
 		cmd = cmd->next;

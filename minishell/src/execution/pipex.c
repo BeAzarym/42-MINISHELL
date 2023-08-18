@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/16 16:55:15 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:29:38 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,15 @@ static void	read_stdin(const char *limiter, int fd)
 	}
 	free(line);
 }
+
 /*
 	Creates a child process : send to the pipe the output of the execution
 	of the command passed in argument.
 	Parent process : reads the output of the child from the pipe.
 	The child process has it's own copy of the parent's file's decriptors.
+	printf("here\n");
 */
-void	create_process(t_cmd  *cmd, char **envp)
+void	create_process(t_cmd *cmd, char **envp)
 {
 	int	fd[2];
 	int	pid;
@@ -78,8 +80,11 @@ void	create_process(t_cmd  *cmd, char **envp)
 	if (pid == CHILD)
 	{
 		close(fd[0]);
-		duplicate(fd[1], STDOUT_FILENO, "could not write to the pipe");
-		close(fd[1]);
+		if (fd[1] != STDOUT_FILENO)
+		{
+			duplicate(fd[1], STDOUT_FILENO, "could not write to the pipe");
+			close(fd[1]);
+		}
 		execute(cmd, envp);
 	}
 	close(fd[1]);

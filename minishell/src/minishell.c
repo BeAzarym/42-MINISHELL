@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/17 20:02:40 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/18 10:51:05 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, char **argv, char **envp)
 	// char	*cmd_line;
 	int		status;
 	t_cmd	cmd;
+	t_cmd	cmd2;
 
 	(void)argc;
 	cmd_table = init_cmd_dllst();
@@ -39,10 +40,14 @@ int	main(int argc, char **argv, char **envp)
 	
 	if (!cmd_table)
 		return (1);
-	cmd_table->head = &cmd;
-	cmd_table->tail = &cmd;
+	// cmd_table->head = &cmd;
+	// cmd_table->tail = &cmd;
 	cmd_table = add_cmd_dllst(cmd_table, &cmd);
-	cmd.cmd = array_add_back(cmd.cmd, cmd_table->head->value);
+	cmd2.cmd = &argv[3];
+	cmd2.type_in = STDIN_OUT;
+	cmd2.type_out = STDIN_OUT;
+	cmd2.next= NULL;
+	cmd_table = add_cmd_dllst(cmd_table, &cmd2);
 	cmd_table->head = cmd_table->head->next;
 	
 	status = execution(&cmd, envp);	
