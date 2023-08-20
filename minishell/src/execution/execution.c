@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/18 11:02:36 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/19 08:52:49 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,26 +52,26 @@ int	execution(t_cmd *cmd, char **envp)
 	of failure as the execve() function overlays the current process image
 	with a new process image.
 */
-void	execute(t_cmd *argv, char **envp)
+void	execute(t_cmd *cmd, char **envp)
 {
 	char	**paths;
 	char	*cmd_path;
 	// char	**cmd;
-
+	
 	// if (!argv || !argv[0])
 	// 	error_exit("parse error near """);
 	// cmd = ft_split(argv->cmd, ' ');
 	// if (cmd == NULL)
 	// 	error_exit("parsing of the command failed");
 	paths = commands_paths_array(envp);
-	cmd_path = command_access(argv->cmd[0], paths);
+	cmd_path = command_access(cmd->cmd[0], paths);
 	if (cmd_path == NULL)
 	{
 		// ft_free_array(cmd);
 		ft_free_array(paths);
 		exit(127);
 	}
-	execve(cmd_path, argv->cmd, envp);
+	execve(cmd_path, cmd->cmd, envp);
 	perror("could not execute the command");
 	// ft_free_array(cmd);
 	free(cmd_path);

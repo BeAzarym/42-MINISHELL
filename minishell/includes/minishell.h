@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/16 16:05:16 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/21 00:25:59 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+// sigaction
+# include <signal.h>
 // chdir
 # include <unistd.h>
 
@@ -71,7 +73,14 @@ typedef struct s_cmd_dllst
 /*									[Macros]								*/
 # define OK 0
 
+/*									[Global]								*/
+
+bool	g_signalset;
+
 /*									[Src]									*/
+
+// signal.c
+void	ignore_shell_signal(void);
 
 // builtin.c
 int	cd(char *cmd);

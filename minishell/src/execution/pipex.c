@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/18 11:29:38 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/19 08:48:02 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	create_process(t_cmd *cmd, char **envp)
 	if (pid == CHILD)
 	{
 		close(fd[0]);
-		if (fd[1] != STDOUT_FILENO)
+		// if (fd[1] != STDOUT_FILENO)
 		{
 			duplicate(fd[1], STDOUT_FILENO, "could not write to the pipe");
 			close(fd[1]);
@@ -88,8 +88,12 @@ void	create_process(t_cmd *cmd, char **envp)
 		execute(cmd, envp);
 	}
 	close(fd[1]);
-	duplicate(fd[0], STDIN_FILENO, "could not read from the pipe");
-	close(fd[0]);
+	// if (fd[0] != STDIN_FILENO)
+	{
+		duplicate(fd[0], STDIN_FILENO, "could not read from the pipe");
+		close(fd[0]);
+		printf("parent dup\n");
+	}
 }
 
 /*
@@ -99,6 +103,7 @@ void	create_process(t_cmd *cmd, char **envp)
 */
 int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter)
 {
+	printf("lastcmd\n");
 	int	pid;
 	int	status;
 	int	exit_status;
