@@ -6,11 +6,11 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:14:31 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/07 16:20:21 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:44:53 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../includes/minishell.h"
 
 t_token *init_token(char *value)
 {

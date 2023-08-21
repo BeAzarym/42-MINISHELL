@@ -6,11 +6,11 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/09 16:04:15 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/21 00:02:45 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../includes/minishell.h"
 
 void	print_token(t_token *lst)
 {
@@ -34,24 +34,25 @@ void	print_env(t_env_lst *lst)
 	printf("[ENV]\n");
 	while (cpy->head)
 	{
-		printf(">> [KEY] : %s	>> [VALUE] : %s\n", cpy->head->key,
-					cpy->head->value);
+		printf(">> [KEY] : %s	>> [VALUE] : %s\n", cpy->head->key, cpy->head->value);
 		cpy->head = cpy->head->next;
 	}
 }
 
-void	print_cmd(t_cmd_node *node)
+void	print_cmd(t_cmd_dllst *dllst)
 {
-	t_cmd_node *cpy;
+	t_cmd_dllst *cpy;
 	
-	if (!node)
+	if (!dllst)
 		return ;
-	cpy = node;
+	cpy = dllst;
 	printf("[CMD TABLE]\n");
 	while(cpy->head)
 	{
 		printf("---\n");
-		printf(">> INFILE %s\n", cpy->head->infile);
+		print_redir(cpy->head->redir_in);
+		print_redir(cpy->head->redir_out);
+		printf("[CMD ARRAY]\n");
 		ft_array_print(cpy->head->cmd);
 		printf("---\n");
 		cpy->head = cpy->head->next;

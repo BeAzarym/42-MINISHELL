@@ -6,11 +6,11 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:45:51 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/09 16:05:04 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/20 15:40:18 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../includes/minishell.h"
 
 t_cmd	*init_cmd_struct(void)
 {
@@ -24,37 +24,41 @@ t_cmd	*init_cmd_struct(void)
 	new->outfile = NULL;
 	new->type_in = -1;
 	new->type_out = -1;
+	new->redir_in = init_redir_lst();
+	new->redir_out = init_redir_lst();
+	if (!new->redir_in || !new->redir_out)
+		return (NULL);
 	new->next = NULL;
 	return (new);
 }
 
-t_cmd_node	*init_cmd_node(void)
+t_cmd_dllst	*init_cmd_dllst(void)
 {
-	t_cmd_node	*node;
+	t_cmd_dllst	*dllst;
 
-	node = malloc(sizeof(t_cmd_node));
-	if (!node)
+	dllst = malloc(sizeof(t_cmd_dllst));
+	if (!dllst)
 		return (NULL);
-	node->head = NULL;
-	node->tail = NULL;
-	node->size = 0;
-	return (node);
+	dllst->head = NULL;
+	dllst->tail = NULL;
+	dllst->size = 0;
+	return (dllst);
 }
 
-t_cmd_node	*add_cmd_node(t_cmd_node *node, t_cmd *cmd)
+t_cmd_dllst	*add_cmd_dllst(t_cmd_dllst *dllst, t_cmd *cmd)
 {
 	if (!cmd)
 		return (NULL);
-	if (!node->head)
+	if (!dllst->head)
 	{
-		node->head = cmd;
-		node->tail = cmd;
+		dllst->head = cmd;
+		dllst->tail = cmd;
 	}
 	else
 	{
-		node->tail->next = cmd;
-		node->tail = cmd;
+		dllst->tail->next = cmd;
+		dllst->tail = cmd;
 	}
-	node->size++;
-	return (node);
+	dllst->size++;
+	return (dllst);
 }
