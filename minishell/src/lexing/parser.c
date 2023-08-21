@@ -3,45 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:41:30 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/14 13:49:51 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/21 11:36:32 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// t_cmd_node	*parsing(t_tkn_lst *lst)
-// {
-// 	t_cmd_node	*node;
-// 	t_tkn_lst	*cpy;
-// 	t_cmd		*cmd;
+t_cmd_dllst	*parsing(t_tkn_lst *lst)
+{
+	t_tkn_lst	*cpy;
+	t_cmd_dllst	*cmd_table;
+	t_cmd *node;
 
-// 	cpy = lst;
-// 	node = init_cmd_node();
-// 	cmd = init_cmd_struct();
-// 	while (cpy->head)
-// 	{
-// 		if (cpy->head->type == 'I')
-// 		{
-// 			cmd->infile = ft_strdup(cpy->head->next->value);
-// 			cpy->head = cpy->head->next->next;
-// 		}
-// 		while (cpy->head && cpy->head->type != 'P')
-// 		{
-// 			cmd->cmd = array_add_back(cmd->cmd, cpy->head->value);
-// 			cpy->head = cpy->head->next;
-// 		}
-// 		add_cmd_node(node, cmd);
-// 		break;
-// 		if (cpy->head)
-// 			cpy->head = cpy->head->next;
-// 	}
-// 	return (node);
-// }
-
-// char **cmd_table_split(t_tkn_lst *lst)
-// {
-
-// }
+	cpy = lst;
+	cmd_table = init_cmd_dllst();
+	while (cpy->head)
+	{
+		node = init_cmd_struct();
+		while (cpy->head->type == 'I' || cpy->head->type == 'O')
+			cpy = handle_redirect(cpy, node);
+		while (cpy->head->type != 'P' && cpy->head->type != 'I' && cpy->head->type != 'O')
+		{
+			node->cmd = array_add_back(node->cmd, cpy->head->value);
+			cpy->head = cpy->head->next;
+		}
+		printf("OUT OF WHULE %s\n", cpy->head->value);
+		cmd_table = add_cmd_dllst(cmd_table, node);
+		print_cmd(cmd_table);
+		printf("I'M HERE: %s\n", cpy->head->value);
+		if (cpy->head->type != 'I' && cpy->head->type != 'O')
+			cpy->head = cpy->head->next;
+	}
+	return (cmd_table);
+}
