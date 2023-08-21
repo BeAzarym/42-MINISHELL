@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/21 00:34:32 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:51:49 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	main(int argc, char **argv, char **envp)
 	{
 		status = 0;
 		cmd_line = readline("[Minishell] > ");
+		// 	if (cmd_line == NULL)
+	// 		error_exit("ctrl-d\n");
 		lst = lexing(cmd_line);
 		if (ft_strlen(cmd_line) > 0)
 			add_history(cmd_line);

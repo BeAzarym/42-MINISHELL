@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/19 08:48:02 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:55:11 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	create_process(t_cmd *cmd, char **envp)
 			duplicate(fd[1], STDOUT_FILENO, "could not write to the pipe");
 			close(fd[1]);
 		}
+		ft_putstr_fd("test", 2);
 		execute(cmd, envp);
 	}
 	close(fd[1]);
