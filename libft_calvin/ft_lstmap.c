@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 18:24:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2022/11/04 16:14:00 by cchabeau         ###   ########.fr       */
+/*   Created: 2022/05/02 15:11:05 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 15:00:31 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
+
+/*
+	Iterates the list ’lst’ and applies the function ’f’ on the content of each 
+	node. Returns a new list resulting of the successive applications of
+	the function ’f’. Returns NULL if the allocation fails.
+	The ’del’ function is used to delete the content of a node if needed.
+
+*/
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new;
 	t_list	*new_lst;
+	t_list	*temp;
 
-	if (!del || !lst || !f)
-		return (NULL);
 	new_lst = NULL;
 	while (lst)
 	{
-		new = ft_lstnew(f(lst->content));
-		if (!new)
+		temp = ft_lstnew((f)(lst->content));
+		if (!temp)
 		{
 			ft_lstclear(&new_lst, del);
 			return (NULL);
 		}
-		ft_lstadd_back(&new_lst, new);
+		ft_lstadd_back(&new_lst, temp);
 		lst = lst->next;
 	}
 	return (new_lst);

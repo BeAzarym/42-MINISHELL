@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/16 16:09:42 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/21 11:30:49 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)envp;
 	lst = NULL;
 	env_lst = init_envp(envp);
+	// print_env(env_lst);
 	cmd_table = init_cmd_dllst();
 	if (!cmd_table)
 		return (1);
@@ -45,11 +46,12 @@ int	main(int argc, char **argv, char **envp)
 		lst = lexing(cmd_line);
 		if (ft_strlen(cmd_line) > 0)
 			add_history(cmd_line);
-		print_token(lst->head);
-		// cmd_table = parsing(lst);
-		// print_cmd(cmd_table);
+		// print_token(lst->head);
+		cmd_table = parsing(lst);
+		print_cmd(cmd_table);
 		// if (ft_strncmp(cmd_line, "cd", 2) == OK)
 		// 	status = cd(cmd_line + 3);
+	
 	}
 	clear_env_lst(env_lst->head);
 	return (status);

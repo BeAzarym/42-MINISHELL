@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_unbrlen_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 18:21:01 by cchabeau          #+#    #+#             */
-/*   Updated: 2022/10/25 20:09:31 by cchabeau         ###   ########.fr       */
+/*   Created: 2022/07/07 17:10:19 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 14:59:59 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
-int	ft_lstsize(t_list *lst)
+// start at 1 to include zero or the equivalent in any base or the first digit
+size_t	ft_unbrlen_base(unsigned long n, unsigned int base)
 {
-	size_t	i;
+	size_t			nb_len;
 
-	i = 1;
-	if (!lst)
+	if (!base)
 		return (0);
-	while (lst->next)
+	nb_len = 1;
+	while (n / base)
 	{
-		i++;
-		lst = lst->next;
+		n = n / base;
+		nb_len++;
 	}
-	return (i);
+	return (nb_len);
 }

@@ -3,26 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 18:17:23 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/06/24 19:22:34 by cchabeau         ###   ########.fr       */
+/*   Created: 2022/05/02 12:08:13 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 15:00:07 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
+//Adds the node ’new’ at the end of the list.
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*last;
 
 	if (!lst)
 		return ;
-	if (!*lst)
-	{
+	if (*lst == NULL)
 		*lst = new;
-		return ;
-	}
 	else
 	{
 		last = ft_lstlast(*lst);

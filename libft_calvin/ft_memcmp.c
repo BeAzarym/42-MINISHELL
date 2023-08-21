@@ -3,18 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 21:22:45 by cchabeau          #+#    #+#             */
-/*   Updated: 2022/11/02 17:09:32 by cchabeau         ###   ########.fr       */
+/*   Created: 2022/04/19 17:56:52 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 14:57:23 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
+
+/*
+	Compares byte string s1 against byte string s2.  
+	Both strings are assumed to be n bytes long.
+	returns zero if the two strings are identical,
+    otherwise returns the difference between the first two differing
+    bytes (treated as unsigned char values, so that ‘\200’ is greater
+    than ‘\0’, for example).  Zero-length strings are always identical.
+*/
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	while (n-- > 0)
+	while (n--)
 	{
 		if (*(unsigned char *)s1 != *(unsigned char *)s2)
 			return (*(unsigned char *)s1 - *(unsigned char *)s2);

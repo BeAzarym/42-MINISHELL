@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 18:21:51 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/02/10 22:03:33 by cchabeau         ###   ########.fr       */
+/*   Created: 2022/04/30 12:37:49 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 15:00:27 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
+// Returns the last node of the list
 t_list	*ft_lstlast(t_list *lst)
 {
 	if (!lst)
 		return (NULL);
-	while (lst->next)
+	while (lst && lst->next)
 		lst = lst->next;
 	return (lst);
 }

@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 18:21:01 by cchabeau          #+#    #+#             */
-/*   Updated: 2022/10/25 20:09:31 by cchabeau         ###   ########.fr       */
+/*   Created: 2022/04/30 12:27:47 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 15:00:42 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
+// Returns the length of the list aka the number of nodes in the list.
 int	ft_lstsize(t_list *lst)
 {
-	size_t	i;
+	int	len;
 
-	i = 1;
 	if (!lst)
 		return (0);
-	while (lst->next)
+	len = 0;
+	while (lst)
 	{
-		i++;
 		lst = lst->next;
+		len++;
 	}
-	return (i);
+	return (len);
 }

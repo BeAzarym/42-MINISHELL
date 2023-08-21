@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_free_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 11:54:20 by cchabeau          #+#    #+#             */
-/*   Updated: 2022/10/20 12:02:04 by cchabeau         ###   ########.fr       */
+/*   Created: 2023/04/28 18:40:44 by angassin          #+#    #+#             */
+/*   Updated: 2023/04/28 18:45:54 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
-char	*ft_strchr(const char *s, int c)
+void	*ft_free_array(char **arr)
 {
-	while (*s && *s != (char)c)
-		s++;
-	if (*s == (char)c)
-		return ((char *)s);
+	int	row;
+
+	row = 0;
+	while (arr[row] != NULL)
+	{
+		free(arr[row]);
+		row++;
+	}
+	free(arr);
 	return (NULL);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/08/15 16:21:52 by angassin         ###   ########.fr        #
+#    Updated: 2023/08/21 11:29:24 by cchabeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ MINISHELL		= builtins/builtin.c execution/execution.c execution/pipex.c \
 		lexing/env_utils.c \
 		lexing/parser.c \
 		lexing/parser_utils.c \
-		lexing/redirect_handler.c \
+		lexing/redirect_handler.c lexing/redir_struct.c \
 		utils.c minishell.c
 MINISHELL_SRC	= $(addprefix src/, $(MINISHELL))
 

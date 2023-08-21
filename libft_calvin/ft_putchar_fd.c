@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 23:38:33 by cchabeau          #+#    #+#             */
-/*   Updated: 2022/10/29 16:01:59 by cchabeau         ###   ########.fr       */
+/*   Created: 2022/04/29 19:28:53 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 14:59:09 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+//	Outputs the character ’c’ to the given file descriptor.
+//	Returns size of output.
+ssize_t	ft_putchar_fd(char c, int fd)
 {
-	if (fd < 0)
-		return ;
-	write (fd, &c, 1);
+	write(fd, &c, 1);
+	return (1);
 }

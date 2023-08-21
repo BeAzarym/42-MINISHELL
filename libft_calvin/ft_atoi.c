@@ -3,49 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 13:36:57 by cchabeau          #+#    #+#             */
-/*   Updated: 2022/12/09 13:13:33 by cchabeau         ###   ########.fr       */
+/*   Created: 2022/04/21 18:03:42 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 14:56:03 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-static int	ft_isspace(char c)
-{
-	if (c == 32)
-		return (1);
-	if (c >= 9 && c <= 13)
-		return (1);
-	return (0);
-}
+#include "../includes/libft.h"
 
 int	ft_atoi(const char *str)
 {
+	unsigned long	nb;
 	int				sign;
-	long int		result;
-	long int		tmp;
 
+	nb = 0;
 	sign = 1;
-	result = 0;
-	while (ft_isspace(*str) == 1)
+	while (*str && (*str == ' ' || (*str >= '\t' && *str <= '\r' )))
 		str++;
-	if (*str == 45 || *str == 43)
-	{
-		if (*str == 45)
+	while (*str == '-' || *str == '+')
+	{	
+		if (*(str + 1) == '+' || *(str + 1) == '-')
+			return (0);
+		if (*str == '-')
 			sign *= -1;
 		str++;
 	}
-	while (*str >= 48 && *str <= 57)
+	while (*str && (*str >= '0' && *str <= '9'))
 	{
-		tmp = result;
-		result = (result * 10) + (*str - 48);
-		str++;
-		if (result < tmp && sign == 1)
+		nb = nb * 10 + *str - '0';
+		if (nb > LLONG_MAX && sign == 1)
 			return (-1);
-		if (result < tmp && sign == -1)
+		if (nb > LLONG_MAX && sign == -1)
 			return (0);
+		str++;
 	}
-	return ((int)result * sign);
+	return (nb * sign);
 }

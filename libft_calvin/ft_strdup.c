@@ -3,26 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:33:58 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/02/21 11:59:10 by cchabeau         ###   ########.fr       */
+/*   Created: 2022/04/22 00:05:08 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 14:57:52 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
-char	*ft_strdup(const char *s)
+/*
+	The strdup() function allocates sufficient memory for a copy of the 
+	string s1, does the copy, and returns a pointer to it.  
+	The pointer may subsequently be used as an argument to the function free.
+	If insufficient memory is available, NULL is returned and errno is set 
+	to ENOMEM.
+*/
+
+char	*ft_strdup(const char *s1)
 {
-	char	*dup;
-	int		slen;
+	char	*cpy;
 
-	slen = ft_strlen(s);
-	dup = malloc(sizeof(char) * (slen + 1));
-	if (!dup)
+	cpy = malloc(sizeof(*cpy) * (ft_strlen(s1) + 1));
+	if (!cpy)
 		return (NULL);
-	while (*s != '\0')
-		*dup++ = *s++;
-	*dup = '\0';
-	return (dup - slen);
+	ft_strlcpy(cpy, s1, ft_strlen(s1) + 1);
+	return (cpy);
 }

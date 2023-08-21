@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:45:51 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/16 16:05:07 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/21 11:28:25 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ t_cmd	*init_cmd_struct(void)
 	new->outfile = NULL;
 	new->type_in = -1;
 	new->type_out = -1;
+	new->redir_in = init_redir_lst();
+	new->redir_out = init_redir_lst();
+	if (!new->redir_in || !new->redir_out)
+		return (NULL);
 	new->next = NULL;
 	return (new);
 }

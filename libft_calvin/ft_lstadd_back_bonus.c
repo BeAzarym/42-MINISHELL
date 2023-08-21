@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_put_unbr_base_fd.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 18:17:23 by cchabeau          #+#    #+#             */
-/*   Updated: 2022/11/04 15:57:43 by cchabeau         ###   ########.fr       */
+/*   Created: 2022/07/07 16:43:48 by angassin          #+#    #+#             */
+/*   Updated: 2023/08/14 14:24:43 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+// Recursive function to display an unsigned number in the given base
+void	ft_put_unbr_base_fd(unsigned long n, char *base, int fd)
 {
-	t_list	*last;
+	unsigned int	base_len;
 
-	if (!lst)
+	if (!base)
 		return ;
-	if (!*lst)
+	base_len = ft_strlen(base);
+	if (n >= base_len)
 	{
-		*lst = new;
-		return ;
+		ft_put_unbr_base_fd(n / base_len, base, fd);
+		ft_put_unbr_base_fd(n % base_len, base, fd);
 	}
-	else
-	{
-		last = ft_lstlast(*lst);
-		last->next = new;
-	}
+	if (n < base_len)
+		ft_putchar_fd(base[n], fd);
 }

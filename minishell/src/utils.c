@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/16 16:07:13 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/21 11:31:23 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ void	print_env(t_env_lst *lst)
 	printf("[ENV]\n");
 	while (cpy->head)
 	{
-		printf(">> [KEY] : %s	>> [VALUE] : %s\n", cpy->head->key,
-					cpy->head->value);
+		printf(">> [KEY] : %s	>> [VALUE] : %s\n", cpy->head->key, cpy->head->value);
 		cpy->head = cpy->head->next;
 	}
 }
@@ -51,7 +50,9 @@ void	print_cmd(t_cmd_dllst *dllst)
 	while(cpy->head)
 	{
 		printf("---\n");
-		printf(">> INFILE %s\n", cpy->head->infile);
+		print_redir(cpy->head->redir_in);
+		print_redir(cpy->head->redir_out);
+		printf("[CMD ARRAY]\n");
 		ft_array_print(cpy->head->cmd);
 		printf("---\n");
 		cpy->head = cpy->head->next;

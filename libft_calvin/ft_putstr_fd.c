@@ -3,18 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 23:38:44 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/03/30 21:32:14 by cchabeau         ###   ########.fr       */
+/*   Created: 2022/04/29 19:46:11 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 14:59:27 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+/*
+	Output the string s to the filedescriptor fd.
+	Return the number of characters printed.
+*/
+
+ssize_t	ft_putstr_fd(char *s, int fd)
 {
-	if (!s || fd < 0)
-		return ;
-	write(fd, s, ft_strlen(s));
+	ssize_t	len;
+
+	if (!s)
+		return (0);
+	len = write(fd, s, ft_strlen(s));
+	return (len);
 }

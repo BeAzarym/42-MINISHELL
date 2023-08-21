@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_array_print.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:59:55 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/05/16 23:03:00 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:28:37 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 void	ft_array_print(char **array)
 {

@@ -3,28 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 15:44:17 by cchabeau          #+#    #+#             */
-/*   Updated: 2022/10/22 18:09:59 by cchabeau         ###   ########.fr       */
+/*   Created: 2022/04/14 14:03:06 by angassin          #+#    #+#             */
+/*   Updated: 2023/02/25 14:58:01 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
+
+/*
+	strlcpy() copies up to dstsize - 1 characters from the string src to dst, 
+	NUL-terminating the result if dstsize is not 0
+	If the src and dst strings overlap, the behavior is undefined.
+	return the total length of src (without \0)
+*/
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t	i;
-	size_t	len;
+	int	i;
 
-	len = ft_strlen(src);
-	i = -1;
-	while (src[++i] != '\0' && dstsize > 1)
+	i = 0;
+	while ((dstsize > 1) && src[i])
 	{
 		dst[i] = src[i];
+		i++;
 		dstsize--;
 	}
-	if (dstsize != 0)
+	if (dstsize)
 		dst[i] = '\0';
-	return (len);
+	return (ft_strlen(src));
 }

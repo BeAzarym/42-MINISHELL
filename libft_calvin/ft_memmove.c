@@ -3,32 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 13:25:30 by cchabeau          #+#    #+#             */
-/*   Updated: 2022/12/23 15:29:41 by cchabeau         ###   ########.fr       */
+/*   Created: 2022/04/14 11:08:13 by angassin          #+#    #+#             */
+/*   Updated: 2022/04/14 12:57:41 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
+/*
+	The memmove() function copies len bytes from string src to string dst.  
+	The two strings may overlap; 
+	the copy is always done in a non-destructive manner.
+*/
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t	i;
+	unsigned char		*p_dst;
+	const unsigned char	*p_src;
 
-	if (!dst && !src)
-		return (0);
-	i = 0;
-	if (dst < src)
+	p_dst = dst;
+	p_src = src;
+	if (dst > src)
 	{
-		while (i < len)
-		{
-			((char *)dst)[i] = ((char *)src)[i];
-			i++;
-		}
-	}
-	else
 		while (len--)
-			((char *)dst)[len] = ((char *)src)[len];
+			*(p_dst + len) = *(p_src + len);
+	}
+	else if (dst < src)
+		ft_memcpy(dst, src, len);
 	return (dst);
 }

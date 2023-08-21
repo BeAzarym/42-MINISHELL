@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 17:09:20 by angassin          #+#    #+#              #
-#    Updated: 2023/08/14 13:27:17 by angassin         ###   ########.fr        #
+#    Updated: 2023/08/21 11:29:56 by cchabeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ CC			=	cc
 
 RM			=	rm -f
 
-CFLAGS		=	-Wall -Wextra -Werror -g 
+CFLAGS		=	-Wall -Wextra -Werror
 
 #--------------------------------SOURCES----------------------------------------
 
@@ -47,7 +47,7 @@ FT_42		=	ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c  \
 				ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
 				ft_putendl_fd.c  ft_putnbr_fd.c ft_nbrlen_base.c \
 				ft_putnbr_base_fd.c ft_put_unbr_base_fd.c ft_unbrlen_base.c \
-				ft_strrncmp.c ft_free_array.c ft_array_clear.c ft_array_print.c
+				ft_strrncmp.c ft_free_array.c ft_array_clear.c ft_array_print.c ft_array_add_back.c ft_array_len.c
 42_SRC		=	$(addprefix ft_42/, $(FT_42))	
 
 FT_LISTS	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
