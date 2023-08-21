@@ -3,10 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/19 22:19:55 by cchabeau          #+#    #+#             */
+/*   Updated: 2023/08/15 14:20:46 by angassin         ###   ########.fr       */
+=======
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 22:19:55 by cchabeau          #+#    #+#             */
 /*   Updated: 2022/10/29 15:49:39 by cchabeau         ###   ########.fr       */
+<<<<<<< HEAD
+>>>>>>> merge ok, commented main.c and buggy code minishell.c
+=======
+>>>>>>> 11d7b2b8f4e9c4c32f69e3c557b139a744cea52e
+>>>>>>> aa0ee6d47bc72e27cf4d9e385551ba86e312b03b
 /*                                                                            */
 /* ************************************************************************** */
 

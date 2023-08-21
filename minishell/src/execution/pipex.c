@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 18:17:56 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/15 16:20:01 by angassin         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/08/19 08:48:02 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/minishell.h"
 
@@ -58,13 +59,15 @@ static void	read_stdin(const char *limiter, int fd)
 	}
 	free(line);
 }
+
 /*
 	Creates a child process : send to the pipe the output of the execution
 	of the command passed in argument.
 	Parent process : reads the output of the child from the pipe.
 	The child process has it's own copy of the parent's file's decriptors.
+	printf("here\n");
 */
-void	create_process(t_cmd  *cmd, char **envp)
+void	create_process(t_cmd *cmd, char **envp)
 {
 	int	fd[2];
 	int	pid;
@@ -77,13 +80,20 @@ void	create_process(t_cmd  *cmd, char **envp)
 	if (pid == CHILD)
 	{
 		close(fd[0]);
-		duplicate(fd[1], STDOUT_FILENO, "could not write to the pipe");
-		close(fd[1]);
+		// if (fd[1] != STDOUT_FILENO)
+		{
+			duplicate(fd[1], STDOUT_FILENO, "could not write to the pipe");
+			close(fd[1]);
+		}
 		execute(cmd, envp);
 	}
 	close(fd[1]);
-	duplicate(fd[0], STDIN_FILENO, "could not read from the pipe");
-	close(fd[0]);
+	// if (fd[0] != STDIN_FILENO)
+	{
+		duplicate(fd[0], STDIN_FILENO, "could not read from the pipe");
+		close(fd[0]);
+		printf("parent dup\n");
+	}
 }
 
 /*
@@ -93,6 +103,7 @@ void	create_process(t_cmd  *cmd, char **envp)
 */
 int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter)
 {
+	printf("lastcmd\n");
 	int	pid;
 	int	status;
 	int	exit_status;

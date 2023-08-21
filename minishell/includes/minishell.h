@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/21 11:30:07 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:06:19 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@
 // readline
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <stdio.h>
+# include <readline/history.h>
+// sigaction
+# include <signal.h>
 // chdir
 # include <stdbool.h>
 # include <unistd.h>
@@ -111,26 +113,16 @@ enum					e_redirect
 /*									[Macros]								*/
 # define OK 0
 
+/*									[Global]								*/
+
+bool	g_signalset;
+
 /*									[Src]									*/
 
-// execution.c
-int						execution(t_cmd *cmd, char **envp);
-void					execute(t_cmd *argv, char **envp);
+// signal.c
+void	ignore_shell_signal(void);
+// void	set_sigint_in_child(int signal);
 
-// pipex.c
-void					heredoc(const char *limiter);
-void					create_process(t_cmd *cmd, char **envp);
-int						lastcmd_process(t_cmd *cmd, char **envp,
-							int arg_counter);
-
-/*									[Utils]								*/
-
-// exe_utils.c
-void					error_exit(char *error_msg);
-int						infile_open(char *file);
-int						outfile_append_open(char *file);
-int						outfile_truncate_open(char *file);
-void					duplicate(int fd_src, int fd_dest, char *error);
 // builtin.c
 int						cd(char *cmd);
 

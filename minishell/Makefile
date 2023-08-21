@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+         #
+#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/08/21 11:29:24 by cchabeau         ###   ########.fr        #
+#    Updated: 2023/08/21 13:07:24 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 #-------------------------------COLORS------------------------------------------
 
@@ -59,17 +60,17 @@ LIBFT_A 	= libft.a
 LIBFT_DIR 	= libft/
 LIBFT		= $(addprefix libft/, $(LIBFT_A))
 
-MINISHELL		= builtins/builtin.c execution/execution.c execution/pipex.c \
-		lexing/lexer.c \
-		lexing/arg_split.c \
-		lexing/token.c \
-		lexing/token_utils.c \
-		lexing/env.c \
-		lexing/env_utils.c \
-		lexing/parser.c \
-		lexing/parser_utils.c \
-		lexing/redirect_handler.c lexing/redir_struct.c \
-		utils.c minishell.c
+MINISHELL	= 	builtins/builtin.c execution/execution.c execution/pipex.c \
+				lexing/lexer.c \
+				lexing/arg_split.c \
+				lexing/token.c \
+				lexing/token_utils.c \
+				lexing/env.c \
+				lexing/env_utils.c \
+				lexing/parser.c \
+				lexing/parser_utils.c \
+				lexing/redirect_handler.c lexing/redir_struct.c \
+				utils.c minishell.c signals.c
 MINISHELL_SRC	= $(addprefix src/, $(MINISHELL))
 
 UTILS		= exe_utils.c

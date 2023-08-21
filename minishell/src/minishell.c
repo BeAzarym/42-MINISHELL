@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/21 11:30:49 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:09:00 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,45 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd_dllst	*cmd_table;
 	char	*cmd_line;
 	int		status;
-	// t_cmd	cmd;
+	t_cmd	cmd;
+	// t_cmd	cmd2;
+	g_signalset = false;
+	ignore_shell_signal();
+	
 
-	// (void)argc;
-	// cmd.type_in = STDIN_OUT;
-	// cmd.type_out = STDIN_OUT;
-	// cmd.infile = "infile.txt";
-	// cmd.outfile = "out";
-	// cmd.cmd = &argv[1];
-	// cmd.next= NULL;
 
-	// status = execution(&cmd, envp);	
+	(void)argc;
+	char *cmd_str1 = argv[1];
+	// char *cmd_str2 = "wc";
+	cmd_table = init_cmd_dllst();
+	cmd.type_in = STDIN_OUT;
+	cmd.type_out = STDIN_OUT;
+	cmd.infile = "infile.txt";
+	cmd.outfile = "out";
+	cmd.cmd = &cmd_str1;
+	cmd.next= NULL;
+	
+	
 	(void)argv;
 	(void)argc;
 	(void)envp;
 	lst = NULL;
 	env_lst = init_envp(envp);
-	// print_env(env_lst);
-	cmd_table = init_cmd_dllst();
+	cmd_table = add_cmd_dllst(cmd_table, &cmd);
 	if (!cmd_table)
 		return (1);
+	// cmd_table->head = &cmd;
+	// cmd_table->tail = &cmd;
+	
+	
+	// cmd2.cmd = &cmd_str2;
+	// cmd2.type_in = STDIN_OUT;
+	// cmd2.type_out = STDIN_OUT;
+	// cmd2.next= NULL;
+	// cmd_table = add_cmd_dllst(cmd_table, &cmd2);
+	// cmd_table->head = cmd_table->head->next;
+	
+	status = execution(&cmd, envp);	
 	while (true)
 	{
 		status = 0;

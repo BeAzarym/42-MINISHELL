@@ -3,10 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/04 12:10:00 by cchabeau          #+#    #+#             */
+<<<<<<< HEAD
+<<<<<<< HEAD:libft_calvin/libft.h
+/*   Updated: 2023/08/15 13:56:49 by angassin         ###   ########.fr       */
+=======
+/*   Updated: 2023/08/08 15:54:05 by cchabeau         ###   ########.fr       */
+>>>>>>> phoenix:minishell/libft_calvin/libft.h
+=======
+=======
+/*   Updated: 2023/08/15 13:56:49 by angassin         ###   ########.fr       */
+=======
+>>>>>>> aa0ee6d47bc72e27cf4d9e385551ba86e312b03b
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2022/04/06 11:33:18 by angassin          #+#    #+#             */
 /*   Updated: 2023/08/20 23:20:40 by cchabeau         ###   ########.fr       */
+=======
+/*   Created: 2022/10/04 12:10:00 by cchabeau          #+#    #+#             */
+/*   Updated: 2023/08/08 15:54:05 by cchabeau         ###   ########.fr       */
+<<<<<<< HEAD
+>>>>>>> merge ok, commented main.c and buggy code minishell.c
+=======
+>>>>>>> 11d7b2b8f4e9c4c32f69e3c557b139a744cea52e
+>>>>>>> aa0ee6d47bc72e27cf4d9e385551ba86e312b03b
+>>>>>>> Anaïs
 /*                                                                            */
 /* ************************************************************************** */
 
