@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/21 13:06:19 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:20:09 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # include <unistd.h>
 // libft and other includes
 # include "../libft/includes/libft.h"
+# include "execute.h"
 
 /*									[Typedefs]								*/
 
@@ -163,7 +164,22 @@ t_redir_lst				*add_redir_lst(t_redir_lst *lst, t_redir_node *node);
 t_redir_node			*init_redir_node(void);
 t_redir_lst				*init_redir_lst(void);
 void					print_redir(t_redir_lst *lst);
+// execution.c
+int		execution(t_cmd *cmd, char **envp);
+void	execute(t_cmd *argv, char **envp);
 
-/*									[Utils]									*/
+// pipex.c
+void	heredoc(const char *limiter);
+void	create_process(t_cmd *cmd, char **envp);
+int		lastcmd_process(t_cmd *cmd, char **envp, int arg_counter);
+
+/*									[Utils]								*/
+
+// exe_utils.c
+void	error_exit(char *error_msg);
+int		infile_open(char *file);
+int		outfile_append_open(char *file);
+int		outfile_truncate_open(char *file);
+void	duplicate(int fd_src, int fd_dest, char *error);
 
 #endif
