@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/22 09:23:05 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/22 09:26:52 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int	main(int argc, char **argv, char **envp)
 	// {
 	// 	status = 0;
 	// 	cmd_line = readline("[Minishell] > ");
-		if (cmd_line == NULL)
-			exit(EXIT_SUCCESS);
+		// if (cmd_line == NULL)
+		// 	exit(EXIT_SUCCESS);
 	// 	// lst = lexing(cmd_line);
 	// 	if (ft_strlen(cmd_line) > 0)
 	// 		add_history(cmd_line);
