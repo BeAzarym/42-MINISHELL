@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/22 11:36:54 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/22 12:26:59 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int argc, char **argv, char **envp)
 	// cmd_table = add_cmd_dllst(cmd_table, &cmd2);
 	// cmd_table->head = cmd_table->head->next;
 	
-	status = execution(&cmd, envp);	
+	// status = execution(&cmd, envp);	
 	while (true)
 	{
 		status = 0;
@@ -70,8 +70,10 @@ int	main(int argc, char **argv, char **envp)
 		// print_token(lst->head);
 		// cmd_table = parsing(lst);
 		// print_cmd(cmd_table);
-		// if (ft_strncmp(cmd_line, "cd", 2) == OK)
-		// 	status = cd(cmd_line + 3);
+		if (ft_strncmp(cmd_line, "cd", 2) == OK)
+			status = cd(cmd_line + 3);
+		if (ft_strncmp(cmd_line, "echo", 4) == OK)
+			status = echo(cmd_line + 5);
 	}
 	// clear_env_lst(env_lst->head);
 	return (status);

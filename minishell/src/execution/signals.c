@@ -6,11 +6,11 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 23:40:50 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/22 11:25:14 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/22 11:49:35 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 /* 
 	Ignore "Ctrl-C"

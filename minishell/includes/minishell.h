@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/22 11:23:17 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/22 12:30:04 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ bool				g_signalset;
 /*									[Src]									*/
 
 // builtin.c
+int					echo(char *cmd);
+// void				exit(int);
 int					cd(char *cmd);
 
 // parsing
