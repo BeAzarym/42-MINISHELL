@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 23:40:50 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/21 12:53:14 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/22 05:29:29 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* 
 	Ignore "Ctrl-C"
-	Ignore "Ctrl-\" and "Ctrl-D"
+	Ignore "Ctrl-\"
 */
 void	ignore_shell_signal(void)
 {
@@ -28,13 +28,13 @@ void	ignore_shell_signal(void)
 	g_signalset = true;
 }
 
-// 
-// void	set_sigint_in_child(int signal)
-// {
-// 	struct sigaction	sa;
+// ctrl-c
+void	set_sigint_in_child(int signal)
+{
+	struct sigaction	sa;
 
-// 	(void)signal;
-// 	if (g_signalset == true)
-// 		sigaction(SIGINT, &sa, NULL);
+	(void)signal;
+	if (g_signalset == true)
+		sigaction(SIGINT, &sa, NULL);
 
-// }
+}

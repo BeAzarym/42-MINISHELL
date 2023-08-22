@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/21 12:46:12 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/22 06:04:49 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,17 @@ void	execute(t_cmd *cmd, char **envp)
 	char	**paths;
 	char	*cmd_path;
 	// char	**cmd;
-	// struct sigaction	sa;
+	struct sigaction	sa;
 	
 	// if (!argv || !argv[0])
 	// 	error_exit("parse error near """);
 	// cmd = ft_split(argv->cmd, ' ');
 	// if (cmd == NULL)
 	// 	error_exit("parsing of the command failed");
-	// sa.sa_handler = &set_sigint_in_child;
-	// if (sigaction(SIGINT, &sa, NULL) == -1 || sigaction(SIGQUIT, &sa, NULL) == -1)
-	// 	error_exit("killed\n");
+	sa.sa_handler = &set_sigint_in_child;
+	if (sigaction(SIGINT, &sa, NULL) == -1
+		|| sigaction(SIGQUIT, &sa, NULL) == -1)
+		error_exit("killed\n");
 	paths = commands_paths_array(envp);
 	cmd_path = command_access(cmd->cmd[0], paths);
 	if (cmd_path == NULL)

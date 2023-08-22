@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/21 16:55:11 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/22 05:47:22 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,17 @@ void	create_process(t_cmd *cmd, char **envp)
 	if (pid == CHILD)
 	{
 		close(fd[0]);
-		// if (fd[1] != STDOUT_FILENO)
-		{
-			duplicate(fd[1], STDOUT_FILENO, "could not write to the pipe");
-			close(fd[1]);
-		}
-		ft_putstr_fd("test", 2);
+		duplicate(fd[1], STDOUT_FILENO, "could not write to the pipe");
+		close(fd[1]);
+		ft_putstr_fd("in pipe, command : ", 2);
+		ft_putstr_fd(cmd->cmd[0], 2);
+		ft_putstr_fd("\n", 2);
 		execute(cmd, envp);
 	}
 	close(fd[1]);
-	// if (fd[0] != STDIN_FILENO)
-	{
-		duplicate(fd[0], STDIN_FILENO, "could not read from the pipe");
-		close(fd[0]);
-		printf("parent dup\n");
-	}
+	duplicate(fd[0], STDIN_FILENO, "could not read from the pipe");
+	close(fd[0]);
+	ft_putstr_fd("parent dup\n", 2);
 }
 
 /*
