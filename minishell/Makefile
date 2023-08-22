@@ -6,7 +6,7 @@
 #    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/08/22 11:29:43 by angassin         ###   ########.fr        #
+#    Updated: 2023/08/22 11:40:35 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,14 +30,7 @@ CFLAGS		= -Wall -Wextra -Werror
 
 DEBUG		= 0
 
-# THREAD_SANI	= 0
-
 SANI		= 0
-
-# ifeq ($(THREAD_SANI), 1)
-# 	CFLAGS += -fsanitize=thread
-# 	DEBUG = 1
-# endif
 
 ifeq ($(SANI), 1)
 	CFLAGS += 	-fsanitize=address -fsanitize=undefined \
@@ -95,7 +88,7 @@ $(NAME): $(OBJ)
 	@echo $(GREEN)"- Compiled -"$(NONE)
 
 exe: all
-	@make DEBUG=1 -C ./ clean
+	@make -C ./ clean
 	@echo "     - Executing $(NAME)... \n"
 	@./$(NAME)
 	@echo "\n     - Done -"

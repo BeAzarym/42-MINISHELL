@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/22 09:26:52 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/22 11:36:54 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv, char **envp)
 	// t_tkn_lst	*lst;
 	// t_env_lst	*env_lst;
 	// t_cmd_dllst	*cmd_table;
-	// char	*cmd_line;
+	char	*cmd_line;
 	int		status;
 	t_cmd	cmd;
 	// t_cmd	cmd2;
@@ -58,21 +58,21 @@ int	main(int argc, char **argv, char **envp)
 	// cmd_table->head = cmd_table->head->next;
 	
 	status = execution(&cmd, envp);	
-	// while (true)
-	// {
-	// 	status = 0;
-	// 	cmd_line = readline("[Minishell] > ");
-		// if (cmd_line == NULL)
-		// 	exit(EXIT_SUCCESS);
-	// 	// lst = lexing(cmd_line);
-	// 	if (ft_strlen(cmd_line) > 0)
-	// 		add_history(cmd_line);
-	// 	// print_token(lst->head);
-	// 	// cmd_table = parsing(lst);
-	// 	// print_cmd(cmd_table);
-	// 	// if (ft_strncmp(cmd_line, "cd", 2) == OK)
-	// 	// 	status = cd(cmd_line + 3);
-	// }
-	// // clear_env_lst(env_lst->head);
+	while (true)
+	{
+		status = 0;
+		cmd_line = readline("[Minishell] > ");
+		if (cmd_line == NULL)
+			exit(EXIT_SUCCESS);
+		// lst = lexing(cmd_line);
+		if (ft_strlen(cmd_line) > 0)
+			add_history(cmd_line);
+		// print_token(lst->head);
+		// cmd_table = parsing(lst);
+		// print_cmd(cmd_table);
+		// if (ft_strncmp(cmd_line, "cd", 2) == OK)
+		// 	status = cd(cmd_line + 3);
+	}
+	// clear_env_lst(env_lst->head);
 	return (status);
 }
