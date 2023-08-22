@@ -6,10 +6,9 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/16 16:51:36 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/22 11:13:00 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef EXECUTE_H
 # define EXECUTE_H
@@ -48,6 +47,10 @@ enum	e_redirect
 };
 
 /*									[Src]									*/
+
+// signal.c
+void	ignore_shell_signal(void);
+void	set_sigint_in_child(int signal);
 
 // execution.c
 int		execution(t_cmd *cmd, char **envp);

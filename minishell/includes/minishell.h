@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/22 05:32:33 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/22 11:23:17 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,14 @@
 // open
 # include <fcntl.h>
 // readline
-# include <stdio.h>
-# include <readline/readline.h>
 # include <readline/history.h>
+# include <readline/readline.h>
+# include <stdio.h>
 // sigaction
 # include <signal.h>
 // chdir
-# include <unistd.h>
-
 # include <stdbool.h>
+# include <unistd.h>
 // libft and other includes
 # include "../libft/includes/libft.h"
 # include "execute.h"
@@ -75,16 +74,12 @@ typedef struct s_cmd_dllst
 
 /*									[Global]								*/
 
-bool	g_signalset;
+bool				g_signalset;
 
 /*									[Src]									*/
 
-// signal.c
-void	ignore_shell_signal(void);
-void	set_sigint_in_child(int signal);
-
 // builtin.c
-int	cd(char *cmd);
+int					cd(char *cmd);
 
 // parsing
 char				**arg_split(char *s, char *sep);
@@ -95,8 +90,7 @@ void				add_back(t_token *src, t_token *new);
 void				clear_lst(t_token *lst);
 t_token				*init_token(char *value);
 t_tkn_lst			*init_tkn_lst(void);
-t_tkn_lst			*add_lst_tkn(char *value,
-						t_tkn_lst *lst);
+t_tkn_lst			*add_lst_tkn(char *value, t_tkn_lst *lst);
 int					jump_to_next_sep(char *s, char *sep, int i);
 int					escape_quotes(char *str, int n);
 char				define_type(char *value);

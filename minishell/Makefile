@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: angassin <angassin@student.s19.be>         +#+  +:+       +#+         #
+#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/08/21 00:28:29 by angassin         ###   ########.fr        #
+#    Updated: 2023/08/22 11:29:43 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,14 +53,15 @@ endif
 
 #--------------------------------SOURCES----------------------------------------
 
-SRC			= $(MINISHELL_SRC) $(UTILS_SRC)
-SRC_BONUS	= $(BONUS_SRC) $(UTILS_SRC)
+SRC			= 	$(MINISHELL_SRC) $(UTILS_SRC)
+SRC_BONUS	= 	$(BONUS_SRC) $(UTILS_SRC)
 
-LIBFT_A 	= libft.a
-LIBFT_DIR 	= libft/
-LIBFT		= $(addprefix libft/, $(LIBFT_A))
+LIBFT_A 	= 	libft.a
+LIBFT_DIR 	= 	libft/
+LIBFT		= 	$(addprefix libft/, $(LIBFT_A))
 
-MINISHELL	= 	builtins/builtin.c execution/execution.c execution/pipex.c \
+MINISHELL	=	builtins/builtin.c execution/execution.c execution/pipex.c \
+				execution/signals.c \
 				lexing/lexer.c \
 				lexing/arg_split.c \
 				lexing/token.c \
@@ -70,17 +71,13 @@ MINISHELL	= 	builtins/builtin.c execution/execution.c execution/pipex.c \
 				lexing/parser.c \
 				lexing/parser_utils.c \
 				lexing/redirect_handler.c \
-				utils.c minishell.c signals.c
+				utils.c minishell.c 
 MINISHELL_SRC	= $(addprefix src/, $(MINISHELL))
 
-UTILS		= exe_utils.c
-UTILS_SRC	= $(addprefix utils/, $(UTILS))
+UTILS		= 	exe_utils.c
+UTILS_SRC	= 	$(addprefix utils/, $(UTILS))
 
-#BONUS		= main_bonus.c
-#BONUS_SRC	= $(addprefix src/, $(BONUS))
-
-OBJ			= $(SRC:.c=.o)
-#BONUS_OBJ	= $(SRC_BONUS:.c=.o)
+OBJ			= 	$(SRC:.c=.o)
 
 #---------------------------------RULES-----------------------------------------
 
@@ -97,17 +94,11 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -lreadline -o $(NAME)
 	@echo $(GREEN)"- Compiled -"$(NONE)
 
-# bonus : $(BONUS_OBJ)
-# 	@echo $(CURSIVE)$(GRAY) "     - Making libft..." $(NONE)
-# 	@make -C $(LIBFT_DIR)
-# 	@$(CC) $(CFLAGS) $(BONUS_OBJ) $(LIBFT) -o $(NAME)
-# 	@echo $(GREEN)"- Bonus compiled -"$(NONE)
-
-# exe: all
-# 	@make -C ./ clean
-# 	@echo "     - Executing $(NAME)... \n"
-# 	@./$(NAME) infile "ls -l" "wc -l" outfile
-# 	@echo "\n     - Done -"
+exe: all
+	@make DEBUG=1 -C ./ clean
+	@echo "     - Executing $(NAME)... \n"
+	@./$(NAME)
+	@echo "\n     - Done -"
 
 clean:
 	@echo $(CURSIVE)$(GRAY) "     - Removing object files..." $(NONE)
