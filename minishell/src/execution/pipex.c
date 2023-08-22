@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/22 05:47:22 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/22 09:16:18 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter)
 	exit_status = WEXITSTATUS(status);
 	// while (arg_counter <= argc - 2)
 	// {
-	// 	waitpid(-1, &status, 0);
+		waitpid(-1, &status, 0);
 	// 	arg_counter++;
 	// }
 	return (exit_status);
