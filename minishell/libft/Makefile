@@ -6,7 +6,7 @@
 #    By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 17:09:20 by angassin          #+#    #+#              #
-#    Updated: 2023/08/21 10:16:57 by cchabeau         ###   ########.fr        #
+#    Updated: 2023/08/24 15:15:15 by cchabeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ CC			=	cc
 
 RM			=	rm -f
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror 
 
 #--------------------------------SOURCES----------------------------------------
 

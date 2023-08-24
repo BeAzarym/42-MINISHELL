@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/20 23:37:40 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:58:22 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	main(int argc, char **argv, char **envp)
 		lst = lexing(cmd_line);
 		if (ft_strlen(cmd_line) > 0)
 			add_history(cmd_line);
-		// print_token(lst->head);
-		cmd_table = parsing(lst);
+		print_token(lst->head);
+		cmd_table = parsing(lst, cmd_table);
 		print_cmd(cmd_table);
 		// if (ft_strncmp(cmd_line, "cd", 2) == OK)
 		// 	status = cd(cmd_line + 3);
