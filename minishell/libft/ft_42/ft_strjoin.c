@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 12:47:06 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/08 18:18:07 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:54:56 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,26 @@ static void	get_next_str(va_list *strs, char *cat, int *index)
 		++i;
 		++(*index);
 	}
+}
+
+char	*ft_strjoin_s1(char *s1, char *s2)
+{
+	size_t	len;
+	size_t	len_s1;
+	char	*str;
+
+	if (!s1 || !s2)
+		return (NULL);
+	len_s1 = ft_strlen(s1);
+	len = len_s1 + ft_strlen(s2);
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	while (*s1)
+		*str++ = *s1++;
+	free(s1 - len_s1);
+	while (*s2)
+		*str++ = *s2++;
+	*str = '\0';
+	return (str - len);
 }

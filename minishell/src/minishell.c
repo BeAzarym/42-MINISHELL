@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/24 16:58:22 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:57:34 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,11 @@ int	main(int argc, char **argv, char **envp)
 		print_token(lst->head);
 		cmd_table = parsing(lst, cmd_table);
 		print_cmd(cmd_table);
+		// char **new_env = convert_env_to_exec(env_lst);
+		// (void)new_env;
 		// if (ft_strncmp(cmd_line, "cd", 2) == OK)
 		// 	status = cd(cmd_line + 3);
-	
-	}
+		}
 	clear_env_lst(env_lst->head);
 	return (status);
 }
