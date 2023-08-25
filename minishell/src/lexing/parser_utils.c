@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:45:51 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/16 16:55:59 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:09:33 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ t_cmd	*init_cmd_struct(void)
 	new->outfile = NULL;
 	new->type_in = -1;
 	new->type_out = -1;
+	new->redir_in = init_redir_lst();
+	new->redir_out = init_redir_lst();
+	if (!new->redir_in || !new->redir_out)
+		return (NULL);
 	new->next = NULL;
 	return (new);
 }

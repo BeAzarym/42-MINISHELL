@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/22 12:26:59 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/25 15:36:06 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv, char **envp)
 	// t_cmd_dllst	*cmd_table;
 	char	*cmd_line;
 	int		status;
-	t_cmd	cmd;
+	// t_cmd	cmd;
 	// t_cmd	cmd2;
 	g_signalset = false;
 	ignore_shell_signal();
