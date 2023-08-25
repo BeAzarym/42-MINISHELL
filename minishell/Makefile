@@ -6,7 +6,7 @@
 #    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/08/25 15:33:07 by angassin         ###   ########.fr        #
+#    Updated: 2023/08/25 16:04:53 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ MINISHELL	=	builtins/builtin.c execution/execution.c execution/pipex.c \
 				lexing/env_utils.c \
 				lexing/parser.c \
 				lexing/parser_utils.c \
-				lexing/redirect_handler.c \
+				lexing/redirect_handler.c lexing/redir_struct.c \
 				utils.c minishell.c 
 MINISHELL_SRC	= $(addprefix src/, $(MINISHELL))
 

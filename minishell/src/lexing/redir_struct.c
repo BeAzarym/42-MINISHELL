@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:21:55 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/20 23:31:18 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:03:37 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_redir_node	*init_redir_node(void)
 	return (new);
 }
 
-t_redir_lst *add_redir_lst(t_redir_lst *lst, t_redir_node *node)
+t_redir_lst	*add_redir_lst(t_redir_lst *lst, t_redir_node *node)
 {
 	if (!node)
 		return (NULL);
@@ -55,7 +55,7 @@ t_redir_lst *add_redir_lst(t_redir_lst *lst, t_redir_node *node)
 	return (lst);
 }
 
-void print_redir(t_redir_lst *lst)
+void	print_redir(t_redir_lst *lst)
 {
 	t_redir_lst	*cpy;
 
