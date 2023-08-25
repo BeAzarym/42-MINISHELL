@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 23:40:50 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/21 12:53:14 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/25 14:13:38 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	ignore_shell_signal(void)
 	g_signalset = true;
 }
 
-// 
-// void	set_sigint_in_child(int signal)
-// {
-// 	struct sigaction	sa;
 
-// 	(void)signal;
-// 	if (g_signalset == true)
-// 		sigaction(SIGINT, &sa, NULL);
+void	set_sigint_in_child(int signal)
+{
+	struct sigaction	sa;
 
-// }
+	(void)signal;
+	if (g_signalset == true)
+		sigaction(SIGINT, &sa, NULL);
+
+}
