@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/21 13:23:12 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:38:49 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strlen(cmd_line) > 0)
 			add_history(cmd_line);
 		// print_token(lst->head);
-		cmd_table = parsing(lst);
+		cmd_table = parsing(lst, cmd_table);
 		print_cmd(cmd_table);
 		// if (ft_strncmp(cmd_line, "cd", 2) == OK)
 		// 	status = cd(cmd_line + 3);

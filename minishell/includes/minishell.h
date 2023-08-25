@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/21 13:20:09 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:38:20 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,14 +156,16 @@ t_cmd					*init_cmd_struct(void);
 t_cmd_dllst				*init_cmd_dllst(void);
 t_cmd_dllst				*add_cmd_dllst(t_cmd_dllst *dllst, t_cmd *cmd);
 void					print_cmd(t_cmd_dllst *dllst);
-t_cmd_dllst				*parsing(t_tkn_lst *lst);
-int						have_redirect_arg(t_tkn_lst *lst);
+t_cmd_dllst *parsing(t_tkn_lst *lst, t_cmd_dllst *cmd_table);
+int have_redirect_arg(t_tkn_lst *lst);
 t_tkn_lst *handle_redirect(t_tkn_lst *lst, t_cmd *cmd_table);
 
 t_redir_lst				*add_redir_lst(t_redir_lst *lst, t_redir_node *node);
 t_redir_node			*init_redir_node(void);
 t_redir_lst				*init_redir_lst(void);
 void					print_redir(t_redir_lst *lst);
+void					exctrat_data(t_tkn_lst *lst, t_cmd *node);
+char					**convert_env_to_exec(t_env_lst *env_lst);
 // execution.c
 int		execution(t_cmd *cmd, char **envp);
 void	execute(t_cmd *argv, char **envp);
