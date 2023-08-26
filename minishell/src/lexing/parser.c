@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:41:30 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/25 13:37:54 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/26 12:51:18 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_cmd_dllst	*parsing(t_tkn_lst *lst, t_cmd_dllst *cmd_table)
 	return (cmd_table);
 }
 
-void	exctrat_data(t_tkn_lst *lst, t_cmd *node)
+void	extract_data(t_tkn_lst *lst, t_cmd *node)
 {
 	if (!lst || !node)
 		return ;

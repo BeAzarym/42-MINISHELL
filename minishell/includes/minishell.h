@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/25 16:02:06 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/26 12:50:53 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ typedef struct s_redir_lst
 
 typedef struct s_cmd
 {
-	int					type_in;
-	int					type_out;
 	char				*infile;
 	char				*outfile;
 	t_redir_lst			*redir_in;
@@ -131,8 +129,8 @@ void					add_back(t_token *src, t_token *new);
 void					clear_lst(t_token *lst);
 t_token					*init_token(char *value);
 t_tkn_lst				*init_tkn_lst(void);
-t_tkn_lst	*add_lst_tkn(char *value,
-						t_tkn_lst *lst);
+t_tkn_lst				*add_lst_tkn(char *value,
+							t_tkn_lst *lst);
 int						jump_to_next_sep(char *s, char *sep, int i);
 int						escape_quotes(char *str, int n);
 char					define_type(char *value);
@@ -158,7 +156,7 @@ t_redir_lst				*add_redir_lst(t_redir_lst *lst, t_redir_node *node);
 t_redir_node			*init_redir_node(void);
 t_redir_lst				*init_redir_lst(void);
 void					print_redir(t_redir_lst *lst);
-void					exctrat_data(t_tkn_lst *lst, t_cmd *node);
+void					extract_data(t_tkn_lst *lst, t_cmd *node);
 char					**convert_env_to_exec(t_env_lst *env_lst);
 // // execution.c
 // int		execution(t_cmd *cmd, char **envp);

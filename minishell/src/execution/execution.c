@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/25 15:44:15 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/26 12:28:47 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ int	execution(t_cmd *cmd, char **envp)
 	int	fdin;
 	int	fdout;
 
-	if (cmd->type_in == HEREDOC)
+	if (cmd->redir_in == HEREDOC)
 		heredoc(cmd->cmd[0]);
-	else if (cmd->type_in == INFILE)
+	else if (cmd->redir_in == INFILE)
 	{
 		fdin = infile_open(cmd->infile);
 		duplicate(fdin, STDIN_FILENO, "duplication of the infile failed");
 	}
-	if (cmd->type_out == TRUNCATE)
+	if (cmd->redir_out == TRUNCATE)
 		fdout = outfile_truncate_open(cmd->outfile);
-	else if (cmd->type_out == APPEND)
+	else if (cmd->redir_out == APPEND)
 		fdout = outfile_append_open(cmd->outfile);
 	else
 		fdout = STDOUT_FILENO;
