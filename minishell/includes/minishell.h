@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/26 12:50:53 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/26 13:05:21 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef struct s_redir_lst
 
 typedef struct s_cmd
 {
+	int					type_in;
+	int					type_out;
 	char				*infile;
 	char				*outfile;
 	t_redir_lst			*redir_in;
@@ -98,7 +100,7 @@ typedef struct s_cmd
 }						t_cmd;
 
 /*									[Macros]								*/
-# define CHILD 0
+# define OK 0
 
 enum					e_redirect
 {
@@ -108,13 +110,6 @@ enum					e_redirect
 	TRUNCATE,
 	APPEND
 };
-
-/*									[Macros]								*/
-# define OK 0
-
-/*									[Global]								*/
-
-bool				g_signalset;
 
 /*									[Src]									*/
 

@@ -6,7 +6,7 @@
 #    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/08/25 16:04:53 by angassin         ###   ########.fr        #
+#    Updated: 2023/08/26 14:07:37 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ MINISHELL	=	builtins/builtin.c execution/execution.c execution/pipex.c \
 				utils.c minishell.c 
 MINISHELL_SRC	= $(addprefix src/, $(MINISHELL))
 
-UTILS		= 	exe_utils.c
+UTILS		= 	exe_utils.c files_utils.c 
 UTILS_SRC	= 	$(addprefix utils/, $(UTILS))
 
 OBJ			= 	$(SRC:.c=.o)
