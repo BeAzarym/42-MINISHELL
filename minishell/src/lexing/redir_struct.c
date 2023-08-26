@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:21:55 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/20 23:31:18 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/25 14:38:25 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void print_redir(t_redir_lst *lst)
 	if (!lst)
 		return ;
 	cpy = lst;
-	printf("[REDIR]\n");
 	while (cpy->head)
 	{
 		printf(">> [TYPE] : %c	>> [FILE] : %s\n", cpy->head->type, cpy->head->file);

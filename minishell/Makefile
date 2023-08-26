@@ -6,7 +6,7 @@
 #    By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/08/20 12:24:55 by cchabeau         ###   ########.fr        #
+#    Updated: 2023/08/26 16:44:13 by cchabeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ MINISHELL		= builtins/builtin.c execution/execution.c execution/pipex.c \
 		lexing/token_utils.c \
 		lexing/env.c \
 		lexing/env_utils.c \
+		lexing/expender.c \
 		lexing/parser.c \
 		lexing/parser_utils.c \
 		lexing/redirect_handler.c lexing/redir_struct.c \

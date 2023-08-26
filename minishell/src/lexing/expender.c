@@ -1,24 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_array_print.c                                   :+:      :+:    :+:   */
+/*   expender.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/29 17:59:55 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/25 14:43:06 by cchabeau         ###   ########.fr       */
+/*   Created: 2023/08/26 16:43:22 by cchabeau          #+#    #+#             */
+/*   Updated: 2023/08/26 16:43:33 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
-void	ft_array_print(char **array)
-{
-	if (!array)
-		return ;
-	while (*array != NULL)
-	{
-		ft_printf("|		  {%s}		     |\n", *array);
-		array++;
-	}
-}

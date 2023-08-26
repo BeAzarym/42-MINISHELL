@@ -6,15 +6,37 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:55:06 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/24 16:47:10 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/25 14:31:36 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_tkn_lst 	*handle_redirect(t_tkn_lst *lst, t_cmd *cmd_node)
+static void	handle_simple(t_tkn_lst *lst, t_redir_node *node)
 {
-	t_redir_node *node;
+	if (lst->head->type == 'I')
+		node->type = 'I';
+	else
+		node->type = 'O';
+	node->file = ft_strdup(lst->head->next->value);
+	if (!node->file)
+		return ;
+}
+
+static void	handle_double(t_tkn_lst *lst, t_redir_node *node)
+{
+	if (lst->head->type == 'I')
+		node->type = 'H';
+	else
+		node->type = 'A';
+	node->file = ft_strdup(lst->head->next->next->value);
+	if (!node->file)
+		return ;
+}
+
+t_tkn_lst	*handle_redirect(t_tkn_lst *lst, t_cmd *cmd_node)
+{
+	t_redir_node	*node;
 
 	node = init_redir_node();
 	if (!lst)
@@ -22,25 +44,11 @@ t_tkn_lst 	*handle_redirect(t_tkn_lst *lst, t_cmd *cmd_node)
 	if (!have_redirect_arg(lst))
 		return (NULL);
 	if (have_redirect_arg(lst) == 1)
-	{
-		if (lst->head->type == 'I')
-			node->type = 'I';
-		else
-			node->type = 'O';
-		node->file = ft_strdup(lst->head->next->value);
-		if (!node->file)
-			return (NULL);
-	}
-	if (have_redirect_arg(lst) == 2)
-	{
-		if (lst->head->type == 'I')
-			node->type = 'H';
-		else
-			node->type = 'A';
-		node->file = ft_strdup(lst->head->next->next->value);
-		if (!node->file)
-			return (NULL);
-	}
+		handle_simple(lst, node);
+	else if (have_redirect_arg(lst) == 2)
+		handle_double(lst, node);
+	if (!node->file)
+		return (NULL);
 	if (lst->head->type == 'I')
 		add_redir_lst(cmd_node->redir_in, node);
 	else

@@ -3,21 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:54:44 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/14 13:49:09 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/26 20:39:33 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static char	*extract_word(char *word)
+{
+	char	*tkn;
+	int		len;
+
+	len = locate_token(word, "|<>");
+	if (len == -2)
+		return (NULL);
+	else if (len == -1)
+		tkn = ft_substr(word, 0, ft_strlen(word));
+	else
+		tkn = ft_substr(word, 0, len);
+	if (!tkn)
+		return (NULL);
+	return (tkn);
+}
+
 
 int	locate_token(char *value, char *token)
 {
 	int	i;
 
 	if (!value || !token)
-		return (-1);
+		return (-2);
 	i = 0;
 	while (value[i])
 	{
@@ -32,36 +50,42 @@ int	locate_token(char *value, char *token)
 
 t_tkn_lst	*token_split(t_tkn_lst *stack, t_tkn_lst *new)
 {
-	int	j;
-	int	len;
+	int		i;
+	char	*tkn;
 
+	t_tkn_lst *cpy;
+
+	cpy = stack;
 	new = init_tkn_lst();
-	while (stack->head)
+	if (!new)
+		return (NULL);
+	while (cpy->head)
 	{
-		len = ft_strlen(stack->head->value);
-		j = locate_token(stack->head->value, "|<>");
-		if (j == -1)
-			new = add_lst_tkn(stack->head->value, new);
-		else if (j == 0 && len == 1)
-			new = add_lst_tkn(ft_substr(stack->head->value, j, 1), new);
-		else if (j == (len - 1))
+		i = 0;
+		while (cpy->head->value[i])
 		{
-			new = add_lst_tkn(ft_substr(stack->head->value, 0, j), new);
-			new = add_lst_tkn(ft_substr(stack->head->value, j, 1), new);
+			if (is_sep(cpy->head->value[i], "|<>"))
+			{
+				tkn = ft_substr(cpy->head->value, i, 1);
+				if (!tkn)
+					return (NULL);
+				new = add_lst_tkn(tkn, new);
+				if (!new)
+					return (NULL);
+				i++;
+			}
+			else if (!is_sep(cpy->head->value[i], "|<>"))
+			{
+				tkn = extract_word(&cpy->head->value[i]);
+				if (!tkn)
+					return (NULL);
+				new = add_lst_tkn(tkn, new);
+				if (!new)
+					return (NULL);
+				i += ft_strlen(tkn);
+			}
 		}
-		else if (j > 0 && j < len)
-		{
-			new = add_lst_tkn(ft_substr(stack->head->value, 0, j), new);
-			new = add_lst_tkn(ft_substr(stack->head->value, j, 1), new);
-			new = add_lst_tkn(ft_substr(stack->head->value, (j + 1), len), new);
-		}
-		else if (j == 0 && len > 0)
-		{
-			new = add_lst_tkn(ft_substr(stack->head->value, j, 1), new);
-			new = add_lst_tkn(ft_substr(stack->head->value, 1, len), new);
-		}
-		stack->head = stack->head->next;
+		cpy->head = cpy->head->next;
 	}
-	clear_lst(stack->head);
 	return (new);
 }

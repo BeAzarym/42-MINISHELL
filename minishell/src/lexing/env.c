@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:54:49 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/25 12:56:32 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/26 16:40:40 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ t_env_lst	*init_envp(char **envp)
 	{
 		tmp = envp_split(envp[i]);
 		lst = add_lst_env(tmp[0], tmp[1], lst);
-		// printf("[KEY] >> %s	[VALUE] >> %s\n", tmp[0], tmp[1]);
 		ft_array_clear(tmp);
 		i++;
 	}
