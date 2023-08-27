@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:41:30 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/25 14:33:07 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/27 16:22:09 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_cmd_dllst	*parsing(t_tkn_lst *lst, t_cmd_dllst *cmd_table)
 	while (cpy->head)
 	{
 		node = init_cmd_struct();
-		exctrat_data(lst, node);
+		exctrat_data(cpy, node);
 		cmd_table = add_cmd_dllst(cmd_table, node);
 		if (cpy->head)
 			cpy->head = cpy->head->next;

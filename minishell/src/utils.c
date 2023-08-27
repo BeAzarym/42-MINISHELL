@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/25 14:38:05 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/27 16:27:11 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,38 @@ void	print_token(t_token *lst)
 
 void	print_env(t_env_lst *lst)
 {
-	t_env_lst	*cpy;
+	t_env	*cpy;
 
 	if (!lst)
 		return ;
-	cpy = lst;
+	cpy = lst->head;
 	printf("[ENV]\n");
-	while (cpy->head)
+	while (cpy)
 	{
-		printf(">> [KEY] : %s	>> [VALUE] : %s\n", cpy->head->key, cpy->head->value);
-		cpy->head = cpy->head->next;
+		printf(">> [KEY] : %s	>> [VALUE] : %s\n", cpy->key, cpy->value);
+		cpy = cpy->next;
 	}
 }
 
 void	print_cmd(t_cmd_dllst *dllst)
 {
-	t_cmd_dllst *cpy;
+	t_cmd *cpy;
 	
 	if (!dllst)
 		return ;
-	cpy = dllst;
+	cpy = dllst->head;
 	printf("[CMD TABLE]\n");
-	while(cpy->head)
+	while(cpy)
 	{
 		printf("--------------------------------------\n");
 		printf("--------------[REDIR IN]--------------\n");
-		print_redir(cpy->head->redir_in);
+		print_redir(cpy->redir_in);
 		printf("--------------[REDIR OUT]-------------\n");
-		print_redir(cpy->head->redir_out);
+		print_redir(cpy->redir_out);
 		printf("--------------[CMD  TABLE]------------\n");
-		ft_array_print(cpy->head->cmd);
+		ft_array_print(cpy->cmd);
 		printf("--------------------------------------\n\n");
-		cpy->head = cpy->head->next;
+		cpy = cpy->next;
 	}
 }
 
