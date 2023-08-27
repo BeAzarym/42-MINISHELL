@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/26 13:05:21 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/27 21:33:16 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,10 @@ typedef struct s_cmd
 enum					e_redirect
 {
 	STDIN_OUT,
-	HEREDOC,
-	INFILE,
-	TRUNCATE,
-	APPEND
+	HEREDOC = 'H',
+	INFILE = 'I',
+	TRUNCATE = 'O',
+	APPEND = 'A'
 };
 
 /*									[Src]									*/

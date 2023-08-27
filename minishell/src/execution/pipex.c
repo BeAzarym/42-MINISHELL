@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/25 15:44:25 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/27 21:28:18 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	create_process(t_cmd *cmd, char **envp)
 */
 int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter)
 {
-	printf("lastcmd\n");
+	printf("lastcmd : %s\n", cmd->cmd[0]);
 	int	pid;
 	int	status;
 	int	exit_status;
