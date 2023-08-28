@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/28 11:57:34 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:29:19 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ static void	read_stdin(const char *limiter, int fd)
 	The child process has it's own copy of the parent's file's decriptors.
 	printf("here\n");
 */
-void	create_process(t_cmd *cmd, char **envp)
+void	create_process(t_cmd *cmd, char **envp, int fd[2])
 {
-	int	fd[2];
 	int	pid;
 
 	if (pipe(fd) == -1)
@@ -88,8 +87,6 @@ void	create_process(t_cmd *cmd, char **envp)
 		execute(cmd, envp);
 	}
 	close(fd[1]);
-	duplicate(fd[0], STDIN_FILENO, "could not read from the pipe");
-	close(fd[0]);
 	ft_putstr_fd("parent dup\n", 2);
 }
 
@@ -98,7 +95,7 @@ void	create_process(t_cmd *cmd, char **envp)
 	the child processes to end in the parent.
 	Returns the exit status of the last command.
 */
-int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter)
+int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter, int fdout, int fd_first_pipe[2])
 {
 	printf("lastcmd : %s\n", cmd->cmd[0]);
 	int	pid;
@@ -109,7 +106,23 @@ int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter)
 	if (pid == -1)
 		error_exit("could not create process");
 	if (pid == CHILD)
+	{
+		if (fdout != STDOUT_FILENO)
+		{
+			printf("fdout : %d\n", fdout);
+			duplicate(fdout, STDOUT_FILENO, "duplication of the outfile failed");
+			close(fdout);
+		}
+		if (fd_first_pipe[0] != -1) {
+			duplicate(fd_first_pipe[0], STDIN_FILENO, "could not read from the pipe");
+			close(fd_first_pipe[0]);
+		}
 		execute(cmd, envp);
+	}
+	if (fd_first_pipe[0] != -1)
+		close(fd_first_pipe[0]);
+	if (fdout != STDOUT_FILENO)
+		close(fdout);
 	waitpid(pid, &status, 0);
 	arg_counter++;
 	(void)arg_counter;

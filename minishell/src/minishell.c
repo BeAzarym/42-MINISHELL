@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/28 11:53:07 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:22:06 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		status = 0;
 		cmd_line = readline("[Minishell] > ");
+		printf("cmd line is: %s\n", cmd_line);
 		if (cmd_line == NULL)
 			exit(EXIT_SUCCESS);
 		lst = lexing(cmd_line);
@@ -43,6 +44,7 @@ int	main(int argc, char **argv, char **envp)
 		// print_cmd(cmd_table);// segfault
 		get_input_output(cmd_table);
 		status = execution(cmd_table->head, envp);
+		// printf("debug got here\n");
 		if (ft_strncmp(cmd_line, "cd", 2) == OK)
 			status = cd(cmd_line + 3);
 		if (ft_strncmp(cmd_line, "echo", 4) == OK)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/28 12:03:32 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:28:39 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ int	execution(t_cmd *cmd, char **envp)
 {
 	int			fdin;
 	int			fdout;
+	int			fd_first_pipe[2];
 	t_redir_lst	*out_lst;
 
+	fd_first_pipe[0] = -1;
+	fd_first_pipe[1] = -1;
 	if (cmd->type_in == HEREDOC)
 		heredoc(cmd->cmd[0]);
 	else if (cmd->type_in == INFILE)
@@ -32,10 +35,12 @@ int	execution(t_cmd *cmd, char **envp)
 		fdin = infile_open(cmd->infile);
 		duplicate(fdin, STDIN_FILENO, "duplication of the infile failed");
 	}
+	printf("ONE MORE PRINT: %d\n", cmd->type_out);
 	if (cmd->type_out == STDIN_OUT)
 		fdout = STDOUT_FILENO;
 	else
 	{
+
 		out_lst = cmd->redir_out;
 		while (out_lst->head != NULL)
 		{
@@ -49,15 +54,10 @@ int	execution(t_cmd *cmd, char **envp)
 	}
 	while (cmd->next != NULL)
 	{
-		create_process(cmd, envp);
+		create_process(cmd, envp, fd_first_pipe);
 		cmd = cmd->next;
 	}
-	if (fdout != STDOUT_FILENO)
-	{
-		printf("fdout : %d\n", fdout);
-		duplicate(fdout, STDOUT_FILENO, "duplication of the outfile failed");
-	}
-	return (lastcmd_process(cmd, envp, 2));
+	return (lastcmd_process(cmd, envp, 2, fdout, fd_first_pipe));
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/26 13:30:39 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:17:58 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	execute(t_cmd *argv, char **envp);
 
 // pipex.c
 void	heredoc(const char *limiter);
-void	create_process(t_cmd *cmd, char **envp);
-int		lastcmd_process(t_cmd *cmd, char **envp, int arg_counter);
+void	create_process(t_cmd *cmd, char **envp, int fd[2]);
+int		lastcmd_process(t_cmd *cmd, char **envp, int arg_counter, int fdout, int fd_first_pipe[2]);
 
 /*									[Utils]								*/
 
