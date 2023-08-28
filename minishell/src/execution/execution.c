@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/26 13:08:43 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/28 12:03:32 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ static char	*command_access(char *cmd, char **paths);
 */
 int	execution(t_cmd *cmd, char **envp)
 {
-	int	fdin;
-	int	fdout;
+	int			fdin;
+	int			fdout;
+	t_redir_lst	*out_lst;
 
 	if (cmd->type_in == HEREDOC)
 		heredoc(cmd->cmd[0]);
@@ -31,19 +32,31 @@ int	execution(t_cmd *cmd, char **envp)
 		fdin = infile_open(cmd->infile);
 		duplicate(fdin, STDIN_FILENO, "duplication of the infile failed");
 	}
-	if (cmd->type_out == TRUNCATE)
-		fdout = outfile_truncate_open(cmd->outfile);
-	else if (cmd->type_out == APPEND)
-		fdout = outfile_append_open(cmd->outfile);
-	else
+	if (cmd->type_out == STDIN_OUT)
 		fdout = STDOUT_FILENO;
+	else
+	{
+		out_lst = cmd->redir_out;
+		while (out_lst->head != NULL)
+		{
+			if (out_lst->head->type == TRUNCATE)
+				fdout = outfile_truncate_open(out_lst->head->file);
+			else if (out_lst->head->type == APPEND)
+				fdout = outfile_append_open(out_lst->head->file);
+			out_lst->head = out_lst->head->next;
+		}
+		printf("fdout in execution : %d\n", fdout);	
+	}
 	while (cmd->next != NULL)
 	{
 		create_process(cmd, envp);
 		cmd = cmd->next;
 	}
 	if (fdout != STDOUT_FILENO)
+	{
+		printf("fdout : %d\n", fdout);
 		duplicate(fdout, STDOUT_FILENO, "duplication of the outfile failed");
+	}
 	return (lastcmd_process(cmd, envp, 2));
 }
 
@@ -64,6 +77,7 @@ void	execute(t_cmd *cmd, char **envp)
 	// cmd = ft_split(argv->cmd, ' ');
 	// if (cmd == NULL)
 	// 	error_exit("parsing of the command failed");
+	ft_putstr_fd("in execute\n", 2);
 	sa.sa_handler = &set_sigint_in_child;
 	if (sigaction(SIGINT, &sa, NULL) == -1
 		|| sigaction(SIGQUIT, &sa, NULL) == -1)

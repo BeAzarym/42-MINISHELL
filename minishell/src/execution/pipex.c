@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/27 21:28:18 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:57:34 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ void	create_process(t_cmd *cmd, char **envp)
 		close(fd[0]);
 		duplicate(fd[1], STDOUT_FILENO, "could not write to the pipe");
 		close(fd[1]);
-		ft_putstr_fd("in pipe, command : ", 2);
-		ft_putstr_fd(cmd->cmd[0], 2);
-		ft_putstr_fd("\n", 2);
+		// ft_putstr_fd("in pipe, command : ", 2);
+		// ft_putstr_fd(cmd->cmd[0], 2);
+		// ft_putstr_fd("\n", 2);
 		execute(cmd, envp);
 	}
 	close(fd[1]);
