@@ -6,14 +6,14 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 23:40:50 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/25 15:44:34 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/28 12:10:46 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 
 /* 
-	Ignore "Ctrl-C"
+	Ignore "Ctrl-c"
 	Ignore "Ctrl-\"
 */
 void	ignore_shell_signal(void)
