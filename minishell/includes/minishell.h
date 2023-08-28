@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/27 21:33:16 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/28 12:27:53 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,6 @@ enum					e_redirect
 
 /*									[Src]									*/
 
-
-
 // parsingerrno
 char					**arg_split(char *s, char *sep);
 t_token					*create_token(char *word, char type, t_token *lst);
@@ -124,8 +122,8 @@ void					add_back(t_token *src, t_token *new);
 void					clear_lst(t_token *lst);
 t_token					*init_token(char *value);
 t_tkn_lst				*init_tkn_lst(void);
-t_tkn_lst				*add_lst_tkn(char *value,
-							t_tkn_lst *lst);
+t_tkn_lst	*add_lst_tkn(char *value,
+						t_tkn_lst *lst);
 int						jump_to_next_sep(char *s, char *sep, int i);
 int						escape_quotes(char *str, int n);
 char					define_type(char *value);
@@ -153,6 +151,8 @@ t_redir_lst				*init_redir_lst(void);
 void					print_redir(t_redir_lst *lst);
 void					extract_data(t_tkn_lst *lst, t_cmd *node);
 char					**convert_env_to_exec(t_env_lst *env_lst);
+int						search_in_env(char *key, t_env_lst *env);
+
 // // execution.c
 // int		execution(t_cmd *cmd, char **envp);
 // void	execute(t_cmd *argv, char **envp);
