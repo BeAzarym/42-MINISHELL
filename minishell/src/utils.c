@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/21 13:09:18 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/28 12:30:11 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,38 @@ void	print_token(t_token *lst)
 
 void	print_env(t_env_lst *lst)
 {
-	t_env_lst	*cpy;
+	t_env	*cpy;
 
 	if (!lst)
 		return ;
-	cpy = lst;
+	cpy = lst->head;
 	printf("[ENV]\n");
-	while (cpy->head)
+	while (cpy)
 	{
-		printf(">> [KEY] : %s	>> [VALUE] : %s\n", cpy->head->key, cpy->head->value);
-		cpy->head = cpy->head->next;
+		printf(">> [KEY] : %s	>> [VALUE] : %s\n", cpy->key, cpy->value);
+		cpy = cpy->next;
 	}
 }
 
 void	print_cmd(t_cmd_dllst *dllst)
 {
-	t_cmd_dllst *cpy;
+	t_cmd *cpy;
 	
 	if (!dllst)
 		return ;
-	cpy = dllst;
+	cpy = dllst->head;
 	printf("[CMD TABLE]\n");
-	while(cpy->head)
+	while(cpy)
 	{
-		printf("---\n");
-		print_redir(cpy->head->redir_in);
-		print_redir(cpy->head->redir_out);
-		printf("[CMD ARRAY]\n");
-		ft_array_print(cpy->head->cmd);
-		printf("---\n");
-		cpy->head = cpy->head->next;
+		printf("--------------------------------------\n");
+		printf("--------------[REDIR IN]--------------\n");
+		print_redir(cpy->redir_in);
+		printf("--------------[REDIR OUT]-------------\n");
+		print_redir(cpy->redir_out);
+		printf("--------------[CMD  TABLE]------------\n");
+		ft_array_print(cpy->cmd);
+		printf("--------------------------------------\n\n");
+		cpy = cpy->next;
 	}
 }
 
@@ -83,5 +85,3 @@ void	clear_tkn_lst(t_token *lst)
 	}
 	free(lst);
 }
-
-
