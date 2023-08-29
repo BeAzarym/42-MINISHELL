@@ -6,10 +6,9 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/28 13:29:19 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:29:37 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/execute.h"
 
@@ -87,7 +86,7 @@ void	create_process(t_cmd *cmd, char **envp, int fd[2])
 		execute(cmd, envp);
 	}
 	close(fd[1]);
-	ft_putstr_fd("parent dup\n", 2);
+	ft_putstr_fd("in parent (create process)\n", 2);
 }
 
 /*
@@ -104,16 +103,17 @@ int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter, int fdout, int fd_
 
 	pid = fork();
 	if (pid == -1)
-		error_exit("could not create process");
+		error_exit("could not create lastcmd process");
 	if (pid == CHILD)
 	{
 		if (fdout != STDOUT_FILENO)
 		{
-			printf("fdout : %d\n", fdout);
+			printf("fdout in lastcmd child: %d\n", fdout);
 			duplicate(fdout, STDOUT_FILENO, "duplication of the outfile failed");
 			close(fdout);
 		}
-		if (fd_first_pipe[0] != -1) {
+		if (fd_first_pipe[0] != -1) 
+		{
 			duplicate(fd_first_pipe[0], STDIN_FILENO, "could not read from the pipe");
 			close(fd_first_pipe[0]);
 		}
