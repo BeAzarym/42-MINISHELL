@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/28 12:27:53 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:44:49 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,23 +152,5 @@ void					print_redir(t_redir_lst *lst);
 void					extract_data(t_tkn_lst *lst, t_cmd *node);
 char					**convert_env_to_exec(t_env_lst *env_lst);
 int						search_in_env(char *key, t_env_lst *env);
-
-// // execution.c
-// int		execution(t_cmd *cmd, char **envp);
-// void	execute(t_cmd *argv, char **envp);
-
-// // pipex.c
-// void	heredoc(const char *limiter);
-// void	create_process(t_cmd *cmd, char **envp);
-// int		lastcmd_process(t_cmd *cmd, char **envp, int arg_counter);
-
-// /*									[Utils]								*/
-
-// // exe_utils.c
-// void	error_exit(char *error_msg);
-// int		infile_open(char *file);
-// int		outfile_append_open(char *file);
-// int		outfile_truncate_open(char *file);
-// void	duplicate(int fd_src, int fd_dest, char *error);
 
 #endif

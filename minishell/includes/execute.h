@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/28 13:17:58 by angassin         ###   ########.fr       */
+/*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
+/*   Updated: 2023/08/28 15:49:01 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef EXECUTE_H
 # define EXECUTE_H
@@ -34,7 +33,7 @@
 
 /*									[Global]								*/
 
-bool				g_signalset;
+bool	g_signalset;
 
 /*									[Src]									*/
 
@@ -49,9 +48,9 @@ void	execute(t_cmd *argv, char **envp);
 // pipex.c
 void	heredoc(const char *limiter);
 void	create_process(t_cmd *cmd, char **envp, int fd[2]);
-int		lastcmd_process(t_cmd *cmd, char **envp, int arg_counter, int fdout, int fd_first_pipe[2]);
+int		lastcmd_process(t_cmd *cmd, nchar **envp, int arg_counter, int fdout, int fd_first_pipe[2]);
 
-/*									[Utils]								*/
+/*									[Utils]									  */
 
 // exe_utils.c
 void	error_exit(char *error_msg);
