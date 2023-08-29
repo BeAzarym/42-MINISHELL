@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/26 15:35:41 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:00:52 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	main(int argc, char **argv, char **envp)
 	t_tkn_lst	*lst;
 	t_env_lst	*env_lst;
 	t_cmd_dllst	*cmd_table;
-	char	*cmd_line;
-	int		status;
-	// t_cmd	cmd;
+	char		*cmd_line;
+	int			status;
 
+	// t_cmd	cmd;
 	// (void)argc;
 	// cmd.type_in = STDIN_OUT;
 	// cmd.type_out = STDIN_OUT;
@@ -28,31 +28,29 @@ int	main(int argc, char **argv, char **envp)
 	// cmd.outfile = "out";
 	// cmd.cmd = &argv[1];
 	// cmd.next= NULL;
-
-	// status = execution(&cmd, envp);	
+	// status = execution(&cmd, envp);
 	(void)argv;
 	(void)argc;
 	lst = NULL;
 	env_lst = init_envp(envp);
 	// print_env(env_lst);
-	cmd_table = init_cmd_dllst();
-	if (!cmd_table)
-		return (1);
 	while (true)
 	{
+		cmd_table = init_cmd_dllst();
+		if (!cmd_table)
+			return (1);
 		status = 0;
 		cmd_line = readline("[Minishell] > ");
-		lst = lexing(cmd_line);
 		if (ft_strlen(cmd_line) > 0)
 			add_history(cmd_line);
+		lst = lexing(cmd_line);
 		print_token(lst->head);
 		cmd_table = parsing(lst, cmd_table);
 		print_cmd(cmd_table);
-		// char **new_env = convert_env_to_exec(env_lst);
-		// (void)new_env;
 		// if (ft_strncmp(cmd_line, "cd", 2) == OK)
 		// 	status = cd(cmd_line + 3);
-		}
+		clear_cmd_ddlst(cmd_table);
+	}
 	clear_env_lst(env_lst->head);
 	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:45:51 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/20 15:40:18 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/29 13:47:36 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,19 @@ t_cmd_dllst	*add_cmd_dllst(t_cmd_dllst *dllst, t_cmd *cmd)
 	}
 	dllst->size++;
 	return (dllst);
+}
+
+void clear_cmd_ddlst(t_cmd_dllst *lst)
+{
+	if (!lst)
+		return ;
+	while (lst->head)
+	{
+		free(lst->head->infile);
+		free(lst->head->outfile);
+		clear_redir_lst(lst->head->redir_in);
+		clear_redir_lst(lst->head->redir_out);
+		ft_array_clear(lst->head->cmd);
+		lst->head = lst->head->next;
+	}
 }

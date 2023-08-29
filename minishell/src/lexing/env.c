@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:54:49 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/26 16:40:40 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:46:24 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,22 @@ char **convert_env_to_exec(t_env_lst *env_lst)
 	char **arr;
 	int i;
 
-	t_env_lst *cpy;
+	t_env *cpy;
 
-	cpy = env_lst;
-	arr = malloc(sizeof(char *) * cpy->size + 1);
+	cpy = env_lst->head;
+	arr = malloc(sizeof(char *) * env_lst->size + 1);
 	if (!arr)
 		return (NULL);
 	i = 0;
-	while (cpy->head)
+	while (cpy)
 	{
-		arr[i] = ft_strjoin(cpy->head->key, "=");
-		arr[i] = ft_strjoin_s1(arr[i], cpy->head->value);
+		arr[i] = ft_strjoin(cpy->key, "=");
+		arr[i] = ft_strjoin_s1(arr[i], cpy->value);
 		if (!arr[i])
 			return (NULL);
 		i++;
-		cpy->head = cpy->head->next;
+		cpy = cpy->next;
 	}
 	arr[i] = NULL;
-	ft_array_print(arr);
 	return (arr);
 }
