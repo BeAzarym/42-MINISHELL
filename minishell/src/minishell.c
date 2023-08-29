@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/28 13:22:06 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:43:09 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int argc, char **argv, char **envp)
 			status = cd(cmd_line + 3);
 		if (ft_strncmp(cmd_line, "echo", 4) == OK)
 			status = echo(cmd_line + 5);
+		free(cmd_line);
 	}
 	clear_env_lst(env_lst->head);
 	return (status);
