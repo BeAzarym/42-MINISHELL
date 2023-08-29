@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:21:55 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/29 13:46:33 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:12:31 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_redir_node	*init_redir_node(void)
 	return (new);
 }
 
-t_redir_lst *add_redir_lst(t_redir_lst *lst, t_redir_node *node)
+t_redir_lst	*add_redir_lst(t_redir_lst *lst, t_redir_node *node)
 {
 	if (!node)
 		return (NULL);
@@ -55,7 +55,7 @@ t_redir_lst *add_redir_lst(t_redir_lst *lst, t_redir_node *node)
 	return (lst);
 }
 
-void print_redir(t_redir_lst *lst)
+void	print_redir(t_redir_lst *lst)
 {
 	t_redir_node	*cpy;
 
@@ -69,13 +69,15 @@ void print_redir(t_redir_lst *lst)
 	}
 }
 
-void clear_redir_lst(t_redir_lst *lst)
+void	clear_redir_lst(t_redir_lst *lst)
 {
 	if (!lst)
-		return;
+		return ;
 	while (lst->head)
 	{
 		free(lst->head->file);
 		lst->head = lst->head->next;
 	}
+	free(lst->head);
+	free(lst);
 }

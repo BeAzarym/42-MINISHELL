@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/29 13:58:47 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:17:04 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,11 +140,9 @@ t_token					*create_token(char *word, char type, t_token *lst);
 void					print_token(t_token *lst);
 t_token					*get_lstlast(t_token *lst);
 void					add_back(t_token *src, t_token *new);
-void					clear_lst(t_token *lst);
 t_token					*init_token(char *value);
 t_tkn_lst				*init_tkn_lst(void);
-t_tkn_lst	*add_lst_tkn(char *value,
-						t_tkn_lst *lst);
+t_tkn_lst				*add_lst_tkn(char *value, t_tkn_lst *lst);
 int						jump_to_next_sep(char *s, char *sep, int i);
 int						escape_quotes(char *str, int n);
 char					define_type(char *value);
@@ -156,8 +154,8 @@ t_env_lst				*add_lst_env(char *key, char *value, t_env_lst *lst);
 t_env_lst				*init_envp(char **envp);
 char					**envp_split(char *str);
 void					print_env(t_env_lst *lst);
-void					clear_env_lst(t_env *lst);
-void					clear_tkn_lst(t_token *lst);
+void					clear_env_lst(t_env_lst *lst);
+void					clear_tkn_lst(t_tkn_lst *lst);
 t_tkn_lst				*lexing(char *str);
 t_cmd					*init_cmd_struct(void);
 t_cmd_dllst				*init_cmd_dllst(void);

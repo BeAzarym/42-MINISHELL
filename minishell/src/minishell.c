@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/29 14:00:52 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:11:23 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ int	main(int argc, char **argv, char **envp)
 		// 	status = cd(cmd_line + 3);
 		clear_cmd_ddlst(cmd_table);
 	}
-	clear_env_lst(env_lst->head);
+	clear_env_lst(env_lst);
 	return (status);
 }

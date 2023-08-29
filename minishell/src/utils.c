@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/27 16:27:11 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:15:44 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,29 +61,29 @@ void	print_cmd(t_cmd_dllst *dllst)
 	}
 }
 
-void	clear_env_lst(t_env *lst)
+void	clear_env_lst(t_env_lst *lst)
 {
-	if (!lst)
+	if (!lst->head)
 		return ;
-	while (lst)
+	while (lst->head)
 	{
-		free(lst->key);
-		free(lst->value);
-		lst = lst->next;
+		free(lst->head->key);
+		free(lst->head->value);
+		lst->head = lst->head->next;
 	}
+	free(lst->head);
 	free(lst);
 }
 
-void	clear_tkn_lst(t_token *lst)
+void	clear_tkn_lst(t_tkn_lst *lst)
 {
-	if (!lst)
+	if (!lst->head)
 		return ;
-	while (lst)
+	while (lst->head)
 	{
-		free(lst->value);
-		lst = lst->next;
+		free(lst->head->value);
+		lst->head = lst->head->next;
 	}
+	free(lst->head);
 	free(lst);
 }
-
-
