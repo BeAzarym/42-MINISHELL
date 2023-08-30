@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/30 15:09:34 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:17:37 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,15 +116,27 @@ int	lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fdout, int fd_pipe[2])
 		}
 		if (fd_pipe[0] != -1)
 		{
+			printf("fd_pipe[0] in lastcmd child: %d\n", fd_pipe[0]);
 			duplicate(fd_pipe[0], STDIN_FILENO, "could not read from the pipe");
 			close(fd_pipe[0]);
 		}
+		// if (fd_pipe[1] != -1)
+		// {
+		// 	close(fd_pipe[1]);
+		// 	printf("close fd_pipe[1] in child (lastcmd)\n");
+		// }
 		execute(cmd_lst->head, envp);
 	}
-	if (fd_pipe[0] != -1)
+	if (fd_pipe[0] != -1 && fd_pipe[0] != STDOUT_FILENO)
+	{
 		close(fd_pipe[0]);
+		printf("close fd_pipe[0] in parent (lastcmd)\n");
+	}
 	if (fdout != STDOUT_FILENO)
+	{
 		close(fdout);
+		printf("close fdout in parent\n");
+	}
 	waitpid(pid, &status, 0);
 	exit_status = WEXITSTATUS(status);
 	i = 1;
