@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/29 19:43:09 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:44:36 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_tkn_lst	*lst;
 	t_env_lst	*env_lst;
-	t_cmd_dllst	*cmd_table;
+	t_cmd_lst	*cmd_table;
 	char		*cmd_line;
 	int			status;
 
 	g_signalset = false;
 	ignore_shell_signal();
-	cmd_table = init_cmd_dllst();
+	cmd_table = init_cmd_lst();
 	(void)argv;
 	(void)argc;
 	lst = NULL;

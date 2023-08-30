@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:41:30 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/26 12:54:34 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:44:36 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_cmd_dllst	*parsing(t_tkn_lst *lst, t_cmd_dllst *cmd_table)
+t_cmd_lst	*parsing(t_tkn_lst *lst, t_cmd_lst *cmd_table)
 {
 	t_tkn_lst	*cpy;
 	t_cmd		*node;

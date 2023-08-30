@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/28 13:28:39 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:41:17 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int	execution(t_cmd *cmd, char **envp)
 {
 	int			fdin;
 	int			fdout;
-	int			fd_first_pipe[2];
+	int			fd_pipe[2];
 	t_redir_lst	*out_lst;
 
-	fd_first_pipe[0] = -1;
-	fd_first_pipe[1] = -1;
+	fd_pipe[0] = -1;
+	fd_pipe[1] = -1;
 	if (cmd->type_in == HEREDOC)
 		heredoc(cmd->cmd[0]);
 	else if (cmd->type_in == INFILE)
@@ -54,10 +54,10 @@ int	execution(t_cmd *cmd, char **envp)
 	}
 	while (cmd->next != NULL)
 	{
-		create_process(cmd, envp, fd_first_pipe);
+		create_process(cmd, envp, fd_pipe);
 		cmd = cmd->next;
 	}
-	return (lastcmd_process(cmd, envp, 2, fdout, fd_first_pipe));
+	return (lastcmd_process(cmd, envp, 2, fdout, fd_pipe));
 }
 
 /*

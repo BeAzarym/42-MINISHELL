@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:20:02 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/28 11:40:42 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:44:36 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 	Otherwise, loops over all the infiles to check that they exist,
 	if all valids, save the last one in memory
 */
-void	get_input_output(t_cmd_dllst *cmd_table)
+void	get_input_output(t_cmd_lst *cmd_table)
 {
 	t_redir_lst	*in;
 	// t_redir_lst	*out;

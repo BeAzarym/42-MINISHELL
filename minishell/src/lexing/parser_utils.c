@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:45:51 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/21 13:09:33 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:44:36 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ t_cmd	*init_cmd_struct(void)
 	return (new);
 }
 
-t_cmd_dllst	*init_cmd_dllst(void)
+t_cmd_lst	*init_cmd_lst(void)
 {
-	t_cmd_dllst	*dllst;
+	t_cmd_lst	*dllst;
 
-	dllst = malloc(sizeof(t_cmd_dllst));
+	dllst = malloc(sizeof(t_cmd_lst));
 	if (!dllst)
 		return (NULL);
 	dllst->head = NULL;
@@ -45,7 +45,7 @@ t_cmd_dllst	*init_cmd_dllst(void)
 	return (dllst);
 }
 
-t_cmd_dllst	*add_cmd_dllst(t_cmd_dllst *dllst, t_cmd *cmd)
+t_cmd_lst	*add_cmd_dllst(t_cmd_lst *dllst, t_cmd *cmd)
 {
 	if (!cmd)
 		return (NULL);

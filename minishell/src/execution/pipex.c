@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/29 19:29:37 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:41:17 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	create_process(t_cmd *cmd, char **envp, int fd[2])
 	the child processes to end in the parent.
 	Returns the exit status of the last command.
 */
-int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter, int fdout, int fd_first_pipe[2])
+int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter, int fdout, int fd_pipe[2])
 {
 	printf("lastcmd : %s\n", cmd->cmd[0]);
 	int	pid;
@@ -112,15 +112,15 @@ int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter, int fdout, int fd_
 			duplicate(fdout, STDOUT_FILENO, "duplication of the outfile failed");
 			close(fdout);
 		}
-		if (fd_first_pipe[0] != -1) 
+		if (fd_pipe[0] != -1) 
 		{
-			duplicate(fd_first_pipe[0], STDIN_FILENO, "could not read from the pipe");
-			close(fd_first_pipe[0]);
+			duplicate(fd_pipe[0], STDIN_FILENO, "could not read from the pipe");
+			close(fd_pipe[0]);
 		}
 		execute(cmd, envp);
 	}
-	if (fd_first_pipe[0] != -1)
-		close(fd_first_pipe[0]);
+	if (fd_pipe[0] != -1)
+		close(fd_pipe[0]);
 	if (fdout != STDOUT_FILENO)
 		close(fdout);
 	waitpid(pid, &status, 0);
