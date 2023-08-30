@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/30 13:46:15 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:50:28 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,6 @@ typedef struct s_env
 	struct s_env		*next;
 }						t_env;
 
-typedef struct s_cmd_lst
-{
-	struct s_cmd		*head;
-	struct s_cmd		*tail;
-	int					size;
-}						t_cmd_lst;
-
 typedef struct s_redir_node
 {
 	char				type;
@@ -86,6 +79,13 @@ typedef struct s_redir_lst
 	struct s_redir_node	*tail;
 	int					size;
 }						t_redir_lst;
+
+typedef struct s_cmd_lst
+{
+	struct s_cmd		*head;
+	struct s_cmd		*tail;
+	int					size;
+}						t_cmd_lst;
 
 typedef struct s_cmd
 {
@@ -122,8 +122,7 @@ void					add_back(t_token *src, t_token *new);
 void					clear_lst(t_token *lst);
 t_token					*init_token(char *value);
 t_tkn_lst				*init_tkn_lst(void);
-t_tkn_lst	*add_lst_tkn(char *value,
-						t_tkn_lst *lst);
+t_tkn_lst				*add_lst_tkn(char *value, t_tkn_lst *lst);
 int						jump_to_next_sep(char *s, char *sep, int i);
 int						escape_quotes(char *str, int n);
 char					define_type(char *value);

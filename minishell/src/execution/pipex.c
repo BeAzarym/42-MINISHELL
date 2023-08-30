@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/30 13:41:17 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:09:34 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,14 @@ void	create_process(t_cmd *cmd, char **envp, int fd[2])
 	the child processes to end in the parent.
 	Returns the exit status of the last command.
 */
-int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter, int fdout, int fd_pipe[2])
+int	lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fdout, int fd_pipe[2])
 {
-	printf("lastcmd : %s\n", cmd->cmd[0]);
 	int	pid;
 	int	status;
 	int	exit_status;
+	int	i;
 
+	printf("lastcmd : %s\n", cmd_lst->head->cmd[0]);
 	pid = fork();
 	if (pid == -1)
 		error_exit("could not create lastcmd process");
@@ -109,29 +110,29 @@ int	lastcmd_process(t_cmd *cmd, char **envp, int arg_counter, int fdout, int fd_
 		if (fdout != STDOUT_FILENO)
 		{
 			printf("fdout in lastcmd child: %d\n", fdout);
-			duplicate(fdout, STDOUT_FILENO, "duplication of the outfile failed");
+			duplicate(fdout, STDOUT_FILENO,
+				"duplication of the outfile failed");
 			close(fdout);
 		}
-		if (fd_pipe[0] != -1) 
+		if (fd_pipe[0] != -1)
 		{
 			duplicate(fd_pipe[0], STDIN_FILENO, "could not read from the pipe");
 			close(fd_pipe[0]);
 		}
-		execute(cmd, envp);
+		execute(cmd_lst->head, envp);
 	}
 	if (fd_pipe[0] != -1)
 		close(fd_pipe[0]);
 	if (fdout != STDOUT_FILENO)
 		close(fdout);
 	waitpid(pid, &status, 0);
-	arg_counter++;
-	(void)arg_counter;
 	exit_status = WEXITSTATUS(status);
-	// while (arg_counter <= argc - 2)
-	// {
+	i = 1;
+	while (i <= cmd_lst->size)
+	{
 		waitpid(-1, &status, 0);
-	// 	arg_counter++;
-	// }
+		++i;
+	}
 	return (exit_status);
 }
 

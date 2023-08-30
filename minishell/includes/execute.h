@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/30 13:44:36 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:35:35 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void	ignore_shell_signal(void);
 void	set_sigint_in_child(int signal);
 
 // execution.c
-int		execution(t_cmd *cmd, char **envp);
+int		execution(t_cmd_lst *cmd_lst, char **envp);
 void	execute(t_cmd *argv, char **envp);
 
 // pipex.c
 void	heredoc(const char *limiter);
 void	create_process(t_cmd *cmd, char **envp, int fd[2]);
-int		lastcmd_process(t_cmd *cmd, char **envp, int arg_counter, int fdout, int fd_pipe[2]);
+int		lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fdout, int fd_pipe[2]);
 
 /*									[Utils]									  */
 

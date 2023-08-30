@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/30 13:41:17 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:12:55 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*command_access(char *cmd, char **paths);
 	Redirects the input and output file descriptors if necessary and execute
 	the commands in processes
 */
-int	execution(t_cmd *cmd, char **envp)
+int	execution(t_cmd_lst *cmd_lst, char **envp)
 {
 	int			fdin;
 	int			fdout;
@@ -28,20 +28,20 @@ int	execution(t_cmd *cmd, char **envp)
 
 	fd_pipe[0] = -1;
 	fd_pipe[1] = -1;
-	if (cmd->type_in == HEREDOC)
-		heredoc(cmd->cmd[0]);
-	else if (cmd->type_in == INFILE)
+	if (cmd_lst->head->type_in == HEREDOC)
+		heredoc(cmd_lst->head->cmd[0]);
+	else if (cmd_lst->head->type_in == INFILE)
 	{
-		fdin = infile_open(cmd->infile);
+		fdin = infile_open(cmd_lst->head->infile);
 		duplicate(fdin, STDIN_FILENO, "duplication of the infile failed");
 	}
-	printf("ONE MORE PRINT: %d\n", cmd->type_out);
-	if (cmd->type_out == STDIN_OUT)
+	printf("ONE MORE PRINT: %d\n", cmd_lst->head->type_out);
+	if (cmd_lst->head->type_out == STDIN_OUT)
 		fdout = STDOUT_FILENO;
 	else
 	{
 
-		out_lst = cmd->redir_out;
+		out_lst = cmd_lst->head->redir_out;
 		while (out_lst->head != NULL)
 		{
 			if (out_lst->head->type == TRUNCATE)
@@ -50,14 +50,14 @@ int	execution(t_cmd *cmd, char **envp)
 				fdout = outfile_append_open(out_lst->head->file);
 			out_lst->head = out_lst->head->next;
 		}
-		printf("fdout in execution : %d\n", fdout);	
+		printf("fdout in execution : %d\n", fdout);
 	}
-	while (cmd->next != NULL)
+	while (cmd_lst->head->next != NULL)
 	{
-		create_process(cmd, envp, fd_pipe);
-		cmd = cmd->next;
+		create_process(cmd_lst->head, envp, fd_pipe);
+		cmd_lst->head = cmd_lst->head->next;
 	}
-	return (lastcmd_process(cmd, envp, 2, fdout, fd_pipe));
+	return (lastcmd_process(cmd_lst, envp, fdout, fd_pipe));
 }
 
 /*
@@ -77,7 +77,7 @@ void	execute(t_cmd *cmd, char **envp)
 	// cmd = ft_split(argv->cmd, ' ');
 	// if (cmd == NULL)
 	// 	error_exit("parsing of the command failed");
-	ft_putstr_fd("in execute\n", 2);
+	// ft_putstr_fd("in execute\n", 2);
 	sa.sa_handler = &set_sigint_in_child;
 	if (sigaction(SIGINT, &sa, NULL) == -1
 		|| sigaction(SIGQUIT, &sa, NULL) == -1)
