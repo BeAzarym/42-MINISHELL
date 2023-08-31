@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/31 16:06:51 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:45:02 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 
 	if (pipe(fd_pipes[1]) == CLOSED)
 		error_exit("could not create pipe");
-	printf("previous: [%d; %d], next: [%d; %d]\n", fd_pipes[0][0], fd_pipes[0][1], fd_pipes[1][0], fd_pipes[1][1]);
+	printf("previous: [%d; %d], next: [%d; %d]\n",
+		fd_pipes[0][0], fd_pipes[0][1], fd_pipes[1][0], fd_pipes[1][1]);
 	pid = fork();
 	if (pid == -1)
 		error_exit("could not create process");
@@ -81,7 +82,8 @@ void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 		if (fd_pipes[0][0] != CLOSED)
 		{
 			close(fd_pipes[0][1]);
-			duplicate(fd_pipes[0][0], STDIN_FILENO, "could not read from the pipe");
+			duplicate(fd_pipes[0][0], STDIN_FILENO,
+				"could not read from the pipe");
 			close(fd_pipes[0][0]);
 		}
 		close(fd_pipes[1][0]);
@@ -93,14 +95,8 @@ void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 		execute(cmd, envp);
 	}
 	if (fd_pipes[0][0] != CLOSED)
-	{
 		close(fd_pipes[0][0]);
-		// 	fd_previous[0] = -1;
-		fd_pipes[0][0] = -1;
-	}
 	close(fd_pipes[1][1]);
-	// fd_next[1] = -1;
-	fd_pipes[1][1] = -1;
 	ft_putstr_fd("in parent (create process)\n", 2);
 }
 
@@ -130,7 +126,7 @@ int	lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fdout, int fd_pipe[2])
 				"duplication of the outfile failed");
 			close(fdout);
 		}
-		if (fd_pipe[0] != -1)
+		if (fd_pipe[0] != CLOSED)
 		{
 			// printf("fd_pipe[0] in lastcmd child: %d\n", fd_pipe[0]);
 			duplicate(fd_pipe[0], STDIN_FILENO, "could not read from the pipe");

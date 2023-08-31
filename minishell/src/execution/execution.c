@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/31 15:59:49 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:42:15 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,9 @@ int	execution(t_cmd_lst *cmd_lst, char **envp)
 		printf("current cmd: %s\n", cmd_lst->head->cmd[0]);
 		create_process(cmd_lst->head, envp, fd_pipes);
 		cmd_lst->head = cmd_lst->head->next;
-		// fd_pipe_previous[0] = fd_pipe_next[0];
 		fd_pipes[0][0] = fd_pipes[1][0];
-		// fd_pipe_previous[1] = fd_pipe_next[1];
  		fd_pipes[0][1] = fd_pipes[1][1];
- 		// fd_pipe_next[0] = -1;
 		fd_pipes[1][0] = -1;
-		// fd_pipe_next[1] = -1;
 		fd_pipes[1][1] = -1;
 	}
 	return (lastcmd_process(cmd_lst, envp, fdout, fd_pipes[0]));

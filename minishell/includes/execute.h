@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/31 15:06:30 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:38:35 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 /*									[Macros]								*/
 # define CHILD 0
 # define CLOSED -1
+
 /*									[Global]								*/
 
 bool	g_signalset;
