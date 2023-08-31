@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/31 16:42:15 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:55:20 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,48 +24,49 @@ int	execution(t_cmd_lst *cmd_lst, char **envp)
 	int			fdin;
 	int			fdout;
 	int			fd_pipes[2][2];
-	// int			fd_pipe_next[2];
 	t_redir_lst	*out_lst;
 
 	fd_pipes[0][0] = -1;
 	fd_pipes[0][1] = -1;
 	fd_pipes[1][0] = -1;
 	fd_pipes[1][1] = -1;
-	if (cmd_lst->head->type_in == HEREDOC)
-		heredoc(cmd_lst->head->cmd[0]);
-	else if (cmd_lst->head->type_in == INFILE)
-	{
-		fdin = infile_open(cmd_lst->head->infile);
-		// duplicate(fdin, STDIN_FILENO, "duplication of the infile failed");
-	}
+	fdin = 0;
 	printf("ONE MORE PRINT: %d\n", cmd_lst->head->type_out);
-	if (cmd_lst->head->type_out == STDIN_OUT) //this in loop
-		fdout = STDOUT_FILENO;
-	else
-	{
 
-		out_lst = cmd_lst->head->redir_out;
-		while (out_lst->head != NULL)
-		{
-			if (out_lst->head->type == TRUNCATE)
-				fdout = outfile_truncate_open(out_lst->head->file);
-			else if (out_lst->head->type == APPEND)
-				fdout = outfile_append_open(out_lst->head->file);
-			out_lst->head = out_lst->head->next;
-		}
-		printf("fdout in execution : %d\n", fdout);
-	}
 	while (cmd_lst->head->next != NULL)
 	{
+		if (cmd_lst->head->type_in == HEREDOC)
+			heredoc(cmd_lst->head->cmd[0]);
+		else if (cmd_lst->head->type_in == INFILE)
+		{
+			fdin = infile_open(cmd_lst->head->infile);
+			// duplicate(fdin, STDIN_FILENO, "duplication of the infile failed");
+		}
+		if (cmd_lst->head->type_out == STDIN_OUT) //this in loop
+			fdout = STDOUT_FILENO;
+		else
+		{
+
+			out_lst = cmd_lst->head->redir_out;
+			while (out_lst->head != NULL)
+			{
+				if (out_lst->head->type == TRUNCATE)
+					fdout = outfile_truncate_open(out_lst->head->file);
+				else if (out_lst->head->type == APPEND)
+					fdout = outfile_append_open(out_lst->head->file);
+				out_lst->head = out_lst->head->next;
+			}
+			printf("fdout in execution : %d\n", fdout);
+		}
 		printf("current cmd: %s\n", cmd_lst->head->cmd[0]);
-		create_process(cmd_lst->head, envp, fd_pipes);
+		create_process(cmd_lst->head, envp, fd_pipes, fdin);
 		cmd_lst->head = cmd_lst->head->next;
 		fd_pipes[0][0] = fd_pipes[1][0];
- 		fd_pipes[0][1] = fd_pipes[1][1];
+		fd_pipes[0][1] = fd_pipes[1][1];
 		fd_pipes[1][0] = -1;
 		fd_pipes[1][1] = -1;
 	}
-	return (lastcmd_process(cmd_lst, envp, fdout, fd_pipes[0]));
+	return (lastcmd_process(cmd_lst, envp, fdout, fd_pipes[0], fdin));
 }
 
 /*

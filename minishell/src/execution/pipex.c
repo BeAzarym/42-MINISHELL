@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/31 16:45:02 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:53:38 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	read_stdin(const char *limiter, int fd)
 	The child process has it's own copy of the parent's file's decriptors.
 	printf("here\n");
 */
-void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2])
+void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2], int fdin)
 {
 	int	pid;
 
@@ -79,6 +79,14 @@ void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 		error_exit("could not create process");
 	if (pid == CHILD)
 	{
+		if (fdin)
+		{
+			close(fd_pipes[0][0]);
+			close(fd_pipes[0][1]);
+			duplicate(fdin, STDIN_FILENO,
+				"could not read from infile");
+			close(fdin);
+		}
 		if (fd_pipes[0][0] != CLOSED)
 		{
 			close(fd_pipes[0][1]);
@@ -94,6 +102,8 @@ void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 		ft_putstr_fd("\n", 2);
 		execute(cmd, envp);
 	}
+	if (fdin)
+		close(fdin);
 	if (fd_pipes[0][0] != CLOSED)
 		close(fd_pipes[0][0]);
 	close(fd_pipes[1][1]);
@@ -105,7 +115,7 @@ void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 	the child processes to end in the parent.
 	Returns the exit status of the last command.
 */
-int	lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fdout, int fd_pipe[2])
+int	lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fdout, int fd_pipe[2], int fdin)
 {
 	int	pid;
 	int	status;
@@ -126,7 +136,15 @@ int	lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fdout, int fd_pipe[2])
 				"duplication of the outfile failed");
 			close(fdout);
 		}
-		if (fd_pipe[0] != CLOSED)
+		if (fdin)
+		{
+			if (fd_pipe[0] != CLOSED)
+				close(fd_pipe[0]);
+			duplicate(fdin, STDIN_FILENO,
+				"could not read from infile");
+			close(fdin);
+		}
+		else if (fd_pipe[0] != CLOSED)
 		{
 			// printf("fd_pipe[0] in lastcmd child: %d\n", fd_pipe[0]);
 			duplicate(fd_pipe[0], STDIN_FILENO, "could not read from the pipe");
