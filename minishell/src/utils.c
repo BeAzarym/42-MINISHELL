@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/31 16:38:22 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:51:49 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ void	print_env(t_env_lst *lst)
 	}
 }
 
-void	print_cmd(t_cmd_dllst *dllst)
+void	print_cmd(t_cmd_lst *lst)
 {
 	t_cmd *cpy;
 	
-	if (!dllst)
+	if (!lst)
 		return ;
-	cpy = dllst->head;
+	cpy = lst->head;
 	printf("[CMD TABLE]\n");
 	while(cpy)
 	{

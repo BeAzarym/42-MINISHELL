@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:41:30 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/31 16:40:23 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:51:49 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_cmd_dllst	*parsing(t_tkn_lst *lst, t_cmd_dllst *cmd_table)
+t_cmd_lst	*parsing(t_tkn_lst *lst, t_cmd_lst *cmd_table)
 {
 	t_token	*cpy;
 	t_cmd		*node;
@@ -22,7 +22,7 @@ t_cmd_dllst	*parsing(t_tkn_lst *lst, t_cmd_dllst *cmd_table)
 	{
 		node = init_cmd_struct();
 		cpy = exctrat_data(cpy, node);
-		cmd_table = add_cmd_dllst(cmd_table, node);
+		cmd_table = add_cmd_lst(cmd_table, node);
 		if (cpy)
 			cpy = cpy->next;
 	}

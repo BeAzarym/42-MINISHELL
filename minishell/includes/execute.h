@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/28 13:17:58 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:51:49 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		lastcmd_process(t_cmd *cmd, char **envp, int arg_counter, int fdout, int fd
 void	error_exit(char *error_msg);
 void	duplicate(int fd_src, int fd_dest, char *error);
 // files_utils.c
-void	get_input_output(t_cmd_dllst *cmd_table);
+void	get_input_output(t_cmd_lst *cmd_table);
 int		infile_open(char *file);
 int		outfile_append_open(char *file);
 int		outfile_truncate_open(char *file);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/31 16:38:16 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:52:00 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_tkn_lst	*lst;
 	t_env_lst	*env_lst;
-	t_cmd_dllst	*cmd_table;
+	t_cmd_lst	*cmd_table;
 	char		*cmd_line;
 	int			status;
 
 	g_signalset = false;
 	ignore_shell_signal();
-	cmd_table = init_cmd_dllst();
+	cmd_table = init_cmd_lst();
 	(void)argv;
 	(void)argc;
 	lst = NULL;
 	env_lst = init_envp(envp);
 	while (true)
 	{
-		cmd_table = init_cmd_dllst();
+		cmd_table = init_cmd_lst();
 		if (!cmd_table)
 			return (1);
 		status = 0;
@@ -52,6 +52,8 @@ int	main(int argc, char **argv, char **envp)
 			status = cd(cmd_line + 3);
 		if (ft_strncmp(cmd_line, "echo", 4) == OK)
 			status = echo(cmd_line + 5);
+		free(cmd_line);
+		clear_cmd_lst(cmd_table);
 	}
 	clear_env_lst(env_lst);
 	return (status);

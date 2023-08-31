@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:45:51 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/31 16:39:38 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:52:00 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,38 +32,38 @@ t_cmd	*init_cmd_struct(void)
 	return (new);
 }
 
-t_cmd_dllst	*init_cmd_dllst(void)
+t_cmd_lst	*init_cmd_lst(void)
 {
-	t_cmd_dllst	*dllst;
+	t_cmd_lst	*lst;
 
-	dllst = malloc(sizeof(t_cmd_dllst));
-	if (!dllst)
+	lst = malloc(sizeof(t_cmd_lst));
+	if (!lst)
 		return (NULL);
-	dllst->head = NULL;
-	dllst->tail = NULL;
-	dllst->size = 0;
-	return (dllst);
+	lst->head = NULL;
+	lst->tail = NULL;
+	lst->size = 0;
+	return (lst);
 }
 
-t_cmd_dllst	*add_cmd_dllst(t_cmd_dllst *dllst, t_cmd *cmd)
+t_cmd_lst	*add_cmd_lst(t_cmd_lst *lst, t_cmd *cmd)
 {
 	if (!cmd)
 		return (NULL);
-	if (!dllst->head)
+	if (!lst->head)
 	{
-		dllst->head = cmd;
-		dllst->tail = cmd;
+		lst->head = cmd;
+		lst->tail = cmd;
 	}
 	else
 	{
-		dllst->tail->next = cmd;
-		dllst->tail = cmd;
+		lst->tail->next = cmd;
+		lst->tail = cmd;
 	}
-	dllst->size++;
-	return (dllst);
+	lst->size++;
+	return (lst);
 }
 
-void clear_cmd_ddlst(t_cmd_dllst *lst)
+void clear_cmd_lst(t_cmd_lst *lst)
 {
 	if (!lst)
 		return ;
