@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:14:31 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/21 13:10:45 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:43:11 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,4 @@ t_tkn_lst *add_lst_tkn(char *value, t_tkn_lst *stack)
 	}
 	stack->size++;
 	return (stack);
-}
-
-void	clear_lst(t_token *lst)
-{
-	if (!lst)
-		return;
-	while (lst)
-	{
-		free(lst->value);
-		lst = lst->next;
-	}
-	free(lst);
 }

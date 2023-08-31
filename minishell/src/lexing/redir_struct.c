@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:21:55 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/25 16:03:37 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:40:38 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,27 @@ t_redir_lst	*add_redir_lst(t_redir_lst *lst, t_redir_node *node)
 
 void	print_redir(t_redir_lst *lst)
 {
-	t_redir_lst	*cpy;
+	t_redir_node	*cpy;
 
 	if (!lst)
 		return ;
-	cpy = lst;
-	printf("[REDIR]\n");
-	while (cpy->head)
+	cpy = lst->head;
+	while (cpy)
 	{
-		printf(">> [TYPE] : %c	>> [FILE] : %s\n", cpy->head->type, cpy->head->file);
-		cpy->head = cpy->head->next;
+		printf(">> [TYPE] : %c	>> [FILE] : %s\n", cpy->type, cpy->file);
+		cpy = cpy->next;
 	}
+}
+
+void	clear_redir_lst(t_redir_lst *lst)
+{
+	if (!lst)
+		return ;
+	while (lst->head)
+	{
+		free(lst->head->file);
+		lst->head = lst->head->next;
+	}
+	free(lst->head);
+	free(lst);
 }

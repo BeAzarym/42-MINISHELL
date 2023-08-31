@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:14:14 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/16 16:55:51 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:39:29 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ t_tkn_lst	*lexing(char *str)
 	if (!lst)
 		return (NULL);
 	ft_array_clear(array);
-	clear_tkn_lst(stack->head);
+	clear_tkn_lst(stack);
 	return (lst);
 }

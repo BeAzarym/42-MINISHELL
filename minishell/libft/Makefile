@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 17:09:20 by angassin          #+#    #+#              #
-#    Updated: 2023/08/21 13:11:09 by angassin         ###   ########.fr        #
+#    Updated: 2023/08/31 16:43:48 by cchabeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ CC			=	cc
 
 RM			=	rm -f
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g3
 
 #--------------------------------SOURCES----------------------------------------
 
