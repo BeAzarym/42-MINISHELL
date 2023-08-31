@@ -5,13 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-<<<<<<< HEAD
 /*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/31 16:38:35 by angassin         ###   ########.fr       */
-=======
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/31 16:51:49 by angassin         ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2023/08/31 17:00:44 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +62,5 @@ void	get_input_output(t_cmd_lst *cmd_table);
 int		infile_open(char *file);
 int		outfile_append_open(char *file);
 int		outfile_truncate_open(char *file);
-
 
 #endif
