@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/08/26 14:07:37 by angassin         ###   ########.fr        #
+#    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
+#    Updated: 2023/08/31 16:36:36 by cchabeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

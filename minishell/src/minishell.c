@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/30 15:03:10 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:59:49 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ int	main(int argc, char **argv, char **envp)
 	env_lst = init_envp(envp);
 	while (true)
 	{
+		cmd_table = init_cmd_lst();
+		if (!cmd_table)
+			return (1);
 		status = 0;
 		cmd_line = readline("[Minishell] > ");
 		// printf("cmd line is: %s\n", cmd_line);
@@ -50,7 +53,8 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strncmp(cmd_line, "echo", 4) == OK)
 			status = echo(cmd_line + 5);
 		free(cmd_line);
+		clear_cmd_lst(cmd_table);
 	}
-	clear_env_lst(env_lst->head);
+	clear_env_lst(env_lst);
 	return (status);
 }
