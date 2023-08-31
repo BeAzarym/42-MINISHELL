@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/30 13:44:36 by angassin         ###   ########.fr       */
-=======
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/31 16:51:49 by angassin         ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2023/08/31 17:10:21 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +39,7 @@ void	print_env(t_env_lst *lst)
 	}
 }
 
-<<<<<<< HEAD
-void	print_cmd(t_cmd_lst *dllst)
-=======
 void	print_cmd(t_cmd_lst *lst)
->>>>>>> master
 {
 	t_cmd *cpy;
 	
