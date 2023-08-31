@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:20:02 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/31 17:11:47 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 17:20:41 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,6 @@ void	get_input_output(t_cmd_lst *cmd_table)
 	}
 	if (cmd_table->head->redir_out->head == NULL)
 		cmd_table->head->type_out = STDIN_OUT;
-	// else
-	// {
-	// 	out = cmd_table->head->redir_out;
-	// 	while (out->head != NULL)
-	// 	{
-	// 		if (access(out->head->file, W_OK) != OK)
-	// 			error_exit("");
-	// 		out->head = out->head->next;
-	// 	}
-	// }
-	
-	
 }
 
 int	infile_open(char *file)
