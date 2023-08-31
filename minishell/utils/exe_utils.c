@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:19:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/26 13:21:28 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 17:13:15 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ void	error_exit(char *error_msg)
 
 void	duplicate(int fd_src, int fd_dest, char *error)
 {
-	// (void)fd_dest;
-	// if (fd_src == STDOUT_FILENO)
-	// 	return ;
 	if (dup2(fd_src, fd_dest) == -1)
 	{
 		close(fd_src);

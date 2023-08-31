@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/31 17:10:21 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 17:13:33 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	print_env(t_env_lst *lst)
 
 void	print_cmd(t_cmd_lst *lst)
 {
-	t_cmd *cpy;
-	
+	t_cmd	*cpy;
+
 	if (!lst)
 		return ;
 	cpy = lst->head;

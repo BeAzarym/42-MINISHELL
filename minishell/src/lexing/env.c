@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:54:49 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/31 16:39:26 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/08/31 17:14:45 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 t_env_lst	*init_envp(char **envp)
 {
-	int i;
-	t_env_lst *lst;
-	char **tmp;
+	int			i;
+	t_env_lst	*lst;
+	char		**tmp;
 
 	lst = init_env_lst();
 	if (!lst)
 		return (NULL);
 	i = 0;
-	
+
 	while (envp[i])
 	{
 		tmp = envp_split(envp[i]);
@@ -33,12 +33,11 @@ t_env_lst	*init_envp(char **envp)
 	return (lst);
 }
 
-char **convert_env_to_exec(t_env_lst *env_lst)
+char	**convert_env_to_exec(t_env_lst *env_lst)
 {
-	char **arr;
-	int i;
-
-	t_env *cpy;
+	char	**arr;
+	int		i;
+	t_env	*cpy;
 
 	cpy = env_lst->head;
 	arr = malloc(sizeof(char *) * env_lst->size + 1);
