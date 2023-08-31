@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:45:51 by cchabeau          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/08/30 13:44:36 by angassin         ###   ########.fr       */
-=======
-/*   Updated: 2023/08/31 16:52:00 by angassin         ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2023/08/31 17:09:22 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +34,10 @@ t_cmd	*init_cmd_struct(void)
 
 t_cmd_lst	*init_cmd_lst(void)
 {
-<<<<<<< HEAD
-	t_cmd_lst	*dllst;
-
-	dllst = malloc(sizeof(t_cmd_lst));
-	if (!dllst)
-=======
 	t_cmd_lst	*lst;
 
 	lst = malloc(sizeof(t_cmd_lst));
 	if (!lst)
->>>>>>> master
 		return (NULL);
 	lst->head = NULL;
 	lst->tail = NULL;
@@ -56,11 +45,7 @@ t_cmd_lst	*init_cmd_lst(void)
 	return (lst);
 }
 
-<<<<<<< HEAD
-t_cmd_lst	*add_cmd_dllst(t_cmd_lst *dllst, t_cmd *cmd)
-=======
 t_cmd_lst	*add_cmd_lst(t_cmd_lst *lst, t_cmd *cmd)
->>>>>>> master
 {
 	if (!cmd)
 		return (NULL);
