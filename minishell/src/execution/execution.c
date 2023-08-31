@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/30 15:12:55 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:23:20 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,23 @@ int	execution(t_cmd_lst *cmd_lst, char **envp)
 {
 	int			fdin;
 	int			fdout;
-	int			fd_pipe[2];
+	int			fd_pipe_previous[2];
+	int			fd_pipe_next[2];
 	t_redir_lst	*out_lst;
 
-	fd_pipe[0] = -1;
-	fd_pipe[1] = -1;
+	fd_pipe_previous[0] = -1;
+	fd_pipe_previous[1] = -1;
+	fd_pipe_next[0] = -1;
+	fd_pipe_next[1] = -1;
 	if (cmd_lst->head->type_in == HEREDOC)
 		heredoc(cmd_lst->head->cmd[0]);
 	else if (cmd_lst->head->type_in == INFILE)
 	{
 		fdin = infile_open(cmd_lst->head->infile);
-		duplicate(fdin, STDIN_FILENO, "duplication of the infile failed");
+		// duplicate(fdin, STDIN_FILENO, "duplication of the infile failed");
 	}
 	printf("ONE MORE PRINT: %d\n", cmd_lst->head->type_out);
-	if (cmd_lst->head->type_out == STDIN_OUT)
+	if (cmd_lst->head->type_out == STDIN_OUT) //this in loop
 		fdout = STDOUT_FILENO;
 	else
 	{
@@ -54,10 +57,15 @@ int	execution(t_cmd_lst *cmd_lst, char **envp)
 	}
 	while (cmd_lst->head->next != NULL)
 	{
-		create_process(cmd_lst->head, envp, fd_pipe);
+		printf("current cmd: %s\n", cmd_lst->head->cmd[0]);
+		create_process(cmd_lst->head, envp, fd_pipe_previous, fd_pipe_next);
 		cmd_lst->head = cmd_lst->head->next;
+		fd_pipe_previous[0] = fd_pipe_next[0];
+		fd_pipe_previous[1] = fd_pipe_next[1];
+		fd_pipe_next[0] = -1;
+		fd_pipe_next[1] = -1;
 	}
-	return (lastcmd_process(cmd_lst, envp, fdout, fd_pipe));
+	return (lastcmd_process(cmd_lst, envp, fdout, fd_pipe_previous));
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/30 19:17:37 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:37:37 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,26 +66,37 @@ static void	read_stdin(const char *limiter, int fd)
 	The child process has it's own copy of the parent's file's decriptors.
 	printf("here\n");
 */
-void	create_process(t_cmd *cmd, char **envp, int fd[2])
+void	create_process(t_cmd *cmd, char **envp, int fd_previous[2], int fd_next[2])
 {
 	int	pid;
 
-	if (pipe(fd) == -1)
+	if (pipe(fd_next) == -1)
 		error_exit("could not create pipe");
+	printf("previous: [%d; %d], next: [%d; %d]\n", fd_previous[0], fd_previous[1], fd_next[0], fd_next[1]);
 	pid = fork();
 	if (pid == -1)
 		error_exit("could not create process");
 	if (pid == CHILD)
 	{
-		close(fd[0]);
-		duplicate(fd[1], STDOUT_FILENO, "could not write to the pipe");
-		close(fd[1]);
+		if (fd_previous[0] != -1) {
+			close(fd_previous[1]);
+			duplicate(fd_previous[0], STDIN_FILENO, "could not read from the pipe");
+			close(fd_previous[0]);
+		}
+		close(fd_next[0]);
+		duplicate(fd_next[1], STDOUT_FILENO, "could not write to the pipe");
+		close(fd_next[1]);
 		// ft_putstr_fd("in pipe, command : ", 2);
 		// ft_putstr_fd(cmd->cmd[0], 2);
 		// ft_putstr_fd("\n", 2);
 		execute(cmd, envp);
 	}
-	close(fd[1]);
+	if (fd_previous[0] != -1) {
+		close(fd_previous[0]);
+		fd_previous[0] = -1;
+	}
+	close(fd_next[1]);
+	fd_next[1] = -1;
 	ft_putstr_fd("in parent (create process)\n", 2);
 }
 
@@ -102,6 +113,7 @@ int	lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fdout, int fd_pipe[2])
 	int	i;
 
 	printf("lastcmd : %s\n", cmd_lst->head->cmd[0]);
+	printf("previous: [%d; %d]\n", fd_pipe[0], fd_pipe[1]);
 	pid = fork();
 	if (pid == -1)
 		error_exit("could not create lastcmd process");
@@ -127,7 +139,7 @@ int	lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fdout, int fd_pipe[2])
 		// }
 		execute(cmd_lst->head, envp);
 	}
-	if (fd_pipe[0] != -1 && fd_pipe[0] != STDOUT_FILENO)
+	if (fd_pipe[0] != -1) // && fd_pipe[0] != STDOUT_FILENO
 	{
 		close(fd_pipe[0]);
 		printf("close fd_pipe[0] in parent (lastcmd)\n");
@@ -140,7 +152,7 @@ int	lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fdout, int fd_pipe[2])
 	waitpid(pid, &status, 0);
 	exit_status = WEXITSTATUS(status);
 	i = 1;
-	while (i <= cmd_lst->size)
+	while (i < cmd_lst->size)
 	{
 		waitpid(-1, &status, 0);
 		++i;
