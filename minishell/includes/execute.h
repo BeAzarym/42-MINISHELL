@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/31 13:26:24 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:06:30 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 /*									[Macros]								*/
 # define CHILD 0
-
+# define CLOSED -1
 /*									[Global]								*/
 
 bool	g_signalset;
@@ -47,8 +47,9 @@ void	execute(t_cmd *argv, char **envp);
 
 // pipex.c
 void	heredoc(const char *limiter);
-void	create_process(t_cmd *cmd, char **envp, int fd_previous[2], int fd_next[2]);
-int		lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fdout, int fd_pipe[2]);
+void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2]);
+int		lastcmd_process(t_cmd_lst *cmd_lst,
+			char **envp, int fdout, int fd_pipe[2]);
 
 /*									[Utils]									  */
 

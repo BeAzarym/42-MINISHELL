@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/31 13:37:37 by angassin         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:06:51 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,37 +66,41 @@ static void	read_stdin(const char *limiter, int fd)
 	The child process has it's own copy of the parent's file's decriptors.
 	printf("here\n");
 */
-void	create_process(t_cmd *cmd, char **envp, int fd_previous[2], int fd_next[2])
+void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 {
 	int	pid;
 
-	if (pipe(fd_next) == -1)
+	if (pipe(fd_pipes[1]) == CLOSED)
 		error_exit("could not create pipe");
-	printf("previous: [%d; %d], next: [%d; %d]\n", fd_previous[0], fd_previous[1], fd_next[0], fd_next[1]);
+	printf("previous: [%d; %d], next: [%d; %d]\n", fd_pipes[0][0], fd_pipes[0][1], fd_pipes[1][0], fd_pipes[1][1]);
 	pid = fork();
 	if (pid == -1)
 		error_exit("could not create process");
 	if (pid == CHILD)
 	{
-		if (fd_previous[0] != -1) {
-			close(fd_previous[1]);
-			duplicate(fd_previous[0], STDIN_FILENO, "could not read from the pipe");
-			close(fd_previous[0]);
+		if (fd_pipes[0][0] != CLOSED)
+		{
+			close(fd_pipes[0][1]);
+			duplicate(fd_pipes[0][0], STDIN_FILENO, "could not read from the pipe");
+			close(fd_pipes[0][0]);
 		}
-		close(fd_next[0]);
-		duplicate(fd_next[1], STDOUT_FILENO, "could not write to the pipe");
-		close(fd_next[1]);
-		// ft_putstr_fd("in pipe, command : ", 2);
-		// ft_putstr_fd(cmd->cmd[0], 2);
-		// ft_putstr_fd("\n", 2);
+		close(fd_pipes[1][0]);
+		duplicate(fd_pipes[1][1], STDOUT_FILENO, "could not write to the pipe");
+		close(fd_pipes[1][1]);
+		ft_putstr_fd("in pipe, command : ", 2);
+		ft_putstr_fd(cmd->cmd[0], 2);
+		ft_putstr_fd("\n", 2);
 		execute(cmd, envp);
 	}
-	if (fd_previous[0] != -1) {
-		close(fd_previous[0]);
-		fd_previous[0] = -1;
+	if (fd_pipes[0][0] != CLOSED)
+	{
+		close(fd_pipes[0][0]);
+		// 	fd_previous[0] = -1;
+		fd_pipes[0][0] = -1;
 	}
-	close(fd_next[1]);
-	fd_next[1] = -1;
+	close(fd_pipes[1][1]);
+	// fd_next[1] = -1;
+	fd_pipes[1][1] = -1;
 	ft_putstr_fd("in parent (create process)\n", 2);
 }
 
@@ -121,33 +125,28 @@ int	lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fdout, int fd_pipe[2])
 	{
 		if (fdout != STDOUT_FILENO)
 		{
-			printf("fdout in lastcmd child: %d\n", fdout);
+			// printf("fdout in lastcmd child: %d\n", fdout);
 			duplicate(fdout, STDOUT_FILENO,
 				"duplication of the outfile failed");
 			close(fdout);
 		}
 		if (fd_pipe[0] != -1)
 		{
-			printf("fd_pipe[0] in lastcmd child: %d\n", fd_pipe[0]);
+			// printf("fd_pipe[0] in lastcmd child: %d\n", fd_pipe[0]);
 			duplicate(fd_pipe[0], STDIN_FILENO, "could not read from the pipe");
 			close(fd_pipe[0]);
 		}
-		// if (fd_pipe[1] != -1)
-		// {
-		// 	close(fd_pipe[1]);
-		// 	printf("close fd_pipe[1] in child (lastcmd)\n");
-		// }
 		execute(cmd_lst->head, envp);
 	}
-	if (fd_pipe[0] != -1) // && fd_pipe[0] != STDOUT_FILENO
+	if (fd_pipe[0] != CLOSED)
 	{
 		close(fd_pipe[0]);
-		printf("close fd_pipe[0] in parent (lastcmd)\n");
+		// printf("close fd_pipe[0] in parent (lastcmd)\n");
 	}
 	if (fdout != STDOUT_FILENO)
 	{
 		close(fdout);
-		printf("close fdout in parent\n");
+		// printf("close fdout in parent\n");
 	}
 	waitpid(pid, &status, 0);
 	exit_status = WEXITSTATUS(status);
