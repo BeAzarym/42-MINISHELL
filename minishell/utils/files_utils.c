@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:20:02 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/01 16:49:34 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/01 17:18:25 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 	Check if the infile is the stdin
 	Otherwise, loops over all the infiles to check that they exist,
 	if all valids, save the last one in memory
+
 */
 void	get_input_output(t_cmd_lst *cmd_table)
 {
@@ -26,7 +27,7 @@ void	get_input_output(t_cmd_lst *cmd_table)
 	printf("get input\n");
 	if (cmd_table->head->redir_in->head == NULL)
 	{
-		printf("redir_in == NULL\n");
+		printf("redir_in == STDIN\n");
 		cmd_table->head->fdin = STDIN_FILENO;
 	}
 	else
@@ -35,7 +36,7 @@ void	get_input_output(t_cmd_lst *cmd_table)
 		while (in->head != NULL)
 		{
 			if (access(in->head->file, R_OK) != OK)
-				error_exit("");
+				error_exit(in->head->file);
 			in->head = in->head->next;
 		}
 		cmd_table->head->type_in = in->tail->type;
@@ -44,10 +45,7 @@ void	get_input_output(t_cmd_lst *cmd_table)
 		printf("infile in get_input : %s\n", cmd_table->head->infile);
 	}
 	if (cmd_table->head->redir_out->head == NULL)
-	{
 		cmd_table->head->fdout = STDOUT_FILENO;
-		// cmd_table->tail->fdout = STDOUT_FILENO;
-	}
 	else
 	{
 		out = cmd_table->head->redir_out;

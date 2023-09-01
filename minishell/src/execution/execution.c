@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/01 16:49:09 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/01 17:28:20 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,16 @@ int	execution(t_cmd_lst *cmd_table, char **envp)
 	Executes the command sent in argument, execve returns only in case
 	of failure as the execve() function overlays the current process image
 	with a new process image.
+	// ft_putstr_fd("in execute\n", 2);
 */
 void	execute(t_cmd *cmd, char **envp)
 {
 	char	**paths;
 	char	*cmd_path;
-	// char	**cmd;
 	struct sigaction	sa;
-	
-	// if (!argv || !argv[0])
-	// 	error_exit("parse error near """);
-	// cmd = ft_split(argv->cmd, ' ');
-	// if (cmd == NULL)
-	// 	error_exit("parsing of the command failed");
-	// ft_putstr_fd("in execute\n", 2);
+
+	if (cmd == NULL)
+		error_exit("parsing of the command failed");
 	sa.sa_handler = &set_sigint_in_child;
 	if (sigaction(SIGINT, &sa, NULL) == -1
 		|| sigaction(SIGQUIT, &sa, NULL) == -1)
@@ -70,13 +66,11 @@ void	execute(t_cmd *cmd, char **envp)
 	cmd_path = command_access(cmd->cmd[0], paths);
 	if (cmd_path == NULL)
 	{
-		// ft_free_array(cmd);
 		ft_free_array(paths);
 		exit(127);
 	}
 	execve(cmd_path, cmd->cmd, envp);
 	perror("could not execute the command");
-	// ft_free_array(cmd);
 	free(cmd_path);
 	exit(127);
 }
