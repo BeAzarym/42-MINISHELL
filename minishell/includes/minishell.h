@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/01 14:24:34 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/01 19:50:51 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_cmd
 	int					fdout;
 	char				*infile;
 	char				*outfile;
+	const char			*limiter;
 	t_redir_lst			*redir_in;
 	t_redir_lst			*redir_out;
 	char				**cmd;

@@ -6,38 +6,31 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/01 18:40:18 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/01 19:53:18 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 
-static void	read_stdin(const char *limiter, int fd);
-
 /* Creates a child process to prompt the user */
-void	heredoc(const char *limiter, int fd[2])
+void	heredoc(t_cmd *cmd, int fd_pipes[2][2])
 {
-	// int			fd[2];
-	int			pid;
+	int	pid;
 
-	if (pipe(fd) == -1)
+	if (pipe(fd_pipes[1]) == CLOSED)
 		error_exit("could not create pipe");
 	pid = fork();
 	if (pid == -1)
 		error_exit("could not create process");
 	if (pid == CHILD)
 	{
-		close(fd[0]);
-		read_stdin(limiter, fd[1]);
-		close(fd[1]);
+		pipe_branching(cmd, fd_pipes);
 	}
-	close(fd[1]);
-	duplicate(fd[0], STDIN_FILENO, "could not read from the pipe");
-	close(fd[0]);
-	waitpid(pid, NULL, 0);
+	pipe_closing(cmd, fd_pipes);
+	// waitpid(pid, NULL, 0);
 }
 
-static void	read_stdin(const char *limiter, int fd)
+void	read_stdin(const char *limiter, int fd)
 {
 	char	*line;
 
@@ -62,8 +55,6 @@ static void	read_stdin(const char *limiter, int fd)
 /*
 	Creates a child process : send to the pipe the output of the execution
 	of the command passed in argument.
-	Parent process : reads the output of the child from the pipe.
-	The child process has it's own copy of the parent's file's decriptors.
 	printf("here\n");
 */
 void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2])
@@ -85,15 +76,7 @@ void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 		ft_putstr_fd("\n", 2);
 		execute(cmd, envp);
 	}
-	if (cmd->fdin != STDIN_FILENO)
-		close(cmd->fdin);
-	if (fd_pipes[0][0] != CLOSED) 
-	{
-		close(fd_pipes[0][0]);
-		fd_pipes[0][0] = -1;
-	}
-	close(fd_pipes[1][1]);
-	fd_pipes[1][1] = -1;
+	pipe_closing(cmd, fd_pipes);
 	ft_putstr_fd("in parent (create process)\n", 2);
 }
 

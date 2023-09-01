@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:20:02 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/01 17:18:25 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/01 19:58:17 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@ void	get_input_output(t_cmd_lst *cmd_table)
 {
 	t_redir_lst	*in;
 	t_redir_lst	*out;
+	int		fd_pipes[2][2];
 
+	fd_pipes[0][0] = -1;
+	fd_pipes[0][1] = -1;
+	fd_pipes[1][0] = -1;
+	fd_pipes[1][1] = -1;
 	printf("get input\n");
 	if (cmd_table->head->redir_in->head == NULL)
 	{
@@ -59,7 +64,7 @@ void	get_input_output(t_cmd_lst *cmd_table)
 		}
 	}
 	if (cmd_table->head->type_in == HEREDOC)
-		heredoc(cmd_table->head->cmd[0]);
+		heredoc(cmd_table->head, fd_pipes);
 	else if (cmd_table->head->type_in == INFILE)
 		cmd_table->head->fdin = infile_open(cmd_table->head->infile);
 }

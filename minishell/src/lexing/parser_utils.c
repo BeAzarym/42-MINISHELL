@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:45:51 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/01 14:41:35 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/01 19:45:00 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_cmd	*init_cmd_struct(void)
 	new->type_out = -1;
 	new->fdin = -1;
 	new->fdout = -1;
+	new->limiter = NULL;
 	new->redir_in = init_redir_lst();
 	new->redir_out = init_redir_lst();
 	if (!new->redir_in || !new->redir_out)
