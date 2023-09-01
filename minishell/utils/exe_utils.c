@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:19:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/31 17:13:15 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:42:20 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	duplicate(int fd_src, int fd_dest, char *error)
 	if (dup2(fd_src, fd_dest) == -1)
 	{
 		close(fd_src);
+		// ft_putnbr_fd(fd_src, 2);
+		// ft_putstr_fd("\n", 2);
 		error_exit(error);
 	}
 	close(fd_src);

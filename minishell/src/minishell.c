@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/31 16:59:49 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/01 14:19:29 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	main(int argc, char **argv, char **envp)
 		// print_token(lst->head); 
 		cmd_table = parsing(lst, cmd_table);
 		// print_cmd(cmd_table);// segfault
-		get_input_output(cmd_table);
 		status = execution(cmd_table, envp);
 		// printf("debug got here\n");
 		if (ft_strncmp(cmd_line, "cd", 2) == OK)

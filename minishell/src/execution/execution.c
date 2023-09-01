@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/31 18:55:20 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:49:09 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,54 +19,29 @@ static char	*command_access(char *cmd, char **paths);
 	Redirects the input and output file descriptors if necessary and execute
 	the commands in processes
 */
-int	execution(t_cmd_lst *cmd_lst, char **envp)
+int	execution(t_cmd_lst *cmd_table, char **envp)
 {
-	int			fdin;
-	int			fdout;
-	int			fd_pipes[2][2];
-	t_redir_lst	*out_lst;
+	int		fd_pipes[2][2];
 
 	fd_pipes[0][0] = -1;
 	fd_pipes[0][1] = -1;
 	fd_pipes[1][0] = -1;
 	fd_pipes[1][1] = -1;
-	fdin = 0;
-	printf("ONE MORE PRINT: %d\n", cmd_lst->head->type_out);
-
-	while (cmd_lst->head->next != NULL)
+	printf("ONE MORE PRINT: %d\n", cmd_table->head->type_out);
+	while (cmd_table->head->next != NULL)
 	{
-		if (cmd_lst->head->type_in == HEREDOC)
-			heredoc(cmd_lst->head->cmd[0]);
-		else if (cmd_lst->head->type_in == INFILE)
-		{
-			fdin = infile_open(cmd_lst->head->infile);
-			// duplicate(fdin, STDIN_FILENO, "duplication of the infile failed");
-		}
-		if (cmd_lst->head->type_out == STDIN_OUT) //this in loop
-			fdout = STDOUT_FILENO;
-		else
-		{
-
-			out_lst = cmd_lst->head->redir_out;
-			while (out_lst->head != NULL)
-			{
-				if (out_lst->head->type == TRUNCATE)
-					fdout = outfile_truncate_open(out_lst->head->file);
-				else if (out_lst->head->type == APPEND)
-					fdout = outfile_append_open(out_lst->head->file);
-				out_lst->head = out_lst->head->next;
-			}
-			printf("fdout in execution : %d\n", fdout);
-		}
-		printf("current cmd: %s\n", cmd_lst->head->cmd[0]);
-		create_process(cmd_lst->head, envp, fd_pipes, fdin);
-		cmd_lst->head = cmd_lst->head->next;
+		get_input_output(cmd_table);
+		printf("fdout in execution : %d\n", cmd_table->head->fdout);
+		printf("current cmd: %s\n", cmd_table->head->cmd[0]);
+		create_process(cmd_table->head, envp, fd_pipes);
+		cmd_table->head = cmd_table->head->next;
 		fd_pipes[0][0] = fd_pipes[1][0];
 		fd_pipes[0][1] = fd_pipes[1][1];
 		fd_pipes[1][0] = -1;
 		fd_pipes[1][1] = -1;
 	}
-	return (lastcmd_process(cmd_lst, envp, fdout, fd_pipes[0], fdin));
+	get_input_output(cmd_table);
+	return (lastcmd_process(cmd_table, envp, fd_pipes[0]));
 }
 
 /*

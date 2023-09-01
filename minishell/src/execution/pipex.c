@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/31 18:53:38 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:42:47 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	read_stdin(const char *limiter, int fd)
 	The child process has it's own copy of the parent's file's decriptors.
 	printf("here\n");
 */
-void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2], int fdin)
+void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 {
 	int	pid;
 
@@ -79,13 +79,14 @@ void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2], int fdin)
 		error_exit("could not create process");
 	if (pid == CHILD)
 	{
-		if (fdin)
+		if (cmd->fdin != STDIN_FILENO)
 		{
+			printf("fdin in create_process : %d\n", cmd->fdin);
 			close(fd_pipes[0][0]);
 			close(fd_pipes[0][1]);
-			duplicate(fdin, STDIN_FILENO,
+			duplicate(cmd->fdin, STDIN_FILENO,
 				"could not read from infile");
-			close(fdin);
+			close(cmd->fdin);
 		}
 		if (fd_pipes[0][0] != CLOSED)
 		{
@@ -95,6 +96,7 @@ void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2], int fdin)
 			close(fd_pipes[0][0]);
 		}
 		close(fd_pipes[1][0]);
+		ft_putnbr_fd(fd_pipes[1][1], 2);
 		duplicate(fd_pipes[1][1], STDOUT_FILENO, "could not write to the pipe");
 		close(fd_pipes[1][1]);
 		ft_putstr_fd("in pipe, command : ", 2);
@@ -102,11 +104,15 @@ void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2], int fdin)
 		ft_putstr_fd("\n", 2);
 		execute(cmd, envp);
 	}
-	if (fdin)
-		close(fdin);
-	if (fd_pipes[0][0] != CLOSED)
+	if (cmd->fdin != STDIN_FILENO)
+		close(cmd->fdin);
+	if (fd_pipes[0][0] != CLOSED) 
+	{
 		close(fd_pipes[0][0]);
+		fd_pipes[0][0] = -1;
+	}
 	close(fd_pipes[1][1]);
+	fd_pipes[1][1] = -1;
 	ft_putstr_fd("in parent (create process)\n", 2);
 }
 
@@ -115,34 +121,34 @@ void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2], int fdin)
 	the child processes to end in the parent.
 	Returns the exit status of the last command.
 */
-int	lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fdout, int fd_pipe[2], int fdin)
+int	lastcmd_process(t_cmd_lst *cmd_table, char **envp, int fd_pipe[2])
 {
 	int	pid;
 	int	status;
 	int	exit_status;
 	int	i;
 
-	printf("lastcmd : %s\n", cmd_lst->head->cmd[0]);
+	printf("lastcmd : %s\n", cmd_table->head->cmd[0]);
 	printf("previous: [%d; %d]\n", fd_pipe[0], fd_pipe[1]);
 	pid = fork();
 	if (pid == -1)
 		error_exit("could not create lastcmd process");
 	if (pid == CHILD)
 	{
-		if (fdout != STDOUT_FILENO)
+		if (cmd_table->head->fdout != STDOUT_FILENO)
 		{
-			// printf("fdout in lastcmd child: %d\n", fdout);
-			duplicate(fdout, STDOUT_FILENO,
+			printf("fdout in lastcmd child: %d\n", cmd_table->head->fdout);
+			duplicate(cmd_table->head->fdout, STDOUT_FILENO,
 				"duplication of the outfile failed");
-			close(fdout);
+			close(cmd_table->head->fdout);
 		}
-		if (fdin)
+		if (cmd_table->head->fdin != STDIN_FILENO)
 		{
 			if (fd_pipe[0] != CLOSED)
 				close(fd_pipe[0]);
-			duplicate(fdin, STDIN_FILENO,
+			duplicate(cmd_table->head->fdin, STDIN_FILENO,
 				"could not read from infile");
-			close(fdin);
+			close(cmd_table->head->fdin);
 		}
 		else if (fd_pipe[0] != CLOSED)
 		{
@@ -150,22 +156,22 @@ int	lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fdout, int fd_pipe[2], 
 			duplicate(fd_pipe[0], STDIN_FILENO, "could not read from the pipe");
 			close(fd_pipe[0]);
 		}
-		execute(cmd_lst->head, envp);
+		execute(cmd_table->head, envp);
 	}
 	if (fd_pipe[0] != CLOSED)
 	{
 		close(fd_pipe[0]);
 		// printf("close fd_pipe[0] in parent (lastcmd)\n");
 	}
-	if (fdout != STDOUT_FILENO)
+	if (cmd_table->head->fdout != STDOUT_FILENO)
 	{
-		close(fdout);
+		close(cmd_table->head->fdout);
 		// printf("close fdout in parent\n");
 	}
 	waitpid(pid, &status, 0);
 	exit_status = WEXITSTATUS(status);
 	i = 1;
-	while (i < cmd_lst->size)
+	while (i < cmd_table->size)
 	{
 		waitpid(-1, &status, 0);
 		++i;
