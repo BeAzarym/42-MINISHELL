@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/01 19:53:44 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/04 00:00:30 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		execution(t_cmd_lst *cmd_lst, char **envp);
 void	execute(t_cmd *argv, char **envp);
 
 // pipex.c
-void	heredoc(t_cmd *cmd, int fd_pipes[2][2]);
+int		heredoc(t_cmd_lst *cmd_lst, int fd_pipes[2][2]);
 void	read_stdin(const char *limiter, int fd);
 void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2]);
 int		lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fd_pipe[2]);

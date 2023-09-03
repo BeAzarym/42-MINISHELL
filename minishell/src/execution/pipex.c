@@ -3,20 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/01 19:53:18 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/04 00:02:19 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 
 /* Creates a child process to prompt the user */
-void	heredoc(t_cmd *cmd, int fd_pipes[2][2])
+int	heredoc(t_cmd_lst *cmd_lst, int fd_pipes[2][2])
 {
 	int	pid;
+	int	status;
+	int	exit_status;
 
+	cmd_lst->head->limiter = cmd_lst->head->redir_in->head->file;
 	if (pipe(fd_pipes[1]) == CLOSED)
 		error_exit("could not create pipe");
 	pid = fork();
@@ -24,10 +27,13 @@ void	heredoc(t_cmd *cmd, int fd_pipes[2][2])
 		error_exit("could not create process");
 	if (pid == CHILD)
 	{
-		pipe_branching(cmd, fd_pipes);
+		printf("in heredoc child\n");
+		pipe_branching(cmd_lst->head, fd_pipes);
 	}
-	pipe_closing(cmd, fd_pipes);
-	// waitpid(pid, NULL, 0);
+	pipe_closing(cmd_lst->head, fd_pipes);
+	waitpid(pid, &status, 0);
+	exit_status = WEXITSTATUS(status);
+	return (exit_status);
 }
 
 void	read_stdin(const char *limiter, int fd)
@@ -38,11 +44,13 @@ void	read_stdin(const char *limiter, int fd)
 	{
 		ft_putstr_fd("> ", STDOUT_FILENO);
 		line = get_next_line(STDIN_FILENO);
+		printf("\nline : %s in read_stdin\n", line);
 		if (line == NULL)
 			exit(127);
 		if (ft_strncmp(limiter, line, ft_strlen(limiter)) == OK
 			&& ft_strlen(limiter) == (ft_strlen(line) - 1))
 		{
+			printf("exit read_stdin\n");
 			free(line);
 			exit(EXIT_SUCCESS);
 		}

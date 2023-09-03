@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/01 14:19:29 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/03 20:45:59 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!cmd_table)
 			return (1);
 		status = 0;
-		cmd_line = readline("[Minishell] > ");
+	cmd_line = readline("[Minishell] > ");
 		// printf("cmd line is: %s\n", cmd_line);
 		if (cmd_line == NULL)
 			exit(EXIT_SUCCESS);
