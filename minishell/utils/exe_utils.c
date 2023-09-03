@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:19:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/03 21:06:22 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/04 00:07:51 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ void	pipe_branching(t_cmd *cmd, int fd_pipes[2][2])
 }
 
 /*
-	Close and reinitiallize
+	Close and reinitialize
 */
 void	pipe_closing(t_cmd *cmd, int fd_pipes[2][2])
 {
 	if (cmd->fdin != STDIN_FILENO)
 		close(cmd->fdin);
-	if (fd_pipes[0][0] != CLOSED) 
+	if (fd_pipes[0][0] != CLOSED)
 	{
 		close(fd_pipes[0][0]);
 		fd_pipes[0][0] = -1;
