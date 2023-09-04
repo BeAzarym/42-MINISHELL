@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/31 16:57:51 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/04 13:05:20 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,5 +153,6 @@ char					**convert_env_to_exec(t_env_lst *env_lst);
 int						search_in_env(char *key, t_env_lst *env);
 void					clear_redir_lst(t_redir_lst *lst);
 void					clear_cmd_lst(t_cmd_lst *lst);
+int						need_substitute(char *str);
 
 #endif
