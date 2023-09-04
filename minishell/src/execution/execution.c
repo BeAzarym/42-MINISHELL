@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/04 00:02:18 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:17:10 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int	execution(t_cmd_lst *cmd_table, char **envp)
 		get_input_output(cmd_table);
 		printf("fdout in execution : %d\n", cmd_table->head->fdout);
 		printf("current cmd: %s\n", cmd_table->head->cmd[0]);
-		create_process(cmd_table->head, envp, fd_pipes);
+		if (cmd_table->head->type_in == HEREDOC)
+			heredoc(cmd_table, fd_pipes);
+		else
+			create_process(cmd_table->head, envp, fd_pipes);
 		cmd_table->head = cmd_table->head->next;
 		fd_pipes[0][0] = fd_pipes[1][0];
 		fd_pipes[0][1] = fd_pipes[1][1];

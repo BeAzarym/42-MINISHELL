@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/03 20:45:59 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:13:20 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char **argv, char **envp)
 			add_history(cmd_line);
 		// print_token(lst->head); 
 		cmd_table = parsing(lst, cmd_table);
-		// print_cmd(cmd_table);// segfault
+		print_cmd(cmd_table);
 		status = execution(cmd_table, envp);
 		// printf("debug got here\n");
 		if (ft_strncmp(cmd_line, "cd", 2) == OK)
