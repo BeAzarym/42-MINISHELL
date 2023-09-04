@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/04 12:13:20 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:36:37 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,11 @@ int	main(int argc, char **argv, char **envp)
 		status = 0;
 	cmd_line = readline("[Minishell] > ");
 		// printf("cmd line is: %s\n", cmd_line);
-		if (cmd_line == NULL)
+		if (cmd_line == NULL) // fix the printing of ^D
+		{
+			printf("exit\n");
 			exit(EXIT_SUCCESS);
+		}
 		lst = lexing(cmd_line);
 		if (ft_strlen(cmd_line) > 0)
 			add_history(cmd_line);

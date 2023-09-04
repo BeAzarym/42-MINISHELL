@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/28 13:15:12 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:20:45 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	echo(char *cmd)
 	bool	newline_char;
 
 	newline_char = true;
-	if (ft_strncmp(cmd, "-n ", 3) == OK)
+	if (ft_strncmp(cmd, "-n ", 3) == OK)  //echo -nnnnnnnnn -n -nnn -nnnn yann
 	{
 		newline_char = false;
 		cmd += 3; 

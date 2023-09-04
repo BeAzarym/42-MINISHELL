@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/04 12:17:10 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:24:42 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,13 @@ static char	*command_access(char *cmd, char **paths)
 
 	if (access(cmd, X_OK) == OK)
 		return (cmd);
+	if (cmd[0] == '/')
+	{
+		error = variadic_strjoin(3, "minishell: ", cmd, ": command not found\n");
+		ft_putstr_fd(error, STDERR_FILENO);
+		free(error);
+		return (NULL);
+	}
 	i = -1;
 	while (paths[++i])
 	{

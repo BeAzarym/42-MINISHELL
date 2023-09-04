@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/04 11:57:07 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:38:06 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 	Creates a child process to prompt the user
 	printf("in heredoc child\n"); 
 */
+// todo : recuperer content input user
 int	heredoc(t_cmd_lst *cmd_lst, int fd_pipes[2][2])
 {
 	int	pid;
