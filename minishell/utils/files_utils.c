@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:20:02 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/31 17:20:41 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/03 23:04:23 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,33 @@
 	Check if the infile is the stdin
 	Otherwise, loops over all the infiles to check that they exist,
 	if all valids, save the last one in memory
+
 */
 void	get_input_output(t_cmd_lst *cmd_table)
 {
 	t_redir_lst	*in;
-	// t_redir_lst	*out;
+	t_redir_lst	*out;
+	// int			fd_pipes[2][2];
 
+	// fd_pipes[0][0] = -1;
+	// fd_pipes[0][1] = -1;
+	// fd_pipes[1][0] = -1;
+	// fd_pipes[1][1] = -1;
 	printf("get input\n");
-	if (cmd_table->head->redir_in->head == NULL)
+	in = cmd_table->head->redir_in;
+	if (in->head == NULL)
 	{
-		printf("redir_in == NULL\n");
-		cmd_table->head->type_in = STDIN_OUT;
+		printf("redir_in == STDIN\n");
+		cmd_table->head->fdin = STDIN_FILENO;
 	}
+	else if (in->head->type == HEREDOC)
+		cmd_table->head->type_in = in->head->type;
 	else
 	{
-		in = cmd_table->head->redir_in;
 		while (in->head != NULL)
 		{
 			if (access(in->head->file, R_OK) != OK)
-				error_exit("");
+				error_exit(in->head->file);
 			in->head = in->head->next;
 		}
 		cmd_table->head->type_in = in->tail->type;
@@ -44,7 +52,24 @@ void	get_input_output(t_cmd_lst *cmd_table)
 		printf("infile in get_input : %s\n", cmd_table->head->infile);
 	}
 	if (cmd_table->head->redir_out->head == NULL)
-		cmd_table->head->type_out = STDIN_OUT;
+		cmd_table->head->fdout = STDOUT_FILENO;
+	else
+	{
+		out = cmd_table->head->redir_out;
+		while (out->head != NULL)
+		{
+			if (out->head->type == TRUNCATE)
+				cmd_table->head->fdout = outfile_truncate_open(out->head->file);
+			else if (out->head->type == APPEND)
+				cmd_table->head->fdout = outfile_append_open(out->head->file);
+			out->head = out->head->next;
+		}
+	}
+	// if (cmd_table->head->type_in == HEREDOC)
+	// 	heredoc(cmd_table, fd_pipes);
+	// else 
+	if (cmd_table->head->type_in == INFILE)
+		cmd_table->head->fdin = infile_open(cmd_table->head->infile);
 }
 
 int	infile_open(char *file)

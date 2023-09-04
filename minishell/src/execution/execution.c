@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/31 16:42:15 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:17:10 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,73 +19,55 @@ static char	*command_access(char *cmd, char **paths);
 	Redirects the input and output file descriptors if necessary and execute
 	the commands in processes
 */
-int	execution(t_cmd_lst *cmd_lst, char **envp)
+int	execution(t_cmd_lst *cmd_table, char **envp)
 {
-	int			fdin;
-	int			fdout;
-	int			fd_pipes[2][2];
-	// int			fd_pipe_next[2];
-	t_redir_lst	*out_lst;
+	int		fd_pipes[2][2];
+	int		status;
 
+	status = 0;
 	fd_pipes[0][0] = -1;
 	fd_pipes[0][1] = -1;
 	fd_pipes[1][0] = -1;
 	fd_pipes[1][1] = -1;
-	if (cmd_lst->head->type_in == HEREDOC)
-		heredoc(cmd_lst->head->cmd[0]);
-	else if (cmd_lst->head->type_in == INFILE)
+	printf("ONE MORE PRINT: %d\n", cmd_table->head->type_out);
+	while (cmd_table->head->next != NULL)
 	{
-		fdin = infile_open(cmd_lst->head->infile);
-		// duplicate(fdin, STDIN_FILENO, "duplication of the infile failed");
-	}
-	printf("ONE MORE PRINT: %d\n", cmd_lst->head->type_out);
-	if (cmd_lst->head->type_out == STDIN_OUT) //this in loop
-		fdout = STDOUT_FILENO;
-	else
-	{
-
-		out_lst = cmd_lst->head->redir_out;
-		while (out_lst->head != NULL)
-		{
-			if (out_lst->head->type == TRUNCATE)
-				fdout = outfile_truncate_open(out_lst->head->file);
-			else if (out_lst->head->type == APPEND)
-				fdout = outfile_append_open(out_lst->head->file);
-			out_lst->head = out_lst->head->next;
-		}
-		printf("fdout in execution : %d\n", fdout);
-	}
-	while (cmd_lst->head->next != NULL)
-	{
-		printf("current cmd: %s\n", cmd_lst->head->cmd[0]);
-		create_process(cmd_lst->head, envp, fd_pipes);
-		cmd_lst->head = cmd_lst->head->next;
+		printf("in loop\n");
+		get_input_output(cmd_table);
+		printf("fdout in execution : %d\n", cmd_table->head->fdout);
+		printf("current cmd: %s\n", cmd_table->head->cmd[0]);
+		if (cmd_table->head->type_in == HEREDOC)
+			heredoc(cmd_table, fd_pipes);
+		else
+			create_process(cmd_table->head, envp, fd_pipes);
+		cmd_table->head = cmd_table->head->next;
 		fd_pipes[0][0] = fd_pipes[1][0];
- 		fd_pipes[0][1] = fd_pipes[1][1];
+		fd_pipes[0][1] = fd_pipes[1][1];
 		fd_pipes[1][0] = -1;
 		fd_pipes[1][1] = -1;
 	}
-	return (lastcmd_process(cmd_lst, envp, fdout, fd_pipes[0]));
+	get_input_output(cmd_table);
+	if (cmd_table->head->type_in == HEREDOC)
+		heredoc(cmd_table, fd_pipes);
+	if (cmd_table->head->cmd != NULL)
+		status = lastcmd_process(cmd_table, envp, fd_pipes[0]);
+	return (status);
 }
 
 /*
 	Executes the command sent in argument, execve returns only in case
 	of failure as the execve() function overlays the current process image
 	with a new process image.
+	// ft_putstr_fd("in execute\n", 2);
 */
 void	execute(t_cmd *cmd, char **envp)
 {
 	char	**paths;
 	char	*cmd_path;
-	// char	**cmd;
 	struct sigaction	sa;
-	
-	// if (!argv || !argv[0])
-	// 	error_exit("parse error near """);
-	// cmd = ft_split(argv->cmd, ' ');
-	// if (cmd == NULL)
-	// 	error_exit("parsing of the command failed");
-	// ft_putstr_fd("in execute\n", 2);
+
+	if (cmd == NULL)
+		error_exit("parsing of the command failed");
 	sa.sa_handler = &set_sigint_in_child;
 	if (sigaction(SIGINT, &sa, NULL) == -1
 		|| sigaction(SIGQUIT, &sa, NULL) == -1)
@@ -94,13 +76,11 @@ void	execute(t_cmd *cmd, char **envp)
 	cmd_path = command_access(cmd->cmd[0], paths);
 	if (cmd_path == NULL)
 	{
-		// ft_free_array(cmd);
 		ft_free_array(paths);
 		exit(127);
 	}
 	execve(cmd_path, cmd->cmd, envp);
 	perror("could not execute the command");
-	// ft_free_array(cmd);
 	free(cmd_path);
 	exit(127);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/04 13:05:20 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/04 13:08:52 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,11 @@ typedef struct s_cmd
 {
 	int					type_in;
 	int					type_out;
+	int					fdin;
+	int					fdout;
 	char				*infile;
 	char				*outfile;
+	const char			*limiter;
 	t_redir_lst			*redir_in;
 	t_redir_lst			*redir_out;
 	char				**cmd;
