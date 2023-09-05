@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/05 15:10:29 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:42:48 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,17 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strlen(cmd_line) > 0)
 			add_history(cmd_line);
 		// print_token(lst->head); 
-		cmd_table = parsing(lst, cmd_table);
-		print_cmd(cmd_table);
-		status = execution(cmd_table, envp);
-		// printf("debug got here\n");
-		if (ft_strncmp(cmd_line, "cd", 2) == OK)
-			status = cd(cmd_line + 3);
-		if (ft_strncmp(cmd_line, "echo", 4) == OK)
-			status = echo(cmd_line + 5);
+			cmd_table = parsing(lst, cmd_table);
+		if (cmd_table->head != NULL)
+		{
+			print_cmd(cmd_table);
+			status = execution(cmd_table, envp);
+			// printf("debug got here\n");
+			if (ft_strncmp(cmd_line, "cd", 2) == OK)
+				status = cd(cmd_line + 3);
+			if (ft_strncmp(cmd_line, "echo", 4) == OK)
+				status = echo(cmd_line + 5);
+		}
 		free(cmd_line);
 		clear_cmd_lst(cmd_table);
 	}

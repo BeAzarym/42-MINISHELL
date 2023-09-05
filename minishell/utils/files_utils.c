@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:20:02 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/05 15:16:30 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:18:28 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ void	get_input_output(t_cmd_lst *cmd_table)
 		cmd_table->head->fdin = STDIN_FILENO;
 	}
 	else if (in->head->type == HEREDOC)
-	{
 		cmd_table->head->type_in = in->head->type;
-		cmd_table->head->fdin = STDIN_FILENO;
-	}
 	else
 	{
 		while (in->head != NULL)

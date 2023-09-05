@@ -3,38 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/05 15:18:45 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:26:40 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 
 /*
-	Creates a child process to prompt the user
-	printf("in heredoc child\n"); 
+	printf("in heredoc\n"); 
 */
 // todo : recuperer content input user
-int	heredoc(t_cmd_lst *cmd_lst, int fd_pipes[2][2])
+void	heredoc(t_cmd_lst *cmd_table)
 {
-	int	pid;
-	int	status;
-	int	exit_status;
-
-	cmd_lst->head->limiter = cmd_lst->head->redir_in->head->file;
-	if (pipe(fd_pipes[1]) == CLOSED)
-		error_exit("could not create pipe");
-	pid = fork();
-	if (pid == -1)
-		error_exit("could not create process");
-	if (pid == CHILD)
-		pipe_branching(cmd_lst->head, fd_pipes);
-	pipe_closing(cmd_lst->head, fd_pipes);
-	waitpid(pid, &status, 0);
-	exit_status = WEXITSTATUS(status);
-	return (exit_status);
+	cmd_table->head->limiter = cmd_table->head->redir_in->head->file;
+	cmd_table->head->fdin = open("heredoc.tmp", O_RDWR | O_CREAT | O_APPEND,
+			0777);
+	read_stdin(cmd_table->head->limiter, cmd_table->head->fdin);
+	close(cmd_table->head->fdin);
 }
 
 //printf("\nline : %s in read_stdin\n", line);

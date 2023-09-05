@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/05 15:20:01 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:27:31 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	execution(t_cmd_lst *cmd_table, char **envp)
 		printf("fdout in execution : %d\n", cmd_table->head->fdout);
 		printf("current cmd: %s\n", cmd_table->head->cmd[0]);
 		if (cmd_table->head->type_in == HEREDOC)
-			heredoc(cmd_table, fd_pipes);
+			heredoc(cmd_table);
 		else
 			create_process(cmd_table->head, envp, fd_pipes);
 		cmd_table->head = cmd_table->head->next;
@@ -48,7 +48,7 @@ int	execution(t_cmd_lst *cmd_table, char **envp)
 	}
 	get_input_output(cmd_table);
 	if (cmd_table->head->type_in == HEREDOC)
-		status = heredoc(cmd_table, fd_pipes);
+		heredoc(cmd_table);
 	if (cmd_table->head->cmd != NULL)
 		status = lastcmd_process(cmd_table, envp, fd_pipes[0]);
 	return (status);

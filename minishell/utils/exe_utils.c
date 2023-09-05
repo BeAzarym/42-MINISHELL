@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:19:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/05 15:00:40 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:10:53 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ void	duplicate(int fd_src, int fd_dest, char *error)
 */
 void	pipe_branching(t_cmd *cmd, int fd_pipes[2][2])
 {
-	if (cmd->type_in == HEREDOC)
-		read_stdin(cmd->limiter, fd_pipes[1][1]);
-	else if (cmd->fdin != STDIN_FILENO)
+	if (cmd->fdin != STDIN_FILENO)
 	{
 		printf("fdin in create_process : %d\n", cmd->fdin);
 		close(fd_pipes[0][0]);
@@ -62,7 +60,7 @@ void	pipe_branching(t_cmd *cmd, int fd_pipes[2][2])
 	close(fd_pipes[1][0]);
 	// ft_putnbr_fd(fd_pipes[1][1], 2);
 	// ft_putchar_fd('\n', 2);
-	if (cmd->type_in != HEREDOC)
+	// if (cmd->type_in != HEREDOC)
 		duplicate(fd_pipes[1][1], STDOUT_FILENO, "could not write to pipe[1]");
 	close(fd_pipes[1][1]);
 }
