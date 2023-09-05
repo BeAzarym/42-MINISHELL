@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:20:02 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/03 23:04:23 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:16:30 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ void	get_input_output(t_cmd_lst *cmd_table)
 		cmd_table->head->fdin = STDIN_FILENO;
 	}
 	else if (in->head->type == HEREDOC)
+	{
 		cmd_table->head->type_in = in->head->type;
+		cmd_table->head->fdin = STDIN_FILENO;
+	}
 	else
 	{
 		while (in->head != NULL)
@@ -65,9 +68,6 @@ void	get_input_output(t_cmd_lst *cmd_table)
 			out->head = out->head->next;
 		}
 	}
-	// if (cmd_table->head->type_in == HEREDOC)
-	// 	heredoc(cmd_table, fd_pipes);
-	// else 
 	if (cmd_table->head->type_in == INFILE)
 		cmd_table->head->fdin = infile_open(cmd_table->head->infile);
 }

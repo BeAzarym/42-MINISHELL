@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/04 15:38:06 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:18:45 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,12 +135,13 @@ int	lastcmd_process(t_cmd_lst *cmd_table, char **envp, int fd_pipe[2])
 	if (fd_pipe[0] != CLOSED)
 	{
 		close(fd_pipe[0]);
-		// printf("close fd_pipe[0] in parent (lastcmd)\n");
+		printf("close fd_pipe[0] in parent (lastcmd)\n");
 	}
+	// close(fd_pipe[1]);
 	if (cmd_table->head->fdout != STDOUT_FILENO)
 	{
 		close(cmd_table->head->fdout);
-		// printf("close fdout in parent\n");
+		printf("close fdout in parent\n");
 	}
 	waitpid(pid, &status, 0);
 	exit_status = WEXITSTATUS(status);

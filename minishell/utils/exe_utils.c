@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:19:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/04 12:11:09 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:00:40 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	pipe_branching(t_cmd *cmd, int fd_pipes[2][2])
 		duplicate(cmd->fdin, STDIN_FILENO, "could not read from infile");
 		close(cmd->fdin);
 	}
-	if (fd_pipes[0][0] != CLOSED)
+	else if (fd_pipes[0][0] != CLOSED)
 	{
 		printf("redirecting pipe[0] to stdin\n");
 		close(fd_pipes[0][1]);

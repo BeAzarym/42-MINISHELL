@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/04 15:24:42 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:20:01 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	execution(t_cmd_lst *cmd_table, char **envp)
 	}
 	get_input_output(cmd_table);
 	if (cmd_table->head->type_in == HEREDOC)
-		heredoc(cmd_table, fd_pipes);
+		status = heredoc(cmd_table, fd_pipes);
 	if (cmd_table->head->cmd != NULL)
 		status = lastcmd_process(cmd_table, envp, fd_pipes[0]);
 	return (status);
@@ -62,8 +62,8 @@ int	execution(t_cmd_lst *cmd_table, char **envp)
 */
 void	execute(t_cmd *cmd, char **envp)
 {
-	char	**paths;
-	char	*cmd_path;
+	char				**paths;
+	char				*cmd_path;
 	struct sigaction	sa;
 
 	if (cmd == NULL)
