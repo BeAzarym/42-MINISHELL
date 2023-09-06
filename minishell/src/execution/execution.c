@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/06 13:57:29 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:44:33 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ int	execution(t_cmd_lst *cmd_table, char **envp)
 		printf("fdout in execution : %d\n", cmd_table->head->fdout);
 		printf("current cmd: %s\n", cmd_table->head->cmd[0]);
 		if (cmd_table->head->type_in == HEREDOC)
+		{
 			heredoc(cmd_table);
+			unlink((const char *)cmd_table->head->infile);
+		}
 		else
 			create_process(cmd_table->head, envp, fd_pipes);
 		cmd_table->head = cmd_table->head->next;

@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/06 14:54:30 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/06 18:55:20 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	heredoc(t_cmd_lst *cmd_table)
 		if (pid == -1)
 			error_exit("could not create here_doc process");
 		cmd_table->head->limiter = in->file;
-		cmd_table->head->fdin = outfile_truncate_open("heredoc.tmp");
+		cmd_table->head->fdin = outfile_append_open("heredoc.tmp");
 		if (pid == CHILD)
 		{
 			read_stdin(cmd_table->head->limiter, cmd_table->head->fdin);
