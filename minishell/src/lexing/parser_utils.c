@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:45:51 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/01 19:45:00 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/06 00:00:34 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_cmd_lst	*add_cmd_lst(t_cmd_lst *lst, t_cmd *cmd)
 	return (lst);
 }
 
-void clear_cmd_lst(t_cmd_lst *lst)
+void	clear_cmd_lst(t_cmd_lst *lst)
 {
 	if (!lst)
 		return ;

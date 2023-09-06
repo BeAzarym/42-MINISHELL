@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/05 16:27:31 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/06 13:57:29 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	execution(t_cmd_lst *cmd_table, char **envp)
 		heredoc(cmd_table);
 	if (cmd_table->head->cmd != NULL)
 		status = lastcmd_process(cmd_table, envp, fd_pipes[0]);
+	if (cmd_table->head->type_in == HEREDOC)
+		unlink((const char *)cmd_table->head->infile);
 	return (status);
 }
 

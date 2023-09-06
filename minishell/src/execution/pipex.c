@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/05 16:26:40 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/06 14:54:30 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,32 @@
 /*
 	printf("in heredoc\n"); 
 */
-// todo : recuperer content input user
+// todo : get content input user
 void	heredoc(t_cmd_lst *cmd_table)
 {
-	cmd_table->head->limiter = cmd_table->head->redir_in->head->file;
-	cmd_table->head->fdin = open("heredoc.tmp", O_RDWR | O_CREAT | O_APPEND,
-			0777);
-	read_stdin(cmd_table->head->limiter, cmd_table->head->fdin);
-	close(cmd_table->head->fdin);
+	int				pid;
+	t_redir_node	*in;
+
+	in = cmd_table->head->redir_in->head;
+	while (in->type == HEREDOC)
+	{
+		pid = fork();
+		if (pid == -1)
+			error_exit("could not create here_doc process");
+		cmd_table->head->limiter = in->file;
+		cmd_table->head->fdin = outfile_truncate_open("heredoc.tmp");
+		if (pid == CHILD)
+		{
+			read_stdin(cmd_table->head->limiter, cmd_table->head->fdin);
+			close(cmd_table->head->fdin);
+		}
+		free(cmd_table->head->infile);
+		cmd_table->head->infile = ft_strdup("heredoc.tmp");
+		wait(NULL);
+		if (in->next == NULL)
+			break ;
+		in = in->next;
+	}
 }
 
 //printf("\nline : %s in read_stdin\n", line);
@@ -108,6 +126,8 @@ int	lastcmd_process(t_cmd_lst *cmd_table, char **envp, int fd_pipe[2])
 		{
 			if (fd_pipe[0] != CLOSED)
 				close(fd_pipe[0]);
+			printf("fdin in lastcmd : %d\n", cmd_table->head->fdin);
+			printf("infile in lastcmd : %s\n", cmd_table->head->infile);
 			duplicate(cmd_table->head->fdin, STDIN_FILENO,
 				"could not read from infile");
 			close(cmd_table->head->fdin);
@@ -125,7 +145,6 @@ int	lastcmd_process(t_cmd_lst *cmd_table, char **envp, int fd_pipe[2])
 		close(fd_pipe[0]);
 		printf("close fd_pipe[0] in parent (lastcmd)\n");
 	}
-	// close(fd_pipe[1]);
 	if (cmd_table->head->fdout != STDOUT_FILENO)
 	{
 		close(cmd_table->head->fdout);
