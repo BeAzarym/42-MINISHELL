@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/08 13:58:08 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:17:16 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,8 @@ int	execution(t_cmd_lst *cmd_table, char **envp)
 	{
 		get_input_output(cmd_table);
 		if (cmd_table->head->type_in == HEREDOC)
-		{
 			heredoc(cmd_table);
-			unlink((const char *)cmd_table->head->infile);
-		}
-		create_process(cmd_table->head, envp, fd_pipes);
+		pipe_execute(cmd_table->head, envp, fd_pipes);
 		cmd_table->head = cmd_table->head->next;
 		fd_pipes[0][0] = fd_pipes[1][0];
 		fd_pipes[0][1] = fd_pipes[1][1];
@@ -53,8 +50,7 @@ int	execution(t_cmd_lst *cmd_table, char **envp)
 		heredoc(cmd_table);
 	if (cmd_table->head->cmd != NULL)
 		status = lastcmd_process(cmd_table, envp, fd_pipes[0]);
-	if (cmd_table->head->type_in == HEREDOC)
-		unlink((const char *)cmd_table->head->infile);
+	unlink("/tmp/.heredoc.tmp");
 	return (status);
 }
 
