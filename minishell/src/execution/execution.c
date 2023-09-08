@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/06 15:44:33 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:58:08 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ static char	*command_access(char *cmd, char **paths);
 /* 
 	Redirects the input and output file descriptors if necessary and execute
 	the commands in processes
+	printf("in loop\n");
+	printf("fdout in execution : %d\n", cmd_table->head->fdout);
+	printf("current cmd: %s\n", cmd_table->head->cmd[0]);
+	printf("ONE MORE PRINT: %d\n", cmd_table->head->type_out);
 */
 int	execution(t_cmd_lst *cmd_table, char **envp)
 {
@@ -29,20 +33,15 @@ int	execution(t_cmd_lst *cmd_table, char **envp)
 	fd_pipes[0][1] = -1;
 	fd_pipes[1][0] = -1;
 	fd_pipes[1][1] = -1;
-	printf("ONE MORE PRINT: %d\n", cmd_table->head->type_out);
 	while (cmd_table->head->next != NULL)
 	{
-		printf("in loop\n");
 		get_input_output(cmd_table);
-		printf("fdout in execution : %d\n", cmd_table->head->fdout);
-		printf("current cmd: %s\n", cmd_table->head->cmd[0]);
 		if (cmd_table->head->type_in == HEREDOC)
 		{
 			heredoc(cmd_table);
 			unlink((const char *)cmd_table->head->infile);
 		}
-		else
-			create_process(cmd_table->head, envp, fd_pipes);
+		create_process(cmd_table->head, envp, fd_pipes);
 		cmd_table->head = cmd_table->head->next;
 		fd_pipes[0][0] = fd_pipes[1][0];
 		fd_pipes[0][1] = fd_pipes[1][1];

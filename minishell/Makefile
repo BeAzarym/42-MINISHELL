@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+         #
+#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/08/31 16:36:36 by cchabeau         ###   ########.fr        #
+#    Updated: 2023/09/08 14:22:35 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,6 +93,12 @@ exe: all
 	@echo "     - Executing $(NAME)... \n"
 	@./$(NAME)
 	@echo "\n     - Done -"
+
+debug : fclean
+	make DEBUG=1
+	
+sanitize : fclean
+	make SANI=1
 
 clean:
 	@echo $(CURSIVE)$(GRAY) "     - Removing object files..." $(NONE)

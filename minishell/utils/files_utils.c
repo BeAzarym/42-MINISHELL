@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:20:02 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/06 18:54:43 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:00:57 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	outfile_truncate_open(char *file)
 	int	fd;
 
 	fd = -1;
-	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	printf("outfile_truncate fd : %i\n", fd);
 	if (fd == -1)
 		error_exit(file);
