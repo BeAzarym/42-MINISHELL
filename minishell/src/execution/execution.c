@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/08 16:17:16 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:50:06 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ int	execution(t_cmd_lst *cmd_table, char **envp)
 	int		status;
 
 	status = 0;
-	fd_pipes[0][0] = -1;
-	fd_pipes[0][1] = -1;
-	fd_pipes[1][0] = -1;
-	fd_pipes[1][1] = -1;
+	pipe_init(fd_pipes);
 	while (cmd_table->head->next != NULL)
 	{
 		get_input_output(cmd_table);
