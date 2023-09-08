@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/08 15:32:22 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:21:11 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ void	set_sigint_in_child(int signal);
 int		execution(t_cmd_lst *cmd_lst, char **envp);
 void	execute(t_cmd *argv, char **envp);
 
-// pipex.c
+// here_doc.c
 void	heredoc(t_cmd_lst *cmd_lst);
-void	read_stdin(const char *limiter, int fd);
+
+// pipex.c
 void	pipe_execute(t_cmd *cmd, char **envp, int fd_pipes[2][2]);
 int		lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fd_pipe[2]);
 
@@ -57,6 +58,7 @@ int		lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fd_pipe[2]);
 // exe_utils.c
 void	error_exit(char *error_msg);
 void	duplicate(int fd_src, int fd_dest, char *error);
+void	pipe_init(int fd_pipes[2][2]);
 void	pipe_branching(t_cmd *cmd, int fd_pipes[2][2]);
 void	pipe_closing(t_cmd *cmd, int fd_pipes[2][2]);
 
