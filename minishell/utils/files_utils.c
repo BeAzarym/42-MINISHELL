@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:20:02 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/08 14:00:57 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/08 19:15:23 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,19 @@
 	Check if the infile is the stdin
 	Otherwise, loops over all the infiles to check that they exist,
 	if all valids, save the last one in memory
-
+	printf("get input\n");
+	printf("redir_in == STDIN\n");
+	printf("type of in : %c\n", cmd_table->head->type_in);
+	printf("infile in get_input : %s\n", cmd_table->head->infile);
 */
 void	get_input_output(t_cmd_lst *cmd_table)
 {
 	t_redir_lst	*in;
 	t_redir_lst	*out;
-	// int			fd_pipes[2][2];
 
-	// fd_pipes[0][0] = -1;
-	// fd_pipes[0][1] = -1;
-	// fd_pipes[1][0] = -1;
-	// fd_pipes[1][1] = -1;
-	printf("get input\n");
 	in = cmd_table->head->redir_in;
 	if (in->head == NULL)
-	{
-		printf("redir_in == STDIN\n");
 		cmd_table->head->fdin = STDIN_FILENO;
-	}
 	else if (in->head->type == HEREDOC)
 		cmd_table->head->type_in = in->head->type;
 	else
@@ -47,9 +41,7 @@ void	get_input_output(t_cmd_lst *cmd_table)
 			in->head = in->head->next;
 		}
 		cmd_table->head->type_in = in->tail->type;
-		printf("type of in : %c\n", cmd_table->head->type_in);
 		cmd_table->head->infile = in->tail->file;
-		printf("infile in get_input : %s\n", cmd_table->head->infile);
 	}
 	if (cmd_table->head->redir_out->head == NULL)
 		cmd_table->head->fdout = STDOUT_FILENO;
@@ -62,6 +54,7 @@ void	get_input_output(t_cmd_lst *cmd_table)
 				cmd_table->head->fdout = outfile_truncate_open(out->head->file);
 			else if (out->head->type == APPEND)
 				cmd_table->head->fdout = outfile_append_open(out->head->file);
+			cmd_table->head->outfile = out->head->file; // not mandatory?
 			out->head = out->head->next;
 		}
 	}

@@ -6,7 +6,7 @@
 #    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/09/08 14:22:35 by angassin         ###   ########.fr        #
+#    Updated: 2023/09/08 17:39:27 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ LIBFT_DIR 	= 	libft/
 LIBFT		= 	$(addprefix libft/, $(LIBFT_A))
 
 MINISHELL	=	builtins/builtin.c execution/execution.c execution/pipex.c \
-				execution/signals.c \
+				execution/signals.c execution/here_doc.c\
 				lexing/lexer.c \
 				lexing/arg_split.c \
 				lexing/token.c \

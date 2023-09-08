@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/05 22:18:02 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/08 19:12:23 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!cmd_table)
 			return (1);
 		status = 0;
-	cmd_line = readline("[Minishell] > ");
+	cmd_line = readline("[Minishell]$ ");
 		// printf("cmd line is: %s\n", cmd_line);
 		if (cmd_line == NULL) // fix the printing of ^D
 		{
@@ -46,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strlen(cmd_line) > 0)
 			add_history(cmd_line);
 		// print_token(lst->head); 
-			cmd_table = parsing(lst, cmd_table);
+		cmd_table = parsing(lst, cmd_table);
 		if (cmd_table->head != NULL)
 		{
 			print_cmd(cmd_table);

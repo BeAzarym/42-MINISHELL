@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/08 17:19:22 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:55:04 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 
 static	void	lastcmd_dup(t_cmd *cmd_node, int fd_pipes[2]);
-
-
+static int	processes_wait(t_cmd_lst *cmd_table, const pid_t pid);
 
 /*
 	Creates a child process : send to the pipe the output of the execution
@@ -57,10 +56,8 @@ void	pipe_execute(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 */
 int	lastcmd_process(t_cmd_lst *cmd_table, char **envp, int fd_pipe[2])
 {
-	int	pid;
-	int	status;
-	int	exit_status;
-	int	i;
+	pid_t	pid;
+	int		exit_status;
 
 	pid = fork();
 	if (pid == -1)
@@ -80,14 +77,7 @@ int	lastcmd_process(t_cmd_lst *cmd_table, char **envp, int fd_pipe[2])
 		close(cmd_table->head->fdout);
 		printf("close fdout in parent\n");
 	}
-	waitpid(pid, &status, 0);
-	exit_status = WEXITSTATUS(status);
-	i = 1;
-	while (i < cmd_table->size)
-	{
-		waitpid(-1, &status, 0);
-		++i;
-	}
+	exit_status = processes_wait(cmd_table, pid);
 	return (exit_status);
 }
 
@@ -112,4 +102,21 @@ static	void	lastcmd_dup(t_cmd *cmd_node, int fd_pipe[2])
 		duplicate(fd_pipe[0], STDIN_FILENO, "could not read from the pipe");
 		close(fd_pipe[0]);
 	}
+}
+
+static int	processes_wait(t_cmd_lst *cmd_table, const pid_t pid)
+{
+	int	status;
+	int	exit_status;
+	int	i;
+
+	waitpid(pid, &status, 0);
+	exit_status = WEXITSTATUS(status);
+	i = 1;
+	while (i < cmd_table->size)
+	{
+		waitpid(-1, &status, 0);
+		++i;
+	}
+	return (exit_status);
 }

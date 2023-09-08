@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:18:52 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/08 17:19:55 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:43:43 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static void	read_stdin(const char *limiter, int fd);
 
 /*
+	Creates a child process to prompt the user.
+	Stores the user input in a temporary file. 
 	printf("in heredoc\n"); 
 */
 void	heredoc(t_cmd_lst *cmd_table)
@@ -43,7 +45,6 @@ void	heredoc(t_cmd_lst *cmd_table)
 		in = in->next;
 	}
 }
-
 
 //printf("\nline : %s in read_stdin\n", line);
 //printf("exit read_stdin\n");

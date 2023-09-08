@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/08 16:50:06 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/08 19:16:03 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	execution(t_cmd_lst *cmd_table, char **envp)
 		if (cmd_table->head->type_in == HEREDOC)
 			heredoc(cmd_table);
 		pipe_execute(cmd_table->head, envp, fd_pipes);
+		if (cmd_table->head->next->redir_out->head == NULL)
+			cmd_table->head->next->fdout = cmd_table->head->fdout; // added for debug
 		cmd_table->head = cmd_table->head->next;
 		fd_pipes[0][0] = fd_pipes[1][0];
 		fd_pipes[0][1] = fd_pipes[1][1];
