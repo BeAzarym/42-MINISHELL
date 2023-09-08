@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/08 14:04:29 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:12:34 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
 	printf("in heredoc\n"); 
 */
-// todo : get content input user
 void	heredoc(t_cmd_lst *cmd_table)
 {
 	int				pid;
@@ -28,14 +27,14 @@ void	heredoc(t_cmd_lst *cmd_table)
 		if (pid == -1)
 			error_exit("could not create here_doc process");
 		cmd_table->head->limiter = in->file;
-		cmd_table->head->fdin = outfile_truncate_open("heredoc.tmp");
+		cmd_table->head->fdin = outfile_truncate_open("/tmp/.heredoc.tmp");
 		if (pid == CHILD)
 		{
 			read_stdin(cmd_table->head->limiter, cmd_table->head->fdin);
 			close(cmd_table->head->fdin);
 		}
 		free(cmd_table->head->infile);
-		cmd_table->head->infile = ft_strdup("heredoc.tmp");
+		cmd_table->head->infile = ft_strdup("/tmp/.heredoc.tmp");
 		wait(NULL);
 		if (in->next == NULL)
 			break ;
@@ -73,7 +72,7 @@ void	read_stdin(const char *limiter, int fd)
 	of the command passed in argument.
 	printf("here\n");
 */
-void	create_process(t_cmd *cmd, char **envp, int fd_pipes[2][2])
+void	pipe_execute(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 {
 	int	pid;
 
@@ -160,4 +159,3 @@ int	lastcmd_process(t_cmd_lst *cmd_table, char **envp, int fd_pipe[2])
 	}
 	return (exit_status);
 }
-
