@@ -3,7 +3,8 @@
 		"minishell.h": "c",
 		"libft.h": "c",
 		"__tuple": "c",
-		"array": "c"
+		"array": "c",
+		"execute.h": "c"
 	},
 	"files.autoSave": "onFocusChange",
 	"[c]": {
