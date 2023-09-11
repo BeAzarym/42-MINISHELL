@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:19:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/11 19:59:50 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 20:05:37 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	pipe_init(int fd_pipes[2][2])
 
 /*
 	Plugs either the infile or the entry of previous pipe to the stdin 
-	and the exit of the pipe to the stdout
-	Closes all the unused fds'
+	and the exit of the pipe to the stdout.
+	Closes all the unused fds'.
 	// ft_putnbr_fd(fd_pipes[1][1], 2);
 	// ft_putchar_fd('\n', 2);
 	cmd->fdout == CLOSED ||

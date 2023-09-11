@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/11 19:21:58 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 20:05:54 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ static int	processes_wait(t_cmd_lst *cmd_table, const pid_t pid);
 /*
 	Creates a child process : send to the pipe the output of the execution
 	of the command passed in argument.
+	Close the pipes and used fds in parent process.
 	printf("here\n");
 	printf("fd_pipe[0] in lastcmd child: %d\n", fd_pipe[0]);
+	ft_putstr_fd("in pipe, command : ", 2);
+	ft_putstr_fd(cmd->cmd[0], 2);
+	ft_putstr_fd("\n", 2);
 */
 void	pipe_execute(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 {
@@ -35,9 +39,6 @@ void	pipe_execute(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 	if (pid == CHILD)
 	{
 		pipe_branching(cmd, fd_pipes);
-		ft_putstr_fd("in pipe, command : ", 2);
-		ft_putstr_fd(cmd->cmd[0], 2);
-		ft_putstr_fd("\n", 2);
 		execute(cmd, envp);
 	}
 	pipe_closing(cmd, fd_pipes);
