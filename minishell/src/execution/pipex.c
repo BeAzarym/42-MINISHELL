@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/10 20:25:18 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 19:21:58 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ int	lastcmd_process(t_cmd_lst *cmd_table, char **envp, int fd_pipe[2])
 	if (fd_pipe[0] != CLOSED)
 	{
 		close(fd_pipe[0]);
-		printf("close fd_pipe[0] in parent (lastcmd)\n");
+		printf("close fd_pipe[0] in lastcmd\n");
 	}
 	if (cmd_table->head->fdout != STDOUT_FILENO)
 	{
 		close(cmd_table->head->fdout);
-		printf("close fdout in parent\n");
+		printf("close fdout in lastcmd\n");
 	}
 	exit_status = processes_wait(cmd_table, pid);
 	return (exit_status);

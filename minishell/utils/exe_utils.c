@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:19:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/11 18:23:39 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 19:59:50 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	pipe_init(int fd_pipes[2][2])
 	Closes all the unused fds'
 	// ft_putnbr_fd(fd_pipes[1][1], 2);
 	// ft_putchar_fd('\n', 2);
+	cmd->fdout == CLOSED ||
 */
 void	pipe_branching(t_cmd *cmd, int fd_pipes[2][2])
 {
@@ -69,9 +70,9 @@ void	pipe_branching(t_cmd *cmd, int fd_pipes[2][2])
 	}
 	close(fd_pipes[1][0]);
 	printf("cmd_outfile = %d\n", cmd->fdout);
-	if (cmd->fdout == CLOSED)
+	if (cmd->fdout == STDOUT_FILENO)
 		duplicate(fd_pipes[1][1], STDOUT_FILENO, "could not write to pipe[1]");
-	else 
+	else
 	{
 		duplicate(cmd->fdout, STDOUT_FILENO, "could not write to fdout");
 		close(cmd->fdout);
@@ -80,13 +81,15 @@ void	pipe_branching(t_cmd *cmd, int fd_pipes[2][2])
 }
 
 /*
-	Closes the fdin except standard in.
+	Closes the fdin and fdout except standard in and out.
 	Closes the open pipes'fds and reinitialize them. 
 */
 void	pipe_closing(t_cmd *cmd, int fd_pipes[2][2])
 {
 	if (cmd->fdin != STDIN_FILENO)
 		close(cmd->fdin);
+	if (cmd->fdout != STDOUT_FILENO)
+		close(cmd->fdout);
 	if (fd_pipes[0][0] != CLOSED)
 	{
 		close(fd_pipes[0][0]);
