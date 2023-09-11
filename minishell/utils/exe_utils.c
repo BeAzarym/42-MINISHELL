@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:19:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/08 18:21:13 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 18:23:39 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,14 @@ void	pipe_branching(t_cmd *cmd, int fd_pipes[2][2])
 		close(cmd->fdin);
 	}
 	close(fd_pipes[1][0]);
-	if (cmd->outfile == NULL)
+	printf("cmd_outfile = %d\n", cmd->fdout);
+	if (cmd->fdout == CLOSED)
 		duplicate(fd_pipes[1][1], STDOUT_FILENO, "could not write to pipe[1]");
+	else 
+	{
+		duplicate(cmd->fdout, STDOUT_FILENO, "could not write to fdout");
+		close(cmd->fdout);
+	}
 	close(fd_pipes[1][1]);
 }
 
