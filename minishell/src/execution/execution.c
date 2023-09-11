@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/11 10:51:04 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:46:51 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	execute(t_cmd *cmd, char **envp)
 
 	if (cmd == NULL)
 		error_exit("parsing of the command failed");
-	sa.sa_handler = &set_sigint_in_child;
+	set_sigint_in_child(SIGINT);
 	if (sigaction(SIGINT, &sa, NULL) == -1
 		|| sigaction(SIGQUIT, &sa, NULL) == -1)
 		error_exit("killed\n");

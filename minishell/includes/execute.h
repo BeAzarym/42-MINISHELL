@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/11 11:23:18 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:43:10 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ bool	g_signalset;
 /*									[Src]									*/
 
 // signal.c
+void	set_signal_handler(int signal, int flags, void (*handler)(int));
 void	ignore_shell_signal(void);
 void	set_sigint_in_child(int signal);
 
