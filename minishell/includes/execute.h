@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/08 17:21:11 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:23:18 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,15 @@
 # define EXECUTE_H
 /*									[Includes]								*/
 
-# include <signal.h>
-
-# include <sys/errno.h>
+# include <stdbool.h>
 // waitpid
 # include <sys/wait.h>
 // open
 # include <fcntl.h>
+// chdir
+# include <unistd.h>
 // other includes
 # include "minishell.h"
-
-/*									[Typedefs]								*/
-
-
 
 /*									[Macros]								*/
 # define CHILD 0

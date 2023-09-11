@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:14:31 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/31 16:43:11 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:12:10 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_token *init_token(char *value)
+t_token	*init_token(char *value)
 {
-	t_token *new;
+	t_token	*new;
 
 	new = malloc(sizeof(t_token));
 	if (!new)
@@ -29,16 +29,17 @@ t_token *init_token(char *value)
 	return (new);
 }
 
-char define_type(char *value)
+char	define_type(char *value)
 {
+	int	i;
+
 	if (!value)
 		return (0);
-	int i;
 	i = 0;
-	while(value[i])
+	while (value[i])
 	{
 		if (value[i] == '\'' || value[i] == '"')
-				i = escape_quotes(value, i);
+			i = escape_quotes(value, i);
 		if (value[i] == '|')
 			return ('P');
 		else if (value[i] == '>')
@@ -50,9 +51,9 @@ char define_type(char *value)
 	return ('W');
 }
 
-t_tkn_lst *init_tkn_lst()
+t_tkn_lst	*init_tkn_lst(void)
 {
-	t_tkn_lst *lst;
+	t_tkn_lst	*lst;
 
 	lst = malloc(sizeof(t_tkn_lst));
 	if (!lst)
@@ -63,9 +64,9 @@ t_tkn_lst *init_tkn_lst()
 	return (lst);
 }
 
-t_tkn_lst *add_lst_tkn(char *value, t_tkn_lst *stack)
+t_tkn_lst	*add_lst_tkn(char *value, t_tkn_lst *stack)
 {
-	t_token *new;
+	t_token	*new;
 
 	new = init_token(value);
 	if (!new)

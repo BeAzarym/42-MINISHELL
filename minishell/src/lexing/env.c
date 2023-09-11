@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:54:49 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/31 17:14:45 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:15:13 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_env_lst	*init_envp(char **envp)
 	if (!lst)
 		return (NULL);
 	i = 0;
-
 	while (envp[i])
 	{
 		tmp = envp_split(envp[i]);

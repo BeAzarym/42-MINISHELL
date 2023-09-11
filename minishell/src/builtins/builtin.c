@@ -6,18 +6,19 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/04 15:20:45 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:13:07 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtins.h"
 
+//echo -nnnnnnnnn -n -nnn -nnnn yann
 int	echo(char *cmd)
 {
 	bool	newline_char;
 
 	newline_char = true;
-	if (ft_strncmp(cmd, "-n ", 3) == OK)  //echo -nnnnnnnnn -n -nnn -nnnn yann
+	if (ft_strncmp(cmd, "-n ", 3) == OK)
 	{
 		newline_char = false;
 		cmd += 3; 
@@ -30,7 +31,6 @@ int	echo(char *cmd)
 
 // void exit(int);
 // {
-	
 // 	// return (EXIT_SUCCESS);
 // }
 

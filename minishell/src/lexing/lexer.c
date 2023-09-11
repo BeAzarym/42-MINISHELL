@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:14:14 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/31 16:39:29 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:26:07 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 t_tkn_lst	*lexing(char *str)
 {
-	char **array;
-	t_tkn_lst *stack;
+	char		**array;
+	t_tkn_lst	*stack;
 	t_tkn_lst	*lst;
-	int i;
+	int			i;
 
 	stack = NULL;
 	lst = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 10:08:05 by angassin          #+#    #+#             */
-/*   Updated: 2023/03/30 10:39:24 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:06:33 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ long	ft_atol(const char *str)
 
 	nb = 0;
 	sign = 1;
-	while (*str && (*str == ' ' || (*str >= '\t' && *str <= '\r' )))
+	while (*str && (*str == ' ' || (*str >= '\t' && *str <= '\r')))
 		str++;
 	while (*str == '-' || *str == '+')
-	{	
+	{
 		if (*(str + 1) == '+' || *(str + 1) == '-')
 			return (0);
 		if (*str == '-')

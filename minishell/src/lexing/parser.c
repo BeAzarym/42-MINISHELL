@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:41:30 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/31 17:08:20 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:26:59 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 t_cmd_lst	*parsing(t_tkn_lst *lst, t_cmd_lst *cmd_table)
 {
 	t_token	*cpy;
-	t_cmd		*node;
+	t_cmd	*node;
 
 	cpy = lst->head;
 	while (cpy)
 	{
 		node = init_cmd_struct();
-		cpy = exctrat_data(cpy, node);
+		cpy = extract_data(cpy, node);
 		cmd_table = add_cmd_lst(cmd_table, node);
 		if (cpy)
 			cpy = cpy->next;
@@ -30,7 +30,7 @@ t_cmd_lst	*parsing(t_tkn_lst *lst, t_cmd_lst *cmd_table)
 	return (cmd_table);
 }
 
-t_token *exctrat_data(t_token *lst, t_cmd *node)
+t_token	*extract_data(t_token *lst, t_cmd *node)
 {
 	if (!lst || !node)
 		return (NULL);

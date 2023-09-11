@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 14:22:34 by angassin          #+#    #+#             */
-/*   Updated: 2022/07/12 15:53:54 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:04:37 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 	Returns a negative value if an error occurs.
 */
 int	ft_printf(const char *format, ...)
-{	
-	t_print				print_struct;
+{
+	t_print	print_struct;
 
 	va_start(print_struct.args, format);
 	print_struct.len = 0;
@@ -41,7 +41,7 @@ int	ft_printf(const char *format, ...)
 	while (*format)
 	{
 		if (*format == '%' && (format + 1))
-		{	
+		{
 			format = eval_format(&print_struct, format + 1);
 		}
 		else

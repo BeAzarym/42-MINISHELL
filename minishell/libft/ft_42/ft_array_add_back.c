@@ -3,40 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_array_add_back.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 23:17:13 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/20 23:54:07 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/11 10:58:13 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-static char **create_single_arr(char **arr, char *str)
+static char	**create_single_arr(char **arr, char *str)
 {
 	arr = malloc(sizeof(char *) * 2);
-		if (!arr)
-			return (NULL);
-		arr[0] = ft_strdup(str);
-		if (!arr[0])
-			return (NULL);
-		arr[1] = NULL;
-		return (arr);
+	if (!arr)
+		return (NULL);
+	arr[0] = ft_strdup(str);
+	if (!arr[0])
+		return (NULL);
+	arr[1] = NULL;
+	return (arr);
 }
 
 char	**array_add_back(char **arr, char *str)
 {
 	char	**result;
 	int		len;
-	int i;
+	int		i;
 
 	result = NULL;
 	if (!str)
-			return (NULL);
+		return (NULL);
 	if (!arr)
 		return (create_single_arr(result, str));
 	len = ft_arraylen(arr);
-	result = ft_calloc(sizeof(char *) , len + 2);
+	result = ft_calloc(sizeof(char *), len + 2);
 	if (!result)
 		return (NULL);
 	i = 0;

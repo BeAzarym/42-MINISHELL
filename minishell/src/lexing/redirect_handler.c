@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:55:06 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/31 16:34:33 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:29:19 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	have_redirect_arg(t_token *lst)
 		if (lst->next->type == 'W')
 			return (1);
 		else if ((lst->next->type == 'I' || lst->next->type == 'O')
-				&& lst->next->next)
+			&& lst->next->next)
 		{
 			if (lst->next->next->type == 'W')
 				return (2);

@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:33:53 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/16 16:55:22 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:14:43 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ static size_t	ft_count_word(char *s, char *sep)
 int	jump_to_next_sep(char *s, char *sep, int i)
 {
 	while (s[i] && !is_sep(s[i], sep))
-		{
-			if (s[i] == '"' || s[i] == '\'')
-				i = escape_quotes(s, i);
-			i++;
-		}
-		return (i);
+	{
+		if (s[i] == '"' || s[i] == '\'')
+			i = escape_quotes(s, i);
+		i++;
+	}
+	return (i);
 }
 
 char	**arg_split(char *s, char *sep)

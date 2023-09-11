@@ -4,7 +4,9 @@
 		"libft.h": "c",
 		"__tuple": "c",
 		"array": "c",
-		"execute.h": "c"
+		"execute.h": "c",
+		"stdbool.h": "c",
+		"history.h": "c"
 	},
 	"files.autoSave": "onFocusChange",
 	"[c]": {

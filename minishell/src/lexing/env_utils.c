@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:57:11 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/31 16:49:09 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:15:33 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ char	**envp_split(char *str)
 
 int	search_in_env(char *key, t_env_lst *env)
 {
-	t_env *cpy;
+	t_env	*cpy;
 
 	if (!key || !env)
 		return (-1);
 	cpy = env->head;
-	while(cpy)
+	while (cpy)
 	{
 		if (ft_strncmp(key, cpy->key, ft_strlen(key)) == 0)
 			return (1);

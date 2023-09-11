@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/04 13:08:52 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:26:59 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,16 @@
 # define MINISHELL_H
 /*									[Includes]								*/
 
-# include <signal.h>
+# include <stdbool.h>
 # include <sys/errno.h>
-// waitpid
-# include <sys/errno.h>
-# include <sys/wait.h>
-// waitpid
-# include <sys/wait.h>
-// open
-# include <fcntl.h>
 // readline
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdio.h>
 // sigaction
 # include <signal.h>
-// chdir
-# include <stdbool.h>
-# include <unistd.h>
 // libft and other includes
 # include "../libft/includes/libft.h"
-// # include "execute.h"
 
 /*									[Typedefs]								*/
 
@@ -151,7 +140,7 @@ t_redir_lst				*add_redir_lst(t_redir_lst *lst, t_redir_node *node);
 t_redir_node			*init_redir_node(void);
 t_redir_lst				*init_redir_lst(void);
 void					print_redir(t_redir_lst *lst);
-t_token					*exctrat_data(t_token *lst, t_cmd *node);
+t_token					*extract_data(t_token *lst, t_cmd *node);
 char					**convert_env_to_exec(t_env_lst *env_lst);
 int						search_in_env(char *key, t_env_lst *env);
 void					clear_redir_lst(t_redir_lst *lst);

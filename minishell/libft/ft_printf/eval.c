@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eval.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:29:30 by angassin          #+#    #+#             */
-/*   Updated: 2022/07/21 17:09:20 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:10:14 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ const char	*eval_format(t_print *print_struct, const char *format)
 {
 	initialise_flags(print_struct);
 	while (*format && !ft_strchr(PLACEHOLDERS, *format))
-	{	
+	{
 		if (*format == '#')
 			print_struct->hash = 1;
 		else if (*format == '.')
@@ -97,7 +97,7 @@ static int	eval_spec(t_print *print_struct, const char specifier)
 	if (!specifier)
 		return (-1);
 	if (ft_strchr(PLACEHOLDERS, specifier))
-	{	
+	{
 		spec_index = index_spec(PLACEHOLDERS, specifier);
 		if (!(spec_index == 6 || spec_index == 7))
 			print_struct->hash = 0;

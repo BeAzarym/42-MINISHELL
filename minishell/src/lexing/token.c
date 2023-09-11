@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:54:44 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/31 16:42:59 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:29:41 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static char	*extract_word(char *word)
 		return (NULL);
 	return (tkn);
 }
-
 
 int	locate_token(char *value, char *token)
 {
@@ -52,8 +51,7 @@ t_tkn_lst	*token_split(t_tkn_lst *stack, t_tkn_lst *new)
 {
 	int		i;
 	char	*tkn;
-
-	t_token *cpy;
+	t_token	*cpy;
 
 	cpy = stack->head;
 	new = init_tkn_lst();

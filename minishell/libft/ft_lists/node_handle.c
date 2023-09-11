@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node_handle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.19.be>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 11:50:05 by angassin          #+#    #+#             */
-/*   Updated: 2023/04/03 13:00:43 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:03:47 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	nodes_iter(t_node *node, void (*f)(int))
 	{
 		f(node->value);
 		node = node->next;
-	}	
+	}
 }
 
 /*

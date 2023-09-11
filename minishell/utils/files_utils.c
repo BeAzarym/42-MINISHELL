@@ -6,12 +6,14 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:20:02 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/08 19:15:23 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 10:48:01 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/execute.h"
+
+static	void	get_outfile(t_cmd_lst *cmd_table);
 
 /*
 	Check if the infile is the stdin
@@ -25,7 +27,6 @@
 void	get_input_output(t_cmd_lst *cmd_table)
 {
 	t_redir_lst	*in;
-	t_redir_lst	*out;
 
 	in = cmd_table->head->redir_in;
 	if (in->head == NULL)
@@ -43,6 +44,18 @@ void	get_input_output(t_cmd_lst *cmd_table)
 		cmd_table->head->type_in = in->tail->type;
 		cmd_table->head->infile = in->tail->file;
 	}
+	get_outfile(cmd_table);
+	if (cmd_table->head->type_in == INFILE)
+		cmd_table->head->fdin = infile_open(cmd_table->head->infile);
+}
+
+/*
+	cmd_table->head->outfile = out->head->file;
+*/
+static	void	get_outfile(t_cmd_lst *cmd_table)
+{
+	t_redir_lst	*out;
+
 	if (cmd_table->head->redir_out->head == NULL)
 		cmd_table->head->fdout = STDOUT_FILENO;
 	else
@@ -54,12 +67,9 @@ void	get_input_output(t_cmd_lst *cmd_table)
 				cmd_table->head->fdout = outfile_truncate_open(out->head->file);
 			else if (out->head->type == APPEND)
 				cmd_table->head->fdout = outfile_append_open(out->head->file);
-			cmd_table->head->outfile = out->head->file; // not mandatory?
 			out->head = out->head->next;
 		}
 	}
-	if (cmd_table->head->type_in == INFILE)
-		cmd_table->head->fdin = infile_open(cmd_table->head->infile);
 }
 
 int	infile_open(char *file)
