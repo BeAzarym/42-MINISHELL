@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/10 20:33:35 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:46:38 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd_lst	*cmd_table;
 	char		*cmd_line;
 	int			status;
+	char		**env;
 
 	g_signalset = false;
 	ignore_shell_signal();
@@ -50,7 +51,8 @@ int	main(int argc, char **argv, char **envp)
 		if (cmd_table->head != NULL)
 		{
 			print_cmd(cmd_table);
-			status = execution(cmd_table, envp);
+			env = convert_env_to_exec(env_lst);
+			status = execution(cmd_table, env);
 			// printf("debug got here\n");
 			if (ft_strncmp(cmd_line, "cd", 2) == OK)
 				status = cd(cmd_line + 3);
