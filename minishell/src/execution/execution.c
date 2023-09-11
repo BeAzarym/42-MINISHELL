@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/08 19:16:03 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/10 20:31:43 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ static char	*command_access(char *cmd, char **paths);
 	printf("fdout in execution : %d\n", cmd_table->head->fdout);
 	printf("current cmd: %s\n", cmd_table->head->cmd[0]);
 	printf("ONE MORE PRINT: %d\n", cmd_table->head->type_out);
-*/
+	ls > out | cat -e :
+	if (cmd_table->head->next->redir_out->head == NULL)
+			cmd_table->head->next->fdout = cmd_table->head->fdout;
+*/	
 int	execution(t_cmd_lst *cmd_table, char **envp)
 {
 	int		fd_pipes[2][2];
@@ -36,8 +39,6 @@ int	execution(t_cmd_lst *cmd_table, char **envp)
 		if (cmd_table->head->type_in == HEREDOC)
 			heredoc(cmd_table);
 		pipe_execute(cmd_table->head, envp, fd_pipes);
-		if (cmd_table->head->next->redir_out->head == NULL)
-			cmd_table->head->next->fdout = cmd_table->head->fdout; // added for debug
 		cmd_table->head = cmd_table->head->next;
 		fd_pipes[0][0] = fd_pipes[1][0];
 		fd_pipes[0][1] = fd_pipes[1][1];

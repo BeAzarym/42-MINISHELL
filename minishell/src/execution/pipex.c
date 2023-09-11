@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/08 18:55:04 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/10 20:25:18 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	pipe_execute(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 	Executes the last command in a child process and wait for all
 	the child processes to end in the parent.
 	Returns the exit status of the last command.
-	printf("lastcmd : %s\n", cmd_table->head->cmd[0]);
 	printf("previous: [%d; %d]\n", fd_pipe[0], fd_pipe[1]);
 	printf("fdout in lastcmd child: %d\n", cmd_table->head->fdout);
 	printf("fdin in lastcmd : %d\n", cmd_table->head->fdin);
@@ -64,6 +63,7 @@ int	lastcmd_process(t_cmd_lst *cmd_table, char **envp, int fd_pipe[2])
 		error_exit("could not create lastcmd process");
 	if (pid == CHILD)
 	{
+		printf("lastcmd : %s\n", cmd_table->head->cmd[0]);
 		lastcmd_dup(cmd_table->head, fd_pipe);
 		execute(cmd_table->head, envp);
 	}
