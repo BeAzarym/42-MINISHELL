@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/11 20:05:54 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/11 20:11:40 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static int	processes_wait(t_cmd_lst *cmd_table, const pid_t pid);
 	of the command passed in argument.
 	Close the pipes and used fds in parent process.
 	printf("here\n");
+	printf("previous: [%d; %d], next: [%d; %d]\n",
+		fd_pipes[0][0], fd_pipes[0][1], fd_pipes[1][0], fd_pipes[1][1]);
 	printf("fd_pipe[0] in lastcmd child: %d\n", fd_pipe[0]);
 	ft_putstr_fd("in pipe, command : ", 2);
 	ft_putstr_fd(cmd->cmd[0], 2);
@@ -31,8 +33,6 @@ void	pipe_execute(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 
 	if (pipe(fd_pipes[1]) == CLOSED)
 		error_exit("could not create pipe");
-	printf("previous: [%d; %d], next: [%d; %d]\n",
-		fd_pipes[0][0], fd_pipes[0][1], fd_pipes[1][0], fd_pipes[1][1]);
 	pid = fork();
 	if (pid == -1)
 		error_exit("could not create process");
@@ -53,6 +53,8 @@ void	pipe_execute(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 	printf("fdout in lastcmd child: %d\n", cmd_table->head->fdout);
 	printf("fdin in lastcmd : %d\n", cmd_table->head->fdin);
 	printf("infile in lastcmd : %s\n", cmd_table->head->infile);
+	printf("close fd_pipe[0] in lastcmd\n");
+	printf("close fdout in lastcmd\n");
 */
 int	lastcmd_process(t_cmd_lst *cmd_table, char **envp, int fd_pipe[2])
 {
@@ -69,15 +71,9 @@ int	lastcmd_process(t_cmd_lst *cmd_table, char **envp, int fd_pipe[2])
 		execute(cmd_table->head, envp);
 	}
 	if (fd_pipe[0] != CLOSED)
-	{
 		close(fd_pipe[0]);
-		printf("close fd_pipe[0] in lastcmd\n");
-	}
 	if (cmd_table->head->fdout != STDOUT_FILENO)
-	{
 		close(cmd_table->head->fdout);
-		printf("close fdout in lastcmd\n");
-	}
 	exit_status = processes_wait(cmd_table, pid);
 	return (exit_status);
 }
