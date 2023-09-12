@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:45:51 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/06 00:00:34 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/12 13:32:13 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_cmd	*init_cmd_struct(void)
 		return (NULL);
 	new->cmd = NULL;
 	new->infile = NULL;
-	new->outfile = NULL;
 	new->type_in = -1;
 	new->type_out = -1;
 	new->fdin = -1;
@@ -73,7 +72,6 @@ void	clear_cmd_lst(t_cmd_lst *lst)
 	while (lst->head)
 	{
 		free(lst->head->infile);
-		free(lst->head->outfile);
 		clear_redir_lst(lst->head->redir_in);
 		clear_redir_lst(lst->head->redir_out);
 		ft_array_clear(lst->head->cmd);
