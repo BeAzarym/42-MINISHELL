@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/11 11:46:38 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/13 18:09:30 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,17 @@ int	main(int argc, char **argv, char **envp)
 		cmd_table = init_cmd_lst();
 		if (!cmd_table)
 			return (1);
-		status = 0;
-	cmd_line = readline("[Minishell]$ ");
-		// printf("cmd line is: %s\n", cmd_line);
+	 	cmd_line = readline("[Minishell]$ ");
 		if (cmd_line == NULL) // to do : fix the printing of ^D
 		{
 			printf("exit\n");
-			exit(EXIT_SUCCESS);
+			printf("exit status : %d\n", status);
+			exit(status);
 		}
+		if (ft_strncmp(cmd_line, "", 1) == OK)
+			status = 0;
+		printf("cmd line is: %s\n", cmd_line);
+		printf("status : %d\n", status);
 		lst = lexing(cmd_line);
 		if (ft_strlen(cmd_line) > 0)
 			add_history(cmd_line);
