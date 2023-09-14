@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/13 18:09:30 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:44:58 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	main(int argc, char **argv, char **envp)
 		if (cmd_line == NULL) // to do : fix the printing of ^D
 		{
 			printf("exit\n");
-			printf("exit status : %d\n", status);
 			exit(status);
 		}
 		if (ft_strncmp(cmd_line, "", 1) == OK)
