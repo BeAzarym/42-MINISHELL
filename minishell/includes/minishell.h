@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/17 18:15:09 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/17 18:55:14 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_cmd
 	int					type_out;
 	int					fdin;
 	int					fdout;
-	char				*infile;	
+	char				*infile;
 	const char			*limiter;
 	t_redir_lst			*redir_in;
 	t_redir_lst			*redir_out;
@@ -153,6 +153,12 @@ int						search_in_env(char *key, t_env_lst *env);
 char					*substitute_env(char *key, t_env_lst *env, int status);
 char					*get_key_value(char *key, t_env_lst *env, int status);
 char					*extract_word_sep(char *str, char *sep);
-int				compute_len(char *str, char *sep);
+int						compute_len(char *str, char *sep);
+int						verify_closed_qhotes(char *str);
+char					*handle_d_qhote(char *str, t_env_lst *env, int status);
+char					*handle_s_qhote(char *str);
+char					*handle_without_q(char *str, t_env_lst *env,
+							int status);
+char					*extract_key(char *str);
 
 #endif

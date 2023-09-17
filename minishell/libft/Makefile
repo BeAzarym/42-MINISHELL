@@ -6,7 +6,7 @@
 #    By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/04 17:09:20 by angassin          #+#    #+#              #
-#    Updated: 2023/08/31 16:43:48 by cchabeau         ###   ########.fr        #
+#    Updated: 2023/09/17 18:57:24 by cchabeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ LIBC		=	ft_isalpha.c ft_isdigit.c  ft_isalnum.c ft_isascii.c \
 				ft_strdup.c ft_strstr.c ft_atol.c 
 LIBC_SRC	=	$(addprefix libc/, $(LIBC))
 
-FT_42		=	ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c  \
+FT_42		=	ft_substr.c ft_strjoin.c ft_strjoin_shell.c ft_strtrim.c ft_split.c  \
 				ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
 				ft_putendl_fd.c  ft_putnbr_fd.c ft_nbrlen_base.c \
 				ft_putnbr_base_fd.c ft_put_unbr_base_fd.c ft_unbrlen_base.c \
