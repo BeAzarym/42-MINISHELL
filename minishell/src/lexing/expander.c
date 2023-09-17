@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:43:22 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/17 18:12:32 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/17 18:21:57 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	verify_closed_qhotes(char *str)
 	return (-1);
 }
 
-void	process_expand(t_cmd_dllst *cmd, t_env_lst *env, int status)
+void	process_expand(t_cmd_lst *cmd, t_env_lst *env, int status)
 {
 	t_cmd	*lst;
 	int		i;

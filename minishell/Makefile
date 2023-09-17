@@ -6,7 +6,7 @@
 #    By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/09/17 18:16:52 by cchabeau         ###   ########.fr        #
+#    Updated: 2023/09/17 18:19:58 by cchabeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ MINISHELL	=	builtins/builtin.c execution/execution.c execution/pipex.c \
 				lexing/parser.c \
 				lexing/parser_utils.c \
 				lexing/redirect_handler.c lexing/redir_struct.c \
-				lexing/expander.c lexing/expander_utils.c
+				lexing/expander.c lexing/expander_utils.c \
 				utils.c minishell.c 
 MINISHELL_SRC	= $(addprefix src/, $(MINISHELL))
 

@@ -6,13 +6,16 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/17 18:18:53 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/17 18:23:14 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/execute.h"
 #include "../includes/builtins.h"
+
+ bool	g_signalset = false;
+
 
 int	main(int argc, char **argv, char **envp)
 {
