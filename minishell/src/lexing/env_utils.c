@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:57:11 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/11 11:15:33 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/17 18:14:00 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	search_in_env(char *key, t_env_lst *env)
 	cpy = env->head;
 	while (cpy)
 	{
+		if (ft_strncmp(key, "?", ft_strlen(key)) == 0)
+			return (1);
 		if (ft_strncmp(key, cpy->key, ft_strlen(key)) == 0)
 			return (1);
 		cpy = cpy->next;

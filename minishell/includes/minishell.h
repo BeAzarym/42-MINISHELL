@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/12 13:29:54 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/17 18:15:09 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,14 @@ int						search_in_env(char *key, t_env_lst *env);
 void					clear_redir_lst(t_redir_lst *lst);
 void					clear_cmd_lst(t_cmd_lst *lst);
 int						need_substitute(char *str);
+int						have_qhotes(char *str);
+void					process_expand(t_cmd_lst *cmd, t_env_lst *env,
+							int status);
+char					*expand(char *str, t_env_lst *env, int status);
+int						search_in_env(char *key, t_env_lst *env);
+char					*substitute_env(char *key, t_env_lst *env, int status);
+char					*get_key_value(char *key, t_env_lst *env, int status);
+char					*extract_word_sep(char *str, char *sep);
+int				compute_len(char *str, char *sep);
 
 #endif
