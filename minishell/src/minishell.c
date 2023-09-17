@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/11 11:46:38 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/17 18:18:53 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	main(int argc, char **argv, char **envp)
 			add_history(cmd_line);
 		// print_token(lst->head); 
 		cmd_table = parsing(lst, cmd_table);
+		process_expand(cmd_table, env_lst, status);
 		if (cmd_table->head != NULL)
 		{
 			print_cmd(cmd_table);
