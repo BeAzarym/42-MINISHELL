@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   qhote_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:41:37 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/17 18:55:08 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:37:11 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char	*get_key_value(char *key, t_env_lst *env, int status)
 	t_env	*cpy;
 	char	*value;
 
+	value = NULL;
 	if (ft_strncmp(key, "?", 1) == 0)
 	{
 		value = ft_itoa(status);
