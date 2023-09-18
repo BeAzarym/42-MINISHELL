@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:43:22 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/18 13:43:39 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:20:53 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ char	*handle_without_q(char *str, t_env_lst *env, int status)
 	char	*tmp;
 	char	*res;
 
+	res = NULL;
 	i = 0;
 	while (str[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:41:37 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/18 13:37:11 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:49:56 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ char	*handle_d_qhote(char *str, t_env_lst *env, int status)
 	char	*tmp;
 	char	*res;
 
+	res = NULL;
 	i = -1;
 	while (str[++i])
 	{
