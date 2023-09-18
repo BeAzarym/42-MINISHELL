@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/18 13:05:59 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:44:14 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ int	main(int argc, char **argv, char **envp)
 		cmd_table = init_cmd_lst();
 		if (!cmd_table)
 			return (1);
+		set_sigint_in_main(SIGINT);
 	 	cmd_line = readline("[Minishell]$ ");
 		if (cmd_line == NULL) // to do : fix the printing of ^D
 		{
 			printf("exit\n");
 			exit(status);
 		}
-		set_sigint_in_main(SIGINT);
 		if (ft_strncmp(cmd_line, "", 1) == OK)
 			status = 0;
 		printf("cmd line is: %s\n", cmd_line);

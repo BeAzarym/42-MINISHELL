@@ -6,7 +6,7 @@
 #    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/09/18 13:03:20 by angassin         ###   ########.fr        #
+#    Updated: 2023/09/18 13:29:52 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,19 +79,17 @@ OBJ			= 	$(SRC:.c=.o)
 
 #---------------------------------RULES-----------------------------------------
 
-all: $(NAME)
-
 %o: %c
 	@echo $(GRAY)"Compiling...";
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -Iincludes  -c $< -o  $(<:.c=.o)
 
-
+all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo $(CURSIVE)$(GRAY) "     - Making libft..." $(NONE)
 	@make -C $(LIBFT_DIR)
 	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
-	$(CC) $(CFLAGS)  $(OBJ) $(LIBFT)  $(LDFLAGS) $(CPPFLAGS) $(READLINE) -o $(NAME)
+	@$(CC) $(CFLAGS)  $(OBJ) $(LIBFT)  $(LDFLAGS) $(CPPFLAGS) $(READLINE) -o $(NAME)
 	@echo $(GREEN)"- Compiled -"$(NONE)
 
 exe: all
