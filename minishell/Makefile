@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+         #
+#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/09/17 18:52:26 by cchabeau         ###   ########.fr        #
+#    Updated: 2023/09/18 14:53:20 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,10 @@ RED='\033[1;91m'
 NAME		= minishell
 
 CC			= gcc
+
+CPPFLAGS 	= -I$(HOME)/.brew/opt/readline/include
+
+LDFLAGS 	= -L$(HOME)/.brew/opt/readline/lib
 
 CFLAGS		= -Wall -Wextra -Werror
 
@@ -48,11 +52,11 @@ endif
 #--------------------------------SOURCES----------------------------------------
 
 SRC			= 	$(MINISHELL_SRC) $(UTILS_SRC)
-SRC_BONUS	= 	$(BONUS_SRC) $(UTILS_SRC)
 
 LIBFT_A 	= 	libft.a
 LIBFT_DIR 	= 	libft/
 LIBFT		= 	$(addprefix libft/, $(LIBFT_A))
+READLINE	=	 -lreadline 
 
 MINISHELL	=	builtins/builtin.c execution/execution.c execution/pipex.c \
 				execution/signals.c execution/here_doc.c\
@@ -79,7 +83,7 @@ OBJ			= 	$(SRC:.c=.o)
 
 %o: %c
 	@echo $(GRAY)"Compiling...";
-	@$(CC) $(CFLAGS) -Iincludes -c $< -o  $(<:.c=.o)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -Iincludes  -c $< -o  $(<:.c=.o)
 
 all: $(NAME)
 
@@ -87,7 +91,7 @@ $(NAME): $(OBJ)
 	@echo $(CURSIVE)$(GRAY) "     - Making libft..." $(NONE)
 	@make -C $(LIBFT_DIR)
 	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -lreadline -o $(NAME)
+	@$(CC) $(CFLAGS)  $(OBJ) $(LIBFT)  $(LDFLAGS) $(CPPFLAGS) $(READLINE) -o $(NAME)
 	@echo $(GREEN)"- Compiled -"$(NONE)
 
 exe: all

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/17 18:55:14 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:53:56 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 # include <stdbool.h>
 # include <sys/errno.h>
+# include <stdio.h>
 // readline
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <stdio.h>
 // sigaction
 # include <signal.h>
 // libft and other includes
