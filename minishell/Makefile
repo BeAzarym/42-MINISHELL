@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: angassin <angassin@student.s19.be>         +#+  +:+       +#+         #
+#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/09/17 22:19:19 by angassin         ###   ########.fr        #
+#    Updated: 2023/09/18 13:03:20 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,10 @@ RED='\033[1;91m'
 NAME		= minishell
 
 CC			= gcc
+
+CPPFLAGS 	= -I$(HOME)/.brew/opt/readline/include
+
+LDFLAGS 	= -L$(HOME)/.brew/opt/readline/lib
 
 CFLAGS		= -Wall -Wextra -Werror
 
@@ -48,7 +52,6 @@ endif
 #--------------------------------SOURCES----------------------------------------
 
 SRC			= 	$(MINISHELL_SRC) $(UTILS_SRC)
-SRC_BONUS	= 	$(BONUS_SRC) $(UTILS_SRC)
 
 LIBFT_A 	= 	libft.a
 LIBFT_DIR 	= 	libft/
@@ -76,17 +79,19 @@ OBJ			= 	$(SRC:.c=.o)
 
 #---------------------------------RULES-----------------------------------------
 
+all: $(NAME)
+
 %o: %c
 	@echo $(GRAY)"Compiling...";
-	@$(CC) $(CFLAGS) -Iincludes -c $< -o  $(<:.c=.o)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -Iincludes  -c $< -o  $(<:.c=.o)
 
-all: $(NAME)
+
 
 $(NAME): $(OBJ)
 	@echo $(CURSIVE)$(GRAY) "     - Making libft..." $(NONE)
 	@make -C $(LIBFT_DIR)
 	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(READLINE)  -o $(NAME)
+	$(CC) $(CFLAGS)  $(OBJ) $(LIBFT)  $(LDFLAGS) $(CPPFLAGS) $(READLINE) -o $(NAME)
 	@echo $(GREEN)"- Compiled -"$(NONE)
 
 exe: all
