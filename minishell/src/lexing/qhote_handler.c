@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   qhote_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:41:37 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/18 14:49:56 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:19:55 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*handle_s_qhote(char *str)
+char	*handle_s_quote(char *str)
 {
 	int		i;
 	int		status;
@@ -99,7 +99,7 @@ char	*substitute_env(char *key, t_env_lst *env, int status)
 	return (value);
 }
 
-char	*handle_d_qhote(char *str, t_env_lst *env, int status)
+char	*handle_d_quote(char *str, t_env_lst *env, int status)
 {
 	int		i;
 	char	*tmp;

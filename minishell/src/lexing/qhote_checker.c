@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   qhote_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:45:00 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/18 14:08:27 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:19:55 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	set_status_true(int *dq_status, int index)
 	return (index + 1);
 }
 
-int	verify_closed_qhotes(char *str)
+int	verify_closed_quotes(char *str)
 {
 	int	i;
 	int d_qh;

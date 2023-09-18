@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/18 14:53:56 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:19:55 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int						search_in_env(char *key, t_env_lst *env);
 void					clear_redir_lst(t_redir_lst *lst);
 void					clear_cmd_lst(t_cmd_lst *lst);
 int						need_substitute(char *str);
-int						have_qhotes(char *str);
+int						have_quotes(char *str);
 void					process_expand(t_cmd_lst *cmd, t_env_lst *env,
 							int status);
 char					*expand(char *str, t_env_lst *env, int status);
@@ -154,9 +154,9 @@ char					*substitute_env(char *key, t_env_lst *env, int status);
 char					*get_key_value(char *key, t_env_lst *env, int status);
 char					*extract_word_sep(char *str, char *sep);
 int						compute_len(char *str, char *sep);
-int						verify_closed_qhotes(char *str);
-char					*handle_d_qhote(char *str, t_env_lst *env, int status);
-char					*handle_s_qhote(char *str);
+int						verify_closed_quotes(char *str);
+char					*handle_d_quote(char *str, t_env_lst *env, int status);
+char					*handle_s_quote(char *str);
 char					*handle_without_q(char *str, t_env_lst *env,
 							int status);
 char					*extract_key(char *str);

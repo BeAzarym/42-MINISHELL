@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:43:22 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/18 14:20:53 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:19:55 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	have_qhotes(char *str)
+int	have_quotes(char *str)
 {
 	int	i;
 
@@ -52,7 +52,7 @@ void	process_expand(t_cmd_lst *cmd, t_env_lst *env, int status)
 		i = 0;
 		while (lst->cmd[i])
 		{
-			if (have_qhotes(lst->cmd[i]) || need_substitute(lst->cmd[i]))
+			if (have_quotes(lst->cmd[i]) || need_substitute(lst->cmd[i]))
 				lst->cmd[i] = expand(lst->cmd[i], env, status);
 			i++;
 		}
@@ -96,20 +96,20 @@ char	*expand(char *str, t_env_lst *env, int status)
 	char	*res;
 
 	res = NULL;
-	if (verify_closed_qhotes(str) == -1)
+	if (verify_closed_quotes(str) == -1)
 		return (NULL);
 	i = -1;
 	while (str[++i])
 	{
 		if (str[i] == '\'')
 		{
-			tmp = handle_s_qhote(&str[i]);
+			tmp = handle_s_quote(&str[i]);
 			i += escape_quotes(&str[i], i);
 			res = ft_strjoin_null(tmp, res);
 		}
 		else if (str[i] == '"')
 		{
-			tmp = handle_d_qhote(&str[i], env, status);
+			tmp = handle_d_quote(&str[i], env, status);
 			i += escape_quotes(&str[i], i);
 			res = ft_strjoin_null(tmp, res);
 		}
