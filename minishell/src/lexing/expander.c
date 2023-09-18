@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:43:22 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/17 19:13:30 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:43:39 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ char	*expand(char *str, t_env_lst *env, int status)
 	char	*tmp;
 	char	*res;
 
+	res = NULL;
 	if (verify_closed_qhotes(str) == -1)
 		return (NULL);
 	i = -1;
