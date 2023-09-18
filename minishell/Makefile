@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: angassin <angassin@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/09/20 09:40:18 by angassin         ###   ########.fr        #
+=======
+#    Updated: 2023/09/18 21:08:58 by angassin         ###   ########.fr        #
+>>>>>>> added flags for computer M1
 #                                                                              #
 # **************************************************************************** #
 
