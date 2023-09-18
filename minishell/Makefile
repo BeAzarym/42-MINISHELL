@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: angassin <angassin@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/09/08 17:39:27 by angassin         ###   ########.fr        #
+#    Updated: 2023/09/17 22:19:19 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRC_BONUS	= 	$(BONUS_SRC) $(UTILS_SRC)
 LIBFT_A 	= 	libft.a
 LIBFT_DIR 	= 	libft/
 LIBFT		= 	$(addprefix libft/, $(LIBFT_A))
+READLINE	=	 -lreadline 
 
 MINISHELL	=	builtins/builtin.c execution/execution.c execution/pipex.c \
 				execution/signals.c execution/here_doc.c\
@@ -85,7 +86,7 @@ $(NAME): $(OBJ)
 	@echo $(CURSIVE)$(GRAY) "     - Making libft..." $(NONE)
 	@make -C $(LIBFT_DIR)
 	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -lreadline -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(READLINE)  -o $(NAME)
 	@echo $(GREEN)"- Compiled -"$(NONE)
 
 exe: all

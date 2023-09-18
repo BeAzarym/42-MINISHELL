@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 23:40:50 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/11 15:48:41 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:15:07 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 
-void	set_signal_handler(int signal, int flags, void (*handler)(int))
+static void	set_signal_handler(int signal, int flags, void (*handler)(int))
 {
 	struct sigaction	sa;
 
@@ -33,9 +33,20 @@ void	ignore_shell_signal(void)
 	g_signalset = true;
 }
 
-// ctrl-c
+// ctrl-c in child
 void	set_sigint_in_child(int signal)
 {
 	if (g_signalset && signal == SIGINT)
 		set_signal_handler(SIGINT, 0, SIG_DFL);
+}
+
+// ctrl-c in main
+void	set_sigint_in_main(int signal)
+{
+	if (g_signalset && signal == SIGINT)
+	{
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }

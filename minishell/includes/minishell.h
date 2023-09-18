@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/12 13:29:54 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/17 22:32:15 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,8 @@ int						search_in_env(char *key, t_env_lst *env);
 void					clear_redir_lst(t_redir_lst *lst);
 void					clear_cmd_lst(t_cmd_lst *lst);
 int						need_substitute(char *str);
+
+// readline functions
+// void					rl_replace_line(const char *text, int clear_undo);
 
 #endif
