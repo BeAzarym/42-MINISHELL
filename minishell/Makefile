@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: angassin <angassin@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/09/18 15:19:55 by angassin         ###   ########.fr        #
+#    Updated: 2023/09/18 21:08:58 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,10 @@ NAME		= minishell
 
 CC			= gcc
 
-CPPFLAGS 	= -I$(HOME)/.brew/opt/readline/include
-
-LDFLAGS 	= -L$(HOME)/.brew/opt/readline/lib
+# CPPFLAGS 	= -I$(HOME)/.brew/opt/readline/include
+CPPFLAGS 	= -I/opt/homebrew/opt/readline/include
+# LDFLAGS 	= -L$(HOME)/.brew/opt/readline/lib
+LDFLAGS		= -L/opt/homebrew/opt/readline/lib
 
 CFLAGS		= -Wall -Wextra -Werror
 
