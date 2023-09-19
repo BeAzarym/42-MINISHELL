@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/18 15:19:55 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:01:22 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,5 +160,6 @@ char					*handle_s_quote(char *str);
 char					*handle_without_q(char *str, t_env_lst *env,
 							int status);
 char					*extract_key(char *str);
+char *process_substitution(char *str, t_env_lst *env, int status);
 
 #endif

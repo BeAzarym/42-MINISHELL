@@ -6,40 +6,12 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:43:22 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/19 16:51:36 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/19 20:59:28 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/execute.h"
 #include "../../includes/minishell.h"
-
-int	have_quotes(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\'' || str[i] == '"')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	need_substitute(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '$' && (ft_isalnum(str[i + 1]) || str[i + 1] == '_'
-				|| str[i + 1] == '?'))
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 void	process_expand(t_cmd_lst *cmd, t_env_lst *env, int status)
 {
@@ -52,6 +24,8 @@ void	process_expand(t_cmd_lst *cmd, t_env_lst *env, int status)
 		i = 0;
 		while (lst->cmd[i])
 		{
+			if (verify_closed_quotes(lst->cmd[i]) == -1)
+				error_exit("ERROR: quote unclosed\n");
 			if (have_quotes(lst->cmd[i]) || need_substitute(lst->cmd[i]))
 				lst->cmd[i] = expand(lst->cmd[i], env, status);
 			i++;
@@ -74,11 +48,7 @@ char	*handle_without_q(char *str, t_env_lst *env, int status)
 		{
 			tmp = extract_key(&str[i + 1]);
 			i += ft_strlen(tmp) + 1;
-			if (search_in_env(tmp, env))
-				tmp = substitute_env(tmp, env, status);
-			else
-				tmp = ft_strdup("");
-			res = ft_strjoin_null(tmp, res);
+			res = process_substitution(tmp, env, status);
 		}
 		else if (str[i] != '$')
 		{
@@ -90,6 +60,27 @@ char	*handle_without_q(char *str, t_env_lst *env, int status)
 	return (res);
 }
 
+static char	*process_quote(char *str, int i, t_env_lst *env, int status)
+{
+	char	*tmp;
+	char	*res;
+
+	res = NULL;
+	if (str[i] == '\'')
+	{
+		tmp = handle_s_quote(&str[i]);
+		res = ft_strjoin_null(tmp, res);
+		return (res);
+	}
+	else
+	{
+		tmp = handle_d_quote(&str[i + 1], env, status);
+		res = ft_strjoin_null(tmp, res);
+		return (res);
+	}
+	return (res);
+}
+
 char	*expand(char *str, t_env_lst *env, int status)
 {
 	int		i;
@@ -97,20 +88,12 @@ char	*expand(char *str, t_env_lst *env, int status)
 	char	*res;
 
 	res = NULL;
-	if (verify_closed_quotes(str) == -1)
-		return (NULL);
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'')
+		if (str[i] == '\'' || str[i] == '"')
 		{
-			tmp = handle_s_quote(&str[i]);
-			i += ft_strlen(tmp) + 2;
-			res = ft_strjoin_null(tmp, res);
-		}
-		else if (str[i] == '"')
-		{
-			tmp = handle_d_quote(&str[i + 1], env, status);
+			tmp = process_quote(str, i, env, status);
 			i = escape_quotes(str, i) + 1;
 			res = ft_strjoin_null(tmp, res);
 		}
