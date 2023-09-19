@@ -6,7 +6,7 @@
 #    By: angassin <angassin@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/09/21 19:58:34 by angassin         ###   ########.fr        #
+#    Updated: 2023/09/21 19:59:57 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,10 @@ NAME		= minishell
 
 CC			= gcc
 
-# CPPFLAGS 	= -I$(HOME)/.brew/opt/readline/include
-CPPFLAGS 	= -I/opt/homebrew/opt/readline/include
-# LDFLAGS 	= -L$(HOME)/.brew/opt/readline/lib
-LDFLAGS		= -L/opt/homebrew/opt/readline/lib
+CPPFLAGS 	= -I$(HOME)/.brew/opt/readline/include
+# CPPFLAGS 	= -I/opt/homebrew/opt/readline/include
+LDFLAGS 	= -L$(HOME)/.brew/opt/readline/lib
+# LDFLAGS		= -L/opt/homebrew/opt/readline/lib
 
 CFLAGS		= -Wall -Wextra -Werror
 
