@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:43:22 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/19 20:59:28 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:39:00 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,12 @@ char	*handle_without_q(char *str, t_env_lst *env, int status)
 		{
 			tmp = extract_key(&str[i + 1]);
 			i += ft_strlen(tmp) + 1;
-			res = process_substitution(tmp, env, status);
+			tmp = process_substitution(tmp, env, status);
+			res = ft_strjoin_null(tmp, res);
 		}
 		else if (str[i] != '$')
 		{
-			tmp = extract_word_sep(&str[i], "$");
+			tmp = extract_word_sep(&str[i], "$\"'");
 			i += ft_strlen(tmp);
 			res = ft_strjoin_null(tmp, res);
 		}

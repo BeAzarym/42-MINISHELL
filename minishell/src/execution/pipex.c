@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/13 17:57:58 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:11:14 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	lastcmd_process(t_cmd_lst *cmd_table, char **envp, int fd_pipe[2])
 		error_exit("could not create lastcmd process");
 	if (pid == CHILD)
 	{
-		printf("lastcmd : %s\n", cmd_table->head->cmd[0]);
+		// printf("lastcmd : %s\n", cmd_table->head->cmd[0]);
 		lastcmd_dup(cmd_table->head, fd_pipe);
 		execute(cmd_table->head, envp);
 	}

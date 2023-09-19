@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/19 16:53:04 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:09:44 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (ft_strncmp(cmd_line, "", 1) == OK)
 			status = 0;
-		printf("cmd line is: %s\n", cmd_line);
-		printf("status : %d\n", status);
+		// printf("cmd line is: %s\n", cmd_line);
+		// printf("status : %d\n", status);
 		lst = lexing(cmd_line);
 		if (ft_strlen(cmd_line) > 0)
 			add_history(cmd_line);
@@ -56,7 +56,7 @@ int	main(int argc, char **argv, char **envp)
 		process_expand(cmd_table, env_lst, status);
 		if (cmd_table->head != NULL)
 		{
-			print_cmd(cmd_table);
+			// print_cmd(cmd_table);
 			env = convert_env_to_exec(env_lst);
 			status = execution(cmd_table, env);
 			// printf("debug got here\n");
