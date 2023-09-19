@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/09/18 15:19:55 by angassin         ###   ########.fr        #
+#    Updated: 2023/09/19 17:58:05 by cchabeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,7 @@ MINISHELL	=	builtins/builtin.c execution/execution.c execution/pipex.c \
 				lexing/env_utils.c \
 				lexing/parser.c \
 				lexing/parser_utils.c \
+				lexing/subst_env.c \
 				lexing/redirect_handler.c lexing/redir_struct.c \
 				lexing/expander.c lexing/expander_utils.c \
 				lexing/quote_handler.c lexing/quote_checker.c \

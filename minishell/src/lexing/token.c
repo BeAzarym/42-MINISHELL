@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:54:44 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/11 11:29:41 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/19 17:55:20 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,39 @@ int	locate_token(char *value, char *token)
 	return (-1);
 }
 
+static t_tkn_lst	*handle_token(t_token *cpy, t_tkn_lst *new, int i)
+{
+	char	*tkn;
+
+	tkn = ft_substr(cpy->value, i, 1);
+	if (!tkn)
+		return (NULL);
+	new = add_lst_tkn(tkn, new);
+	if (!new)
+		return (NULL);
+	return (new);
+}
+
+static t_tkn_lst	*handle_word(t_token *cpy, t_tkn_lst *new, int i)
+{
+	char	*tkn;
+
+	tkn = extract_word(&cpy->value[i]);
+	if (!tkn)
+		return (NULL);
+	new = add_lst_tkn(tkn, new);
+	if (!new)
+		return (NULL);
+	return (new);
+}
+
 t_tkn_lst	*token_split(t_tkn_lst *stack, t_tkn_lst *new)
 {
 	int		i;
-	char	*tkn;
 	t_token	*cpy;
 
 	cpy = stack->head;
 	new = init_tkn_lst();
-	if (!new)
-		return (NULL);
 	while (cpy)
 	{
 		i = 0;
@@ -64,23 +87,13 @@ t_tkn_lst	*token_split(t_tkn_lst *stack, t_tkn_lst *new)
 		{
 			if (is_sep(cpy->value[i], "|<>"))
 			{
-				tkn = ft_substr(cpy->value, i, 1);
-				if (!tkn)
-					return (NULL);
-				new = add_lst_tkn(tkn, new);
-				if (!new)
-					return (NULL);
+				new = handle_token(cpy, new, i);
 				i++;
 			}
 			else if (!is_sep(cpy->value[i], "|<>"))
 			{
-				tkn = extract_word(&cpy->value[i]);
-				if (!tkn)
-					return (NULL);
-				new = add_lst_tkn(tkn, new);
-				if (!new)
-					return (NULL);
-				i += ft_strlen(tkn);
+				new = handle_word(cpy, new, i);
+				i += ft_strlen(new->tail->value);
 			}
 		}
 		cpy = cpy->next;

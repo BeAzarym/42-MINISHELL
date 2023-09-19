@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:41:37 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/19 14:08:50 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/19 17:38:46 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,65 +38,13 @@ char	*handle_s_quote(char *str)
 	return (res);
 }
 
-char	*extract_key(char *str)
+static char	*process_substitution(char *str, t_env_lst *env, int status)
 {
-	int		i;
-	int		j;
-	char	*result;
-
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		if (ft_isalnum(str[i]) || str[i] == '_' || str[i] == '?')
-			j++;
-		if (!ft_isalnum(str[i]) && str[i] != '_' && str[i] != '?')
-			break ;
-		i++;
-	}
-	result = ft_substr(str, 0, j);
-	if (!result)
-		return (NULL);
-	return (result);
-}
-
-char	*get_key_value(char *key, t_env_lst *env, int status)
-{
-	t_env	*cpy;
-	char	*value;
-
-	value = NULL;
-	if (ft_strncmp(key, "?", 1) == 0)
-	{
-		value = ft_itoa(status);
-		if (!value)
-			return (NULL);
-		return (value);
-	}
-	cpy = env->head;
-	while (cpy)
-	{
-		if (ft_strncmp(key, cpy->key, ft_strlen(key)) == 0)
-		{
-			value = ft_strdup(cpy->value);
-			if (!value)
-				return (NULL);
-			break ;
-		}
-		cpy = cpy->next;
-	}
-	return (value);
-}
-
-char	*substitute_env(char *key, t_env_lst *env, int status)
-{
-	char	*value;
-
-	value = get_key_value(key, env, status);
-	if (!value)
-		return (NULL);
-	free(key);
-	return (value);
+	if (search_in_env(str, env))
+		str = substitute_env(str, env, status);
+	else
+		str = ft_strdup("");
+	return (str);
 }
 
 char	*handle_d_quote(char *str, t_env_lst *env, int status)
@@ -113,10 +61,7 @@ char	*handle_d_quote(char *str, t_env_lst *env, int status)
 		{
 			tmp = extract_key(&str[i + 1]);
 			i += ft_strlen(tmp) + 1;
-			if (search_in_env(tmp, env))
-				tmp = substitute_env(tmp, env, status);
-			else
-				tmp = ft_strdup("");
+			tmp = process_substitution(tmp, env, status);
 			res = ft_strjoin_null(tmp, res);
 		}
 		else if (str[i] != '$' && str[i] != '"')

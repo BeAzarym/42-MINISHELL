@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_split.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:33:53 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/11 11:14:43 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/19 17:20:18 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static size_t	ft_count_word(char *s, char *sep)
 		while (s[i] && !is_sep(s[i], sep))
 			i++;
 	}
-	// printf("WC: [%ld]\n", count);
 	return (count);
 }
 
@@ -91,8 +90,6 @@ char	**arg_split(char *s, char *sep)
 	int		j;
 	int		start;
 
-	if (!s)
-		return (NULL);
 	strs = malloc(sizeof(char *) * (ft_count_word(s, sep) + 1));
 	if (!strs)
 		return (NULL);
