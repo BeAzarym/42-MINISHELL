@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   qhote_checker.c                                    :+:      :+:    :+:   */
+/*   quote_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:45:00 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/18 15:19:55 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:50:39 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@ static int	set_status_true(int *dq_status, int index)
 int	verify_closed_quotes(char *str)
 {
 	int	i;
-	int d_qh;
-	int s_qh;
+	int	d_qh;
+	int	s_qh;
 
 	d_qh = 0;
 	s_qh = 0;
-
 	i = 0;
 	while (str[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 12:47:06 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/17 18:56:23 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:50:13 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,3 @@ static void	get_next_str(va_list *strs, char *cat, int *index)
 		++(*index);
 	}
 }
-

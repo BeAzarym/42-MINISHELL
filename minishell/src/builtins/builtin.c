@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/19 16:31:13 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:51:08 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	echo(char *cmd)
 	if (ft_strncmp(cmd, "-n ", 3) == OK)
 	{
 		newline_char = false;
-		cmd += 3; 
+		cmd += 3;
 	}
 	printf("%s", cmd);
 	if (newline_char == true)
@@ -44,15 +44,15 @@ int	cd(char *cmd)
 	return (0);
 }
 
-int env_builtins(t_env_lst *env)
+int	env_builtins(t_env_lst *env)
 {
 	print_env(env);
 	return (0);
 }
 
-int pwd_builtins()
+int	pwd_builtins(void)
 {
-	char *res;
+	char	*res;
 
 	res = getcwd(NULL, 0);
 	if (!res)

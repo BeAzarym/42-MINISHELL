@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:43:22 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/19 14:44:17 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:51:36 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ char	*handle_without_q(char *str, t_env_lst *env, int status)
 	}
 	return (res);
 }
+
 char	*expand(char *str, t_env_lst *env, int status)
 {
 	int		i;

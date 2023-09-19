@@ -6,16 +6,15 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/19 15:30:26 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:51:58 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../includes/execute.h"
 #include "../includes/builtins.h"
+#include "../includes/execute.h"
+#include "../includes/minishell.h"
 
- bool	g_signalset = false;
-
+bool	g_signalset = false;
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -39,7 +38,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!cmd_table)
 			return (1);
 		set_sigint_in_main(SIGINT);
-	 	cmd_line = readline("[Minishell]$ ");
+		cmd_line = readline("[Minishell]$ ");
 		if (cmd_line == NULL) // to do : fix the printing of ^D
 		{
 			printf("exit\n");
@@ -52,7 +51,7 @@ int	main(int argc, char **argv, char **envp)
 		lst = lexing(cmd_line);
 		if (ft_strlen(cmd_line) > 0)
 			add_history(cmd_line);
-		// print_token(lst->head); 
+		// print_token(lst->head);
 		cmd_table = parsing(lst, cmd_table);
 		process_expand(cmd_table, env_lst, status);
 		if (cmd_table->head != NULL)
