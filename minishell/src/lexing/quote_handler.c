@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   qhote_handler.c                                    :+:      :+:    :+:   */
+/*   quote_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:41:37 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/18 15:19:55 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:08:50 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ char	*handle_d_quote(char *str, t_env_lst *env, int status)
 	char	*res;
 
 	res = NULL;
-	i = -1;
-	while (str[++i])
+	i = 0;
+	while (str[i] && !is_sep(str[i], "\""))
 	{
 		if (str[i] == '$' && str[i] != '"')
 		{
@@ -126,5 +126,7 @@ char	*handle_d_quote(char *str, t_env_lst *env, int status)
 			res = ft_strjoin_null(tmp, res);
 		}
 	}
+	if (!res)
+		res = ft_strdup("");
 	return (res);
 }

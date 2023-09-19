@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:43:22 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/18 15:19:55 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:44:17 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*handle_without_q(char *str, t_env_lst *env, int status)
 
 	res = NULL;
 	i = 0;
-	while (str[i])
+	while (str[i] && !is_sep(str[i], "\"'"))
 	{
 		if (str[i] == '$')
 		{
@@ -98,19 +98,19 @@ char	*expand(char *str, t_env_lst *env, int status)
 	res = NULL;
 	if (verify_closed_quotes(str) == -1)
 		return (NULL);
-	i = -1;
-	while (str[++i])
+	i = 0;
+	while (str[i])
 	{
 		if (str[i] == '\'')
 		{
 			tmp = handle_s_quote(&str[i]);
-			i += escape_quotes(&str[i], i);
+			i += ft_strlen(tmp) + 2;
 			res = ft_strjoin_null(tmp, res);
 		}
 		else if (str[i] == '"')
 		{
-			tmp = handle_d_quote(&str[i], env, status);
-			i += escape_quotes(&str[i], i);
+			tmp = handle_d_quote(&str[i + 1], env, status);
+			i = escape_quotes(str, i) + 1;
 			res = ft_strjoin_null(tmp, res);
 		}
 		else if (str[i] != '"' || str[i] != '\'')
