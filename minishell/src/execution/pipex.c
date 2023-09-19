@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/19 21:11:14 by cchabeau         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/09/20 09:42:20 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/execute.h"
 
@@ -42,7 +43,7 @@ void	pipe_execute(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 		execute(cmd, envp);
 	}
 	pipe_closing(cmd, fd_pipes);
-	ft_putstr_fd("in parent (create process)\n", 2);
+	ft_putstr_fd("in parent (pipe execute)\n", 2);
 }
 
 /*
