@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/20 09:42:20 by angassin         ###   ########.fr       */
+/*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
+/*   Updated: 2023/09/20 13:02:42 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
