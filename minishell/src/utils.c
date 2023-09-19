@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/11 11:14:23 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:20:05 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@ void	print_env(t_env_lst *lst)
 	if (!lst)
 		return ;
 	cpy = lst->head;
-	printf("[ENV]\n");
 	while (cpy)
 	{
-		printf(">> [KEY] : %s	>> [VALUE] : %s\n", cpy->key, cpy->value);
+		printf("%s=%s\n", cpy->key, cpy->value);
 		cpy = cpy->next;
 	}
 }

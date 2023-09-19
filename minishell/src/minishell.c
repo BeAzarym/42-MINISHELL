@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/18 15:00:10 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:30:26 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ int	main(int argc, char **argv, char **envp)
 				status = cd(cmd_line + 3);
 			if (ft_strncmp(cmd_line, "echo", 4) == OK)
 				status = echo(cmd_line + 5);
+			if (ft_strncmp(cmd_line, "env", 4) == OK)
+				status = env_builtins(env_lst);
+			if (ft_strncmp(cmd_line, "pwd", 3) == OK)
+				status = pwd_builtins(env_lst);
 		}
 		free(cmd_line);
 		clear_cmd_lst(cmd_table);

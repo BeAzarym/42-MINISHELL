@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/11 11:13:07 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:31:13 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,23 @@ int	cd(char *cmd)
 		printf("wrong path\n");
 		return (1);
 	}
+	return (0);
+}
+
+int env_builtins(t_env_lst *env)
+{
+	print_env(env);
+	return (0);
+}
+
+int pwd_builtins()
+{
+	char *res;
+
+	res = getcwd(NULL, 0);
+	if (!res)
+		return (-1);
+	printf("%s\n", res);
+	free(res);
 	return (0);
 }
