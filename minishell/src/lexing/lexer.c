@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:14:14 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/21 20:16:53 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/21 20:26:26 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static t_tkn_lst	*put_tkn_in_lst(char **array, t_tkn_lst *stack)
 {
 	int	i;
+
 	i = 0;
 	while (array[i])
 	{
