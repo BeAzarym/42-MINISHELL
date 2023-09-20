@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/21 19:56:32 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/21 20:04:06 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool		g_signalset = false;
 // printf("cmd line is: %s\n", cmd_line);
 // printf("status : %d\n", status);
 // print_token(tkn_lst->head);
-// print_cmd(cmd_table);
+// print_cmd(cmd_table)
 // printf("debug got here\n");
 int	main(int argc, char **argv, char **envp)
 {
