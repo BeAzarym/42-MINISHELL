@@ -6,7 +6,11 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/09/20 13:28:02 by angassin         ###   ########.fr       */
+=======
+/*   Updated: 2023/09/20 13:24:54 by angassin         ###   ########.fr       */
+>>>>>>> 566b423 (norm ok buffer overflow on convert_env_to_exec)
 /*                                                                            */
 /* ************************************************************************** */
 
