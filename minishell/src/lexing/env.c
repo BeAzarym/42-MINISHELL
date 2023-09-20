@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:54:49 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/11 11:15:13 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:55:32 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**convert_env_to_exec(t_env_lst *env_lst)
 	t_env	*cpy;
 
 	cpy = env_lst->head;
-	arr = malloc(sizeof(char *) * env_lst->size + 1);
+	arr = malloc(sizeof(char *) * (env_lst->size + 1));
 	if (!arr)
 		return (NULL);
 	i = 0;
