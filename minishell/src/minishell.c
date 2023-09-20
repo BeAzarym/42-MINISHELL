@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/20 13:05:48 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:09:23 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,15 +93,16 @@ static int	builtin_or_exe(t_env_lst *env_lst, t_cmd_lst *cmd_table,
 	if (cmd_table->head != NULL)
 	{
 		env = convert_env_to_exec(env_lst);
-		status = execution(cmd_table, env);
 		if (ft_strncmp(cmd_line, "cd", 2) == OK)
 			status = cd(cmd_line + 3);
-		if (ft_strncmp(cmd_line, "echo", 4) == OK)
+		else if (ft_strncmp(cmd_line, "echo", 4) == OK)
 			status = echo(cmd_line + 5);
-		if (ft_strncmp(cmd_line, "env", 4) == OK)
+		else if (ft_strncmp(cmd_line, "env", 4) == OK)
 			status = env_builtins(env_lst);
-		if (ft_strncmp(cmd_line, "pwd", 3) == OK)
+		else if (ft_strncmp(cmd_line, "pwd", 3) == OK)
 			status = pwd_builtins();
+		else
+			status = execution(cmd_table, env);
 	}
 	return (status);
 }
