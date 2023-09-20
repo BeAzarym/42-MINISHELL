@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/19 21:00:39 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:07:30 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,13 @@ typedef struct s_cmd_lst
 	struct s_cmd		*tail;
 	int					size;
 }						t_cmd_lst;
+
+typedef struct s_lists
+{
+	t_tkn_lst			*tkn_lst;
+	t_env_lst			*env_lst;
+	t_cmd_lst			*cmd_table;
+}						t_lists;
 
 typedef struct s_cmd
 {
