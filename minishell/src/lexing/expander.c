@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:43:22 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/20 13:31:11 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:01:43 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 // {
 // 	while (redir->head)
 // 	{
-// 		if (have_quotes(redir->head->file) || need_substitute(redir->head->file))
+// 		if (have_quotes(redir->head->file)
+				// || need_substitute(redir->head->file))
 // 			return (1);
 // 		redir->head = redir->head->next;
 // 	}
