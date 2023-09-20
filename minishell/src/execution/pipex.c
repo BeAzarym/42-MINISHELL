@@ -6,10 +6,9 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/20 13:03:18 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:03:41 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/execute.h"
 
@@ -56,6 +55,7 @@ void	pipe_execute(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 	printf("infile in lastcmd : %s\n", cmd_table->head->infile);
 	printf("close fd_pipe[0] in lastcmd\n");
 	printf("close fdout in lastcmd\n");
+	// printf("lastcmd : %s\n", cmd_table->head->cmd[0]);
 */
 int	lastcmd_process(t_cmd_lst *cmd_table, char **envp, int fd_pipe[2])
 {
@@ -67,7 +67,6 @@ int	lastcmd_process(t_cmd_lst *cmd_table, char **envp, int fd_pipe[2])
 		error_exit("could not create lastcmd process");
 	if (pid == CHILD)
 	{
-		// printf("lastcmd : %s\n", cmd_table->head->cmd[0]);
 		lastcmd_dup(cmd_table->head, fd_pipe);
 		execute(cmd_table->head, envp);
 	}
