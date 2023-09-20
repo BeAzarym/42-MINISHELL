@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/21 16:02:22 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:58:25 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,11 @@ int	main(int argc, char **argv, char **envp)
 static void	init(t_lists *lists, char **envp)
 {
 	g_signalset = false;
+<<<<<<< HEAD
 	lists->cmd_table = NULL;
+=======
+	lists->cmd_table = init_cmd_lst();
+>>>>>>> bcd0a62 (norm ok buffer overflow on convert_env_to_exec)
 	lists->tkn_lst = NULL;
 	lists->env_lst = init_envp(envp);
 }
