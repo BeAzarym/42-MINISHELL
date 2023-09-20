@@ -6,12 +6,23 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:43:22 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/20 11:21:28 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:31:11 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 #include "../../includes/minishell.h"
+
+// static int need_subst_redir(t_redir_lst *redir)
+// {
+// 	while (redir->head)
+// 	{
+// 		if (have_quotes(redir->head->file) || need_substitute(redir->head->file))
+// 			return (1);
+// 		redir->head = redir->head->next;
+// 	}
+// 	return (0);
+// }
 
 void	process_expand(t_cmd_lst *cmd, t_env_lst *env, int status)
 {
