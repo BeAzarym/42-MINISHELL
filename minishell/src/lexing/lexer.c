@@ -3,28 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:14:14 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/11 11:26:07 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:31:01 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_tkn_lst	*lexing(char *str)
+static t_tkn_lst	*put_tkn_in_lst(char **array, t_tkn_lst *stack)
 {
-	char		**array;
-	t_tkn_lst	*stack;
-	t_tkn_lst	*lst;
-	int			i;
+	int i;
 
-	stack = NULL;
-	lst = NULL;
-	array = arg_split(str, " \n\t\r\f\t\b");
-	stack = init_tkn_lst();
-	if (!stack)
-		return (NULL);
 	i = 0;
 	while (array[i])
 	{
@@ -33,6 +24,24 @@ t_tkn_lst	*lexing(char *str)
 			return (NULL);
 		i++;
 	}
+	return (stack);
+}
+
+t_tkn_lst	*lexing(char *str)
+{
+	char		**array;
+	t_tkn_lst	*stack;
+	t_tkn_lst	*lst;
+
+	stack = NULL;
+	lst = NULL;
+	array = arg_split(str, " \n\t\r\f\t\b");
+	stack = init_tkn_lst();
+	if (!stack)
+		return (NULL);
+	stack = put_tkn_in_lst(array, stack);
+	if (!stack)
+		return (NULL);
 	lst = token_split(stack, lst);
 	if (!lst)
 		return (NULL);
