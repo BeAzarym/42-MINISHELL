@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_array_add_back.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 23:17:13 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/11 10:58:13 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/21 12:44:53 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,13 @@ char	**array_add_back(char **arr, char *str)
 	result = ft_calloc(sizeof(char *), len + 2);
 	if (!result)
 		return (NULL);
-	i = 0;
-	while (arr[i])
-	{
+	i = -1;
+	while (arr[++i])
 		result[i] = ft_strdup(arr[i]);
-		i++;
-	}
 	result[i] = ft_strdup(str);
 	if (!result)
 		return (NULL);
 	result[++i] = NULL;
+	ft_array_clear(arr);
 	return (result);
 }

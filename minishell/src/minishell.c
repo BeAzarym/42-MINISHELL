@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/20 13:09:23 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:27:03 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int argc, char **argv, char **envp)
 static void	init(t_lists *lists, char **envp)
 {
 	g_signalset = false;
-	lists->cmd_table = init_cmd_lst();
+	lists->cmd_table = NULL;
 	lists->tkn_lst = NULL;
 	lists->env_lst = init_envp(envp);
 }
@@ -103,6 +103,7 @@ static int	builtin_or_exe(t_env_lst *env_lst, t_cmd_lst *cmd_table,
 			status = pwd_builtins();
 		else
 			status = execution(cmd_table, env);
+		ft_array_clear(env);
 	}
 	return (status);
 }

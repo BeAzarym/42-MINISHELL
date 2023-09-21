@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:56:49 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/17 18:57:03 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/21 12:42:20 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	*ft_strjoin_null(char *s1, char *s2)
 	while (*s1)
 		*str++ = *s1++;
 	free(s1 - len_s1);
+	free(s2 - (len - len_s1));
 	*str = '\0';
 	return (str - len);
 }
