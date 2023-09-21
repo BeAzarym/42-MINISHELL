@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/20 15:20:21 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/21 09:50:46 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	(void)argc;
 	init(&lists, envp);
-	ignore_shell_signal();
 	while (true)
 	{
+		ignore_shell_signal();
 		lists.cmd_table = init_cmd_lst();
-		if (!lists.cmd_table)
+		if (lists.cmd_table == NULL)
 			return (1);
 		set_sigint_in_main(SIGINT);
 		status = prompt(&lists, status);
@@ -69,7 +69,7 @@ static int	prompt(t_lists *lists, int status)
 		add_history(cmd_line);
 	lists->cmd_table = parsing(lists->tkn_lst, lists->cmd_table);
 	process_expand(lists->cmd_table, lists->env_lst, status);
-	builtin_or_exe(lists->env_lst, lists->cmd_table, cmd_line, status);
+	status = builtin_or_exe(lists->env_lst, lists->cmd_table, cmd_line, status);
 	free(cmd_line);
 	clear_cmd_lst(lists->cmd_table);
 	return (status);
