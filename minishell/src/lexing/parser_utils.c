@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:45:51 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/12 13:32:13 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:49:20 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ void	clear_cmd_lst(t_cmd_lst *lst)
 		lst->head = lst->head->next;
 	}
 	free(lst->head);
+	free(lst->tail);
 	free(lst);
 }

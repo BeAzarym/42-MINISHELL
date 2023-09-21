@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/19 15:20:05 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/21 15:17:32 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,29 @@ void	clear_tkn_lst(t_tkn_lst *lst)
 		lst->head = lst->head->next;
 	}
 	free(lst->head);
+	free(lst->tail);
 	free(lst);
+}
+
+void clear_tkn(t_token *token)
+{
+	while (token)
+	{
+		free(token->value);
+		token = token->next;
+	}
+	free(token);
+}
+
+void clear_cmd(t_cmd *cmd)
+{
+	while (cmd)
+	{
+		ft_array_clear(cmd->cmd);
+		free(cmd->infile);
+		clear_redir_lst(cmd->redir_in);
+		clear_redir_lst(cmd->redir_out);
+		cmd = cmd->next;
+	}
+	free(cmd);
 }
