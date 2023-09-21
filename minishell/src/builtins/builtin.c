@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/21 18:08:46 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:23:33 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	echo(char **cmd)
 			printf(" ");
 		++i;
 	}
-	if (newline_char == true)
+	if (newline_char)
 		printf("%c", '\n');
 	return (EXIT_SUCCESS);
 }
