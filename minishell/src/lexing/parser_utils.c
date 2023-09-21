@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:45:51 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/20 14:49:20 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:21:59 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ t_cmd_lst	*add_cmd_lst(t_cmd_lst *lst, t_cmd *cmd)
 
 void	clear_cmd_lst(t_cmd_lst *lst)
 {
+	t_cmd *tmp;
 	if (!lst)
 		return ;
 	while (lst->head)
@@ -75,9 +76,9 @@ void	clear_cmd_lst(t_cmd_lst *lst)
 		clear_redir_lst(lst->head->redir_in);
 		clear_redir_lst(lst->head->redir_out);
 		ft_array_clear(lst->head->cmd);
-		lst->head = lst->head->next;
+		tmp = lst->head->next;
+		free(lst->head);
+		lst->head = tmp;
 	}
-	free(lst->head);
-	free(lst->tail);
 	free(lst);
 }
