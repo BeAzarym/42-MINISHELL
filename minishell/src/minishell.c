@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/21 20:37:37 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/21 23:34:38 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ bool		g_signalset = false;
 // printf("cmd line is: %s\n", cmd_line);
 // printf("status : %d\n", status);
 // print_token(tkn_lst->head);
-// print_cmd(cmd_table)
 // printf("debug got here\n");
 int	main(int argc, char **argv, char **envp)
 {
@@ -56,6 +55,7 @@ static void	init(t_lists *lists, char **envp)
 	lists->env_lst = init_envp(envp);
 }
 
+//print_cmd(lists->cmd_table);
 static int	prompt(t_lists *lists, int status)
 {
 	char	*cmd_line;
@@ -93,8 +93,8 @@ static int	builtin_or_exe(t_env_lst *env_lst, t_cmd_lst *cmd_table,
 	if (cmd_table->head != NULL)
 	{
 		env = convert_env_to_exec(env_lst);
-		if (ft_strncmp(cmd_line, "cd", 2) == OK)
-			status = cd(cmd_line + 3);
+		if (ft_strcmp(cmd_table->head->cmd[0], "cd") == OK)
+			status = cd(cmd_table->head->cmd, env_lst, status);
 		else if (ft_strcmp(cmd_table->head->cmd[0], "echo") == OK)
 			status = echo(cmd_table->head->cmd);
 		else if (ft_strncmp(cmd_line, "env", 4) == OK)
