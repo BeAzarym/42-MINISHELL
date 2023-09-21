@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:54:44 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/21 14:20:55 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/21 15:54:37 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ static t_tkn_lst	*handle_token(t_token *cpy, t_tkn_lst *new, int i)
 		return (NULL);
 	new = add_lst_tkn(tkn, new);
 	if (!new)
+	{
+		free(tkn);
 		return (NULL);
+	}
 	free(tkn);
 	return (new);
 }
@@ -70,7 +73,10 @@ static t_tkn_lst	*handle_word(t_token *cpy, t_tkn_lst *new, int i)
 		return (NULL);
 	new = add_lst_tkn(tkn, new);
 	if (!new)
+	{
+		free(tkn);
 		return (NULL);
+	}
 	free(tkn);
 	return (new);
 }

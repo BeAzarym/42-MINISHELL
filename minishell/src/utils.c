@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/21 15:17:32 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:13:10 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,33 +62,39 @@ void	print_cmd(t_cmd_lst *lst)
 
 void	clear_env_lst(t_env_lst *lst)
 {
+	t_env *tmp;
+	
 	if (!lst->head)
 		return ;
 	while (lst->head)
 	{
 		free(lst->head->key);
 		free(lst->head->value);
-		lst->head = lst->head->next;
+		tmp = lst->head->next;
+		free(lst->head);
+		lst->head = tmp;
 	}
-	free(lst->head);
 	free(lst);
 }
 
 void	clear_tkn_lst(t_tkn_lst *lst)
 {
-	if (!lst->head)
+	t_token	*tmp;
+
+	if (!lst)
 		return ;
-	while (lst->head)
-	{
-		free(lst->head->value);
-		lst->head = lst->head->next;
-	}
-	free(lst->head);
-	free(lst->tail);
+	if (lst->head)
+		while (lst->head)
+		{
+			free(lst->head->value);
+			tmp = lst->head->next;
+			free(lst->head);
+			lst->head = tmp;
+		}
 	free(lst);
 }
 
-void clear_tkn(t_token *token)
+void	clear_tkn(t_token *token)
 {
 	while (token)
 	{
@@ -98,7 +104,7 @@ void clear_tkn(t_token *token)
 	free(token);
 }
 
-void clear_cmd(t_cmd *cmd)
+void	clear_cmd(t_cmd *cmd)
 {
 	while (cmd)
 	{
