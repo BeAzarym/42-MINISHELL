@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/22 00:43:44 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/22 01:20:41 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,15 @@ static bool	has_newline(char *arg)
 // }
 
 // unset home and cd .. /bin
-int	cd(char **cmd, t_env_lst *env, int status)
+// printf("cmd 1 : %s\n", home);
+// cd -
+int	cd(char **cmd, t_env_lst *env)
 {
 	char	*home;
 
 	if (cmd[1] == NULL)
 	{
-		home = expand("$HOME", env, status);
-		printf("cmd 1 : %s\n", home);
+		home = expand("$HOME", env, 0);
 		if (chdir(home) == -1)
 		{
 			printf("minishell: cd: %s: HOME not set\n", home);
