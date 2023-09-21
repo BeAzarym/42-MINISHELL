@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:21:55 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/08/31 16:40:38 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:14:43 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,15 @@ void	print_redir(t_redir_lst *lst)
 
 void	clear_redir_lst(t_redir_lst *lst)
 {
+	t_redir_node *tmp;
 	if (!lst)
 		return ;
 	while (lst->head)
 	{
 		free(lst->head->file);
-		lst->head = lst->head->next;
+		tmp = lst->head->next;
+		free(lst->head);
+		lst->head = tmp;
 	}
-	free(lst->head);
 	free(lst);
 }
