@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:43:22 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/20 14:01:43 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/21 15:37:57 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	process_expand(t_cmd_lst *cmd, t_env_lst *env, int status)
 	int		i;
 
 	lst = cmd->head;
-	if (!lst->cmd)
+	if (!lst || !lst->cmd)
 		return ;
 	while (lst)
 	{
