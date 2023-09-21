@@ -3,30 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/19 16:51:08 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:08:46 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtins.h"
 
-//echo -nnnnnnnnn -n -nnn -nnnn yann
-int	echo(char *cmd)
+static bool	has_newline(char *arg);
+
+/*
+	 Behaves like echo in bash 3.2
+	 The index starts at 1 to skip printing "echo"
+*/
+int	echo(char **cmd)
 {
 	bool	newline_char;
+	size_t	i;
 
-	newline_char = true;
-	if (ft_strncmp(cmd, "-n ", 3) == OK)
+	i = 1;
+	newline_char = has_newline(cmd[1]);
+	if (!newline_char)
+		i = 2;
+	while (cmd[i] != NULL && has_newline(cmd[i]) == false)
+		++i;
+	while (cmd[i] != NULL)
 	{
-		newline_char = false;
-		cmd += 3;
+		printf("%s", cmd[i]);
+		if (cmd[i + 1])
+			printf(" ");
+		++i;
 	}
-	printf("%s", cmd);
 	if (newline_char == true)
 		printf("%c", '\n');
 	return (EXIT_SUCCESS);
+}
+
+static bool	has_newline(char *arg)
+{
+	size_t	i;
+
+	if (arg == NULL)
+		return (true);
+	if (ft_strncmp(arg, "-n", 2) != OK)
+		return (true);
+	i = 2;
+	while (arg[i] != '\0')
+	{
+		if (arg[i] != 'n')
+			return (true);
+		++i;
+	}
+	return (false);
 }
 
 // void exit(int);
