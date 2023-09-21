@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/21 14:13:00 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/21 20:36:20 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*command_access(char *cmd, char **paths);
 
 /* 
 	Redirects the input and output file descriptors if necessary and execute
-	the commands in processes
+	the commands in processess
 	printf("in loop\n");
 	printf("fdout in execution : %d\n", cmd_table->head->fdout);
 	printf("current cmd: %s\n", cmd_table->head->cmd[0]);
@@ -65,14 +65,14 @@ void	execute(t_cmd *cmd, char **envp)
 {
 	char				**paths;
 	char				*cmd_path;
-	struct sigaction	sa;
+	// struct sigaction	sa;
 
 	if (cmd == NULL)
 		error_exit("parsing of the command failed");
 	set_sigint_in_child(SIGINT);
-	if (sigaction(SIGINT, &sa, NULL) == -1
-		|| sigaction(SIGQUIT, &sa, NULL) == -1)
-		error_exit("killed\n");
+	// if (sigaction(SIGINT, &sa, NULL) == -1
+	// 	|| sigaction(SIGQUIT, &sa, NULL) == -1)
+	// 	error_exit("killed\n");
 	paths = commands_paths_array(envp);
 	cmd_path = command_access(cmd->cmd[0], paths);
 	if (cmd_path == NULL)
