@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/22 18:18:09 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/22 19:55:42 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,57 @@ int	exit_builtin(char **cmd, int status)
 	exit(status);
 }
 
+static int	cd_to_expanded_path(char *expanded);
+
 // unset home and cd .. /bin
 // printf("cmd 1 : %s\n", home);
 // cd -
+/*
+		The following operands shall be supported:
+
+       directory An absolute or relative pathname of the directory that
+                 shall become the new working directory. The
+                 interpretation of a relative pathname by cd depends on
+                 the CDPATH and PWD environment variables. 
+					If directory is an empty string, the results
+                 are unspecified.
+
+       -         When a <hyphen-minus> is used as the operand, this
+                 shall be equivalent to the command:
+
+                     cd "$OLDPWD" && pwd
+
+                 which changes to the previous working directory and
+                 then writes its name.
+*/
 int	cd(char **cmd, t_env_lst *env)
 {
-	char	*home;
+	char	*expanded;
 
 	if (cmd[1] == NULL)
 	{
-		home = expand("$HOME", env, 0);
-		if (chdir(home) == -1)
-		{
-			printf("minishell: cd: %s: HOME not set\n", home);
-			return (1);
-		}
+		expanded = expand("$HOME", env, 0);
+		return (cd_to_expanded_path(expanded));
+	}
+	else if (strcmp(cmd[1], "-") == OK)
+	{
+		expanded = expand("$OLDPWD", env, 0);
+		pwd_builtin();
+		return (cd_to_expanded_path(expanded));
 	}
 	else if (chdir(cmd[1]) == -1)
 	{
 		printf("minishell: cd: %s: No such file or directory\n", cmd[1]);
+		return (1);
+	}
+	return (0);
+}
+
+static int	cd_to_expanded_path(char *expanded)
+{
+	if (chdir(expanded) == -1)
+	{
+		printf("minishell: cd: %s: expanded not set\n", expanded);
 		return (1);
 	}
 	return (0);

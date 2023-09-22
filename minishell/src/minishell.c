@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/22 18:39:59 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/22 18:46:44 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ static int	prompt(t_lists *lists, int status)
 	return (status);
 }
 
-/* Called with ctrl - d */
-// to do : fix newline before to print
+/* 
+	Called with ctrl - d 
+*/
 static void	eof(const char *cmd_line, int status)
 {
 	if (cmd_line == NULL)
