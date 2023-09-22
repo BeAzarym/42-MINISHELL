@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:45:51 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/21 16:21:59 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/22 02:48:17 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ t_cmd_lst	*add_cmd_lst(t_cmd_lst *lst, t_cmd *cmd)
 
 void	clear_cmd_lst(t_cmd_lst *lst)
 {
-	t_cmd *tmp;
+	t_cmd	*tmp;
+
 	if (!lst)
 		return ;
 	while (lst->head)
