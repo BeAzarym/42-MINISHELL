@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 02:38:16 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/22 14:46:42 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:54:14 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ int	echo(char **cmd)
 	return (EXIT_SUCCESS);
 }
 
+/*
+	Checks the option -n
+	Returns true if a newline must be printed 
+	and false if there should be no new_line (option -n)
+*/
 static bool	has_newline(char *arg)
 {
 	size_t	i;
