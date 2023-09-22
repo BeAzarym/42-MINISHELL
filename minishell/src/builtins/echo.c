@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 02:38:16 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/22 02:41:29 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:46:42 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	echo(char **cmd)
 	newline_char = has_newline(cmd[1]);
 	if (!newline_char)
 		i = 2;
-	while (cmd[i] != NULL && has_newline(cmd[i]) == false)
+	while (cmd[i] != NULL && !has_newline(cmd[i]))
 		++i;
 	while (cmd[i] != NULL)
 	{
