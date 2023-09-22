@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:51:31 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/22 00:55:57 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/22 02:11:06 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 // builtins.c
 int	cd(char **cmd, t_env_lst *env);
 int	echo(char **cmd);
-int	env_builtins(t_env_lst *env);
-int	pwd_builtins(void);
+int	exit_builtin(char **cmd, int status);
+int	env_builtin(t_env_lst *env);
+int	pwd_builtin(void);
 
 #endif
