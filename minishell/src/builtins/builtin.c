@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/22 19:55:42 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/22 20:45:44 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ int	exit_builtin(char **cmd, int status)
 
 static int	cd_to_expanded_path(char *expanded);
 
-// unset home and cd .. /bin
-// printf("cmd 1 : %s\n", home);
-// cd -
+
 /*
 		The following operands shall be supported:
 
@@ -52,6 +50,9 @@ static int	cd_to_expanded_path(char *expanded);
                  which changes to the previous working directory and
                  then writes its name.
 */
+// unset home and cd .. /bin
+// printf("cmd 1 : %s\n", expanded);
+// cd -
 int	cd(char **cmd, t_env_lst *env)
 {
 	char	*expanded;
