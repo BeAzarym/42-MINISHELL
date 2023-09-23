@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/22 20:45:44 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/24 01:47:07 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int	exit_builtin(char **cmd, int status)
 	exit(status);
 }
 
-static int	cd_to_expanded_path(char *expanded);
-
+static int	cd_to_expanded_path(char *to_expand, t_env_lst *env);
 
 /*
 		The following operands shall be supported:
@@ -55,18 +54,12 @@ static int	cd_to_expanded_path(char *expanded);
 // cd -
 int	cd(char **cmd, t_env_lst *env)
 {
-	char	*expanded;
-
 	if (cmd[1] == NULL)
-	{
-		expanded = expand("$HOME", env, 0);
-		return (cd_to_expanded_path(expanded));
-	}
+		return (cd_to_expanded_path("$HOME", env));
 	else if (strcmp(cmd[1], "-") == OK)
 	{
-		expanded = expand("$OLDPWD", env, 0);
 		pwd_builtin();
-		return (cd_to_expanded_path(expanded));
+		return (cd_to_expanded_path("$OLDPWD", env));
 	}
 	else if (chdir(cmd[1]) == -1)
 	{
@@ -76,8 +69,11 @@ int	cd(char **cmd, t_env_lst *env)
 	return (0);
 }
 
-static int	cd_to_expanded_path(char *expanded)
+static int	cd_to_expanded_path(char *to_expand, t_env_lst *env)
 {
+	char	*expanded;
+
+	expanded = expand(to_expand, env, 0);
 	if (chdir(expanded) == -1)
 	{
 		printf("minishell: cd: %s: expanded not set\n", expanded);
