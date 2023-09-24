@@ -6,54 +6,11 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/24 03:17:24 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/24 03:26:35 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtins.h"
-
-static bool	ft_isnumber(char *cmd)
-{
-	int	i;
-	int	sign;
-
-	sign = 0;
-	i = 0;
-	while (cmd[i] == '-' || cmd[i] == '+')
-	{
-		++sign;
-		++i;
-	}
-	while (cmd[i])
-	{
-		if (cmd[i] < '0' || cmd[i] > '9')
-			return (false);
-		++i;
-	}
-	return (sign <= 1);
-}
-
-int	exit_builtin(char **cmd, int status)
-{
-	int	argc;
-
-	printf("exit\n");
-	argc = 0;
-	while (cmd[argc] != NULL)
-		++argc;
-	if (argc > 2 && ft_isnumber(cmd[1]))
-	{
-		printf("minishell: exit: too many arguments\n");
-		return (1);
-	}
-	else if (cmd[1] != NULL && !ft_isnumber(cmd[1]))
-	{
-		printf("minishell: exit: %s: numeric argument required\n", cmd[1]);
-		return (255);
-	}
-	printf("argc : %d\n", argc);
-	exit(status);
-}
 
 static int	cd_to_expanded_path(char *to_expand, t_env_lst *env);
 
