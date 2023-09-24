@@ -6,7 +6,7 @@
 #    By: angassin <angassin@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/09/24 03:35:58 by angassin         ###   ########.fr        #
+#    Updated: 2023/09/24 03:38:52 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ READLINE	=	 -lreadline
 
 MINISHELL	=	builtins/builtin.c builtins/echo.c builtins/exit.c \
 				execution/execution.c execution/pipex.c \
-				execution/signals.c execution/here_doc.c\
+				execution/signals.c execution/here_doc.c \
 				lexing/lexer.c \
 				lexing/arg_split.c \
 				lexing/token.c \
