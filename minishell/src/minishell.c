@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/25 14:43:56 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:44:32 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ static int	builtin_or_exe(t_env_lst *env_lst, t_cmd_lst *cmd_table,
 			status = pwd_builtins();
 		else if (ft_strcmp(cmd_table->head->cmd[0], "unset") == OK)
 			status = unset_builtins(cmd_table->head->cmd, env_lst);
+		else if (ft_strcmp(cmd_table->head->cmd[0], "export") == OK)
+			status = export_builtins(cmd_table->head->cmd, env_lst);
 		else
 			status = execution(cmd_table, env);
 		ft_array_clear(env);

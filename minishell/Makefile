@@ -6,7 +6,7 @@
 #    By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/09/25 15:10:23 by cchabeau         ###   ########.fr        #
+#    Updated: 2023/09/25 17:03:13 by cchabeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ LIBFT		= 	$(addprefix libft/, $(LIBFT_A))
 READLINE	=	 -lreadline 
 
 MINISHELL	=	builtins/builtin.c builtins/unset.c builtins/unset_utils.c \
+				builtins/export.c builtins/export_utils.c \
 				execution/execution.c execution/pipex.c \
 				execution/signals.c execution/here_doc.c\
 				lexing/lexer.c \
