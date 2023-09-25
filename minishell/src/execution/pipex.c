@@ -6,31 +6,31 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 08:03:52 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 12:59:08 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 
-static	void	lastcmd_dup(t_cmd *cmd_node, int fd_pipes[2]);
 static int	processes_wait(t_cmd_lst *cmd_table, const pid_t pid);
 
 /*
 	Creates a child process : send to the pipe the output of the execution
 	of the command passed in argument.
-	Close the pipes and used fds in parent process.
+	Closes the pipes and used fds in parent process.
 	printf("here\n");
-	printf("previous: [%d; %d], next: [%d; %d]\n",
-		fd_pipes[0][0], fd_pipes[0][1], fd_pipes[1][0], fd_pipes[1][1]);
-	printf("fd_pipe[0] in lastcmd child: %d\n", fd_pipe[0]);
+	
 	ft_putstr_fd("in pipe, command : ", 2);
 	ft_putstr_fd(cmd->cmd[0], 2);
 	ft_putstr_fd("\n", 2);
+	ft_putstr_fd("in parent (pipe execute)\n", 2);
 */
-void	pipe_execute(t_cmd *cmd, char **envp, int fd_pipes[2][2])
+void	pipe_execute(t_cmd *cmd, t_env_lst *env_lst, int fd_pipes[2][2])
 {
-	int	pid;
+	int		pid;
+	char	**envp;
 
+	envp = convert_env_to_exec(env_lst);
 	if (pipe(fd_pipes[1]) == CLOSED)
 		error_exit("could not create pipe");
 	pid = fork();
@@ -39,10 +39,15 @@ void	pipe_execute(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 	if (pid == CHILD)
 	{
 		pipe_branching(cmd, fd_pipes);
-		execute(cmd, envp);
+		printf("previous: [%d; %d], next: [%d; %d]\n",
+		fd_pipes[0][0], fd_pipes[0][1], fd_pipes[1][0], fd_pipes[1][1]);
+		if (is_builtin(cmd->cmd[0]))
+			builtin_execute(env_lst, cmd, 0);
+		else
+			execute(cmd, envp);
 	}
+	ft_array_clear(envp);
 	pipe_closing(cmd, fd_pipes);
-	ft_putstr_fd("in parent (pipe execute)\n", 2);
 }
 
 /*
@@ -57,30 +62,41 @@ void	pipe_execute(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 	printf("close fdout in lastcmd\n");
 	printf("lastcmd : %s\n", cmd_table->head->cmd[0]);
 	printf("exit_status : %d", exit_status);
+	printf("fd_pipe[0] in lastcmd child: %d\n", fd_pipe[0]);
 */
-int	lastcmd_process(t_cmd_lst *cmd_table, char **envp, int fd_pipe[2])
+int	lastcmd_process(t_cmd_lst *cmd_table, t_env_lst *env_lst, int fd_pipe[2])
 {
 	pid_t	pid;
 	int		exit_status;
+	char	**envp;
 
-	
-	pid = fork();
-	if (pid == -1)
-		error_exit("could not create lastcmd process");
-	if (pid == CHILD)
+	envp = convert_env_to_exec(env_lst);
+	if (is_builtin(cmd_table->head->cmd[0]))
 	{
 		lastcmd_dup(cmd_table->head, fd_pipe);
-		execute(cmd_table->head, envp);
+		exit_status = builtin_execute(env_lst, cmd_table->head, 0);
+	}
+	else
+	{
+		pid = fork();
+		if (pid == -1)
+			error_exit("could not create lastcmd process");
+		if (pid == CHILD)
+		{
+			lastcmd_dup(cmd_table->head, fd_pipe);
+			execute(cmd_table->head, envp);
+		}
+		exit_status = processes_wait(cmd_table, pid);
 	}
 	if (fd_pipe[0] != CLOSED)
 		close(fd_pipe[0]);
 	if (cmd_table->head->fdout != STDOUT_FILENO)
 		close(cmd_table->head->fdout);
-	exit_status = processes_wait(cmd_table, pid);
+	ft_array_clear(envp);
 	return (exit_status);
 }
 
-static	void	lastcmd_dup(t_cmd *cmd_node, int fd_pipe[2])
+void	lastcmd_dup(t_cmd *cmd_node, int fd_pipe[2])
 {
 	if (cmd_node->fdout != STDOUT_FILENO)
 	{
@@ -92,8 +108,7 @@ static	void	lastcmd_dup(t_cmd *cmd_node, int fd_pipe[2])
 	{
 		if (fd_pipe[0] != CLOSED)
 			close(fd_pipe[0]);
-		duplicate(cmd_node->fdin, STDIN_FILENO,
-			"could not read from infile");
+		duplicate(cmd_node->fdin, STDIN_FILENO, "could not read from infile");
 		close(cmd_node->fdin);
 	}
 	else if (fd_pipe[0] != CLOSED)

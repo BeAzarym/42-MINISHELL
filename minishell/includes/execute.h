@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 08:42:13 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 12:47:00 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,17 @@ void	set_sigint_in_main(int signal);
 
 // execution.c
 int		execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst);
-
+int		builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node, int status);
+bool	is_builtin(char *cmd);
 
 // here_doc.c
 void	heredoc(t_cmd_lst *cmd_lst);
 
 // pipex.c
-void	pipe_execute(t_cmd *cmd, char **envp, int fd_pipes[2][2]);
-int		lastcmd_process(t_cmd_lst *cmd_lst, char **envp, int fd_pipe[2]);
+void	pipe_execute(t_cmd *cmd, t_env_lst *env_lst, int fd_pipes[2][2]);
+int		lastcmd_process(t_cmd_lst *cmd_lst, t_env_lst *env_lst, int fd_pipe[2]);
 void	execute(t_cmd *argv, char **envp);
+void	lastcmd_dup(t_cmd *cmd_node, int fd_pipes[2]);
 
 /*									[Utils]									  */
 
