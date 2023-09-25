@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:14:31 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/21 16:04:24 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/25 15:18:27 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,5 @@ t_tkn_lst	*add_lst_tkn(char *value, t_tkn_lst *stack)
 		stack->tail = new;
 	}
 	stack->size++;
-
 	return (stack);
 }

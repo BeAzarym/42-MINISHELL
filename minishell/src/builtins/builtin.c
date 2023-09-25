@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/21 18:23:33 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 15:01:27 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtins.h"
+#include "../../includes/execute.h"
 
-static bool	has_newline(char *arg);
+static bool		has_newline(char *arg);
 
 /*
-	 Behaves like echo in bash 3.2
-	 The index starts at 1 to skip printing "echo"
+		Behaves like echo in bash 3.2
+		The index starts at 1 to skip printing "echo"
 */
 int	echo(char **cmd)
 {
@@ -86,7 +87,7 @@ int	pwd_builtins(void)
 
 	res = getcwd(NULL, 0);
 	if (!res)
-		return (-1);
+		error_exit("Error: getcwd crashed.");
 	printf("%s\n", res);
 	free(res);
 	return (0);
