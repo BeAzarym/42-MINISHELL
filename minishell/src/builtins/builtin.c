@@ -6,53 +6,66 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 19:30:30 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:49:44 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtins.h"
+#include "../../includes/execute.h"
 
-static int	cd_to_expanded_path(char *to_expand, t_env_lst *env);
+static bool		has_newline(char *arg);
 
 /*
-		The following operands shall be supported:
-
-       directory An absolute or relative pathname of the directory that
-                 shall become the new working directory. The
-                 interpretation of a relative pathname by cd depends on
-                 the CDPATH and PWD environment variables. 
-					If directory is an empty string, the results
-                 are unspecified.
-
-       -         When a <hyphen-minus> is used as the operand, this
-                 shall be equivalent to the command:
-
-                     cd "$OLDPWD" && pwd
-
-                 which changes to the previous working directory and
-                 then writes its name.
+		Behaves like echo in bash 3.2
+		The index starts at 1 to skip printing "echo"
 */
-// unset home and cd .. /bin
-// printf("cmd 1 : %s\n", expanded);
-// cd -
-int	cd(char **cmd, t_env_lst *env)
+int	echo(char **cmd)
 {
-	if (cmd[1] == NULL)
-		return (cd_to_expanded_path("$HOME", env));
-	else if (ft_strcmp(cmd[1], "-") == OK)
+	bool	newline_char;
+	size_t	i;
+
+	i = 1;
+	newline_char = has_newline(cmd[1]);
+	if (!newline_char)
+		i = 2;
+	while (cmd[i] != NULL && has_newline(cmd[i]) == false)
+		++i;
+	while (cmd[i] != NULL)
 	{
-		pwd_builtin();
-		return (cd_to_expanded_path("$OLDPWD", env));
+		printf("%s", cmd[i]);
+		if (cmd[i + 1])
+			printf(" ");
+		++i;
 	}
-	else if (chdir(cmd[1]) == -1)
-	{
-		printf("minishell: cd: %s: No such file or directory\n", cmd[1]);
-		return (EXIT_FAILURE);
-	}
+	if (newline_char)
+		printf("%c", '\n');
 	return (EXIT_SUCCESS);
 }
 
-static int	cd_to_expanded_path(char *to_expand, t_env_lst *env)
+static bool	has_newline(char *arg)
+{
+	size_t	i;
+
+	if (arg == NULL)
+		return (true);
+	if (ft_strncmp(arg, "-n", 2) != OK)
+		return (true);
+	i = 2;
+	while (arg[i] != '\0')
+	{
+		if (arg[i] != 'n')
+			return (true);
+		++i;
+	}
+	return (false);
+}
+
+// void exit(int);
+// {
+// 	// return (EXIT_SUCCESS);
+// }
+
+int	cd(char *cmd)
 {
 	char	*expanded;
 
@@ -77,7 +90,7 @@ int	pwd_builtin(void)
 
 	res = getcwd(NULL, 0);
 	if (!res)
-		return (-1);
+		error_exit("Error: getcwd crashed.");
 	printf("%s\n", res);
 	free(res);
 	return (0);

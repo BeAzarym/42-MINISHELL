@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/25 17:05:33 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:43:08 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,27 @@ static void	eof(const char *cmd_line, int status);
 static int	prompt(t_lists *lists, int status);
 
 bool		g_signalset = false;
+static void	init(t_lists *lists, char **envp);
+static void	eof(const char *cmd_line, int status);
+static int	builtin_or_exe(t_env_lst *env_lst, t_cmd_lst *cmd_table,
+				char *cmd_line, int status);
+static int	prompt(t_lists *lists, int status);
 
+bool		g_signalset = false;
+
+// printf("cmd line is: %s\n", cmd_line);
+// printf("status : %d\n", status);
+// print_token(tkn_lst->head);
+// print_cmd(cmd_table);
+// printf("debug got here\n");
 // printf("cmd line is: %s\n", cmd_line);
 // printf("status : %d\n", status);
 // print_token(tkn_lst->head);
 // printf("debug got here\n");
 int	main(int argc, char **argv, char **envp)
 {
+	t_lists	lists;
+	int		status;
 	t_lists	lists;
 	int		status;
 
@@ -34,6 +48,9 @@ int	main(int argc, char **argv, char **envp)
 	status = 0;
 	while (true)
 	{
+		ignore_shell_signal();
+		lists.cmd_table = init_cmd_lst();
+		if (lists.cmd_table == NULL)
 		ignore_shell_signal();
 		lists.cmd_table = init_cmd_lst();
 		if (lists.cmd_table == NULL)

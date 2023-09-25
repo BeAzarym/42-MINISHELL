@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:13:59 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/21 16:13:10 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:47:53 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	print_env(t_env_lst *lst)
 	cpy = lst->head;
 	while (cpy)
 	{
-		printf("%s=%s\n", cpy->key, cpy->value);
+		if (cpy->key && cpy->value)
+			printf("%s=%s\n", cpy->key, cpy->value);
 		cpy = cpy->next;
 	}
 }
@@ -62,8 +63,8 @@ void	print_cmd(t_cmd_lst *lst)
 
 void	clear_env_lst(t_env_lst *lst)
 {
-	t_env *tmp;
-	
+	t_env	*tmp;
+
 	if (!lst->head)
 		return ;
 	while (lst->head)
@@ -84,6 +85,7 @@ void	clear_tkn_lst(t_tkn_lst *lst)
 	if (!lst)
 		return ;
 	if (lst->head)
+	{
 		while (lst->head)
 		{
 			free(lst->head->value);
@@ -91,28 +93,6 @@ void	clear_tkn_lst(t_tkn_lst *lst)
 			free(lst->head);
 			lst->head = tmp;
 		}
+	}
 	free(lst);
-}
-
-void	clear_tkn(t_token *token)
-{
-	while (token)
-	{
-		free(token->value);
-		token = token->next;
-	}
-	free(token);
-}
-
-void	clear_cmd(t_cmd *cmd)
-{
-	while (cmd)
-	{
-		ft_array_clear(cmd->cmd);
-		free(cmd->infile);
-		clear_redir_lst(cmd->redir_in);
-		clear_redir_lst(cmd->redir_out);
-		cmd = cmd->next;
-	}
-	free(cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:57:11 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/17 18:14:00 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:39:38 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ t_env_lst	*add_lst_env(char *key, char *value, t_env_lst *lst)
 	if (!new)
 		return (NULL);
 	new->key = ft_strdup(key);
-	new->value = ft_strdup(value);
-	if (!new->key || !new->value)
+	if (value)
+		new->value = ft_strdup(value);
+	if (!new->key || (value != NULL && !new->value))
 		return (NULL);
 	new->next = NULL;
 	if (!lst->head)
