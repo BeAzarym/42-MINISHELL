@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:14:14 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/21 19:29:13 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:44:31 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,30 @@ static t_tkn_lst	*put_tkn_in_lst(char **array, t_tkn_lst *stack)
 		i++;
 	}
 	return (stack);
+}
+
+static int is_valid_cmd_line(t_tkn_lst *lst)
+{
+	t_token *cpy;
+
+	cpy = lst->head;
+	while (cpy)
+	{
+		if (cpy->next && cpy->type == 'P' && cpy->next->type == 'P')
+			return (0);
+		if (cpy->type == 'I' || cpy->type == 'O')
+		{
+			if (cpy->next && cpy->next->type == 'W')
+				cpy = cpy->next;
+			if (cpy->next && cpy->next->next && (cpy->next->type == 'I' || cpy->next->type == 'O'))
+			{
+				if (cpy->next->next->type != 'W')
+					return (0);
+			}
+		}
+		cpy = cpy->next;
+	}
+	return (1);
 }
 
 t_tkn_lst	*lexing(char *str)
@@ -47,5 +71,10 @@ t_tkn_lst	*lexing(char *str)
 		return (NULL);
 	ft_array_clear(array);
 	clear_tkn_lst(stack);
+	if (!is_valid_cmd_line(lst))
+	{
+		printf("Error: Syntax not valid\n");
+		return (NULL);
+	}
 	return (lst);
 }
