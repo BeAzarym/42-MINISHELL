@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 23:40:50 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/24 13:32:13 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:25:56 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	set_signal_handler(int signal, int flags, void (*handler)(int))
 	sigaction(signal, &sa, NULL);
 }
 
+// printf("g_signalset : %d\n", g_signalset);
 static void	handle_sigint_in_main(int signal)
 {
-	// printf("g_signalset : %d\n", g_signalset);
 	if (g_signalset && signal == SIGINT)
 	{
 		printf("\n");

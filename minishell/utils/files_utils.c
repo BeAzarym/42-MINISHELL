@@ -6,72 +6,48 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:20:02 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 16:05:14 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 17:56:15 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
 #include "../includes/execute.h"
+#include "../includes/minishell.h"
 
-static	void	get_outfile(t_cmd_lst *cmd_table);
-
-/*
-	Check if the infile is the stdin
-	Otherwise, loops over all the infiles to check that they exist,
-	if all valids, save the last one in memory
-	printf("get input\n");
-	printf("redir_in == STDIN\n");
-	printf("type of in : %c\n", cmd_table->head->type_in);
-	printf("infile in get_input : %s\n", cmd_table->head->infile);
-*/
-int	get_input_output(t_cmd_lst *cmd_table)
+bool	can_access_infiles(t_cmd *cmd_table)
 {
-	t_redir_lst	*in;
+	t_redir_node	*in;
 
-	in = cmd_table->head->redir_in;
-	if (in->head == NULL)
-		cmd_table->head->fdin = STDIN_FILENO;
-	else if (in->head->type == HEREDOC)
-		cmd_table->head->type_in = in->head->type;
-	else
+	in = cmd_table->redir_in->head;
+	while (in != NULL)
 	{
-		while (in->head != NULL)
+		if (access(in->file, R_OK) != OK)
 		{
-			if (access(in->head->file, R_OK) != OK)
-			{
-				perror(in->head->file);
-				return (EXIT_FAILURE);
-			}
-			in->head = in->head->next;
+			perror(in->file);
+			return (false);
 		}
-		cmd_table->head->type_in = in->tail->type;
-		cmd_table->head->infile = in->tail->file;
+		in = in->next;
 	}
-	get_outfile(cmd_table);
-	if (cmd_table->head->type_in == INFILE)
-		cmd_table->head->fdin = infile_open(cmd_table->head->infile);
-	return (EXIT_SUCCESS);
+	return (true);
 }
-
 /*
-	cmd_table->head->outfile = out->head->file;
+	cmd_table->outfile = out->file;
 */
-static	void	get_outfile(t_cmd_lst *cmd_table)
+void	get_outfile(t_cmd *cmd_table)
 {
-	t_redir_lst	*out;
+	t_redir_node	*out;
 
-	if (cmd_table->head->redir_out->head == NULL)
-		cmd_table->head->fdout = STDOUT_FILENO;
+	out = cmd_table->redir_out->head;
+	if (out == NULL)
+		cmd_table->fdout = STDOUT_FILENO;
 	else
 	{
-		out = cmd_table->head->redir_out;
-		while (out->head != NULL)
+		while (out != NULL)
 		{
-			if (out->head->type == TRUNCATE)
-				cmd_table->head->fdout = outfile_truncate_open(out->head->file);
-			else if (out->head->type == APPEND)
-				cmd_table->head->fdout = outfile_append_open(out->head->file);
-			out->head = out->head->next;
+			if (out->type == TRUNCATE)
+				cmd_table->fdout = outfile_truncate_open(out->file);
+			else if (out->type == APPEND)
+				cmd_table->fdout = outfile_append_open(out->file);
+			out = out->next;
 		}
 	}
 }
@@ -87,13 +63,13 @@ int	infile_open(char *file)
 	return (fd);
 }
 
+//printf("outfile_truncate fd : %i\n", fd);
 int	outfile_truncate_open(char *file)
 {
 	int	fd;
 
 	fd = -1;
 	fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
-	printf("outfile_truncate fd : %i\n", fd);
 	if (fd == -1)
 		error_exit(file);
 	return (fd);

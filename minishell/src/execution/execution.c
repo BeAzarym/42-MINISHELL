@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 16:10:32 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:20:18 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../../includes/execute.h"
 
 static void	pipes_swap(int fd_pipes[2][2]);
+static int	redir(t_cmd *cmd_table);
 
 /* 
 	Redirects the input and output file descriptors if necessary and execute
@@ -29,32 +30,38 @@ static void	pipes_swap(int fd_pipes[2][2]);
 */
 int	execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst)
 {
-	int			fd_pipes[2][2];
-	int			status;
-	t_cmd_lst	*cmd_table;
+	int		fd_pipes[2][2];
+	int		status;
+	t_cmd	*cmd_table;
 
 	g_signalset = false;
 	status = 0;
-	cmd_table = cmd_lst;
+	cmd_table = cmd_lst->head;
 	pipe_init(fd_pipes);
-	while (cmd_table->head->next != NULL)
+	while (cmd_table->next != NULL)
 	{
-		if (get_input_output(cmd_table) == EXIT_FAILURE)
+		if (redir(cmd_table) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (cmd_table->head->type_in == HEREDOC)
-			heredoc(cmd_table);
-		pipe_execute(cmd_table->head, env_lst, fd_pipes);
-		cmd_table->head = cmd_table->head->next;
+		pipe_execute(cmd_table, env_lst, fd_pipes);
+		cmd_table = cmd_table->next;
 		pipes_swap(fd_pipes);
 	}
-	if (get_input_output(cmd_table) == EXIT_FAILURE)
+	if (redir(cmd_table) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (cmd_table->head->type_in == HEREDOC)
-		heredoc(cmd_table);
-	if (cmd_table->head->cmd != NULL)
-		status = lastcmd_process(cmd_table, env_lst, fd_pipes[0]);
+	if (cmd_table->cmd != NULL)
+		status = lastcmd_process(cmd_table, env_lst, fd_pipes[0],
+				cmd_lst->size);
 	unlink("/tmp/.heredoc.tmp");
 	return (status);
+}
+
+static int	redir(t_cmd *cmd_table)
+{
+	if (get_input_output(cmd_table) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (cmd_table->type_in == HEREDOC)
+		heredoc(cmd_table);
+	return (EXIT_SUCCESS);
 }
 
 int	builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node, int status)

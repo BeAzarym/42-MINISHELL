@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:18:52 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/08 17:43:43 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:46:18 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,26 @@ static void	read_stdin(const char *limiter, int fd);
 	Stores the user input in a temporary file. 
 	printf("in heredoc\n"); 
 */
-void	heredoc(t_cmd_lst *cmd_table)
+void	heredoc(t_cmd *cmd_table)
 {
 	int				pid;
 	t_redir_node	*in;
 
-	in = cmd_table->head->redir_in->head;
+	in = cmd_table->redir_in->head;
 	while (in->type == HEREDOC)
 	{
 		pid = fork();
 		if (pid == -1)
 			error_exit("could not create here_doc process");
-		cmd_table->head->limiter = in->file;
-		cmd_table->head->fdin = outfile_truncate_open("/tmp/.heredoc.tmp");
+		cmd_table->limiter = in->file;
+		cmd_table->fdin = outfile_truncate_open("/tmp/.heredoc.tmp");
 		if (pid == CHILD)
 		{
-			read_stdin(cmd_table->head->limiter, cmd_table->head->fdin);
-			close(cmd_table->head->fdin);
+			read_stdin(cmd_table->limiter, cmd_table->fdin);
+			close(cmd_table->fdin);
 		}
-		free(cmd_table->head->infile);
-		cmd_table->head->infile = ft_strdup("/tmp/.heredoc.tmp");
+		free(cmd_table->infile);
+		cmd_table->infile = ft_strdup("/tmp/.heredoc.tmp");
 		wait(NULL);
 		if (in->next == NULL)
 			break ;
