@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/24 17:18:13 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:18:41 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int	cd(char **cmd, t_env_lst *env)
 	else if (chdir(cmd[1]) == -1)
 	{
 		printf("minishell: cd: %s: No such file or directory\n", cmd[1]);
-		return (1);
+		return (EXIT_FAILURE);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 static int	cd_to_expanded_path(char *to_expand, t_env_lst *env)
@@ -60,9 +60,9 @@ static int	cd_to_expanded_path(char *to_expand, t_env_lst *env)
 	if (chdir(expanded) == -1)
 	{
 		printf("minishell: cd: %s: expanded not set\n", expanded);
-		return (1);
+		return (EXIT_FAILURE);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	env_builtin(t_env_lst *env)

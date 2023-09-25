@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 12:59:08 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 15:50:15 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	processes_wait(t_cmd_lst *cmd_table, const pid_t pid);
 	of the command passed in argument.
 	Closes the pipes and used fds in parent process.
 	printf("here\n");
-	
+	printf("previous: [%d; %d], next: [%d; %d]\n",
+		fd_pipes[0][0], fd_pipes[0][1], fd_pipes[1][0], fd_pipes[1][1]);
 	ft_putstr_fd("in pipe, command : ", 2);
 	ft_putstr_fd(cmd->cmd[0], 2);
 	ft_putstr_fd("\n", 2);
@@ -39,10 +40,11 @@ void	pipe_execute(t_cmd *cmd, t_env_lst *env_lst, int fd_pipes[2][2])
 	if (pid == CHILD)
 	{
 		pipe_branching(cmd, fd_pipes);
-		printf("previous: [%d; %d], next: [%d; %d]\n",
-		fd_pipes[0][0], fd_pipes[0][1], fd_pipes[1][0], fd_pipes[1][1]);
 		if (is_builtin(cmd->cmd[0]))
+		{
 			builtin_execute(env_lst, cmd, 0);
+			exit(EXIT_SUCCESS);
+		}
 		else
 			execute(cmd, envp);
 	}
@@ -69,10 +71,18 @@ int	lastcmd_process(t_cmd_lst *cmd_table, t_env_lst *env_lst, int fd_pipe[2])
 	pid_t	pid;
 	int		exit_status;
 	char	**envp;
+	int		fdout_cpy;
+	int		fdin_cpy;
 
 	envp = convert_env_to_exec(env_lst);
+	fdout_cpy = -1;
+	fdin_cpy = -1;
 	if (is_builtin(cmd_table->head->cmd[0]))
 	{
+		if (cmd_table->head->fdout != STDOUT_FILENO)
+			fdout_cpy = dup(STDOUT_FILENO);
+		if (cmd_table->head->fdout != STDIN_FILENO)
+			fdin_cpy = dup(STDIN_FILENO);
 		lastcmd_dup(cmd_table->head, fd_pipe);
 		exit_status = builtin_execute(env_lst, cmd_table->head, 0);
 	}
@@ -93,9 +103,14 @@ int	lastcmd_process(t_cmd_lst *cmd_table, t_env_lst *env_lst, int fd_pipe[2])
 	if (cmd_table->head->fdout != STDOUT_FILENO)
 		close(cmd_table->head->fdout);
 	ft_array_clear(envp);
+	if (fdout_cpy != CLOSED)
+		duplicate(fdout_cpy, STDOUT_FILENO, "could not read from fdout_cpy");
+	if (fdin_cpy != CLOSED)
+		duplicate(fdin_cpy, STDIN_FILENO, "could not read from fdin_cpy");
 	return (exit_status);
 }
 
+//write(2, "deT bugs\n", 9);
 void	lastcmd_dup(t_cmd *cmd_node, int fd_pipe[2])
 {
 	if (cmd_node->fdout != STDOUT_FILENO)
@@ -103,6 +118,7 @@ void	lastcmd_dup(t_cmd *cmd_node, int fd_pipe[2])
 		duplicate(cmd_node->fdout, STDOUT_FILENO,
 			"duplication of the outfile failed");
 		close(cmd_node->fdout);
+		cmd_node->fdout = STDOUT_FILENO;
 	}
 	if (cmd_node->fdin != STDIN_FILENO)
 	{

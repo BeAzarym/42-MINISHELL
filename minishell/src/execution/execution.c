@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 13:57:15 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:10:32 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void	pipes_swap(int fd_pipes[2][2]);
 	ls > out | cat -e :
 	if (cmd_table->head->next->redir_out->head == NULL)
 			cmd_table->head->next->fdout = cmd_table->head->fdout;
+	printf("fdout in execution : %d\n", cmd_table->head->fdout);
+	printf("current cmd: %s\n", cmd_table->head->cmd[0]);
 */
 int	execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst)
 {
@@ -37,28 +39,20 @@ int	execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst)
 	pipe_init(fd_pipes);
 	while (cmd_table->head->next != NULL)
 	{
-		get_input_output(cmd_table);
+		if (get_input_output(cmd_table) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
 		if (cmd_table->head->type_in == HEREDOC)
 			heredoc(cmd_table);
 		pipe_execute(cmd_table->head, env_lst, fd_pipes);
 		cmd_table->head = cmd_table->head->next;
 		pipes_swap(fd_pipes);
 	}
-	get_input_output(cmd_table);
-	printf("fdout in execution : %d\n", cmd_table->head->fdout);
-	printf("current cmd: %s\n", cmd_table->head->cmd[0]);
-	if (is_builtin(cmd_table->head->cmd[0]))
-	{
-		lastcmd_dup(cmd_table->head, fd_pipes[0]);
-		status = builtin_execute(env_lst, cmd_table->head, status);
-	}
-	else
-	{
-		if (cmd_table->head->type_in == HEREDOC)
-			heredoc(cmd_table);
-		if (cmd_table->head->cmd != NULL)
-			status = lastcmd_process(cmd_table, env_lst, fd_pipes[0]);
-	}
+	if (get_input_output(cmd_table) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (cmd_table->head->type_in == HEREDOC)
+		heredoc(cmd_table);
+	if (cmd_table->head->cmd != NULL)
+		status = lastcmd_process(cmd_table, env_lst, fd_pipes[0]);
 	unlink("/tmp/.heredoc.tmp");
 	return (status);
 }

@@ -6,7 +6,8 @@
 		"array": "c",
 		"execute.h": "c",
 		"stdbool.h": "c",
-		"history.h": "c"
+		"history.h": "c",
+		"ios": "c"
 	},
 	"files.autoSave": "onFocusChange",
 	"[c]": {

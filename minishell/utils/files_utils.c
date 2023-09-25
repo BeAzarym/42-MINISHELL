@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:20:02 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/11 10:48:01 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:05:14 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static	void	get_outfile(t_cmd_lst *cmd_table);
 	printf("type of in : %c\n", cmd_table->head->type_in);
 	printf("infile in get_input : %s\n", cmd_table->head->infile);
 */
-void	get_input_output(t_cmd_lst *cmd_table)
+int	get_input_output(t_cmd_lst *cmd_table)
 {
 	t_redir_lst	*in;
 
@@ -38,7 +38,10 @@ void	get_input_output(t_cmd_lst *cmd_table)
 		while (in->head != NULL)
 		{
 			if (access(in->head->file, R_OK) != OK)
-				error_exit(in->head->file);
+			{
+				perror(in->head->file);
+				return (EXIT_FAILURE);
+			}
 			in->head = in->head->next;
 		}
 		cmd_table->head->type_in = in->tail->type;
@@ -47,6 +50,7 @@ void	get_input_output(t_cmd_lst *cmd_table)
 	get_outfile(cmd_table);
 	if (cmd_table->head->type_in == INFILE)
 		cmd_table->head->fdin = infile_open(cmd_table->head->infile);
+	return (EXIT_SUCCESS);
 }
 
 /*

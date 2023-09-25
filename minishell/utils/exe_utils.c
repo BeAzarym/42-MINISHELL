@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:19:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 12:59:42 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 15:35:41 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,27 +49,26 @@ void	pipe_init(int fd_pipes[2][2])
 	Closes all the unused fds'.
 	// ft_putnbr_fd(fd_pipes[1][1], 2);
 	// ft_putchar_fd('\n', 2);
-	cmd->fdout == CLOSED ||
+	printf("fdin in pipe_execute : %d\n", cmd->fdin);
+	printf("cmd_outfile = %d\n", cmd->fdout);
+	printf("redirecting pipe[0] to stdin\n");
 */
 void	pipe_branching(t_cmd *cmd, int fd_pipes[2][2])
 {
 	if (fd_pipes[0][0] != CLOSED)
 	{
-		printf("redirecting pipe[0] to stdin\n");
 		close(fd_pipes[0][1]);
 		duplicate(fd_pipes[0][0], STDIN_FILENO, "could not read from pipe[0]");
 		close(fd_pipes[0][0]);
 	}
 	else if (cmd->fdin != STDIN_FILENO)
 	{
-		printf("fdin in pipe_execute : %d\n", cmd->fdin);
 		close(fd_pipes[0][0]);
 		close(fd_pipes[0][1]);
 		duplicate(cmd->fdin, STDIN_FILENO, "could not read from infile");
 		close(cmd->fdin);
 	}
 	close(fd_pipes[1][0]);
-	printf("cmd_outfile = %d\n", cmd->fdout);
 	if (cmd->fdout == STDOUT_FILENO)
 		duplicate(fd_pipes[1][1], STDOUT_FILENO, "could not write to pipe[1]");
 	else

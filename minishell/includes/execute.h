@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 12:47:00 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:07:18 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	pipe_branching(t_cmd *cmd, int fd_pipes[2][2]);
 void	pipe_closing(t_cmd *cmd, int fd_pipes[2][2]);
 
 // files_utils.c
-void	get_input_output(t_cmd_lst *cmd_table);
+int		get_input_output(t_cmd_lst *cmd_table);
 int		infile_open(char *file);
 int		outfile_append_open(char *file);
 int		outfile_truncate_open(char *file);
