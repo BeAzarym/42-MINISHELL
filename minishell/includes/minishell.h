@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/21 18:57:54 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/24 14:48:27 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,6 @@ typedef struct s_cmd_lst
 	struct s_cmd		*tail;
 	int					size;
 }						t_cmd_lst;
-
-typedef struct s_lists
-{
-	t_tkn_lst			*tkn_lst;
-	t_env_lst			*env_lst;
-	t_cmd_lst			*cmd_table;
-}						t_lists;
-
 typedef struct s_cmd
 {
 	int					type_in;
@@ -96,6 +88,12 @@ typedef struct s_cmd
 	char				**cmd;
 	struct s_cmd		*next;
 }						t_cmd;
+typedef struct s_lists
+{
+	t_tkn_lst			*tkn_lst;
+	t_env_lst			*env_lst;
+	t_cmd_lst			*cmd_table;
+}						t_lists;
 
 /*									[Macros]								*/
 # define OK 0

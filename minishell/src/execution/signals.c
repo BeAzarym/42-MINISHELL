@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 23:40:50 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/21 20:38:17 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/24 13:32:13 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,13 @@ void	ignore_shell_signal(void)
 void	set_sigint_in_child(int signal)
 {
 	if (signal == SIGQUIT)
+	{
 		printf("Quit: 3\n");
+		exit (131);
+	}
 	if (g_signalset && signal == SIGINT)
 	{
-		set_signal_handler(SIGINT, 0, SIG_DFL);
+		set_signal_handler(SIGINT, 0, NULL);
 		exit(130);
 	}
 }

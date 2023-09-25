@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/21 20:34:04 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 08:03:52 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,15 @@ void	pipe_execute(t_cmd *cmd, char **envp, int fd_pipes[2][2])
 	printf("infile in lastcmd : %s\n", cmd_table->head->infile);
 	printf("close fd_pipe[0] in lastcmd\n");
 	printf("close fdout in lastcmd\n");
-	// printf("lastcmd : %s\n", cmd_table->head->cmd[0]);
+	printf("lastcmd : %s\n", cmd_table->head->cmd[0]);
+	printf("exit_status : %d", exit_status);
 */
 int	lastcmd_process(t_cmd_lst *cmd_table, char **envp, int fd_pipe[2])
 {
 	pid_t	pid;
 	int		exit_status;
 
+	
 	pid = fork();
 	if (pid == -1)
 		error_exit("could not create lastcmd process");

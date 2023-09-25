@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/24 03:26:35 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/24 17:18:13 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	pwd_builtin(void)
 
 	res = getcwd(NULL, 0);
 	if (!res)
-		return (1);
+		return (-1);
 	printf("%s\n", res);
 	free(res);
 	return (0);

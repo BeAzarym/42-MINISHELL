@@ -6,18 +6,15 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/22 18:46:44 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:08:21 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/builtins.h"
 #include "../includes/execute.h"
 #include "../includes/minishell.h"
 
 static void	init(t_lists *lists, char **envp);
 static void	eof(const char *cmd_line, int status);
-static int	builtin_or_exe(t_env_lst *env_lst, t_cmd_lst *cmd_table,
-				char *cmd_line, int status);
 static int	prompt(t_lists *lists, int status);
 
 bool		g_signalset = false;
@@ -56,6 +53,10 @@ static void	init(t_lists *lists, char **envp)
 	lists->env_lst = init_envp(envp);
 }
 
+/*
+	Prompts the user for a command and executes it.
+	Updates the history accordingly.
+*/
 //print_cmd(lists->cmd_table);
 static int	prompt(t_lists *lists, int status)
 {
@@ -70,7 +71,7 @@ static int	prompt(t_lists *lists, int status)
 		add_history(cmd_line);
 	lists->cmd_table = parsing(lists->tkn_lst, lists->cmd_table);
 	process_expand(lists->cmd_table, lists->env_lst, status);
-	status = builtin_or_exe(lists->env_lst, lists->cmd_table, cmd_line, status);
+	status = execution(lists->cmd_table, lists->env_lst);
 	free(cmd_line);
 	clear_cmd_lst(lists->cmd_table);
 	return (status);
@@ -86,29 +87,4 @@ static void	eof(const char *cmd_line, int status)
 		printf("exit\n");
 		exit(status);
 	}
-}
-
-static int	builtin_or_exe(t_env_lst *env_lst, t_cmd_lst *cmd_table,
-		char *cmd_line, int status)
-{
-	char	**env;
-
-	if (cmd_table->head != NULL)
-	{
-		env = convert_env_to_exec(env_lst);
-		if (ft_strcmp(cmd_table->head->cmd[0], "cd") == OK)
-			status = cd(cmd_table->head->cmd, env_lst);
-		else if (ft_strcmp(cmd_table->head->cmd[0], "echo") == OK)
-			status = echo(cmd_table->head->cmd);
-		else if (ft_strncmp(cmd_line, "env", 4) == OK)
-			status = env_builtin(env_lst);
-		else if (ft_strncmp(cmd_line, "pwd", 3) == OK)
-			status = pwd_builtin();
-		else if (ft_strcmp(cmd_table->head->cmd[0], "exit") == OK)
-			status = exit_builtin(cmd_table->head->cmd, status);
-		else
-			status = execution(cmd_table, env);
-		ft_array_clear(env);
-	}
-	return (status);
 }
