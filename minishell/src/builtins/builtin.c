@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 16:18:41 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:30:30 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	cd(char **cmd, t_env_lst *env)
 {
 	if (cmd[1] == NULL)
 		return (cd_to_expanded_path("$HOME", env));
-	else if (strcmp(cmd[1], "-") == OK)
+	else if (ft_strcmp(cmd[1], "-") == OK)
 	{
 		pwd_builtin();
 		return (cd_to_expanded_path("$OLDPWD", env));
