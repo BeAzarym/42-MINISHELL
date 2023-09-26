@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 19:50:00 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:06:48 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,10 @@ int	builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node, int status)
 			status = pwd_builtin();
 		else if (ft_strcmp(cmd_node->cmd[0], "exit") == OK)
 			status = exit_builtin(cmd_node->cmd, status);
+		else if (ft_strcmp(cmd_node->cmd[0], "export") == OK)
+			status = export_builtin(cmd_node->cmd, env_lst);
+		else if (ft_strcmp(cmd_node->cmd[0], "unset") == OK)
+			status = unset_builtin(cmd_node->cmd, env_lst);
 	}
 	return (status);
 }
