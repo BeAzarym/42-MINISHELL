@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/25 20:00:33 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/26 12:54:15 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,15 @@ static int	prompt(t_lists *lists, int status)
 	eof(cmd_line, status);
 	if (ft_strncmp(cmd_line, "", 1) == OK)
 		status = 0;
-	lists->tkn_lst = lexing(cmd_line);
 	if (ft_strlen(cmd_line) > 0)
 		add_history(cmd_line);
-	lists->cmd_table = parsing(lists->tkn_lst, lists->cmd_table);
-	process_expand(lists->cmd_table, lists->env_lst, status);
-	status = execution(lists->cmd_table, lists->env_lst);
+	if (ft_strlen(cmd_line) > 0)
+	{
+		lists->tkn_lst = lexing(cmd_line);
+		lists->cmd_table = parsing(lists->tkn_lst, lists->cmd_table);
+		process_expand(lists->cmd_table, lists->env_lst, status);
+		status = execution(lists->cmd_table, lists->env_lst);
+	}
 	free(cmd_line);
 	clear_cmd_lst(lists->cmd_table);
 	return (status);
