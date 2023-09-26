@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:01:01 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/25 15:21:36 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/26 09:27:13 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	unset_var(char *arg, t_env_lst *env)
 	t_env	*cpy;
 
 	cpy = NULL;
-	if (strcmp(env->head->key, arg) == OK)
+	if (ft_strcmp(env->head->key, arg) == OK)
 		return (unset_head(cpy, env));
-	else if (strcmp(env->tail->key, arg) == OK)
+	else if (ft_strcmp(env->tail->key, arg) == OK)
 		return (unset_tail(cpy, arg, env));
 	else
 		return (process_unset(cpy, arg, env));

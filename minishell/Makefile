@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+         #
+#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/09/25 19:58:46 by cchabeau         ###   ########.fr        #
+#    Updated: 2023/09/26 11:38:50 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,10 @@ NAME		= minishell
 
 CC			= gcc
 
-CPPFLAGS 	= -I$(HOME)/.brew/opt/readline/include # Darwin
-# CPPFLAGS 	= -I/opt/homebrew/opt/readline/include # M1Pro
-LDFLAGS 	= -L$(HOME)/.brew/opt/readline/lib	# Darwin
-# LDFLAGS	= -L/opt/homebrew/opt/readline/lib # M1Pro
+# CPPFLAGS 	= -I$(HOME)/.brew/opt/readline/include # Darwin
+CPPFLAGS 	= -I/opt/homebrew/opt/readline/include # M1Pro
+# LDFLAGS 	= -L$(HOME)/.brew/opt/readline/lib	# Darwin
+LDFLAGS	= -L/opt/homebrew/opt/readline/lib # M1Pro
 
 CFLAGS		= -Wall -Wextra -Werror
 
