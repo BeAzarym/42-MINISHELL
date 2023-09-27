@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:57:11 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/26 13:14:43 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:21:22 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_env_lst	*add_lst_env(char *key, char *value, t_env_lst *lst)
 	new->key = ft_strdup(key);
 	if (value)
 		new->value = ft_strdup(value);
+	if (!value)
+		new->value = ft_calloc(1, sizeof(char));
 	if (!new->key || (value != NULL && !new->value))
 		return (NULL);
 	new->next = NULL;
