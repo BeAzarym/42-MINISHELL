@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/27 16:44:36 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:41:16 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ int	main(int argc, char **argv, char **envp)
 		ignore_shell_signal();
 		lists.cmd_table = init_cmd_lst();
 		if (lists.cmd_table == NULL)
-		{
-			ignore_shell_signal();
 			return (1);
-		}
 		set_sigint_in_main(SIGINT);
 		status = prompt(&lists, status);
 	}
