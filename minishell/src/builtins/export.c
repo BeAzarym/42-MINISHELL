@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:47:25 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/26 13:05:48 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:40:12 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int	process_export(char *arg, t_env_lst *env)
 
 	if (!check_assignation(arg))
 	{
-		env = add_lst_env(arg, NULL, env);
+		if (search_in_env(arg, env))
+			return (0);
+		else
+			env = add_lst_env(arg, NULL, env);
 		return (0);
 	}
 	else if (check_assignation(arg) == 1)

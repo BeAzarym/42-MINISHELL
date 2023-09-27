@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/26 12:54:15 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:44:36 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/execute.h"
 #include "../includes/minishell.h"
 
-bool	g_signalset = false;
+bool		g_signalset = false;
 static void	init(t_lists *lists, char **envp);
 static void	eof(const char *cmd_line, int status);
 static int	prompt(t_lists *lists, int status);
@@ -41,10 +41,10 @@ int	main(int argc, char **argv, char **envp)
 		ignore_shell_signal();
 		lists.cmd_table = init_cmd_lst();
 		if (lists.cmd_table == NULL)
+		{
 			ignore_shell_signal();
-		lists.cmd_table = init_cmd_lst();
-		if (lists.cmd_table == NULL)
 			return (1);
+		}
 		set_sigint_in_main(SIGINT);
 		status = prompt(&lists, status);
 	}
@@ -74,16 +74,15 @@ static int	prompt(t_lists *lists, int status)
 	if (ft_strncmp(cmd_line, "", 1) == OK)
 		status = 0;
 	if (ft_strlen(cmd_line) > 0)
-		add_history(cmd_line);
-	if (ft_strlen(cmd_line) > 0)
 	{
+		add_history(cmd_line);
 		lists->tkn_lst = lexing(cmd_line);
 		lists->cmd_table = parsing(lists->tkn_lst, lists->cmd_table);
 		process_expand(lists->cmd_table, lists->env_lst, status);
 		status = execution(lists->cmd_table, lists->env_lst);
+		free(cmd_line);
+		clear_cmd_lst(lists->cmd_table);
 	}
-	free(cmd_line);
-	clear_cmd_lst(lists->cmd_table);
 	return (status);
 }
 

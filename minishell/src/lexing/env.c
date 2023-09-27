@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:54:49 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/25 19:51:22 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:43:35 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ char	**convert_env_to_exec(t_env_lst *env_lst)
 			arr[i] = ft_strjoin_s1(arr[i], cpy->value);
 			if (!arr[i])
 				return (NULL);
+			i++;
 		}
-		i++;
 		cpy = cpy->next;
 	}
 	arr[i] = NULL;
