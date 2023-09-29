@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:19:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/29 12:54:28 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/29 14:26:29 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,16 @@ void	pipe_init(int fd_pipes[2][2])
 void	pipe_plug(t_cmd *cmd, int fd_pipes[2][2])
 {
 	if (fd_pipes[0][0] != CLOSED)
-	{
-		close(fd_pipes[0][1]);
 		duplicate(fd_pipes[0][0], STDIN_FILENO, "could not read from pipe[0]");
-		close(fd_pipes[0][0]);
-		ft_putnbr_fd(fd_pipes[0][0], 2);
-	}
 	else if (cmd->fdin != STDIN_FILENO)
 	{
-		close(fd_pipes[0][0]);
-		close(fd_pipes[0][1]);
 		duplicate(cmd->fdin, STDIN_FILENO, "could not read from infile");
 		close(cmd->fdin);
 	}
+	close(fd_pipes[0][1]);
+	close(fd_pipes[0][0]);
 	close(fd_pipes[1][0]);
+	ft_putnbr_fd(fd_pipes[0][0], 2);
 	if (cmd->fdout == STDOUT_FILENO)
 		duplicate(fd_pipes[1][1], STDOUT_FILENO, "could not write to pipe[1]");
 	else
@@ -100,5 +96,6 @@ void	pipe_closing(t_cmd *cmd, int fd_pipes[2][2])
 	}
 	close(fd_pipes[1][1]);
 	fd_pipes[1][1] = -1;
-	// printf("pipe in LASTCMD befor exe: in[%d; %d]out\n", fd_pipe[1][], fd_pipe[0]);
+	printf("previous in  PIPE_CLOSING: in[%d; %d]out, next: in[%d; %d]out\n",
+		fd_pipes[0][1], fd_pipes[0][0], fd_pipes[1][1], fd_pipes[1][0]);
 }

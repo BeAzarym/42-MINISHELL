@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/29 12:40:04 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/29 14:23:14 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	pipe_execute(t_cmd *cmd, t_env_lst *env_lst, int fd_pipes[2][2])
 		}
 		else
 			execute(cmd, envp);
+		pipe_closing(cmd, fd_pipes);
 	}
 	ft_array_clear(envp);
 	pipe_closing(cmd, fd_pipes);
