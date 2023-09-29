@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/25 17:05:33 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:37:26 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,12 @@ static int	prompt(t_lists *lists, int status)
 		status = 0;
 	lists->tkn_lst = lexing(cmd_line);
 	if (ft_strlen(cmd_line) > 0)
+	{
 		add_history(cmd_line);
-	lists->cmd_table = parsing(lists->tkn_lst, lists->cmd_table);
-	process_expand(lists->cmd_table, lists->env_lst, status);
-	status = execution(lists->cmd_table, lists->env_lst);
+		lists->cmd_table = parsing(lists->tkn_lst, lists->cmd_table);
+		process_expand(lists->cmd_table, lists->env_lst, status);
+		status = execution(lists->cmd_table, lists->env_lst);
+	}
 	free(cmd_line);
 	clear_cmd_lst(lists->cmd_table);
 	return (status);
