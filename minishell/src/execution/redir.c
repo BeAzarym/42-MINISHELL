@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:12:05 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 19:15:33 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:52:58 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	get_input_output(t_cmd *cmd_table)
 		if (!can_access_infiles(cmd_table))
 			return (EXIT_FAILURE);
 		cmd_table->type_in = in->type;
-		cmd_table->infile = in->file;
+		cmd_table->infile = ft_strdup(in->file);
 	}
 	get_outfile(cmd_table);
 	if (cmd_table->type_in == INFILE)
