@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 19:19:21 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/29 12:40:04 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 	Creates a child process : send to the pipe the output of the execution
 	of the command passed in argument.
 	Closes the pipes and used fds in parent process.
+	in fd[1] --- fd[0] out
 	printf("here\n");
-	printf("previous: [%d; %d], next: [%d; %d]\n",
-		fd_pipes[0][0], fd_pipes[0][1], fd_pipes[1][0], fd_pipes[1][1]);
+	printf("previous in  PIPE: in[%d; %d]out, next: in[%d; %d]out\n",
+		fd_pipes[0][1], fd_pipes[0][0], fd_pipes[1][1], fd_pipes[1][0]);
 	ft_putstr_fd("in pipe, command : ", 2);
 	ft_putstr_fd(cmd->cmd[0], 2);
 	ft_putstr_fd("\n", 2);
@@ -32,12 +33,14 @@ void	pipe_execute(t_cmd *cmd, t_env_lst *env_lst, int fd_pipes[2][2])
 	envp = convert_env_to_exec(env_lst);
 	if (pipe(fd_pipes[1]) == CLOSED)
 		error_exit("could not create pipe");
+	printf("previous in  PIPE: in[%d; %d]out, next: in[%d; %d]out\n",
+		fd_pipes[0][1], fd_pipes[0][0], fd_pipes[1][1], fd_pipes[1][0]);
 	pid = fork();
 	if (pid == -1)
 		error_exit("could not create process");
 	if (pid == CHILD)
 	{
-		pipe_branching(cmd, fd_pipes);
+		pipe_plug(cmd, fd_pipes);
 		if (is_builtin(cmd->cmd[0]))
 		{
 			builtin_execute(env_lst, cmd, 0);
@@ -84,7 +87,7 @@ static int	lastcmd_process_exe(t_cmd *cmd_table, int fd_pipe[2],
 	Executes the last command in a child process and wait for all
 	the child processes to end in the parent.
 	Returns the exit status of the last command.
-	printf("previous: [%d; %d]\n", fd_pipe[0], fd_pipe[1]);
+	printf("pipe in LASTCMD: in[%d; %d]out\n", fd_pipe[1], fd_pipe[0]);
 	printf("fdout in lastcmd child: %d\n", cmd_table->fdout);
 	printf("fdin in lastcmd : %d\n", cmd_table->fdin);
 	printf("infile in lastcmd : %s\n", cmd_table->infile);
@@ -101,6 +104,7 @@ int	lastcmd_process(t_cmd *cmd_table, t_env_lst *env_lst, int fd_pipe[2],
 	char	**envp;
 	int		fd_cpy[2];
 
+	printf("pipe in LASTCMD befor exe: in[%d; %d]out\n", fd_pipe[1], fd_pipe[0]);
 	envp = convert_env_to_exec(env_lst);
 	fd_cpy[0] = -1;
 	fd_cpy[1] = -1;
@@ -110,9 +114,16 @@ int	lastcmd_process(t_cmd *cmd_table, t_env_lst *env_lst, int fd_pipe[2],
 		exit_status = lastcmd_process_exe(cmd_table, fd_pipe, cmd_lst_size,
 				envp);
 	if (fd_pipe[0] != CLOSED)
+	{
 		close(fd_pipe[0]);
+		fd_pipe[0] = CLOSED;
+	}
 	if (cmd_table->fdout != STDOUT_FILENO)
+	{
 		close(cmd_table->fdout);
+		cmd_table->fdout = CLOSED;
+	}
+	printf("pipe in LASTCMD after exe: in[%d; %d]out, fdout : %d, fdin : %d\n", fd_pipe[1], fd_pipe[0], cmd_table->fdout, cmd_table->fdin);
 	ft_array_clear(envp);
 	if (fd_cpy[0] != CLOSED)
 		duplicate(fd_cpy[0], STDOUT_FILENO, "could not read from fdout_cpy]");
@@ -124,6 +135,7 @@ int	lastcmd_process(t_cmd *cmd_table, t_env_lst *env_lst, int fd_pipe[2],
 //write(2, "deT bugs\n", 9);
 void	lastcmd_dup(t_cmd *cmd_node, int fd_pipe[2])
 {
+	printf("fdin n LATCMD_DUP: %d\n", cmd_node->fdin);
 	if (cmd_node->fdout != STDOUT_FILENO)
 	{
 		duplicate(cmd_node->fdout, STDOUT_FILENO,
@@ -134,13 +146,16 @@ void	lastcmd_dup(t_cmd *cmd_node, int fd_pipe[2])
 	if (cmd_node->fdin != STDIN_FILENO)
 	{
 		if (fd_pipe[0] != CLOSED)
-			close(fd_pipe[0]);
+			close(fd_pipe[1]);
 		duplicate(cmd_node->fdin, STDIN_FILENO, "could not read from infile");
 		close(cmd_node->fdin);
 	}
 	else if (fd_pipe[0] != CLOSED)
 	{
+		write(2, "deT bugs\n", 9);
 		duplicate(fd_pipe[0], STDIN_FILENO, "could not read from the pipe");
 		close(fd_pipe[0]);
+		fd_pipe[0] = -1;
 	}
+	printf("pipe end of LASTCMD_DUP: in[%d; %d]out\n", fd_pipe[1], fd_pipe[0]);
 }

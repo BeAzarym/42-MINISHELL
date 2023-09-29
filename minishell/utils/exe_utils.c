@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 10:19:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 15:35:41 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/29 12:54:28 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,14 @@ void	pipe_init(int fd_pipes[2][2])
 	printf("cmd_outfile = %d\n", cmd->fdout);
 	printf("redirecting pipe[0] to stdin\n");
 */
-void	pipe_branching(t_cmd *cmd, int fd_pipes[2][2])
+void	pipe_plug(t_cmd *cmd, int fd_pipes[2][2])
 {
 	if (fd_pipes[0][0] != CLOSED)
 	{
 		close(fd_pipes[0][1]);
 		duplicate(fd_pipes[0][0], STDIN_FILENO, "could not read from pipe[0]");
 		close(fd_pipes[0][0]);
+		ft_putnbr_fd(fd_pipes[0][0], 2);
 	}
 	else if (cmd->fdin != STDIN_FILENO)
 	{
@@ -86,7 +87,10 @@ void	pipe_branching(t_cmd *cmd, int fd_pipes[2][2])
 void	pipe_closing(t_cmd *cmd, int fd_pipes[2][2])
 {
 	if (cmd->fdin != STDIN_FILENO)
+	{
 		close(cmd->fdin);
+		cmd->fdin = -1;
+	}
 	if (cmd->fdout != STDOUT_FILENO)
 		close(cmd->fdout);
 	if (fd_pipes[0][0] != CLOSED)
@@ -96,4 +100,5 @@ void	pipe_closing(t_cmd *cmd, int fd_pipes[2][2])
 	}
 	close(fd_pipes[1][1]);
 	fd_pipes[1][1] = -1;
+	// printf("pipe in LASTCMD befor exe: in[%d; %d]out\n", fd_pipe[1][], fd_pipe[0]);
 }

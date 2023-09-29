@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/29 11:52:09 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/29 12:08:28 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst)
 		pipe_execute(cmd_table, env_lst, fd_pipes);
 		cmd_table = cmd_table->next;
 		pipes_swap(fd_pipes);
+		printf("after SWAP: old : in[%d; %d]out, new: in[%d; %d]out\n",
+			fd_pipes[1][1], fd_pipes[1][0], fd_pipes[0][1], fd_pipes[0][0]);
 	}
 	if (redir(cmd_table) == EXIT_FAILURE)
 		return (EXIT_FAILURE);

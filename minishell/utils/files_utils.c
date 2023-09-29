@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:20:02 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/29 11:53:09 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:54:49 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ bool	can_access_infiles(t_cmd *cmd_table)
 	}
 	return (true);
 }
+
 /*
 	cmd_table->outfile = out->file;
 */
