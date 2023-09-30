@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 19:50:27 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/30 12:19:03 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ static int	lastcmd_process_exe(t_cmd *cmd_table, int fd_pipe[2],
 		lastcmd_dup(cmd_table, fd_pipe);
 		execute(cmd_table, envp);
 	}
+	if (fd_pipe[0] != CLOSED)
+	{
+		close(fd_pipe[0]);
+		fd_pipe[0] = CLOSED;
+	}
 	return (exit_status = processes_wait(pid, cmd_lst_size));
 }
 
@@ -115,7 +120,7 @@ int	lastcmd_process(t_cmd *cmd_table, t_env_lst *env_lst, int fd_pipe[2],
 		close(cmd_table->fdout);
 	ft_array_clear(envp);
 	if (fd_cpy[0] != CLOSED)
-		duplicate(fd_cpy[0], STDOUT_FILENO, "could not read from fdout_cpy]");
+		duplicate(fd_cpy[0], STDOUT_FILENO, "could not read from fdout_cpy");
 	if (fd_cpy[1] != CLOSED)
 		duplicate(fd_cpy[1], STDIN_FILENO, "could not read from fdin_cpy");
 	return (exit_status);
