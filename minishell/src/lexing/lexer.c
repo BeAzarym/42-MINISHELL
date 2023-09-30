@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:14:14 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/25 19:52:07 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/30 13:02:22 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static t_tkn_lst	*put_tkn_in_lst(char **array, t_tkn_lst *stack)
 	return (stack);
 }
 
-static int is_valid_cmd_line(t_tkn_lst *lst)
+static int	is_valid_cmd_line(t_tkn_lst *lst)
 {
-	t_token *cpy;
+	t_token	*cpy;
 
 	cpy = lst->head;
 	while (cpy)
@@ -40,7 +40,8 @@ static int is_valid_cmd_line(t_tkn_lst *lst)
 		{
 			if (cpy->next && cpy->next->type == 'W')
 				cpy = cpy->next;
-			if (cpy->next && cpy->next->next && (cpy->next->type == 'I' || cpy->next->type == 'O'))
+			if (cpy->next && cpy->next->next && (cpy->next->type == 'I'
+					|| cpy->next->type == 'O'))
 			{
 				if (cpy->next->next->type != 'W')
 					return (0);
