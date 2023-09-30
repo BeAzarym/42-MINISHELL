@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 19:30:30 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:56:25 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtins.h"
+#include "../../includes/execute.h"
 
 static int	cd_to_expanded_path(char *to_expand, t_env_lst *env);
 
@@ -77,7 +78,7 @@ int	pwd_builtin(void)
 
 	res = getcwd(NULL, 0);
 	if (!res)
-		return (-1);
+		error_exit("Error: getcwd crashed.");
 	printf("%s\n", res);
 	free(res);
 	return (0);

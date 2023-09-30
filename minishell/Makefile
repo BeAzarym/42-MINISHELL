@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: angassin <angassin@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/09/25 19:31:09 by angassin         ###   ########.fr        #
+#    Updated: 2023/09/30 11:51:38 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,10 @@ NAME		= minishell
 
 CC			= gcc
 
-CPPFLAGS 	= -I$(HOME)/.brew/opt/readline/include
-# CPPFLAGS 	= -I/opt/homebrew/opt/readline/include
-LDFLAGS 	= -L$(HOME)/.brew/opt/readline/lib
-# LDFLAGS		= -L/opt/homebrew/opt/readline/lib
+# CPPFLAGS 	= -I$(HOME)/.brew/opt/readline/include # Darwin
+CPPFLAGS 	= -I/opt/homebrew/opt/readline/include # M1Pro
+# LDFLAGS 	= -L$(HOME)/.brew/opt/readline/lib	# Darwin
+LDFLAGS	= -L/opt/homebrew/opt/readline/lib # M1Pro
 
 CFLAGS		= -Wall -Wextra -Werror
 
@@ -59,10 +59,11 @@ LIBFT_DIR 	= 	libft/
 LIBFT		= 	$(addprefix libft/, $(LIBFT_A))
 READLINE	=	 -lreadline 
 
-MINISHELL	=	builtins/builtin.c builtins/echo.c builtins/exit.c \
-				execution/execution.c execution/pipex.c execution/execute.c \
-				execution/signals.c execution/here_doc.c execution/redir.c \
+MINISHELL	=	builtins/builtin.c builtins/unset.c builtins/unset_utils.c builtins/echo.c builtins/exit.c\
+				builtins/export.c builtins/export_utils.c \
+				execution/execution.c execution/pipex.c execution/execute.c execution/redir.c \
 				execution/wait.c \
+				execution/signals.c execution/here_doc.c\
 				lexing/lexer.c \
 				lexing/arg_split.c \
 				lexing/token.c \

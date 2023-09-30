@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:55:06 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/11 11:29:19 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/26 11:07:55 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ t_token	*handle_redirect(t_token *lst, t_cmd *cmd_node)
 	t_redir_node	*node;
 
 	node = init_redir_node();
-	if (!lst)
-		return (NULL);
-	if (!have_redirect_arg(lst))
+	if (!lst || !have_redirect_arg(lst))
 		return (NULL);
 	if (have_redirect_arg(lst) == 1)
 		handle_simple(lst, node);

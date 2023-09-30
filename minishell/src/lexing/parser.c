@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:41:30 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/21 16:32:45 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:52:44 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_cmd_lst	*parsing(t_tkn_lst *lst, t_cmd_lst *cmd_table)
 	t_token	*cpy;
 	t_cmd	*node;
 
+	if (!lst)
+		return (NULL);
 	cpy = lst->head;
 	while (cpy)
 	{

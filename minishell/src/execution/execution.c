@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/29 12:08:28 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:35:39 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int	execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst)
 		pipe_execute(cmd_table, env_lst, fd_pipes);
 		cmd_table = cmd_table->next;
 		pipes_swap(fd_pipes);
-		printf("after SWAP: old : in[%d; %d]out, new: in[%d; %d]out\n",
-			fd_pipes[1][1], fd_pipes[1][0], fd_pipes[0][1], fd_pipes[0][0]);
 	}
 	if (redir(cmd_table) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
@@ -80,6 +78,10 @@ int	builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node, int status)
 			status = pwd_builtin();
 		else if (ft_strcmp(cmd_node->cmd[0], "exit") == OK)
 			status = exit_builtin(cmd_node->cmd, status);
+		else if (ft_strcmp(cmd_node->cmd[0], "export") == OK)
+			status = export_builtin(cmd_node->cmd, env_lst);
+		else if (ft_strcmp(cmd_node->cmd[0], "unset") == OK)
+			status = unset_builtin(cmd_node->cmd, env_lst);
 	}
 	return (status);
 }

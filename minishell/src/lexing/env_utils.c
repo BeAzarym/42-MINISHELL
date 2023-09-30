@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:57:11 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/17 18:14:00 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:40:38 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ t_env_lst	*add_lst_env(char *key, char *value, t_env_lst *lst)
 	if (!new)
 		return (NULL);
 	new->key = ft_strdup(key);
-	new->value = ft_strdup(value);
-	if (!new->key || !new->value)
+	if (value)
+		new->value = ft_strdup(value);
+	else
+		new->value = NULL;
+	if (!new->key || (value != NULL && !new->value))
 		return (NULL);
 	new->next = NULL;
 	if (!lst->head)
@@ -87,9 +90,9 @@ int	search_in_env(char *key, t_env_lst *env)
 	cpy = env->head;
 	while (cpy)
 	{
-		if (ft_strncmp(key, "?", ft_strlen(key)) == 0)
+		if (ft_strcmp(key, "?") == 0)
 			return (1);
-		if (ft_strncmp(key, cpy->key, ft_strlen(key)) == 0)
+		if (ft_strcmp(key, cpy->key) == 0)
 			return (1);
 		cpy = cpy->next;
 	}

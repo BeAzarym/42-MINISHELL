@@ -3,22 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/29 11:37:26 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:41:16 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/execute.h"
 #include "../includes/minishell.h"
 
+bool		g_signalset = false;
 static void	init(t_lists *lists, char **envp);
 static void	eof(const char *cmd_line, int status);
 static int	prompt(t_lists *lists, int status);
 
-bool		g_signalset = false;
-
+// printf("cmd line is: %s\n", cmd_line);
+// printf("status : %d\n", status);
+// print_token(tkn_lst->head);
+// print_cmd(cmd_table);
+// printf("debug got here\n");
 // printf("cmd line is: %s\n", cmd_line);
 // printf("status : %d\n", status);
 // print_token(tkn_lst->head);
@@ -66,16 +70,16 @@ static int	prompt(t_lists *lists, int status)
 	eof(cmd_line, status);
 	if (ft_strncmp(cmd_line, "", 1) == OK)
 		status = 0;
-	lists->tkn_lst = lexing(cmd_line);
 	if (ft_strlen(cmd_line) > 0)
 	{
 		add_history(cmd_line);
+		lists->tkn_lst = lexing(cmd_line);
 		lists->cmd_table = parsing(lists->tkn_lst, lists->cmd_table);
 		process_expand(lists->cmd_table, lists->env_lst, status);
 		status = execution(lists->cmd_table, lists->env_lst);
+		free(cmd_line);
+		clear_cmd_lst(lists->cmd_table);
 	}
-	free(cmd_line);
-	clear_cmd_lst(lists->cmd_table);
 	return (status);
 }
 

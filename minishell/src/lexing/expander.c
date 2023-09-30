@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:43:22 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/21 19:01:51 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:51:35 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	process_expand(t_cmd_lst *cmd, t_env_lst *env, int status)
 	t_cmd	*lst;
 	int		i;
 
+	if (!cmd)
+		return ;
 	lst = cmd->head;
 	if (!lst || !lst->cmd)
 		return ;
@@ -119,5 +121,6 @@ char	*expand(char *str, t_env_lst *env, int status)
 			res = ft_strjoin_null(tmp, res);
 		}
 	}
+	free(str);
 	return (res);
 }
