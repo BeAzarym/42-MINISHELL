@@ -6,7 +6,7 @@
 #    By: angassin <angassin@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/09/30 11:51:38 by angassin         ###   ########.fr        #
+#    Updated: 2023/09/30 13:30:29 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ CC			= gcc
 # CPPFLAGS 	= -I$(HOME)/.brew/opt/readline/include # Darwin
 CPPFLAGS 	= -I/opt/homebrew/opt/readline/include # M1Pro
 # LDFLAGS 	= -L$(HOME)/.brew/opt/readline/lib	# Darwin
-LDFLAGS	= -L/opt/homebrew/opt/readline/lib # M1Pro
+LDFLAGS		= -L/opt/homebrew/opt/readline/lib # M1Pro
 
 CFLAGS		= -Wall -Wextra -Werror
 
