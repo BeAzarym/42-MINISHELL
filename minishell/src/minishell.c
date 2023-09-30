@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/30 13:44:30 by angassin         ###   ########.fr       */
+/*   Updated: 2023/09/30 14:09:31 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,11 @@ static int	prompt(t_lists *lists, int status)
 		lists->tkn_lst = lexing(cmd_line);
 		lists->cmd_table = parsing(lists->tkn_lst, lists->cmd_table);
 		process_expand(lists->cmd_table, lists->env_lst, status);
-		if (lists->cmd_table->head == NULL)
-			return (EXIT_SUCCESS);
-		status = execution(lists->cmd_table, lists->env_lst);
-		free(cmd_line);
-		clear_cmd_lst(lists->cmd_table);
+		if (lists->cmd_table->head != NULL)
+			status = execution(lists->cmd_table, lists->env_lst);
 	}
+	free(cmd_line);
+	clear_cmd_lst(lists->cmd_table);
 	return (status);
 }
 
