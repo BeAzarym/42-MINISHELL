@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 19:56:25 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/01 14:22:34 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,17 @@ static int	cd_to_expanded_path(char *to_expand, t_env_lst *env);
 // cd -
 int	cd(char **cmd, t_env_lst *env)
 {
+	char	*home;
+	char	*old_pwd;
+
+	home = ft_strdup("$HOME");
+	old_pwd = ft_strdup("$OLDPWD");
 	if (cmd[1] == NULL)
-		return (cd_to_expanded_path("$HOME", env));
+		return (cd_to_expanded_path(home, env));
 	else if (ft_strcmp(cmd[1], "-") == OK)
 	{
 		pwd_builtin();
-		return (cd_to_expanded_path("$OLDPWD", env));
+		return (cd_to_expanded_path(old_pwd, env));
 	}
 	else if (chdir(cmd[1]) == -1)
 	{
