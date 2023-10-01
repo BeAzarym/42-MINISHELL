@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/30 12:19:03 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/01 15:48:55 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	pipe_execute(t_cmd *cmd, t_env_lst *env_lst, int fd_pipes[2][2])
 		error_exit("could not create process");
 	if (pid == CHILD)
 	{
-		pipe_branching(cmd, fd_pipes);
+		pipe_plug(cmd, fd_pipes);
 		if (is_builtin(cmd->cmd[0]))
 		{
 			builtin_execute(env_lst, cmd, 0);
