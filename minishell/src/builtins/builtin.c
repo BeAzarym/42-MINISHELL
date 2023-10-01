@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/01 14:22:34 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/01 19:16:31 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,18 @@ static int	cd_to_expanded_path(char *to_expand, t_env_lst *env);
 // cd -
 int	cd(char **cmd, t_env_lst *env)
 {
-	char	*home;
-	char	*old_pwd;
+	char	*to_expand;
 
-	home = ft_strdup("$HOME");
-	old_pwd = ft_strdup("$OLDPWD");
 	if (cmd[1] == NULL)
-		return (cd_to_expanded_path(home, env));
+	{
+		to_expand = ft_strdup("$HOME");
+		return (cd_to_expanded_path(to_expand, env));
+	}
 	else if (ft_strcmp(cmd[1], "-") == OK)
 	{
+		to_expand = ft_strdup("$OLDPWD");
 		pwd_builtin();
-		return (cd_to_expanded_path(old_pwd, env));
+		return (cd_to_expanded_path(to_expand, env));
 	}
 	else if (chdir(cmd[1]) == -1)
 	{
