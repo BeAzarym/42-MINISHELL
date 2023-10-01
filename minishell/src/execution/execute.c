@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 15:12:10 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 16:24:58 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/01 18:00:36 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,39 @@ static char	**commands_paths_array(char **envp)
 	Returns the path to the command given in argument if exists.
 	Otherwise displays error and return NULL.
 */
+// static char	*command_access(char *cmd, char **paths)
+// {
+// 	// (void)paths;
+// 	int		i;
+// 	char	*cmd_address;
+// 	char	*error;
+
+// 	i = -1;
+// 	while (paths[++i])
+// 	{
+// 		cmd_address = variadic_strjoin(3, paths[i], "/", cmd);
+// 		if (access(cmd_address, X_OK) == OK)
+// 			return (cmd_address);
+// 		free(cmd_address);
+// 	}
+// 	if (access(cmd, X_OK) == OK)
+// 		return (cmd);
+// 	if (cmd[0] == '/')
+// 	{
+// 		error = variadic_strjoin(3, "minishell: ", cmd, ": command not found\n");
+// 		ft_putstr_fd(error, STDERR_FILENO);
+// 		free(error);
+// 		return (NULL);
+// 	}
+// 	else
+// 	{
+// 		error = variadic_strjoin(3, "minishell: ", cmd, ": command not found\n");
+// 		ft_putstr_fd(error, STDERR_FILENO);
+// 	}
+// 	free(error);
+// 	return (NULL);
+// }
+
 static char	*command_access(char *cmd, char **paths)
 {
 	int		i;
