@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:02:43 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/02 14:16:09 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/02 15:48:01 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	sort_env(t_env_lst *env)
 
 void	print_export(t_env_lst *env)
 {
-	int i;
+	int		i;
 	t_env	*tmp;
 
 	i = 0;
