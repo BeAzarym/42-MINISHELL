@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:51:31 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 14:16:56 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:36:55 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 int		cd(char **cmd, t_env_lst *env);
 int		echo(char **cmd);
-int		exit_builtin(char **cmd, int status);
+int		exit_builtin(char **cmd);
 int		env_builtin(t_env_lst *env);
 int		pwd_builtin(void);
 int		unset_builtin(char **arg, t_env_lst *env);

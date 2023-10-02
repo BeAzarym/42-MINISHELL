@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:47:25 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/02 14:16:32 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:38:08 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int	process_export(char *arg, t_env_lst *env)
 int	export_builtin(char **arg, t_env_lst *env)
 {
 	int	i;
-	int	status;
 
 	if (ft_arraylen(arg) == 1)
 	{
@@ -83,8 +82,8 @@ int	export_builtin(char **arg, t_env_lst *env)
 		if (!check_arg(arg[i]))
 			ft_putstr_fd("export: key is not valid.\n", 2);
 		else
-			status = process_export(arg[i], env);
+			g_signal.status = process_export(arg[i], env);
 		i++;
 	}
-	return (status);
+	return (g_signal.status);
 }

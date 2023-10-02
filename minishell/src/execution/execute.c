@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 15:12:10 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 11:42:14 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:38:27 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	execute(t_cmd *cmd, char **envp)
 	if (cmd == NULL)
 		error_exit("parsing of the command failed");
 	set_sigint_in_child(SIGINT);
+	if (sigaction(SIGQUIT, &sa, NULL) == -1)
+		error_exit ("signal_problem");
 	paths = commands_paths_array(envp);
 	cmd_path = command_access(cmd->cmd[0], paths);
 	if (cmd_path == NULL)

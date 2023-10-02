@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:43:22 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/25 19:51:35 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:12:00 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 // 	return (0);
 // }
 
-void	process_expand(t_cmd_lst *cmd, t_env_lst *env, int status)
+void	process_expand(t_cmd_lst *cmd, t_env_lst *env)
 {
 	t_cmd	*lst;
 	int		i;
@@ -43,14 +43,14 @@ void	process_expand(t_cmd_lst *cmd, t_env_lst *env, int status)
 			if (verify_closed_quotes(lst->cmd[i]) == -1)
 				error_exit("ERROR: quote unclosed\n");
 			if (have_quotes(lst->cmd[i]) || need_substitute(lst->cmd[i]))
-				lst->cmd[i] = expand(lst->cmd[i], env, status);
+				lst->cmd[i] = expand(lst->cmd[i], env);
 			i++;
 		}
 		lst = lst->next;
 	}
 }
 
-char	*handle_without_q(char *str, t_env_lst *env, int status)
+char	*handle_without_q(char *str, t_env_lst *env)
 {
 	int		i;
 	char	*tmp;
@@ -64,7 +64,7 @@ char	*handle_without_q(char *str, t_env_lst *env, int status)
 		{
 			tmp = extract_key(&str[i + 1]);
 			i += ft_strlen(tmp) + 1;
-			tmp = process_substitution(tmp, env, status);
+			tmp = process_substitution(tmp, env);
 			res = ft_strjoin_null(tmp, res);
 		}
 		else if (str[i] != '$')
@@ -77,7 +77,7 @@ char	*handle_without_q(char *str, t_env_lst *env, int status)
 	return (res);
 }
 
-static char	*process_quote(char *str, int i, t_env_lst *env, int status)
+static char	*process_quote(char *str, int i, t_env_lst *env)
 {
 	char	*tmp;
 	char	*res;
@@ -91,14 +91,14 @@ static char	*process_quote(char *str, int i, t_env_lst *env, int status)
 	}
 	else
 	{
-		tmp = handle_d_quote(&str[i + 1], env, status);
+		tmp = handle_d_quote(&str[i + 1], env);
 		res = ft_strjoin_null(tmp, res);
 		return (res);
 	}
 	return (res);
 }
 
-char	*expand(char *str, t_env_lst *env, int status)
+char	*expand(char *str, t_env_lst *env)
 {
 	int		i;
 	char	*tmp;
@@ -110,13 +110,13 @@ char	*expand(char *str, t_env_lst *env, int status)
 	{
 		if (str[i] == '\'' || str[i] == '"')
 		{
-			tmp = process_quote(str, i, env, status);
+			tmp = process_quote(str, i, env);
 			i = escape_quotes(str, i) + 1;
 			res = ft_strjoin_null(tmp, res);
 		}
 		else if (str[i] != '"' || str[i] != '\'')
 		{
-			tmp = handle_without_q(&str[i], env, status);
+			tmp = handle_without_q(&str[i], env);
 			i += compute_len(&str[i], "\"'");
 			res = ft_strjoin_null(tmp, res);
 		}
