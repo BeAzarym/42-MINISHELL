@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 03:27:11 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 15:06:37 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:46:26 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	exit_builtin(char **cmd)
 		printf("minishell: exit: %s: numeric argument required\n", cmd[1]);
 		exit (255);
 	}
-	exit(g_status);
+	exit(g_signal.status);
 }
 
 static bool	ft_isnumber(char *cmd)

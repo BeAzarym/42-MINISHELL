@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 14:06:14 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:26:09 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst)
 	int		fd_pipes[2][2];
 	t_cmd	*cmd_table;
 
+	g_signal.signalset = false;
 	cmd_table = cmd_lst->head;
 	pipe_init(fd_pipes);
 	while (cmd_table->next != NULL)
@@ -46,10 +47,10 @@ int	execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst)
 	if (redir(cmd_table) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (cmd_table->cmd != NULL)
-		g_status = lastcmd_process(cmd_table, env_lst, fd_pipes[0],
+		g_signal.status = lastcmd_process(cmd_table, env_lst, fd_pipes[0],
 				cmd_lst->size);
 	unlink("/tmp/.heredoc.tmp");
-	return (g_status);
+	return (g_signal.status);
 }
 
 static int	redir(t_cmd *cmd_table)
@@ -66,21 +67,21 @@ int	builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node)
 	if (cmd_node != NULL)
 	{
 		if (ft_strcmp(cmd_node->cmd[0], "cd") == OK)
-			g_status = cd(cmd_node->cmd, env_lst);
+			g_signal.status = cd(cmd_node->cmd, env_lst);
 		else if (ft_strcmp(cmd_node->cmd[0], "echo") == OK)
-			g_status = echo(cmd_node->cmd);
+			g_signal.status = echo(cmd_node->cmd);
 		else if (ft_strcmp(cmd_node->cmd[0], "env") == OK)
-			g_status = env_builtin(env_lst);
+			g_signal.status = env_builtin(env_lst);
 		else if (ft_strcmp(cmd_node->cmd[0], "pwd") == OK)
-			g_status = pwd_builtin();
+			g_signal.status = pwd_builtin();
 		else if (ft_strcmp(cmd_node->cmd[0], "exit") == OK)
-			g_status = exit_builtin(cmd_node->cmd);
+			g_signal.status = exit_builtin(cmd_node->cmd);
 		else if (ft_strcmp(cmd_node->cmd[0], "export") == OK)
-			g_status = export_builtin(cmd_node->cmd, env_lst);
+			g_signal.status = export_builtin(cmd_node->cmd, env_lst);
 		else if (ft_strcmp(cmd_node->cmd[0], "unset") == OK)
-			g_status = unset_builtin(cmd_node->cmd, env_lst);
+			g_signal.status = unset_builtin(cmd_node->cmd, env_lst);
 	}
-	return (g_status);
+	return (g_signal.status);
 }
 
 static void	pipes_swap(int fd_pipes[2][2])

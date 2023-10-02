@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:01:01 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/02 13:53:04 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:46:26 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	unset_builtin(char **arg, t_env_lst *env)
 	while (arg[i])
 	{
 		if (search_unset_key(arg[i], env) == 1 && ft_strcmp(arg[i], "_") != 0)
-			g_status = unset_var(arg[i], env);
+			g_signal.status = unset_var(arg[i], env);
 		i++;
 	}
-	return (g_status);
+	return (g_signal.status);
 }

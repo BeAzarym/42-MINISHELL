@@ -6,14 +6,14 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/02 14:05:54 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:46:26 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/execute.h"
 #include "../includes/minishell.h"
 
-int		g_status = 0;
+t_signal	g_signal;
 static void	init(t_lists *lists, char **envp);
 static void	eof(const char *cmd_line);
 static int	prompt(t_lists *lists);
@@ -41,15 +41,16 @@ int	main(int argc, char **argv, char **envp)
 		if (lists.cmd_table == NULL)
 			return (1);
 		set_sigint_in_main(SIGINT);
-		g_status = prompt(&lists);
+		g_signal.status = prompt(&lists);
 	}
 	clear_env_lst(lists.env_lst);
-	return (g_status);
+	return (g_signal.status);
 }
 
 static void	init(t_lists *lists, char **envp)
 {
-	g_status = 0;
+	g_signal.status = 0;
+	g_signal.signalset = false;
 	lists->cmd_table = NULL;
 	lists->tkn_lst = NULL;
 	lists->env_lst = init_envp(envp);
@@ -67,7 +68,7 @@ static int	prompt(t_lists *lists)
 	cmd_line = readline("[Minishell]$ ");
 	eof(cmd_line);
 	if (ft_strncmp(cmd_line, "", 1) == OK)
-		g_status = 0;
+		g_signal.status = 0;
 	if (ft_strlen(cmd_line) > 0)
 	{
 		add_history(cmd_line);
@@ -75,11 +76,11 @@ static int	prompt(t_lists *lists)
 		lists->cmd_table = parsing(lists->tkn_lst, lists->cmd_table);
 		process_expand(lists->cmd_table, lists->env_lst);
 		if (lists->cmd_table->head != NULL)
-			g_status = execution(lists->cmd_table, lists->env_lst);
+			g_signal.status = execution(lists->cmd_table, lists->env_lst);
 	}
 	free(cmd_line);
 	clear_cmd_lst(lists->cmd_table);
-	return (g_status);
+	return (g_signal.status);
 }
 
 /* 
@@ -90,6 +91,6 @@ static void	eof(const char *cmd_line)
 	if (cmd_line == NULL)
 	{
 		printf("exit\n");
-		exit(g_status);
+		exit(g_signal.status);
 	}
 }

@@ -6,33 +6,41 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:18:15 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 15:04:50 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:08:55 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 
+static void	wait_if_signaled(void);
+
 int	processes_wait(const pid_t pid, int size)
 {
 	int	i;
 
-	waitpid(pid, &g_status, 0);
-	if (WIFSIGNALED(g_status))
-	{
-		if (WTERMSIG(g_status) == SIGINT)
-			g_status = 130;
-		else if (WTERMSIG(g_status) == SIGQUIT)
-			g_status = 131;
-		else
-			g_status = 128 + WTERMSIG(g_status);
-	}
-	else
-		g_status = WEXITSTATUS(g_status);
+	waitpid(pid, &g_signal.status, 0);
+	wait_if_signaled();
 	i = 0;
 	while (i < size - 1)
 	{
-		waitpid(-1, NULL, 0);
+		waitpid(-1, &g_signal.status, 0);
+		wait_if_signaled();
 		++i;
 	}
-	return (g_status);
+	return (g_signal.status);
+}
+
+static void	wait_if_signaled(void)
+{
+	if (WIFSIGNALED(g_signal.status))
+	{
+		if (WTERMSIG(g_signal.status) == SIGINT)
+			g_signal.status = 130;
+		else if (WTERMSIG(g_signal.status) == SIGQUIT)
+			g_signal.status = 131;
+		else
+			g_signal.status = 128 + WTERMSIG(g_signal.status);
+	}
+	else
+		g_signal.status = WEXITSTATUS(g_signal.status);
 }

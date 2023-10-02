@@ -6,13 +6,13 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:41:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 14:04:30 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:46:26 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
 
-const char	*read_and_append(char *already_read, int fd, ssize_t g_status);
+const char	*read_and_append(char *already_read, int fd, ssize_t g_signal.status);
 const char	*append(const char *buff, char *already_read);
 const char	*extract_line(char **already_read);
 const char	*keep_leftover(char *left_over);
@@ -57,7 +57,7 @@ char	*get_next_line(int fd)
 	3. Appends content of buffer and frees old already_read
 	4. Frees buffer
 */
-const char	*read_and_append(char *already_read, int fd, ssize_t g_status)
+const char	*read_and_append(char *already_read, int fd, ssize_t g_signal.status)
 {
 	char		*buff;
 
@@ -68,16 +68,16 @@ const char	*read_and_append(char *already_read, int fd, ssize_t g_status)
 		return (NULL);
 	}
 	*buff = '\0';
-	while ((g_status > 0) && (!ft_strchr(buff, '\n')))
+	while ((g_signal.status > 0) && (!ft_strchr(buff, '\n')))
 	{
-		g_status = read(fd, buff, BUFFER_SIZE);
-		if (g_status < 0)
+		g_signal.status = read(fd, buff, BUFFER_SIZE);
+		if (g_signal.status < 0)
 		{
 			free(buff);
 			free(already_read);
 			return (NULL);
 		}
-		buff[g_status] = '\0';
+		buff[g_signal.status] = '\0';
 		already_read = (char *)append(buff, already_read);
 	}
 	free(buff);
