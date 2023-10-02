@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/01 15:48:55 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:07:06 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,6 @@
 # define CHILD 0
 # define CLOSED -1
 
-/*									[Global]								*/
-
-extern bool	g_signalset;
-
 /*									[Src]									*/
 
 // signal.c
@@ -41,7 +37,7 @@ void		set_sigint_in_main(int signal);
 
 // execution.c
 int			execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst);
-int			builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node, int status);
+int			builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node);
 bool		is_builtin(char *cmd);
 int			get_input_output(t_cmd *cmd_table);
 

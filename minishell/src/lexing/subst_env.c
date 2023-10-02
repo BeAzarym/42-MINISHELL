@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subst_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:38:06 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/19 17:38:49 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:06:24 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*extract_key(char *str)
 	return (result);
 }
 
-char	*get_key_value(char *key, t_env_lst *env, int status)
+char	*get_key_value(char *key, t_env_lst *env)
 {
 	t_env	*cpy;
 	char	*value;
@@ -42,7 +42,7 @@ char	*get_key_value(char *key, t_env_lst *env, int status)
 	value = NULL;
 	if (ft_strncmp(key, "?", 1) == 0)
 	{
-		value = ft_itoa(status);
+		value = ft_itoa(g_status);
 		if (!value)
 			return (NULL);
 		return (value);
@@ -62,11 +62,11 @@ char	*get_key_value(char *key, t_env_lst *env, int status)
 	return (value);
 }
 
-char	*substitute_env(char *key, t_env_lst *env, int status)
+char	*substitute_env(char *key, t_env_lst *env)
 {
 	char	*value;
 
-	value = get_key_value(key, env, status);
+	value = get_key_value(key, env);
 	if (!value)
 		return (NULL);
 	free(key);

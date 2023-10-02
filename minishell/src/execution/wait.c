@@ -3,48 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   wait.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:18:15 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 11:49:50 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 15:04:50 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 
-static int	wait_if_signaled(int status, int exit_status);
-
 int	processes_wait(const pid_t pid, int size)
 {
-	int	status;
-	int	exit_status;
 	int	i;
 
-	exit_status = 0;
+	waitpid(pid, &g_status, 0);
+	if (WIFSIGNALED(g_status))
+	{
+		if (WTERMSIG(g_status) == SIGINT)
+			g_status = 130;
+		else if (WTERMSIG(g_status) == SIGQUIT)
+			g_status = 131;
+		else
+			g_status = 128 + WTERMSIG(g_status);
+	}
+	else
+		g_status = WEXITSTATUS(g_status);
 	i = 0;
 	while (i < size - 1)
 	{
-		waitpid(-1, &status, 0);
-		exit_status = wait_if_signaled(status, exit_status);
+		waitpid(-1, NULL, 0);
 		++i;
 	}
-	waitpid(pid, &status, 0);
-	exit_status = wait_if_signaled(status, exit_status);
-	return (exit_status);
-}
-
-static int	wait_if_signaled(int status, int exit_status)
-{
-	if (WIFSIGNALED(status))
-	{
-		if (WTERMSIG(status) == SIGINT)
-			exit_status = 130;
-		else if (WTERMSIG(status) == SIGQUIT)
-			exit_status = 131;
-		else
-			exit_status = 128 + WTERMSIG(status);
-	}
-	else
-		exit_status = WEXITSTATUS(status);
-	return (exit_status);
+	return (g_status);
 }

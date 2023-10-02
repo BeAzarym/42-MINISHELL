@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:41:37 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/19 20:59:46 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:13:14 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ char	*handle_s_quote(char *str)
 	return (res);
 }
 
-char	*process_substitution(char *str, t_env_lst *env, int status)
+char	*process_substitution(char *str, t_env_lst *env)
 {
 	if (search_in_env(str, env))
-		str = substitute_env(str, env, status);
+		str = substitute_env(str, env);
 	else
 		str = ft_strdup("");
 	return (str);
 }
 
-char	*handle_d_quote(char *str, t_env_lst *env, int status)
+char	*handle_d_quote(char *str, t_env_lst *env)
 {
 	int		i;
 	char	*tmp;
@@ -61,7 +61,7 @@ char	*handle_d_quote(char *str, t_env_lst *env, int status)
 		{
 			tmp = extract_key(&str[i + 1]);
 			i += ft_strlen(tmp) + 1;
-			tmp = process_substitution(tmp, env, status);
+			tmp = process_substitution(tmp, env);
 			res = ft_strjoin_null(tmp, res);
 		}
 		else if (str[i] != '$' && str[i] != '"')

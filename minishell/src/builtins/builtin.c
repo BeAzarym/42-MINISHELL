@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 11:47:48 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:09:48 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	cd_to_expanded_path(char *to_expand, t_env_lst *env)
 {
 	char	*expanded;
 
-	expanded = expand(to_expand, env, 0);
+	expanded = expand(to_expand, env);
 	if (chdir(expanded) == -1)
 	{
 		printf("minishell: cd: %s: expanded not set\n", expanded);

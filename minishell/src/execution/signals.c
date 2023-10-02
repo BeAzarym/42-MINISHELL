@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 23:40:50 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 13:08:55 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:38:51 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,17 @@ static void	set_signal_handler(int signal, int flags, void (*handler)(int))
 	sigaction(signal, &sa, NULL);
 }
 
-// printf("g_signalset : %d\n", g_signalset);
+// printf("g_signalset : %d\n", g_status);
 static void	handle_sigint_in_main(int signal)
 {
-	if (g_signalset && signal == SIGINT)
+	if (signal == SIGINT)
 	{
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
+	// g_signal  = 1;
 }
 
 /* 
@@ -42,17 +43,13 @@ void	ignore_shell_signal(void)
 {
 	set_signal_handler(SIGINT, 0, SIG_IGN);
 	set_signal_handler(SIGQUIT, 0, SIG_IGN);
-	g_signalset = true;
 }
 
 // ctrl-c in child
 void	set_sigint_in_child(int signal)
 {
-	if (g_signalset && signal == SIGINT)
-	{
+	if (signal == SIGINT)
 		set_signal_handler(SIGINT, 0, NULL);
-		exit(130);
-	}
 }
 
 //ctrl-c in main
