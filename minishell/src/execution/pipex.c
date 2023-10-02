@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 17:46:51 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:57:55 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	lastcmd_process(t_cmd *cmd_table, t_env_lst *env_lst, int fd_pipe[2],
 		duplicate(fd_cpy[0], STDOUT_FILENO, "could not read from fdout_cpy");
 	if (fd_cpy[1] != CLOSED)
 		duplicate(fd_cpy[1], STDIN_FILENO, "could not read from fdin_cpy");
-	return (g_signal.status); 
+	return (g_signal.status);
 }
 
 static void	lastcmd_builtin_dup(t_cmd *cmd_table, int fd_cpy[2], int fd_pipe[2])

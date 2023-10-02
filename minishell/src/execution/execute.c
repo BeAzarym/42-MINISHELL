@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 15:12:10 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 17:49:58 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:57:29 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,12 @@ void	execute(t_cmd *cmd, char **envp)
 	char				*cmd_path;
 	struct sigaction	sa;
 
-
 	if (cmd == NULL)
 		error_exit("parsing of the command failed");
 	set_sigint_in_child(SIGINT);
 	if (sigaction(SIGQUIT, &sa, NULL) == -1
 		|| sigaction(SIGINT, &sa, NULL) == -1)
-		error_exit ("signal_problem");
+		error_exit("signal_problem");
 	paths = commands_paths_array(envp);
 	cmd_path = command_access(cmd->cmd[0], paths);
 	if (cmd_path == NULL)
@@ -93,14 +92,16 @@ static char	*command_access(char *cmd, char **paths)
 		return (cmd);
 	if (cmd[0] == '/')
 	{
-		error = variadic_strjoin(3, "minishell: ", cmd, ": command not found\n");
+		error = variadic_strjoin(3, "minishell: ", cmd,
+				": command not found\n");
 		ft_putstr_fd(error, STDERR_FILENO);
 		free(error);
 		return (NULL);
 	}
 	else
 	{
-		error = variadic_strjoin(3, "minishell: ", cmd, ": command not found\n");
+		error = variadic_strjoin(3, "minishell: ", cmd,
+				": command not found\n");
 		ft_putstr_fd(error, STDERR_FILENO);
 	}
 	free(error);
