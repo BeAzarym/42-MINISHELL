@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 11:50:25 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 11:51:12 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void	lastcmd_dup(t_cmd *cmd_node, int fd_pipe[2])
 	if (cmd_node->fdout != STDOUT_FILENO)
 	{
 		duplicate(cmd_node->fdout, STDOUT_FILENO,
-				"duplication of the outfile failed");
+			"duplication of the outfile failed");
 		close(cmd_node->fdout);
 		cmd_node->fdout = STDOUT_FILENO;
 	}
