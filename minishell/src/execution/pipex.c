@@ -6,11 +6,16 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/01 22:38:16 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 09:52:55 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
+
+static void	lastcmd_builtin_dup(t_cmd *cmd_table, int fd_cpy[2],
+				int fd_pipe[2]);
+static int	lastcmd_process_exe(t_cmd *cmd_table, int fd_pipe[2],
+				int cmd_lst_size, char **envp);
 
 /*
 	Creates a child process : send to the pipe the output of the execution
@@ -50,39 +55,6 @@ void	pipe_execute(t_cmd *cmd, t_env_lst *env_lst, int fd_pipes[2][2])
 	pipe_closing(cmd, fd_pipes);
 }
 
-static int	lastcmd_builtin_exe(t_cmd *cmd_table, int fd_cpy[2], int fd_pipe[2],
-		t_env_lst *env_lst)
-{
-	if (cmd_table->fdout != STDOUT_FILENO)
-		fd_cpy[0] = dup(STDOUT_FILENO);
-	if (cmd_table->fdout != STDIN_FILENO)
-		fd_cpy[1] = dup(STDIN_FILENO);
-	lastcmd_dup(cmd_table, fd_pipe);
-	return (builtin_execute(env_lst, cmd_table, 0));
-}
-
-static int	lastcmd_process_exe(t_cmd *cmd_table, int fd_pipe[2],
-		int cmd_lst_size, char **envp)
-{
-	pid_t	pid;
-	int		exit_status;
-
-	pid = fork();
-	if (pid == -1)
-		error_exit("could not create lastcmd process");
-	if (pid == CHILD)
-	{
-		lastcmd_dup(cmd_table, fd_pipe);
-		execute(cmd_table, envp);
-	}
-	if (fd_pipe[0] != CLOSED)
-	{
-		close(fd_pipe[0]);
-		fd_pipe[0] = CLOSED;
-	}
-	return (exit_status = processes_wait(pid, cmd_lst_size));
-}
-
 /*
 	Executes the last command in a child process and wait for all
 	the child processes to end in the parent.
@@ -108,7 +80,10 @@ int	lastcmd_process(t_cmd *cmd_table, t_env_lst *env_lst, int fd_pipe[2],
 	fd_cpy[0] = -1;
 	fd_cpy[1] = -1;
 	if (is_builtin(cmd_table->cmd[0]))
-		exit_status = lastcmd_builtin_exe(cmd_table, fd_cpy, fd_pipe, env_lst);
+	{
+		lastcmd_builtin_dup(cmd_table, fd_cpy, fd_pipe);
+		exit_status = (builtin_execute(env_lst, cmd_table, 0));
+	}
 	else
 		exit_status = lastcmd_process_exe(cmd_table, fd_pipe, cmd_lst_size,
 				envp);
@@ -124,13 +99,44 @@ int	lastcmd_process(t_cmd *cmd_table, t_env_lst *env_lst, int fd_pipe[2],
 	return (exit_status);
 }
 
+static void	lastcmd_builtin_dup(t_cmd *cmd_table, int fd_cpy[2], int fd_pipe[2])
+{
+	if (cmd_table->fdout != STDOUT_FILENO)
+		fd_cpy[0] = dup(STDOUT_FILENO);
+	if (cmd_table->fdout != STDIN_FILENO)
+		fd_cpy[1] = dup(STDIN_FILENO);
+	lastcmd_dup(cmd_table, fd_pipe);
+}
+
+static int	lastcmd_process_exe(t_cmd *cmd_table, int fd_pipe[2],
+		int cmd_lst_size, char **envp)
+{
+	pid_t	pid;
+	int		exit_status;
+
+	pid = fork();
+	if (pid == -1)
+		error_exit("could not create lastcmd process");
+	if (pid == CHILD)
+	{
+		lastcmd_dup(cmd_table, fd_pipe);
+		execute(cmd_table, envp);
+	}
+	if (fd_pipe[0] != CLOSED)
+	{
+		close(fd_pipe[0]);
+		fd_pipe[0] = CLOSED;
+	}
+	return (exit_status = processes_wait(pid, cmd_lst_size));
+}
+
 //write(2, "deT bugs\n", 9);
 void	lastcmd_dup(t_cmd *cmd_node, int fd_pipe[2])
 {
 	if (cmd_node->fdout != STDOUT_FILENO)
 	{
 		duplicate(cmd_node->fdout, STDOUT_FILENO,
-			"duplication of the outfile failed");
+				"duplication of the outfile failed");
 		close(cmd_node->fdout);
 		cmd_node->fdout = STDOUT_FILENO;
 	}

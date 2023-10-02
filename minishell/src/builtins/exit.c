@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 03:27:11 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/24 03:36:31 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 01:07:54 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ int	exit_builtin(char **cmd, int status)
 	if (argc > 2 && ft_isnumber(cmd[1]))
 	{
 		printf("minishell: exit: too many arguments\n");
-		return (1);
+		exit (1);
 	}
 	else if (cmd[1] != NULL && !ft_isnumber(cmd[1]))
 	{
 		printf("minishell: exit: %s: numeric argument required\n", cmd[1]);
-		return (255);
+		exit (255);
 	}
-	exit(status);
+	exit(WEXITSTATUS(status));
 }
 
 static bool	ft_isnumber(char *cmd)
