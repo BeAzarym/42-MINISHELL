@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 19:54:45 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:16:24 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_env
 {
 	char				*key;
 	char				*value;
+	int					sorted_pos;
 	struct s_env		*next;
 }						t_env;
 
