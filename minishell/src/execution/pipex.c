@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 17:38:34 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:46:51 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,7 @@ int	lastcmd_process(t_cmd *cmd_table, t_env_lst *env_lst, int fd_pipe[2],
 	if (is_builtin(cmd_table->cmd[0]))
 	{
 		lastcmd_builtin_dup(cmd_table, fd_cpy, fd_pipe);
-<<<<<<< HEAD
-		exit_status = (builtin_execute(env_lst, cmd_table, 0));
-=======
 		g_signal.status = (builtin_execute(env_lst, cmd_table));
->>>>>>> Anaïs
 	}
 	else
 		g_signal.status = lastcmd_process_exe(cmd_table, fd_pipe, cmd_lst_size,
@@ -132,40 +128,6 @@ static int	lastcmd_process_exe(t_cmd *cmd_table, int fd_pipe[2],
 	return (g_signal.status = processes_wait(pid, cmd_lst_size));
 }
 
-<<<<<<< HEAD
-static void	lastcmd_builtin_dup(t_cmd *cmd_table, int fd_cpy[2], int fd_pipe[2])
-{
-	if (cmd_table->fdout != STDOUT_FILENO)
-		fd_cpy[1] = dup(STDOUT_FILENO);
-	if (cmd_table->fdout != STDIN_FILENO)
-		fd_cpy[0] = dup(STDIN_FILENO);
-	lastcmd_dup(cmd_table, fd_pipe);
-}
-
-static int	lastcmd_process_exe(t_cmd *cmd_table, int fd_pipe[2],
-		int cmd_lst_size, char **envp)
-{
-	pid_t	pid;
-	int		exit_status;
-
-	pid = fork();
-	if (pid == -1)
-		error_exit("could not create lastcmd process");
-	if (pid == CHILD)
-	{
-		lastcmd_dup(cmd_table, fd_pipe);
-		execute(cmd_table, envp);
-	}
-	if (fd_pipe[0] != CLOSED)
-	{
-		close(fd_pipe[0]);
-		fd_pipe[0] = CLOSED;
-	}
-	return (exit_status = processes_wait(pid, cmd_lst_size));
-}
-
-=======
->>>>>>> Anaïs
 void	lastcmd_dup(t_cmd *cmd_node, int fd_pipe[2])
 {
 	if (cmd_node->fdout != STDOUT_FILENO)
