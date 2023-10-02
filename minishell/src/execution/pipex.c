@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 09:52:55 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 10:17:35 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,9 @@ int	lastcmd_process(t_cmd *cmd_table, t_env_lst *env_lst, int fd_pipe[2],
 static void	lastcmd_builtin_dup(t_cmd *cmd_table, int fd_cpy[2], int fd_pipe[2])
 {
 	if (cmd_table->fdout != STDOUT_FILENO)
-		fd_cpy[0] = dup(STDOUT_FILENO);
+		fd_cpy[1] = dup(STDOUT_FILENO);
 	if (cmd_table->fdout != STDIN_FILENO)
-		fd_cpy[1] = dup(STDIN_FILENO);
+		fd_cpy[0] = dup(STDIN_FILENO);
 	lastcmd_dup(cmd_table, fd_pipe);
 }
 
@@ -130,13 +130,12 @@ static int	lastcmd_process_exe(t_cmd *cmd_table, int fd_pipe[2],
 	return (exit_status = processes_wait(pid, cmd_lst_size));
 }
 
-//write(2, "deT bugs\n", 9);
 void	lastcmd_dup(t_cmd *cmd_node, int fd_pipe[2])
 {
 	if (cmd_node->fdout != STDOUT_FILENO)
 	{
 		duplicate(cmd_node->fdout, STDOUT_FILENO,
-				"duplication of the outfile failed");
+			"duplication of the outfile failed");
 		close(cmd_node->fdout);
 		cmd_node->fdout = STDOUT_FILENO;
 	}
