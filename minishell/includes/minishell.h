@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 16:45:02 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:25:48 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@
 
 /*									[Global]								*/
 
-typedef struct s_signal
+typedef struct s_status
 {
 	bool				signalset;
 	int					status;
-}						t_signal;
+}						t_status;
 
 /*									[Typedefs]								*/
 
-extern t_signal			g_signal;
+extern t_status			g_stat;
 
 typedef struct s_token_lst
 {
