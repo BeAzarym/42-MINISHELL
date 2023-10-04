@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:14:14 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/03 18:17:26 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:31:50 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,16 @@ static int	is_valid_cmd_line(t_tkn_lst *lst)
 		{
 			if (cpy->next && cpy->next->type == 'W')
 				cpy = cpy->next;
-			if (cpy->next && cpy->next->next && (cpy->next->type == 'I'
-					|| cpy->next->type == 'O'))
+			else if (cpy->next && cpy->next->next && (cpy->next->type == 'I'
+						|| cpy->next->type == 'O'))
 			{
-				if (cpy->next->next->next->type == 'W')
-					cpy = cpy->next->next->next;
+				if (cpy->next->next && cpy->next->next->type == 'W')
+					cpy = cpy->next->next;
 				else
 					return (0);
 			}
+			else
+				return (0);
 		}
 		cpy = cpy->next;
 	}
@@ -77,6 +79,7 @@ t_tkn_lst	*lexing(char *str)
 	if (!is_valid_cmd_line(lst))
 	{
 		printf("Error: Syntax not valid\n");
+		clear_tkn_lst(lst);
 		return (NULL);
 	}
 	return (lst);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/04 13:28:34 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:17:24 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	main(int argc, char **argv, char **envp)
 			return (1);
 		set_sigint_in_main(SIGINT);
 		g_stat.status = prompt(&lists);
+		clear_cmd_lst(lists.cmd_table);
 	}
 	clear_env_lst(lists.env_lst);
 	return (g_stat.status);
@@ -73,13 +74,16 @@ static int	prompt(t_lists *lists)
 	{
 		add_history(cmd_line);
 		lists->tkn_lst = lexing(cmd_line);
+		if (!lists->tkn_lst)
+		{
+			free(cmd_line);
+			return (1);
+		}
 		lists->cmd_table = parsing(lists->tkn_lst, lists->cmd_table);
 		process_expand(lists->cmd_table, lists->env_lst);
 		if (lists->cmd_table->head != NULL)
 			g_stat.status = execution(lists->cmd_table, lists->env_lst);
 	}
-	free(cmd_line);
-	clear_cmd_lst(lists->cmd_table);
 	return (g_stat.status);
 }
 
