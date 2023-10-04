@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/04 14:17:24 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:09:13 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ static int	prompt(t_lists *lists)
 
 	cmd_line = readline("[Minishell]$ ");
 	eof(cmd_line);
-	if (ft_strncmp(cmd_line, "", 1) == OK)
-		g_stat.status = 0;
 	if (ft_strlen(cmd_line) > 0)
 	{
 		add_history(cmd_line);
