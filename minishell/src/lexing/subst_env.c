@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subst_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:38:06 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/02 20:07:40 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/04 13:20:09 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*get_key_value(char *key, t_env_lst *env)
 	value = NULL;
 	if (ft_strncmp(key, "?", 1) == 0)
 	{
-		value = ft_itoa(g_signal.status);
+		value = ft_itoa(g_stat.status);
 		if (!value)
 			return (NULL);
 		return (value);
