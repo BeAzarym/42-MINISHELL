@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 03:27:11 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/04 13:24:45 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:28:12 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 static bool	ft_isnumber(char *cmd);
 
+/*
+	Exits the shell.
+	Exits with the status specified by the user.
+	Exits with the status of the last command if no status is specified.
+*/
 int	exit_builtin(char **cmd)
 {
 	int	argc;
@@ -32,6 +37,8 @@ int	exit_builtin(char **cmd)
 		printf("minishell: exit: %s: numeric argument required\n", cmd[1]);
 		exit (255);
 	}
+	else if (cmd[1] != NULL && ft_isnumber(cmd[1]))
+		exit(ft_atoi(cmd[1]));
 	exit(g_stat.status);
 }
 
