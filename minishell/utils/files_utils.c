@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:20:02 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/30 13:01:23 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:37:47 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,6 @@ bool	can_access_infiles(t_cmd *cmd_table)
 	return (true);
 }
 
-/*
-	cmd_table->outfile = out->file;
-*/
-void	get_outfile(t_cmd *cmd_table)
-{
-	t_redir_node	*out;
-
-	out = cmd_table->redir_out->head;
-	if (out == NULL)
-		cmd_table->fdout = STDOUT_FILENO;
-	else
-	{
-		while (out != NULL)
-		{
-			if (out->type == TRUNCATE)
-				cmd_table->fdout = outfile_truncate_open(out->file);
-			else if (out->type == APPEND)
-				cmd_table->fdout = outfile_append_open(out->file);
-			out = out->next;
-		}
-	}
-}
-
 int	infile_open(char *file)
 {
 	int	fd;
@@ -72,7 +49,7 @@ int	outfile_truncate_open(char *file)
 	fd = -1;
 	fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
-		error_exit(file);
+		perror(file);
 	return (fd);
 }
 
@@ -83,6 +60,6 @@ int	outfile_append_open(char *file)
 	fd = -1;
 	fd = open(file, O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
-		error_exit(file);
+		perror(file);
 	return (fd);
 }

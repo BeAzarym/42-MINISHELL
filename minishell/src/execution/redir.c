@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:12:05 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/30 12:11:34 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:38:38 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,35 @@ int	get_input_output(t_cmd *cmd_table)
 		cmd_table->type_in = in->type;
 		cmd_table->infile = ft_strdup(in->file);
 	}
-	get_outfile(cmd_table);
+	if (get_outfile(cmd_table) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	if (cmd_table->type_in == INFILE)
 		cmd_table->fdin = infile_open(cmd_table->infile);
+	return (EXIT_SUCCESS);
+}
+
+/*
+	cmd_table->outfile = out->file;
+*/
+int	get_outfile(t_cmd *cmd_table)
+{
+	t_redir_node	*out;
+
+	out = cmd_table->redir_out->head;
+	if (out == NULL)
+		cmd_table->fdout = STDOUT_FILENO;
+	else
+	{
+		while (out != NULL)
+		{
+			if (out->type == TRUNCATE)
+				cmd_table->fdout = outfile_truncate_open(out->file);
+			else if (out->type == APPEND)
+				cmd_table->fdout = outfile_append_open(out->file);
+			if (cmd_table->fdout == CLOSED)
+				return (EXIT_FAILURE);
+			out = out->next;
+		}
+	}
 	return (EXIT_SUCCESS);
 }

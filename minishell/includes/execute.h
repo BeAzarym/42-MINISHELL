@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 17:47:36 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:29:40 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ void		set_sigint_in_main(int signal);
 int			execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst);
 int			builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node);
 bool		is_builtin(char *cmd);
+
+// redir.c
 int			get_input_output(t_cmd *cmd_table);
+int			get_outfile(t_cmd *cmd_table);
 
 // here_doc.c
 void		heredoc(t_cmd *cmd_lst);
@@ -68,6 +71,5 @@ bool		can_access_infiles(t_cmd *cmd_table);
 int			infile_open(char *file);
 int			outfile_append_open(char *file);
 int			outfile_truncate_open(char *file);
-void		get_outfile(t_cmd *cmd_table);
 
 #endif
