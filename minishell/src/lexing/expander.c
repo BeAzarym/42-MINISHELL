@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:43:22 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/03 22:56:54 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:59:08 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ static char	**expand_cmd_table(char **cmd_table, t_env_lst *env)
 	i = 0;
 	while (cmd_table[i])
 	{
-		if (!verify_closed_quotes(cmd_table[i]))
+		if (verify_closed_quotes(cmd_table[i]) == -1)
+		{
 			printf("ERROR: quote unclosed\n");
+			return (NULL);
+		}
 		if (have_quotes(cmd_table[i]) || need_substitute(cmd_table[i])
 			|| ft_strcmp(cmd_table[i], "~") == 0)
 			cmd_table[i] = expand(cmd_table[i], env);
@@ -40,8 +43,11 @@ static t_redir_lst	*expand_redir(t_redir_lst *redir, t_env_lst *env)
 	{
 		while (lst)
 		{
-			if (!verify_closed_quotes(lst->file))
+			if (verify_closed_quotes(lst->file) == -1)
+			{
 				printf("ERROR: quote unclosed\n");
+				return (NULL);
+			}
 			if (have_quotes(lst->file) || need_substitute(lst->file))
 				lst->file = expand(lst->file, env);
 			lst = lst->next;
