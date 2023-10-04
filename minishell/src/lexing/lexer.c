@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:14:14 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/04 14:31:50 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:44:37 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	is_valid_cmd_line(t_tkn_lst *lst)
 			if (cpy->next && cpy->next->type == 'W')
 				cpy = cpy->next;
 			else if (cpy->next && cpy->next->next && (cpy->next->type == 'I'
-						|| cpy->next->type == 'O'))
+					|| cpy->next->type == 'O'))
 			{
 				if (cpy->next->next && cpy->next->next->type == 'W')
 					cpy = cpy->next->next;
