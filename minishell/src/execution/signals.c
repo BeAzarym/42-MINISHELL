@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 23:40:50 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/04 13:20:09 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/04 13:27:05 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ignore_shell_signal(void)
 // ctrl-c in child
 void	set_sigint_in_child(int signal)
 {
-	if (g_stat.signalset && signal == SIGINT)
+	if (signal == SIGINT)
 		set_signal_handler(SIGINT, 0, NULL);
 }
 
