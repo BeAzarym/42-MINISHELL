@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 16:43:22 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/04 12:59:08 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:43:40 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static t_redir_lst	*expand_redir(t_redir_lst *redir, t_env_lst *env)
 				printf("ERROR: quote unclosed\n");
 				return (NULL);
 			}
-			if (have_quotes(lst->file) || need_substitute(lst->file))
+			if ((have_quotes(lst->file) || need_substitute(lst->file))
+				&& lst->type != 'H')
 				lst->file = expand(lst->file, env);
 			lst = lst->next;
 		}
