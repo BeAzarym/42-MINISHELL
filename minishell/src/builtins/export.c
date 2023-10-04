@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:47:25 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/02 17:38:08 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 19:55:58 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_arg(char *arg)
 {
 	int	i;
 
-	if (ft_isdigit(arg[0]))
+	if (ft_isdigit(arg[0]) || arg[0] == '=')
 		return (0);
 	i = 0;
 	while (arg[i] && arg[i] != '=')

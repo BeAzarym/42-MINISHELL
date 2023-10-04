@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:41:37 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/02 14:13:14 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/03 22:51:49 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*handle_d_quote(char *str, t_env_lst *env)
 		}
 		else if (str[i] != '$' && str[i] != '"')
 		{
-			tmp = extract_word_sep(&str[i], "$\"");
+			tmp = extract_word_sep(&str[i], "$\"", env);
 			i += ft_strlen(tmp);
 			res = ft_strjoin_null(tmp, res);
 		}

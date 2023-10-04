@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:14:14 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/30 14:23:11 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/03 18:17:26 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ static int	is_valid_cmd_line(t_tkn_lst *lst)
 			if (cpy->next && cpy->next->next && (cpy->next->type == 'I'
 					|| cpy->next->type == 'O'))
 			{
-				if (cpy->next->next->type != 'W')
+				if (cpy->next->next->next->type == 'W')
+					cpy = cpy->next->next->next;
+				else
 					return (0);
 			}
 		}

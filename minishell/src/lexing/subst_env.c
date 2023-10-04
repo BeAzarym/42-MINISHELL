@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subst_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:38:06 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/02 16:46:26 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 20:07:40 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*extract_key(char *str)
 
 	i = 0;
 	j = 0;
+	if (ft_isdigit(str[0]))
+		return (result = ft_substr(str, 0, 1));
 	while (str[i])
 	{
 		if (ft_isalnum(str[i]) || str[i] == '_' || str[i] == '?')
