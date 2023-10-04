@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:41:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/08/14 14:25:11 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:54:56 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ const char	*keep_leftover(char *left_over);
 	Reads the text file pointed to by the file descriptor, one line at a time
 	Return : 
 			- the line that was read including the terminating \n character if
-			  present
+				present
 			- NULL if error or nothing else to read
 	Bonus :
 			- only one static variable
@@ -29,7 +29,7 @@ const char	*keep_leftover(char *left_over);
 
 	1. checks if correct fd and possible to fill buffer
 	2. as long as not reached newline or EOF, appends buffer to already_read, 
-	   protect in case of pb with read
+		protect in case of pb with read
 	3. finds line and extract
 	4. removes the line that was found from already_read[fd]
 */
@@ -59,7 +59,7 @@ char	*get_next_line(int fd)
 */
 const char	*read_and_append(char *already_read, int fd, ssize_t status)
 {
-	char		*buff;
+	char	*buff;
 
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(*buff));
 	if (!buff)
@@ -131,7 +131,7 @@ const char	*extract_line(char **already_read)
 	line = ft_substr(*already_read, 0, line_len + 1);
 	if (!line)
 	{
-		free (*already_read);
+		free(*already_read);
 		*already_read = NULL;
 		return (NULL);
 	}

@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:47:25 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/27 16:40:12 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/02 19:55:58 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_arg(char *arg)
 {
 	int	i;
 
-	if (ft_isdigit(arg[0]))
+	if (ft_isdigit(arg[0]) || arg[0] == '=')
 		return (0);
 	i = 0;
 	while (arg[i] && arg[i] != '=')
@@ -70,11 +70,10 @@ int	process_export(char *arg, t_env_lst *env)
 int	export_builtin(char **arg, t_env_lst *env)
 {
 	int	i;
-	int	status;
 
 	if (ft_arraylen(arg) == 1)
 	{
-		print_env(env);
+		sort_env(env);
 		return (0);
 	}
 	i = 1;
@@ -83,8 +82,8 @@ int	export_builtin(char **arg, t_env_lst *env)
 		if (!check_arg(arg[i]))
 			ft_putstr_fd("export: key is not valid.\n", 2);
 		else
-			status = process_export(arg[i], env);
+			g_signal.status = process_export(arg[i], env);
 		i++;
 	}
-	return (status);
+	return (g_signal.status);
 }

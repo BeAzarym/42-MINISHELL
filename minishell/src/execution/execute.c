@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 15:12:10 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 16:24:58 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:57:29 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static char	**commands_paths_array(char **envp);
 static char	*command_access(char *cmd, char **paths);
+static char	*check_path(char *cmd, char **paths);
 
 /*
 	Executes the command sent in argument, execve returns only in case
@@ -30,9 +31,9 @@ void	execute(t_cmd *cmd, char **envp)
 	if (cmd == NULL)
 		error_exit("parsing of the command failed");
 	set_sigint_in_child(SIGINT);
-	if (sigaction(SIGINT, &sa, NULL) == -1
-		|| sigaction(SIGQUIT, &sa, NULL) == -1)
-		error_exit("killed\n");
+	if (sigaction(SIGQUIT, &sa, NULL) == -1
+		|| sigaction(SIGINT, &sa, NULL) == -1)
+		error_exit("signal_problem");
 	paths = commands_paths_array(envp);
 	cmd_path = command_access(cmd->cmd[0], paths);
 	if (cmd_path == NULL)
@@ -81,19 +82,37 @@ static char	**commands_paths_array(char **envp)
 */
 static char	*command_access(char *cmd, char **paths)
 {
-	int		i;
-	char	*cmd_address;
 	char	*error;
+	char	*cmd_address;
 
+	cmd_address = check_path(cmd, paths);
+	if (cmd_address != NULL)
+		return (cmd_address);
 	if (access(cmd, X_OK) == OK)
 		return (cmd);
 	if (cmd[0] == '/')
 	{
-		error = variadic_strjoin(3, "minishell: ", cmd, ": command not found\n");
+		error = variadic_strjoin(3, "minishell: ", cmd,
+				": command not found\n");
 		ft_putstr_fd(error, STDERR_FILENO);
 		free(error);
 		return (NULL);
 	}
+	else
+	{
+		error = variadic_strjoin(3, "minishell: ", cmd,
+				": command not found\n");
+		ft_putstr_fd(error, STDERR_FILENO);
+	}
+	free(error);
+	return (NULL);
+}
+
+static char	*check_path(char *cmd, char **paths)
+{
+	int		i;
+	char	*cmd_address;
+
 	i = -1;
 	while (paths[++i])
 	{
@@ -102,8 +121,5 @@ static char	*command_access(char *cmd, char **paths)
 			return (cmd_address);
 		free(cmd_address);
 	}
-	error = variadic_strjoin(3, "minishell: ", cmd, ": command not found\n");
-	ft_putstr_fd(error, STDERR_FILENO);
-	free(error);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:02:43 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/25 18:17:20 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/02 15:48:01 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,49 @@ void	replace_value_env(char *key, char *value, t_env_lst *env)
 	}
 }
 
-// void sort_env(t_env_lst *env)
-// {
-// 	t_env *cpy;
-// 	t_env *tmp;
-// 	int i;
+void	sort_env(t_env_lst *env)
+{
+	t_env	*cpy;
+	t_env	*tmp;
 
-// 	cpy = env->head;
-// 	i = 0;
-// 	while (i < env->size-1)
-// 	{
-// 		if (ft_strcmp(cpy->key, cpy->next->key))
-// 		{
-// 			tmp = cpy;
+	cpy = env->head;
+	while (cpy)
+	{
+		cpy->sorted_pos = 0;
+		tmp = env->head;
+		while (tmp)
+		{
+			if (ft_strcmp(cpy->key, tmp->key) > 0)
+			{
+				cpy->sorted_pos++;
+			}
+			tmp = tmp->next;
+		}
+		cpy = cpy->next;
+	}
+	print_export(env);
+}
 
-// 		}
-// 		}
-// }
+void	print_export(t_env_lst *env)
+{
+	int		i;
+	t_env	*tmp;
+
+	i = 0;
+	while (i < env->size)
+	{
+		tmp = env->head;
+		while (tmp)
+		{
+			if (tmp->sorted_pos == i)
+			{
+				if (tmp->value)
+					printf("declare -x %s=%s\n", tmp->key, tmp->value);
+				else
+					printf("declare -x %s\n", tmp->key);
+			}
+			tmp = tmp->next;
+		}
+		i++;
+	}
+}

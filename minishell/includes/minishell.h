@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 19:54:45 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/03 22:51:21 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,17 @@
 // libft and other includes
 # include "../libft/includes/libft.h"
 
+/*									[Global]								*/
+
+typedef struct s_signal
+{
+	bool				signalset;
+	int					status;
+}						t_signal;
+
 /*									[Typedefs]								*/
+
+extern t_signal			g_signal;
 
 typedef struct s_token_lst
 {
@@ -52,6 +62,7 @@ typedef struct s_env
 {
 	char				*key;
 	char				*value;
+	int					sorted_pos;
 	struct s_env		*next;
 }						t_env;
 
@@ -152,22 +163,19 @@ void					clear_redir_lst(t_redir_lst *lst);
 void					clear_cmd_lst(t_cmd_lst *lst);
 int						need_substitute(char *str);
 int						have_quotes(char *str);
-void					process_expand(t_cmd_lst *cmd, t_env_lst *env,
-							int status);
-char					*expand(char *str, t_env_lst *env, int status);
+void					process_expand(t_cmd_lst *cmd, t_env_lst *env);
+char					*expand(char *str, t_env_lst *env);
 int						search_in_env(char *key, t_env_lst *env);
-char					*substitute_env(char *key, t_env_lst *env, int status);
-char					*get_key_value(char *key, t_env_lst *env, int status);
-char					*extract_word_sep(char *str, char *sep);
+char					*substitute_env(char *key, t_env_lst *env);
+char					*get_key_value(char *key, t_env_lst *env);
+char					*extract_word_sep(char *str, char *sep, t_env_lst *env);
 int						compute_len(char *str, char *sep);
 int						verify_closed_quotes(char *str);
-char					*handle_d_quote(char *str, t_env_lst *env, int status);
+char					*handle_d_quote(char *str, t_env_lst *env);
 char					*handle_s_quote(char *str);
-char					*handle_without_q(char *str, t_env_lst *env,
-							int status);
+char					*handle_without_q(char *str, t_env_lst *env);
 char					*extract_key(char *str);
-char					*process_substitution(char *str, t_env_lst *env,
-							int status);
+char					*process_substitution(char *str, t_env_lst *envs);
 void					clear_tkn(t_token *token);
 void					clear_cmd(t_cmd *cmd);
 

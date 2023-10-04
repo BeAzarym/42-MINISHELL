@@ -6,7 +6,7 @@
 #    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/10/04 12:38:03 by angassin         ###   ########.fr        #
+#    Updated: 2023/10/04 13:16:32 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,10 +76,10 @@ MINISHELL	=	builtins/builtin.c builtins/unset.c builtins/unset_utils.c builtins/
 				lexing/redirect_handler.c lexing/redir_struct.c \
 				lexing/expander.c lexing/expander_utils.c \
 				lexing/quote_handler.c lexing/quote_checker.c \
-				utils.c minishell.c 
+				minishell.c 
 MINISHELL_SRC	= $(addprefix src/, $(MINISHELL))
 
-UTILS		= 	exe_utils.c files_utils.c 
+UTILS		= 	exe_utils.c files_utils.c lexing_utils.c
 UTILS_SRC	= 	$(addprefix utils/, $(UTILS))
 
 OBJ			= 	$(SRC:.c=.o)

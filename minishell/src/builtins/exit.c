@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 03:27:11 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/02 00:20:00 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/04 13:16:24 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	ft_isnumber(char *cmd);
 
-int	exit_builtin(char **cmd, int status)
+int	exit_builtin(char **cmd)
 {
 	int	argc;
 
@@ -32,7 +32,7 @@ int	exit_builtin(char **cmd, int status)
 		printf("minishell: exit: %s: numeric argument required\n", cmd[1]);
 		exit (255);
 	}
-	exit(status);
+	exit(g_signal.status);
 }
 
 static bool	ft_isnumber(char *cmd)

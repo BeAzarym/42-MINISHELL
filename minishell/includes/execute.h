@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 19:45:08 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:47:36 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,6 @@
 # define CHILD 0
 # define CLOSED -1
 
-/*									[Global]								*/
-
-extern bool	g_signalset;
-
 /*									[Src]									*/
 
 // signal.c
@@ -41,7 +37,7 @@ void		set_sigint_in_main(int signal);
 
 // execution.c
 int			execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst);
-int			builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node, int status);
+int			builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node);
 bool		is_builtin(char *cmd);
 int			get_input_output(t_cmd *cmd_table);
 
@@ -64,7 +60,7 @@ int			processes_wait(const pid_t pid, int size);
 void		error_exit(char *error_msg);
 void		duplicate(int fd_src, int fd_dest, char *error);
 void		pipe_init(int fd_pipes[2][2]);
-void		pipe_branching(t_cmd *cmd, int fd_pipes[2][2]);
+void		pipe_plug(t_cmd *cmd, int fd_pipes[2][2]);
 void		pipe_closing(t_cmd *cmd, int fd_pipes[2][2]);
 
 // files_utils.c
