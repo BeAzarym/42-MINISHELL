@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/05 16:04:27 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:44:17 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,11 @@ int	lastcmd_process(t_cmd *cmd_table, t_env_lst *env_lst, int fd_pipe[2],
 	if (cmd_table->fdout != STDOUT_FILENO)
 		close(cmd_table->fdout);
 	ft_array_clear(envp);
-	if (fd_cpy[0] != CLOSED)
-		duplicate(fd_cpy[0], STDOUT_FILENO, "could not read from fdout_cpy");
 	if (fd_cpy[1] != CLOSED)
-		duplicate(fd_cpy[1], STDIN_FILENO, "could not read from fdin_cpy");
-	return (g_status);
+		duplicate(fd_cpy[1], STDOUT_FILENO, "could not read from fdout_cpy");
+	if (fd_cpy[0] != CLOSED)
+		duplicate(fd_cpy[0], STDIN_FILENO, "could not read from fdin_cpy");
+	return (g_status); 
 }
 
 static void	lastcmd_builtin_dup(t_cmd *cmd_table, int fd_cpy[2], int fd_pipe[2])
