@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/04 15:29:40 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 10:59:04 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@
 # define CLOSED -1
 
 /*									[Src]									*/
-
-// signal.c
-void		ignore_shell_signal(void);
-void		set_sigint_in_child(int signal);
-void		set_sigint_in_main(int signal);
 
 // execution.c
 int			execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst);
