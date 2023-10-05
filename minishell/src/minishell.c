@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/05 15:00:06 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 15:00:26 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ static void	eof(const char *cmd_line)
 static int is_whitespace(char *str)
 {
 	int i;
+
+	i = 0;
 	while (str[i])
 	{
 		if (is_sep(str[i], " \n\t\r\f\t\b"))
