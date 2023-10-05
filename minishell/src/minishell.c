@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/05 16:15:40 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:32:14 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static int	prompt(t_lists *lists)
 			return (1);
 		}
 		lists->cmd_table = parsing(lists->tkn_lst, lists->cmd_table);
+		print_cmd(lists->cmd_table);
 		process_expand(lists->cmd_table, lists->env_lst);
 		if (lists->cmd_table->head != NULL)
 			g_status = execution(lists->cmd_table, lists->env_lst);
