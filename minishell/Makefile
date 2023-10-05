@@ -6,7 +6,7 @@
 #    By: angassin <angassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/10/05 15:41:04 by angassin         ###   ########.fr        #
+#    Updated: 2023/10/05 15:55:37 by angassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ LIBFT_DIR 	= 	libft/
 LIBFT		= 	$(addprefix libft/, $(LIBFT_A))
 READLINE	=	 -lreadline 
 
-MINISHELL	=	builtins/builtin.c builtins/unset.c builtins/unset_utils.c builtins/echo.c builtins/exit.c \
+MINISHELL	=	builtins/builtin.c builtins/unset.c builtins/unset_utils.c builtins/echo.c builtins/exit.c builtins/cd.c\
 				builtins/export.c builtins/export_utils.c \
 				execution/execution.c execution/pipex.c execution/execute.c execution/redir.c \
 				execution/wait.c execution/here_doc.c \

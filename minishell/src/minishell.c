@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/05 15:05:40 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 15:56:22 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static int	prompt(t_lists *lists)
 		if (lists->cmd_table->head != NULL)
 			g_stat.status = execution(lists->cmd_table, lists->env_lst);
 	}
+	free(cmd_line);
 	return (g_stat.status);
 }
 

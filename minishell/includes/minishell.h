@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/05 14:56:54 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 15:56:05 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,5 +176,7 @@ char					*extract_key(char *str);
 char					*process_substitution(char *str, t_env_lst *envs);
 void					clear_tkn(t_token *token);
 void					clear_cmd(t_cmd *cmd);
+void					update_value_env(char *key, char *value,
+							t_env_lst *env);
 
 #endif
