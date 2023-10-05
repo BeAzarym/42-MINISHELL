@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:18:52 by angassin          #+#    #+#             */
-/*   Updated: 2023/09/25 16:46:18 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 12:52:31 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	heredoc(t_cmd *cmd_table)
 	int				pid;
 	t_redir_node	*in;
 
+	set_heredoc_signals(PARENT_H);
 	in = cmd_table->redir_in->head;
 	while (in->type == HEREDOC)
 	{
@@ -34,6 +35,7 @@ void	heredoc(t_cmd *cmd_table)
 		cmd_table->fdin = outfile_truncate_open("/tmp/.heredoc.tmp");
 		if (pid == CHILD)
 		{
+			set_heredoc_signals(CHILD_H);
 			read_stdin(cmd_table->limiter, cmd_table->fdin);
 			close(cmd_table->fdin);
 		}

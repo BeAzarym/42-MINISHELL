@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/05 09:51:02 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 13:40:31 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,10 @@ int	main(int argc, char **argv, char **envp)
 	init(&lists, envp);
 	while (true)
 	{
-		ignore_shell_signal();
 		lists.cmd_table = init_cmd_lst();
 		if (lists.cmd_table == NULL)
 			return (1);
-		set_sigint_in_main(SIGINT);
+		set_signals(MAIN_H);
 		g_stat.status = prompt(&lists);
 		clear_cmd_lst(lists.cmd_table);
 	}
