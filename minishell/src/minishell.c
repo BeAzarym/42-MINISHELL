@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/05 14:28:18 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/05 15:17:12 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_status	g_stat;
 static void	init(t_lists *lists, char **envp);
 static void	eof(const char *cmd_line);
 static int	prompt(t_lists *lists);
-static int is_whitespace(char *str);
+static int	is_whitespace(char *str);
 
 // printf("cmd line is: %s\n", cmd_line);
 // printf("status : %d\n", status);
@@ -82,6 +82,7 @@ static int	prompt(t_lists *lists)
 		if (lists->cmd_table->head != NULL)
 			g_stat.status = execution(lists->cmd_table, lists->env_lst);
 	}
+	free(cmd_line);
 	return (g_stat.status);
 }
 
@@ -97,9 +98,9 @@ static void	eof(const char *cmd_line)
 	}
 }
 
-static int is_whitespace(char *str)
+static int	is_whitespace(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

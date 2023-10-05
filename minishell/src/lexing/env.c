@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:54:49 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/09/27 16:43:35 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/05 15:16:58 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,21 @@ char	**convert_env_to_exec(t_env_lst *env_lst)
 	}
 	arr[i] = NULL;
 	return (arr);
+}
+
+void	update_value_env(char *key, char *value, t_env_lst *env)
+{
+	t_env	*cpy;
+
+	cpy = env->head;
+	while (cpy)
+	{
+		if (ft_strcmp(cpy->key, key) == 0)
+		{
+			free(cpy->value);
+			cpy->value = ft_strdup(value);
+		}
+		cpy = cpy->next;
+	}
+	free(value);
 }
