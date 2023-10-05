@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:47:25 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/04 13:25:38 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:16:49 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ int	export_builtin(char **arg, t_env_lst *env)
 		if (!check_arg(arg[i]))
 			ft_putstr_fd("export: key is not valid.\n", 2);
 		else
-			g_stat.status = process_export(arg[i], env);
+			g_status = process_export(arg[i], env);
 		i++;
 	}
-	return (g_stat.status);
+	return (g_status);
 }

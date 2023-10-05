@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/05 15:32:02 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:07:52 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,10 @@
 # include "../libft/includes/libft.h"
 # include "signals.h"
 
-/*									[Typedefs]								*/
+/*									[Global]								*/
+extern int			g_status;
 
-typedef struct s_status
-{
-	bool				signalset;
-	int					status;
-}						t_status;
+/*									[Typedefs]								*/
 
 typedef struct s_token_lst
 {
@@ -102,8 +99,6 @@ typedef struct s_lists
 	t_cmd_lst			*cmd_table;
 }						t_lists;
 
-/*									[Global]								*/
-extern t_status			g_stat;
 
 /*									[Macros]								*/
 # define OK 0

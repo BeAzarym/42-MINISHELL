@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 03:27:11 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/04 14:28:12 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:16:49 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	exit_builtin(char **cmd)
 	}
 	else if (cmd[1] != NULL && ft_isnumber(cmd[1]))
 		exit(ft_atoi(cmd[1]));
-	exit(g_stat.status);
+	exit(g_status);
 }
 
 static bool	ft_isnumber(char *cmd)
