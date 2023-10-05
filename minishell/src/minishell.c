@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/05 13:40:31 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 15:05:40 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_status	g_stat;
 static void	init(t_lists *lists, char **envp);
 static void	eof(const char *cmd_line);
 static int	prompt(t_lists *lists);
+static int	is_whitespace(char *str);
 
 // printf("cmd line is: %s\n", cmd_line);
 // printf("status : %d\n", status);
@@ -67,7 +68,7 @@ static int	prompt(t_lists *lists)
 
 	cmd_line = readline("[Minishell]$ ");
 	eof(cmd_line);
-	if (ft_strlen(cmd_line) > 0)
+	if (ft_strlen(cmd_line) > 0 && is_whitespace(cmd_line))
 	{
 		add_history(cmd_line);
 		lists->tkn_lst = lexing(cmd_line);
@@ -94,4 +95,19 @@ static void	eof(const char *cmd_line)
 		ft_putstr_fd("exit\n", 2);
 		exit(g_stat.status);
 	}
+}
+
+static int	is_whitespace(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (is_sep(str[i], " \n\t\r\f\t\b"))
+			i++;
+		else
+			return (1);
+	}
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/04 16:02:07 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/04 22:24:58 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ static int	cd_to_expanded_path(char *to_expand, t_env_lst *env);
                  then writes its name.
 */
 // unset home and cd .. /bin
-// printf("cmd 1 : %s\n", expanded);
-// cd -
 int	cd(char **cmd, t_env_lst *env)
 {
 	char	*to_expand;
