@@ -6,7 +6,7 @@
 #    By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 00:20:00 by angassin          #+#    #+#              #
-#    Updated: 2023/10/05 15:56:43 by cchabeau         ###   ########.fr        #
+#    Updated: 2023/10/05 16:09:46 by cchabeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,7 @@ MINISHELL	=	builtins/builtin.c builtins/unset.c builtins/unset_utils.c builtins/
 				lexing/expander.c lexing/expander_utils.c \
 				lexing/quote_handler.c lexing/quote_checker.c \
 				minishell.c 
+				
 MINISHELL_SRC	= $(addprefix src/, $(MINISHELL))
 
 UTILS		= 	exe_utils.c files_utils.c lexing_utils.c
