@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:02:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/05 15:54:25 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:16:53 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 // 	sigaction(signal, &sa, NULL);
 // }
 
-// printf("g_statset : %d\n", g_stat.status);
+// printf("g_statset : %d\n", g_status);
 void	sigint_in_main_handler(int signal)
 {
 	if (signal == SIGINT)
@@ -31,17 +31,17 @@ void	sigint_in_main_handler(int signal)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		g_stat.status = 1;
+		g_status = 1;
 	}
 }
 
 void	child_process_handler(int signal)
 {
 	if (signal == SIGINT)
-		g_stat.status = 130;
+		g_status = 130;
 	else if (signal == SIGQUIT)
-		g_stat.status = 131;
-	exit(g_stat.status);
+		g_status = 131;
+	exit(g_status);
 }
 
 void	parent_process_handler(int signal)
@@ -49,12 +49,12 @@ void	parent_process_handler(int signal)
 	if (signal == SIGINT)
 	{
 		printf("\n");
-		g_stat.status = 130;
+		g_status = 130;
 	}
 	else if (signal == SIGQUIT)
 	{
 		printf("Quit: 3\n");
-		g_stat.status = 131;
+		g_status = 131;
 	}
 }
 
@@ -62,14 +62,14 @@ void	heredoc_child_process_handler(int signal)
 {
 	if (signal == SIGINT)
 	{
-		g_stat.status = 1;
+		g_status = 1;
 		printf("\n");
-		exit (g_stat.status);
+		exit (g_status);
 	}
 }
 
 void	heredoc_parent_process_handler(int signal)
 {
 	if (signal == SIGINT)
-		g_stat.status = 1;
+		g_status = 1;
 }

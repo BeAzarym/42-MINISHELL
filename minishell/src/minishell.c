@@ -6,14 +6,14 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/05 15:56:22 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:15:40 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/execute.h"
 #include "../includes/minishell.h"
 
-t_status	g_stat;
+int			g_status;
 static void	init(t_lists *lists, char **envp);
 static void	eof(const char *cmd_line);
 static int	prompt(t_lists *lists);
@@ -41,17 +41,16 @@ int	main(int argc, char **argv, char **envp)
 		if (lists.cmd_table == NULL)
 			return (1);
 		set_signals(MAIN_H);
-		g_stat.status = prompt(&lists);
+		g_status = prompt(&lists);
 		clear_cmd_lst(lists.cmd_table);
 	}
 	clear_env_lst(lists.env_lst);
-	return (g_stat.status);
+	return (g_status);
 }
 
 static void	init(t_lists *lists, char **envp)
 {
-	g_stat.status = 0;
-	g_stat.signalset = false;
+	g_status = 0;
 	lists->cmd_table = NULL;
 	lists->tkn_lst = NULL;
 	lists->env_lst = init_envp(envp);
@@ -80,10 +79,10 @@ static int	prompt(t_lists *lists)
 		lists->cmd_table = parsing(lists->tkn_lst, lists->cmd_table);
 		process_expand(lists->cmd_table, lists->env_lst);
 		if (lists->cmd_table->head != NULL)
-			g_stat.status = execution(lists->cmd_table, lists->env_lst);
+			g_status = execution(lists->cmd_table, lists->env_lst);
 	}
 	free(cmd_line);
-	return (g_stat.status);
+	return (g_status);
 }
 
 /* 
@@ -94,7 +93,7 @@ static void	eof(const char *cmd_line)
 	if (cmd_line == NULL)
 	{
 		ft_putstr_fd("exit\n", 2);
-		exit(g_stat.status);
+		exit(g_status);
 	}
 }
 

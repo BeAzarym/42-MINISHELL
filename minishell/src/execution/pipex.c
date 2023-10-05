@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/04 13:26:29 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:04:27 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ int	lastcmd_process(t_cmd *cmd_table, t_env_lst *env_lst, int fd_pipe[2],
 	if (is_builtin(cmd_table->cmd[0]))
 	{
 		lastcmd_builtin_dup(cmd_table, fd_cpy, fd_pipe);
-		g_stat.status = (builtin_execute(env_lst, cmd_table));
+		g_status = (builtin_execute(env_lst, cmd_table));
 	}
 	else
-		g_stat.status = lastcmd_process_exe(cmd_table, fd_pipe, cmd_lst_size,
+		g_status = lastcmd_process_exe(cmd_table, fd_pipe, cmd_lst_size,
 				envp);
 	if (fd_pipe[0] != CLOSED)
 		close(fd_pipe[0]);
@@ -95,7 +95,7 @@ int	lastcmd_process(t_cmd *cmd_table, t_env_lst *env_lst, int fd_pipe[2],
 		duplicate(fd_cpy[0], STDOUT_FILENO, "could not read from fdout_cpy");
 	if (fd_cpy[1] != CLOSED)
 		duplicate(fd_cpy[1], STDIN_FILENO, "could not read from fdin_cpy");
-	return (g_stat.status);
+	return (g_status);
 }
 
 static void	lastcmd_builtin_dup(t_cmd *cmd_table, int fd_cpy[2], int fd_pipe[2])
@@ -125,7 +125,7 @@ static int	lastcmd_process_exe(t_cmd *cmd_table, int fd_pipe[2],
 		close(fd_pipe[0]);
 		fd_pipe[0] = CLOSED;
 	}
-	return (g_stat.status = processes_wait(pid, cmd_lst_size));
+	return (g_status = processes_wait(pid, cmd_lst_size));
 }
 
 void	lastcmd_dup(t_cmd *cmd_node, int fd_pipe[2])

@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:38:06 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/04 13:28:27 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:04:27 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*get_key_value(char *key, t_env_lst *env)
 	value = NULL;
 	if (ft_strncmp(key, "?", 1) == 0)
 	{
-		value = ft_itoa(g_stat.status);
+		value = ft_itoa(g_status);
 		if (!value)
 			return (NULL);
 		return (value);
