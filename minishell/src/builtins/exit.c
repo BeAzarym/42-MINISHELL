@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 03:27:11 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/05 16:16:49 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:51:00 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	exit_builtin(char **cmd)
 	if (argc > 2 && ft_isnumber(cmd[1]))
 	{
 		printf("minishell: exit: too many arguments\n");
-		exit (1);
+		g_status = 1;
+		return (g_status);
 	}
 	else if (cmd[1] != NULL && !ft_isnumber(cmd[1]))
 	{
