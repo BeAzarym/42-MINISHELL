@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/05 15:56:05 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:02:20 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,5 +178,6 @@ void					clear_tkn(t_token *token);
 void					clear_cmd(t_cmd *cmd);
 void					update_value_env(char *key, char *value,
 							t_env_lst *env);
+int						is_valid_cmd_line(t_tkn_lst *lst);
 
 #endif
