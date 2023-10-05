@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/04 13:25:58 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 12:13:57 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst)
 	g_stat.signalset = false;
 	cmd_table = cmd_lst->head;
 	pipe_init(fd_pipes);
+	set_signals(PARENT_H);
 	while (cmd_table->next != NULL)
 	{
 		if (redir(cmd_table) == EXIT_FAILURE)
