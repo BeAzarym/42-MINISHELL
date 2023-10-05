@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 23:14:14 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/04 14:44:37 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/05 15:31:40 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,35 +25,6 @@ static t_tkn_lst	*put_tkn_in_lst(char **array, t_tkn_lst *stack)
 		i++;
 	}
 	return (stack);
-}
-
-static int	is_valid_cmd_line(t_tkn_lst *lst)
-{
-	t_token	*cpy;
-
-	cpy = lst->head;
-	while (cpy)
-	{
-		if (cpy->next && cpy->type == 'P' && cpy->next->type == 'P')
-			return (0);
-		if (cpy->type == 'I' || cpy->type == 'O')
-		{
-			if (cpy->next && cpy->next->type == 'W')
-				cpy = cpy->next;
-			else if (cpy->next && cpy->next->next && (cpy->next->type == 'I'
-					|| cpy->next->type == 'O'))
-			{
-				if (cpy->next->next && cpy->next->next->type == 'W')
-					cpy = cpy->next->next;
-				else
-					return (0);
-			}
-			else
-				return (0);
-		}
-		cpy = cpy->next;
-	}
-	return (1);
 }
 
 t_tkn_lst	*lexing(char *str)

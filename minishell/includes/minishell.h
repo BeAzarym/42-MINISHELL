@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/05 15:06:34 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/05 15:32:02 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,5 +178,6 @@ void					clear_tkn(t_token *token);
 void					clear_cmd(t_cmd *cmd);
 void					update_value_env(char *key, char *value,
 							t_env_lst *env);
+int						is_valid_cmd_line(t_tkn_lst *lst);
 
 #endif
