@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:01:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/05 14:51:18 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:21:03 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	pwd_builtin(void)
 	res = getcwd(NULL, 0);
 	if (!res)
 	{
-		printf("Error getcwd can't find current location.");
+		printf("Error getcwd can't find current location.\n");
 		return (1);
 	}
 	printf("%s\n", res);
