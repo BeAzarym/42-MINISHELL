@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 23:40:50 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/04 13:27:05 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 09:45:50 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	set_signal_handler(int signal, int flags, void (*handler)(int))
 	sa.sa_flags = flags;
 	sigemptyset(&sa.sa_mask);
 	sigaction(signal, &sa, NULL);
+	g_stat.status = 130;
 }
 
 // printf("g_statset : %d\n", g_stat.status);
@@ -31,8 +32,9 @@ static void	handle_sigint_in_main(int signal)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		g_stat.status = 1;
 	}
-	g_stat.status = 1;
+	
 }
 
 /* 

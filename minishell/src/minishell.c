@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/04 16:09:13 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 09:51:02 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static void	eof(const char *cmd_line)
 {
 	if (cmd_line == NULL)
 	{
-		printf("exit\n");
+		ft_putstr_fd("exit\n", 2);
 		exit(g_stat.status);
 	}
 }
