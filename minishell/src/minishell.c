@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/05 19:59:56 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 20:02:23 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	prompt(t_lists *lists)
 
 	cmd_line = readline("[Minishell]$ ");
 	eof(cmd_line);
-	if (ft_strlen(cmd_line) > 0 && is_whitespace(cmd_line))
+	if (ft_strlen(cmd_line) > 0 && !is_whitespace(cmd_line))
 	{
 		add_history(cmd_line);
 		lists->tkn_lst = lexing(cmd_line);
@@ -107,7 +107,7 @@ static int	is_whitespace(char *str)
 		if (is_sep(str[i], " \n\t\r\f\t\b"))
 			i++;
 		else
-			return (1);
+			return (0);
 	}
-	return (0);
+	return (1);
 }
