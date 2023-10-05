@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:02:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/05 12:26:41 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 13:36:37 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	heredoc_child_process_handler(int signal)
 {
 	if (signal == SIGINT)
 	{
-		g_stat.status = 130;
+		g_stat.status = 1;
 		printf("\n");
 		exit (g_stat.status);
 	}
@@ -71,5 +71,5 @@ void	heredoc_child_process_handler(int signal)
 void	heredoc_parent_process_handler(int signal)
 {
 	if (signal == SIGINT)
-		g_stat.status = 130;
+		g_stat.status = 1;
 }

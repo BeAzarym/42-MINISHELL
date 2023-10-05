@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:00:21 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/05 11:46:42 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/05 13:09:23 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 // readline
 # include <readline/history.h>
 # include <readline/readline.h>
-// sigaction
-# include <signal.h>
 // libft and other includes
 # include "../libft/includes/libft.h"
 # include "signals.h"
