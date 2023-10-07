@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:01:01 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/05 16:16:49 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/07 23:34:00 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	unset_var(char *arg, t_env_lst *env)
 	return (1);
 }
 
-int	unset_builtin(char **arg, t_env_lst *env)
+void	unset_builtin(char **arg, t_env_lst *env)
 {
 	int	i;
 
@@ -86,5 +86,4 @@ int	unset_builtin(char **arg, t_env_lst *env)
 			g_status = unset_var(arg[i], env);
 		i++;
 	}
-	return (g_status);
 }

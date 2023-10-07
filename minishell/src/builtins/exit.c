@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 03:27:11 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/06 18:06:16 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/07 23:27:34 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	exit_atoi(char *str);
 	Exits with the status specified by the user.
 	Exits with the status of the last command if no status is specified.
 */
-int	exit_builtin(char **cmd)
+void	exit_builtin(char **cmd)
 {
 	int	argc;
 
@@ -32,7 +32,7 @@ int	exit_builtin(char **cmd)
 	{
 		printf("minishell: exit: too many arguments\n");
 		g_status = 1;
-		return (g_status);
+		return ;
 	}
 	else if ((cmd[1] != NULL && !ft_isnumber(cmd[1]))
 		|| (cmd[1] != NULL && exit_atoi(cmd[1]) >= 255))

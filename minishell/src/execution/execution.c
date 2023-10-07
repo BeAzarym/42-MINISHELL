@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/07 20:11:41 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/07 23:36:03 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	redir(t_cmd *cmd_table)
 	return (EXIT_SUCCESS);
 }
 
-int	builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node)
+void	builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node)
 {
 	if (cmd_node != NULL)
 	{
@@ -73,13 +73,12 @@ int	builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node)
 		else if (ft_strcmp(cmd_node->cmd[0], "pwd") == OK)
 			g_status = pwd_builtin();
 		else if (ft_strcmp(cmd_node->cmd[0], "exit") == OK)
-			g_status = exit_builtin(cmd_node->cmd);
+			exit_builtin(cmd_node->cmd);
 		else if (ft_strcmp(cmd_node->cmd[0], "export") == OK)
 			g_status = export_builtin(cmd_node->cmd, env_lst);
 		else if (ft_strcmp(cmd_node->cmd[0], "unset") == OK)
-			g_status = unset_builtin(cmd_node->cmd, env_lst);
+			unset_builtin(cmd_node->cmd, env_lst);
 	}
-	return (g_status);
 }
 
 static void	pipes_swap(int fd_pipes[2][2])

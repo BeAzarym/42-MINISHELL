@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:18:15 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/06 13:05:33 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/07 23:37:44 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	wait_if_signaled(void);
 
-int	processes_wait(const pid_t pid, int size)
+void	processes_wait(const pid_t pid, int size)
 {
 	int	i;
 
@@ -26,7 +26,6 @@ int	processes_wait(const pid_t pid, int size)
 		waitpid(-1, NULL, 0);
 		++i;
 	}
-	return (g_status);
 }
 
 static void	wait_if_signaled(void)

@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/07 20:16:09 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/07 23:39:04 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 // execution.c
 void		execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst);
-int			builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node);
+void		builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node);
 bool		is_builtin(char *cmd);
 
 // redir.c
@@ -50,7 +50,7 @@ void		execute(t_cmd *argv, char **envp);
 void		lastcmd_dup(t_cmd *cmd_node, int fd_pipes[2]);
 
 // wait.c
-int			processes_wait(const pid_t pid, int size);
+void		processes_wait(const pid_t pid, int size);
 
 /*									[Utils]								*/
 
