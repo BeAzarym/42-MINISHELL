@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:57:19 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/06 16:11:22 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/07 09:52:30 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ enum	e_signal_functions
 /*									[Src]									*/
 
 // signal.c
-void	ignore_shell_signal(void);
 void	set_signals(int handler);
 void	set_heredoc_signals(int handler);
 
