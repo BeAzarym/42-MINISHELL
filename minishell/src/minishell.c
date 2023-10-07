@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/05 20:02:23 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/07 12:27:38 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	main(int argc, char **argv, char **envp)
 		lists.cmd_table = init_cmd_lst();
 		if (lists.cmd_table == NULL)
 			return (1);
-		set_signals(MAIN_H);
 		g_status = prompt(&lists);
 		clear_cmd_lst(lists.cmd_table);
 	}
@@ -66,6 +65,7 @@ static int	prompt(t_lists *lists)
 	char	*cmd_line;
 
 	cmd_line = readline("[Minishell]$ ");
+	set_signals(MAIN_H);
 	eof(cmd_line);
 	if (ft_strlen(cmd_line) > 0 && !is_whitespace(cmd_line))
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:02:32 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/06 16:24:09 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/07 19:18:35 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,11 @@ void	child_process_signal(int signal)
 	exit(g_status);
 }
 
+// ft_putstr_fd("Quit: 3\n", 2);
 void	parent_process_signal(int signal)
 {
 	if (signal == SIGINT)
-	{
 		g_status = 130;
-	}
 	else if (signal == SIGQUIT)
 		g_status = 131;
 }
