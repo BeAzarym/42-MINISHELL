@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:02:59 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/07 19:19:16 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/07 20:18:59 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	lastcmd_builtin_dup(t_cmd *cmd_table, int fd_cpy[2],
 				int fd_pipe[2]);
-static int	lastcmd_process_exe(t_cmd *cmd_table, int fd_pipe[2],
+static void	lastcmd_process_exe(t_cmd *cmd_table, int fd_pipe[2],
 				int cmd_lst_size, char **envp);
 
 /*
@@ -69,7 +69,7 @@ void	pipe_execute(t_cmd *cmd, t_env_lst *env_lst, int fd_pipes[2][2])
 	printf("exit_status : %d", exit_status);
 	printf("fd_pipe[0] in lastcmd child: %d\n", fd_pipe[0]);
 */
-int	lastcmd_process(t_cmd *cmd_table, t_env_lst *env_lst, int fd_pipe[2],
+void	lastcmd_process(t_cmd *cmd_table, t_env_lst *env_lst, int fd_pipe[2],
 		int cmd_lst_size)
 {
 	char	**envp;
@@ -81,11 +81,10 @@ int	lastcmd_process(t_cmd *cmd_table, t_env_lst *env_lst, int fd_pipe[2],
 	if (is_builtin(cmd_table->cmd[0]))
 	{
 		lastcmd_builtin_dup(cmd_table, fd_cpy, fd_pipe);
-		g_status = (builtin_execute(env_lst, cmd_table));
+		builtin_execute(env_lst, cmd_table);
 	}
 	else
-		g_status = lastcmd_process_exe(cmd_table, fd_pipe, cmd_lst_size,
-				envp);
+		lastcmd_process_exe(cmd_table, fd_pipe, cmd_lst_size, envp);
 	if (fd_pipe[0] != CLOSED)
 		close(fd_pipe[0]);
 	if (cmd_table->fdout != STDOUT_FILENO)
@@ -95,7 +94,6 @@ int	lastcmd_process(t_cmd *cmd_table, t_env_lst *env_lst, int fd_pipe[2],
 		duplicate(fd_cpy[1], STDOUT_FILENO, "could not read from fdout_cpy");
 	if (fd_cpy[0] != CLOSED)
 		duplicate(fd_cpy[0], STDIN_FILENO, "could not read from fdin_cpy");
-	return (g_status);
 }
 
 static void	lastcmd_builtin_dup(t_cmd *cmd_table, int fd_cpy[2], int fd_pipe[2])
@@ -107,7 +105,7 @@ static void	lastcmd_builtin_dup(t_cmd *cmd_table, int fd_cpy[2], int fd_pipe[2])
 	lastcmd_dup(cmd_table, fd_pipe);
 }
 
-static int	lastcmd_process_exe(t_cmd *cmd_table, int fd_pipe[2],
+static void	lastcmd_process_exe(t_cmd *cmd_table, int fd_pipe[2],
 		int cmd_lst_size, char **envp)
 {
 	pid_t	pid;
@@ -125,7 +123,7 @@ static int	lastcmd_process_exe(t_cmd *cmd_table, int fd_pipe[2],
 		close(fd_pipe[0]);
 		fd_pipe[0] = CLOSED;
 	}
-	return (g_status = processes_wait(pid, cmd_lst_size));
+	processes_wait(pid, cmd_lst_size);
 }
 
 void	lastcmd_dup(t_cmd *cmd_node, int fd_pipe[2])

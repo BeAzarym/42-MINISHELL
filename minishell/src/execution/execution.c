@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/05 16:04:27 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/07 20:11:41 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	redir(t_cmd *cmd_table);
 	printf("fdout in execution : %d\n", cmd_table->head->fdout);
 	printf("current cmd: %s\n", cmd_table->head->cmd[0]);
 */
-int	execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst)
+void	execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst)
 {
 	int		fd_pipes[2][2];
 	t_cmd	*cmd_table;
@@ -39,18 +39,16 @@ int	execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst)
 	while (cmd_table->next != NULL)
 	{
 		if (redir(cmd_table) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+			g_status = EXIT_FAILURE;
 		pipe_execute(cmd_table, env_lst, fd_pipes);
 		cmd_table = cmd_table->next;
 		pipes_swap(fd_pipes);
 	}
 	if (redir(cmd_table) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		g_status = EXIT_FAILURE;
 	if (cmd_table->cmd != NULL)
-		g_status = lastcmd_process(cmd_table, env_lst, fd_pipes[0],
-				cmd_lst->size);
+		lastcmd_process(cmd_table, env_lst, fd_pipes[0], cmd_lst->size);
 	unlink("/tmp/.heredoc.tmp");
-	return (g_status);
 }
 
 static int	redir(t_cmd *cmd_table)

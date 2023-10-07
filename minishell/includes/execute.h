@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:25 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/05 10:59:04 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/07 20:16:09 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 /*									[Src]									*/
 
 // execution.c
-int			execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst);
+void		execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst);
 int			builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node);
 bool		is_builtin(char *cmd);
 
@@ -44,7 +44,7 @@ void		heredoc(t_cmd *cmd_lst);
 
 // pipex.c
 void		pipe_execute(t_cmd *cmd, t_env_lst *env_lst, int fd_pipes[2][2]);
-int			lastcmd_process(t_cmd *cmd_lst, t_env_lst *env_lst, int fd_pipe[2],
+void		lastcmd_process(t_cmd *cmd_lst, t_env_lst *env_lst, int fd_pipe[2],
 				int cmd_lst_size);
 void		execute(t_cmd *argv, char **envp);
 void		lastcmd_dup(t_cmd *cmd_node, int fd_pipes[2]);

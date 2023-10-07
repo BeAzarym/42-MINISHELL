@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/07 12:27:38 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/07 20:13:11 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 int			g_status;
 static void	init(t_lists *lists, char **envp);
 static void	eof(const char *cmd_line);
-static int	prompt(t_lists *lists);
-static int	is_whitespace(char *str);
+static void	prompt(t_lists *lists);
+static bool	is_whitespace(char *str);
 
 // printf("cmd line is: %s\n", cmd_line);
 // printf("status : %d\n", status);
@@ -40,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 		lists.cmd_table = init_cmd_lst();
 		if (lists.cmd_table == NULL)
 			return (1);
-		g_status = prompt(&lists);
+		prompt(&lists);
 		clear_cmd_lst(lists.cmd_table);
 	}
 	clear_env_lst(lists.env_lst);
@@ -60,11 +60,11 @@ static void	init(t_lists *lists, char **envp)
 	Updates the history accordingly.
 */
 //print_cmd(lists->cmd_table);
-static int	prompt(t_lists *lists)
+static void	prompt(t_lists *lists)
 {
 	char	*cmd_line;
 
-	cmd_line = readline("[Minishell]$ ");
+	cmd_line = readline("[Miniꞩhell]$ ");
 	set_signals(MAIN_H);
 	eof(cmd_line);
 	if (ft_strlen(cmd_line) > 0 && !is_whitespace(cmd_line))
@@ -74,15 +74,14 @@ static int	prompt(t_lists *lists)
 		if (!lists->tkn_lst)
 		{
 			free(cmd_line);
-			return (1);
+			g_status = 1;
 		}
 		lists->cmd_table = parsing(lists->tkn_lst, lists->cmd_table);
 		process_expand(lists->cmd_table, lists->env_lst);
 		if (lists->cmd_table->head != NULL)
-			g_status = execution(lists->cmd_table, lists->env_lst);
+			execution(lists->cmd_table, lists->env_lst);
 	}
 	free(cmd_line);
-	return (g_status);
 }
 
 /* 
@@ -97,7 +96,7 @@ static void	eof(const char *cmd_line)
 	}
 }
 
-static int	is_whitespace(char *str)
+static bool	is_whitespace(char *str)
 {
 	int	i;
 
@@ -107,7 +106,7 @@ static int	is_whitespace(char *str)
 		if (is_sep(str[i], " \n\t\r\f\t\b"))
 			i++;
 		else
-			return (0);
+			return (false);
 	}
-	return (1);
+	return (true);
 }
