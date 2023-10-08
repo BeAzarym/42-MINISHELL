@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:18:15 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/07 23:37:44 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/08 20:15:39 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	processes_wait(const pid_t pid, int size)
 	i = 0;
 	while (i < size - 1)
 	{
-		waitpid(-1, NULL, 0);
+		waitpid(-1, &g_status, 0);
 		++i;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 03:27:11 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/07 23:27:34 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/08 20:22:07 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,15 @@ void	exit_builtin(char **cmd)
 		g_status = 1;
 		return ;
 	}
+	else if ((cmd[1] != NULL && ft_isnumber(cmd[1]))
+		&& (exit_atoi(cmd[1]) <= 255))
+		g_status = exit_atoi(cmd[1]);
 	else if ((cmd[1] != NULL && !ft_isnumber(cmd[1]))
-		|| (cmd[1] != NULL && exit_atoi(cmd[1]) >= 255))
+		|| (cmd[1] != NULL && exit_atoi(cmd[1]) > 255))
 	{
 		printf("minishell: exit: %s: numeric argument required\n", cmd[1]);
-		exit (255);
+		g_status = 255;
 	}
-	else if (cmd[1] != NULL && ft_isnumber(cmd[1]))
-		exit(exit_atoi(cmd[1]));
 	exit(g_status);
 }
 
