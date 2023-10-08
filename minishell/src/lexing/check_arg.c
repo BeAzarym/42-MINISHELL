@@ -6,7 +6,7 @@
 /*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:31:16 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/05 15:52:14 by cchabeau         ###   ########.fr       */
+/*   Updated: 2023/10/08 16:22:03 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int	is_valid_cmd_line(t_tkn_lst *lst)
 	{
 		if (cpy->type == 'P' && !cpy->next)
 			return (0);
-		if (cpy->next && cpy->type == 'P' && (cpy->next->type == 'P'
-				|| cpy->next->type != 'W'))
+		if (cpy->next && cpy->type == 'P' && cpy->next->type == 'P')
 			return (status = 0);
 		if (cpy->type == 'I' || cpy->type == 'O')
 		{
