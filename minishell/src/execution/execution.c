@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/07 23:36:03 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/08 21:10:30 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,19 @@ void	execution(t_cmd_lst *cmd_lst, t_env_lst *env_lst)
 	while (cmd_table->next != NULL)
 	{
 		if (redir(cmd_table) == EXIT_FAILURE)
+		{
 			g_status = EXIT_FAILURE;
+			return ;
+		}
 		pipe_execute(cmd_table, env_lst, fd_pipes);
 		cmd_table = cmd_table->next;
 		pipes_swap(fd_pipes);
 	}
 	if (redir(cmd_table) == EXIT_FAILURE)
+	{
 		g_status = EXIT_FAILURE;
+		return ;
+	}
 	if (cmd_table->cmd != NULL)
 		lastcmd_process(cmd_table, env_lst, fd_pipes[0], cmd_lst->size);
 	unlink("/tmp/.heredoc.tmp");
