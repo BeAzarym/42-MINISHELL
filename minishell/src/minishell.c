@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/07 20:13:11 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/08 15:11:12 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		lists.cmd_table = init_cmd_lst();
 		if (lists.cmd_table == NULL)
-			return (1);
+			return (2);
 		prompt(&lists);
 		clear_cmd_lst(lists.cmd_table);
 	}
