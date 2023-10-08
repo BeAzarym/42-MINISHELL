@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchabeau <cchabeau@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:34:10 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/08 16:19:34 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/08 16:29:39 by cchabeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ static void	prompt(t_lists *lists)
 			free(cmd_line);
 			g_status = 1;
 			return ;
-
 		}
 		lists->cmd_table = parsing(lists->tkn_lst, lists->cmd_table);
 		process_expand(lists->cmd_table, lists->env_lst);
