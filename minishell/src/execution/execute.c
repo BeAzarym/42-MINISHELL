@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 15:12:10 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/05 15:57:12 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/09 00:20:10 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,15 +109,16 @@ static char	*check_path(char *cmd, char **paths)
 	int		i;
 	char	*cmd_address;
 
-	i = -1;
+	i = 0;
 	if (paths == NULL)
 		return (NULL);
-	while (paths[++i])
+	while (paths[i])
 	{
 		cmd_address = variadic_strjoin(3, paths[i], "/", cmd);
 		if (access(cmd_address, X_OK) == OK)
 			return (cmd_address);
 		free(cmd_address);
+		++i;
 	}
 	return (NULL);
 }
