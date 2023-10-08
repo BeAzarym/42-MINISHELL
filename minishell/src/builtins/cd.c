@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:11:22 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/05 19:29:54 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/08 20:26:56 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	cd(char **cmd, t_env_lst *env)
 		return (EXIT_FAILURE);
 	}
 	new_pwd = getcwd(NULL, 0);
-	if (!new_pwd)
+	if (new_pwd == NULL)
 		return (EXIT_FAILURE);
 	update_pwd(new_pwd, env);
 	return (EXIT_SUCCESS);
@@ -73,7 +73,7 @@ static int	cd_to_expanded_path(char *to_expand, t_env_lst *env)
 		return (EXIT_FAILURE);
 	}
 	new_pwd = getcwd(NULL, 0);
-	if (!new_pwd)
+	if (new_pwd == NULL)
 		return (EXIT_FAILURE);
 	update_pwd(new_pwd, env);
 	free(expanded);
@@ -85,7 +85,7 @@ void	update_pwd(char *pwd, t_env_lst *env)
 	char	*old_pwd;
 
 	old_pwd = get_key_value("PWD", env);
-	if (!old_pwd)
+	if (old_pwd == NULL)
 		return ;
 	update_value_env("OLDPWD", old_pwd, env);
 	update_value_env("PWD", pwd, env);
