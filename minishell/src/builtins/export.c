@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:47:25 by cchabeau          #+#    #+#             */
-/*   Updated: 2023/10/05 16:16:49 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/09 00:10:10 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,15 @@ int	process_export(char *arg, t_env_lst *env)
 	return (1);
 }
 
-int	export_builtin(char **arg, t_env_lst *env)
+void	export_builtin(char **arg, t_env_lst *env)
 {
 	int	i;
 
 	if (ft_arraylen(arg) == 1)
 	{
 		sort_env(env);
-		return (0);
+		g_status = 0;
+		return ;
 	}
 	i = 1;
 	while (arg[i])
@@ -85,5 +86,5 @@ int	export_builtin(char **arg, t_env_lst *env)
 			g_status = process_export(arg[i], env);
 		i++;
 	}
-	return (g_status);
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/08 21:10:30 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/09 00:11:24 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	builtin_execute(t_env_lst *env_lst, t_cmd *cmd_node)
 		else if (ft_strcmp(cmd_node->cmd[0], "exit") == OK)
 			exit_builtin(cmd_node->cmd);
 		else if (ft_strcmp(cmd_node->cmd[0], "export") == OK)
-			g_status = export_builtin(cmd_node->cmd, env_lst);
+			export_builtin(cmd_node->cmd, env_lst);
 		else if (ft_strcmp(cmd_node->cmd[0], "unset") == OK)
 			unset_builtin(cmd_node->cmd, env_lst);
 	}
