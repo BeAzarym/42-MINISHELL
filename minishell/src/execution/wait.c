@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:18:15 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/08 20:15:39 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/09 15:29:38 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 static void	wait_if_signaled(void);
 
+/*
+	Waits for the parent process to finish and returns its status
+	Loops over all the child processes and waits for them to finish
+	It's important that the pointer on int of the waitpid function, waiting 
+	the child processes, is NULL so only the parent process status is returned
+*/
 void	processes_wait(const pid_t pid, int size)
 {
 	int	i;
@@ -23,7 +29,7 @@ void	processes_wait(const pid_t pid, int size)
 	i = 0;
 	while (i < size - 1)
 	{
-		waitpid(-1, &g_status, 0);
+		waitpid(-1, NULL, 0);
 		++i;
 	}
 }
