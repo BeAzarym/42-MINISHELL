@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angassin <angassin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:12:05 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/04 15:38:38 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/09 09:23:49 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/execute.h"
 
 /*
-	Check if the infile is the stdin
+	Checks if the infile is the stdin
 	Otherwise, loops over all the infiles to check that they exist,
-	if all valids, save the last one in memory
+	if all valids, saves the last one in memory
 	printf("get input\n");
 	printf("redir_in == STDIN\n");
 	printf("type of in : %c\n", cmd_table->type_in);

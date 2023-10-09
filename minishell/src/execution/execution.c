@@ -6,7 +6,7 @@
 /*   By: angassin <angassin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:35:24 by angassin          #+#    #+#             */
-/*   Updated: 2023/10/09 00:11:24 by angassin         ###   ########.fr       */
+/*   Updated: 2023/10/09 09:23:04 by angassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	redir(t_cmd *cmd_table);
 
 /* 
 	Redirects the input and output file descriptors if necessary and execute
-	the commands in processess
+	the commands in processes
 	printf("in loop\n");
 	
 	printf("ONE MORE PRINT: %d\n", cmd_table->head->type_out);
