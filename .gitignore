@@ -1,6 +1,6 @@
 # MacOS Desktop Service Store finder files
 .DS_Store
-
+.vscode
 # Prerequisites
 *.d
 
